@@ -1,0 +1,82 @@
+@startuml 
+
+skinparam style strictuml
+
+class "Administrador" as Admin
+
+class "Certificado" as Certify {
+    Nombre
+    Apellido
+    Profesor
+    Curso
+    Tipo_Examen_Practicado
+}
+
+class "Usuario" as User {
+    Correo
+    Contraseña
+}
+
+class "Examen" as Exam {
+    Tipo
+    Duracion 
+    Cantidad_Preguntas
+    Instrucciones
+}
+
+class "Pregunta" as Question{
+    Dominio
+    Respondida
+}
+
+class "Respuesta" as Answer{
+    
+}
+
+class "Resumen" as Summary{
+    Preguntas_Aprobadas
+    Preguntas_Reprobadas
+}
+
+class "Explicacion" as Explanation
+
+class "Linea" as Code {
+    Texto 
+    Codigo
+}
+
+class "Ayuda" as Help
+
+class "Mensaje" as Message {
+    Resultado
+}
+
+Question o-- Explanation
+
+Admin --> "0..*" Exam : Crea
+
+Admin --> "0..*" User : Registra
+
+Question *-r- "4..*" Answer 
+
+User -r- "0..*" Exam : Presenta
+
+Exam *-r- "*" Question
+
+Summary -l-o Certify 
+
+Certify "0..*" <-down- User : Obtiene
+
+Code "*" --* Answer
+
+Code "*" --* Question
+
+Summary ..> "*" Exam : Resume
+
+User "0..*" --> Help : Consulta
+
+User --> "0..*" Message : Lee
+
+Exam --> Message : Genera
+
+@enduml
