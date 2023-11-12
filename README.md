@@ -5,3 +5,5 @@ Samuel Flores
 Lisangely Goncalves
 Sofía Marcano
 Gabriel Valero
+# Modelado de Dominio
+![Alt text](Project-ClassDiagram.png)
