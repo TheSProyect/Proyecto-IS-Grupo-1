@@ -1,6 +1,7 @@
 @startuml 
 
 skinparam style strictuml
+hide methods 
 
 class "Administrador" as Admin
 
@@ -8,48 +9,49 @@ class "Certificado" as Certify {
     Nombre
     Apellido
     Profesor
-    Curso
     Tipo_Examen_Practicado
 }
 
 class "Usuario" as User {
     Correo
     Contraseña
+    Preguntas_respondidas
 }
 
 class "Examen" as Exam {
     Tipo
-    Duracion 
-    Cantidad_Preguntas
+    Duracion
     Instrucciones
 }
 
 class "Pregunta" as Question{
-    Dominio
-    Respondida
+    Contenido
 }
 
-class "Respuesta" as Answer{
-    
-}
+class "Respuesta" as Answer
+
+class "Correcta" as Correct
 
 class "Resumen" as Summary{
     Preguntas_Aprobadas
     Preguntas_Reprobadas
 }
 
+class "Dominio" as Domain
+
+class "Curso" as Course
+
 class "Explicacion" as Explanation
 
-class "Linea" as Code {
-    Texto 
-    Codigo
-}
+class "Linea" as Line
+
+class "Texto" as Text
+
+class "Codigo" as Code
 
 class "Ayuda" as Help
 
-class "Mensaje" as Message {
-    Resultado
-}
+class "Resultado" as Result
 
 Question o-- Explanation
 
@@ -63,20 +65,32 @@ User -r- "0..*" Exam : Presenta
 
 Exam *-r- "*" Question
 
-Summary -l-o Certify 
+Summary -d-o Certify 
 
 Certify "0..*" <-down- User : Obtiene
 
-Code "*" --* Answer
+Line "*" --* Answer
 
-Code "*" --* Question
+Line "*" --* Question
 
 Summary ..> "*" Exam : Resume
 
 User "0..*" --> Help : Consulta
 
-User --> "0..*" Message : Lee
+User --> "0..*" Result : Lee
 
-Exam --> Message : Genera
+Exam --> Result : Genera
+
+Text -d-|> Line
+
+Code -d-|>Line
+
+Question -d-o "*" Domain
+
+Exam "*"-u-o Course
+
+Certify -u-o Course
+
+Correct -u-|> Answer
 
 @enduml
