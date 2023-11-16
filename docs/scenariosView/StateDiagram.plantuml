@@ -1,0 +1,27 @@
+@startuml Project-StateDiagram
+state join_state <<join>>
+state c <<choice>>
+skinparam noteBackgroundColor transparent
+skinparam noteBorderColor transparent
+
+[*] --> Usuario_Registrado : Registrar Usuario
+Usuario_Registrado -down-> Sesion_Iniciada : Iniciar sesión
+Sesion_Iniciada -down-> Instrucciones_Mostradas : Escoger tipo de examen
+Instrucciones_Mostradas -down-> Pregunta_Mostrada : Aceptar instrucciones
+Pregunta_Mostrada -down-> c : Responder pregunta
+c -up-> Pregunta_Mostrada : No
+c -down-> Resultados_Mostrados : Si
+Resultados_Mostrados --> join_state
+
+note right of c
+    ¿Terminado?
+end note
+
+Resultados_Mostrados -left-> Sesion_Iniciada : Volver a inicio
+Sesion_Iniciada -right-> join_state
+Instrucciones_Mostradas -right-> join_state
+Sesion_Iniciada -right-> Certificado_Mostrado : Ver certificado
+Certificado_Mostrado -down-> join_state
+join_state --> [*] : Cerrar sesion
+
+@enduml
