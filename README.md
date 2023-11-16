@@ -6,6 +6,6 @@ Lisangely Goncalves
 Sofía Marcano
 Gabriel Valero
 # Modelado de Dominio : Diagrama de Clases
-![Alt text](out\docs\scenariosView\DomainClassDiagram\Project-ClassDiagram.png)
+![Modelado de Dominio : Diagrama de Clases](out/docs/scenariosView/DomainClassDiagram/Project-ClassDiagram.png)
 # Modelado de Dominio : Diagrama de Estados
-![Alt text](out\docs\scenariosView\StateDiagram\Project-StateDiagram.png)
+![Modelado de Dominio : Diagrama de Estados](out/docs/scenariosView/StateDiagram/Project-StateDiagram.png)
