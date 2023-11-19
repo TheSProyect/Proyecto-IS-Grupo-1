@@ -9,3 +9,7 @@ Gabriel Valero
 ![Modelado de Dominio : Diagrama de Clases](out/docs/scenariosView/DomainClassDiagram/Project-ClassDiagram.png)
 # Modelado de Dominio : Diagrama de Estados
 ![Modelado de Dominio : Diagrama de Estados](out/docs/scenariosView/StateDiagram/Project-StateDiagram.png)
+# Modelado de Casos de Uso : Diagrama de Casos de Uso
+![Modelado de Casos de Uso : Diagrama de Casos de Uso](out/docs/scenariosView/UseCaseDiagram/Project-UseCaseDiagram.png)
+# Modelado de Casos de Uso : Diagrama de Estados de los Casos de Uso
+![Modelado de Casos de Uso : Diagrama de Estado de los Casos de Uso](out/docs/scenariosView/UseCaseStateDiagram/Project-UseCaseStateDiagram.png)
