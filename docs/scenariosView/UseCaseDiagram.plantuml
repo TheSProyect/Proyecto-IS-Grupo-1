@@ -18,18 +18,17 @@ usecase "Solicitar Certificado" as Certify
 User <|-l- Admin
 User <|-r- Student
 
-Admin --> CreateT : Inicia
+Admin -- CreateT
 
-Admin --> Register : Inicia
-User <-- Register
+Admin -- Register
 
-User --> Login : Inicia
-User --> Logout : Inicia
+User -- Login
+User -- Logout
 
-User --> Help : Inicia
+User -- Help
 
-Student --> Test : Inicia
+Student -- Test
 
-Student --> Certify : Inicia
+Student -- Certify
 
 @enduml

@@ -1,14 +1,12 @@
 @startuml
-
+hide empty description
 
 state "Inicial" as state1
-state "Curso Creado" as state2
+state "Examen Creado" as state2
 state "Usuario Registrado" as state3
 state "Sesión Iniciada" as state4
-state "Ayuda Mostrada" as state5
-state state6 <<join>>
-state "Examen Presentado" as state7
-state "Certificado Obtenido" as state8
+state "Presentando Examen" as state7
+state "Obteniendo Certificado" as state8
 state state9 <<join>>
 
 [*] --> state1
@@ -19,14 +17,10 @@ state1 --> state3 : Registrar Usuario
 
 state3 --> state4 : Iniciar Sesión
 
-state4 -r-> state5 : Consultar Ayuda
-state5 -r-> state4
+state4 --> state4 : Consultar Ayuda
 
-state4 --> state6
-state2 --> state6
-
-state6 --> state7 : Presentar Examen
-state7 --> state4
+state4 --> state7 : Presentar Examen
+state7 --> state4 : Terminar Examen 
 
 state4 --> state8 : Solicitar Certificado
 
