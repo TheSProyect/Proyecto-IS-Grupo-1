@@ -1,4 +1,5 @@
 @startuml 
+skinparam actorStyle hollow
 left to right direction
 
 actor "Administrador" as Admin
@@ -21,7 +22,7 @@ User <|-l- Admin
 User <|-r- Student
 
 Admin -- CreateT
-Admin -- CreateQ
+CreateT <.. CreateQ 
 Admin -- Register
 
 User -- Login

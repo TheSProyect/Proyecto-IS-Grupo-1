@@ -2,7 +2,7 @@
 hide empty description
 
 state "Inicial" as state1
-state "Examen Creado" as state2
+state "Creando Examen" as state2
 state "Usuario Registrado" as state3
 state "Sesión Iniciada" as state4
 state "Presentando Examen" as state7
@@ -11,16 +11,17 @@ state state9 <<join>>
 
 [*] --> state1
 
-state1 -l-> state2 : Crear Examen
-
+state1 -r-> state2 : Crear Examen
+state2 -r-> state2 : Crear Pregunta
 state1 --> state3 : Registrar Usuario
 
 state3 --> state4 : Iniciar Sesión
 
 state4 --> state4 : Consultar Ayuda
+state4 --> state4 : Editar Perfil
 
 state4 --> state7 : Presentar Examen
-state7 --> state4 : Terminar Examen 
+state7 --> state4 : Terminar Examen
 
 state4 --> state8 : Solicitar Certificado
 
