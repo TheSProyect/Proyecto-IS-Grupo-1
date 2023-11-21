@@ -7,9 +7,11 @@ actor "Usuario" as User
 
 rectangle TéchneLogic {
 usecase "Crear Examen" as CreateT
+usecase "Crear Pregunta" as CreateQ
 usecase "Registrar Usuario" as Register
 usecase "Iniciar Sesión" as Login
 usecase "Cerrar Sesion" as Logout
+usecase "Editar Perfil" as Edit 
 usecase "Consultar Ayuda" as Help
 usecase "Presentar Examen" as Test
 usecase "Solicitar Certificado" as Certify
@@ -19,12 +21,12 @@ User <|-l- Admin
 User <|-r- Student
 
 Admin -- CreateT
-
+Admin -- CreateQ
 Admin -- Register
 
 User -- Login
 User -- Logout
-
+User -- Edit
 User -- Help
 
 Student -- Test
