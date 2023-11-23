@@ -34,7 +34,7 @@
 ![Prototipos de Pantallas : Mis Certificados (Version Admin) ](/out/docs/prototypeModel/SolicitarCertificadoADMIN.png)
 
 ### Certificado (Version Admin)
-![Prototipos de Pantallas : Certificado (Version Admin) ](/out/docs/prototypeModel/CertificadoADMIN.png)
+![Prototipos de Pantallas : Certificado (Version Admin) ](/out/docs/prototypeModel/CertificadoAdmin.png)
 
 ### Ayuda (Version Admin)
 ![Prototipos de Pantallas : Ayuda (Version Admin) ](/out/docs/prototypeModel/PreguntasFrecuentesADMIN.png)
