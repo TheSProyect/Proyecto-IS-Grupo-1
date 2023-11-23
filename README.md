@@ -20,4 +20,11 @@
 - [CrearExamen](/docs/scenariosView/CUCrearExamen.pdf).
 - [PresentarExamen](/docs/scenariosView/CUPresentarExamen.pdf)
 - [SolicitarCertificado](/docs/scenariosView/CUSolicitarCertificado.pdf)
-### Prototipos de pantallas
+## Prototipos de pantallas
+### Flujo de Usuario
+![Prototipos de Pantallas : Flujo Usuario](out/docs/prototypeModel/FlujoUser.png)
+### Flujo de Administrador
+![Prototipos de Pantallas : Flujo Usuario](out/docs/prototypeModel/FlujoAdmin.png)      
+### Prototipado Interactivo
+- [Prototipado en Figma](https://www.figma.com/proto/t3JwDM1Ml5MX22OzwAK5At/Modelo-de-Prototipos-IS---Grupo-1?page-id=0%3A1&type=design&node-id=1-2&viewport=-156%2C482%2C0.15&t=mA4RJ4fKFYQQwOEy-1&scaling=min-zoom&starting-point-node-id=1%3A2&show-proto-sidebar=1&mode=design)
+-[Pantallas](/out/docs/PROTOTYPES.md)
