@@ -21,10 +21,10 @@
 ![Prototipos de Pantallas : Mis Certificados ](/out/docs/prototypeModel/SolicitarCertificado.png)
 
 ### Certificado
-![Prototipos de Pantallas : Login ](/out/docs/prototypeModel/Certificado.png)
+![Prototipos de Pantallas : Certificado ](/out/docs/prototypeModel/Certificado.png)
 
 ### Ayuda
-![Prototipos de Pantallas : Login ](/out/docs/prototypeModel/PreguntasFrecuentes.png)
+![Prototipos de Pantallas : Ayuda ](/out/docs/prototypeModel/PreguntasFrecuentes.png)
 
 ## Pantallas de Administrador
 ### Mis Examenes (Version Admin)
