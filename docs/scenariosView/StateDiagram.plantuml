@@ -1,6 +1,12 @@
 @startuml Project-StateDiagram
 state join_state <<join>>
 state c <<choice>>
+state Usuario_Registrado as "Usuario Registrado"
+state Usuario_Validado as "Usuario Validado"
+state Certificado_Mostrado as "Mostrando Certificado"
+state Instrucciones_Mostradas as "Comenzando Examen"
+state Pregunta_Mostrada as "Contestando Examen"
+state Resultados_Mostrados as "Mostrando Resultados"
 
 hide empty description
 
