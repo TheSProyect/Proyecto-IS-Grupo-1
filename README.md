@@ -17,7 +17,8 @@
 ### Diagrama de Estados de los Casos de Uso
 ![Modelado de Casos de Uso : Diagrama de Estado de los Casos de Uso](out/docs/scenariosView/UseCaseStateDiagram/Project-UseCaseStateDiagram.png)
 ### Especificaciones de los Casos de Uso
-- [CrearExamen](/docs/scenariosView/CUCrearExamen.pdf).
+- [CrearExamen](/docs/scenariosView/CUCrearExamen.pdf)
+- [CrearPregunta](/docs/scenariosView/CUCrearPregunta.pdf)
 - [PresentarExamen](/docs/scenariosView/CUPresentarExamen.pdf)
 - [SolicitarCertificado](/docs/scenariosView/CUSolicitarCertificado.pdf)
 ## Prototipos de pantallas
