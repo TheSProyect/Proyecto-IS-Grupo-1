@@ -1,0 +1,53 @@
+@startuml UC requestCertificate analysisCommunicationDiagram
+skinparam actorstyle hollow
+<style>
+note {
+    LineColor transparent
+    BackgroundColor transparent
+}
+</style>
+skinparam ranksep 1
+skinparam nodesep 1
+
+actor user 
+boundary ":MyExamsView" as start
+boundary ":MyCertificatesView" as myCertificates
+boundary ":CertificateView" as certificateView
+entity ":Course"  as course
+control ":CertificateController" as certificateController
+entity ":Certificate" as certificate
+
+
+user -> start
+note on link
+    :requestCertificate()
+end note
+
+start -> myCertificates
+note on link
+    1 :requestCertificate()
+end note
+
+myCertificates -down-> certificateController
+note on link
+    2 :requestCertificate(course)
+end note
+
+myCertificates -> certificateView
+note on link
+    5 :show(certificate)
+end note
+
+certificateController -> course
+note on link
+    3 :summary = getSummary()
+end note
+
+certificateController -down-> certificate
+note on link
+    4 :certificate = generateCertificate(summary)
+end note
+
+'certificateView - certificate
+
+@enduml

@@ -1,0 +1,21 @@
+@startuml UC requestCertificate analysisClassDiagram
+skinparam actorstyle hollow 
+
+actor user 
+boundary "MyExamsView" as start
+boundary "MyCertificatesView" as myCertificates
+boundary "CertificateView" as certificateView
+entity "Course"  as course
+control "CourseController" as courseController
+entity "Certificate" as certificate
+
+
+user - start
+start - myCertificates
+myCertificates -down- courseController
+myCertificates - certificateView
+courseController - course
+courseController -down- certificate
+'certificateView - certificate
+
+@enduml
