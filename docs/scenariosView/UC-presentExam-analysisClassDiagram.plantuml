@@ -1,0 +1,21 @@
+@startuml Clases de analisis
+hide footbox
+actor User
+boundary ":MyExamsView" as MyExamsView
+boundary ":ExamView" as ExamView
+boundary ":ExamEndedView" as ExamEndedView
+boundary ":AnswersView" as AnswersView
+Control ":ExamController" as ExamController
+entity ":Questions" as Questions
+entity ":Result" as Result
+
+User -> MyExamsView
+MyExamsView - ExamView
+ExamView - ExamController
+ExamController -down- Questions
+ExamController -down- Result
+ExamController -right- ExamEndedView
+ExamController -up- AnswersView
+
+
+@enduml

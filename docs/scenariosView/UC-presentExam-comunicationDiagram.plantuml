@@ -1,0 +1,52 @@
+@startuml Clases de analisis
+skinparam noteBackgroundColor transparent
+skinparam noteBorderColor transparent
+
+hide footbox
+actor User
+boundary ":MyExamsView" as MyExamsView
+boundary ":ExamView" as ExamView
+boundary ":ExamEndedView" as ExamEndedView
+boundary ":AnswersView" as AnswersView
+Control ":ExamController" as ExamController
+entity ":Questions" as Questions
+entity ":Result" as Result
+
+User -> MyExamsView
+note on link 
+    :chooseExam()
+end note 
+
+MyExamsView - ExamView
+note on link 
+    1 :chooseExam()
+end note 
+
+ExamView - ExamController
+note on link 
+    2: startExam()
+end note 
+
+ExamController -down- Questions
+note on link 
+    3: question = answerQuestions()
+end note 
+
+ExamController -down- Result
+note on link 
+    4: result = checkAnswer(question)
+end note 
+
+ExamController -right- ExamEndedView
+note on link 
+    5: showScore(result)
+end note 
+
+ExamController -up- AnswersView
+note on link 
+    6: showAnswers(result)
+end note 
+
+
+
+@enduml
