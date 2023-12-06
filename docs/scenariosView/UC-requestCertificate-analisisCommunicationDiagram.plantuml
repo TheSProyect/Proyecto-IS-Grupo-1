@@ -9,12 +9,12 @@ note {
 skinparam ranksep 1
 skinparam nodesep 1
 
-actor user 
+actor "Student" as user 
 boundary ":MyExamsView" as start
 boundary ":MyCertificatesView" as myCertificates
 boundary ":CertificateView" as certificateView
 entity ":Course"  as course
-control ":CertificateController" as certificateController
+control ":RequestCertificateController" as requestCertificateController
 entity ":Certificate" as certificate
 
 
@@ -23,27 +23,28 @@ note on link
     :requestCertificate()
 end note
 
-start -> myCertificates
+start --[hidden]> myCertificates
+user -> myCertificates
 note on link
     1 :requestCertificate()
 end note
 
-myCertificates -down-> certificateController
+myCertificates -down-> requestCertificateController
 note on link
     2 :requestCertificate(course)
 end note
 
-myCertificates -> certificateView
+requestCertificateController -left-> certificateView
 note on link
     5 :show(certificate)
 end note
 
-certificateController -> course
+requestCertificateController -> course
 note on link
     3 :summary = getSummary()
 end note
 
-certificateController -down-> certificate
+requestCertificateController -down-> certificate
 note on link
     4 :certificate = generateCertificate(summary)
 end note
