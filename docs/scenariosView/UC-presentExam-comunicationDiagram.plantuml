@@ -3,48 +3,57 @@ skinparam noteBackgroundColor transparent
 skinparam noteBorderColor transparent
 
 hide footbox
-actor User
+actor Student
 boundary ":MyExamsView" as MyExamsView
 boundary ":ExamView" as ExamView
 boundary ":ExamEndedView" as ExamEndedView
 boundary ":AnswersView" as AnswersView
-Control ":ExamController" as ExamController
-entity ":Questions" as Questions
+Control ":PresentExamController" as PresentExamController
 entity ":Result" as Result
+entity ":Answers" as Answers
+entity ":Questions" as Questions
 
-User -> MyExamsView
-note on link 
-    :chooseExam()
-end note 
+Student -> MyExamsView
+Student -> ExamView
 
 MyExamsView - ExamView
 note on link 
     1 :chooseExam()
 end note 
 
-ExamView - ExamController
+PresentExamController -down- Questions
 note on link 
-    2: startExam()
+    2: question= getQuestions()
+end note  
+
+PresentExamController -down- Answers
+note on link 
+    3: options = getAnswers()
+end note
+
+ExamView - PresentExamController
+note on link 
+    4: startExam()
 end note 
 
-ExamController -down- Questions
+ExamView -right- PresentExamController
 note on link 
-    3: question = answerQuestions()
+    5: answerQuestion() 
+end note
+
+PresentExamController -right- Result
+note on link 
+    6: result = checkAnswer(options)
 end note 
 
-ExamController -down- Result
+PresentExamController -right- ExamEndedView
 note on link 
-    4: result = checkAnswer(question)
+    7: showScore(result)
 end note 
 
-ExamController -right- ExamEndedView
+PresentExamController -up- AnswersView
 note on link 
-    5: showScore(result)
-end note 
-
-ExamController -up- AnswersView
-note on link 
-    6: showAnswers(result)
+    8: showAnswers(result)
 end note 
 
 
