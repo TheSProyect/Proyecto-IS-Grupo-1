@@ -3,6 +3,7 @@ hide empty description
 
 state "Inicial" as state1
 state "Creando Examen" as state2
+state "Editando Examen" as updateS
 state "Usuario Registrado" as state3
 state "Sesión Iniciada" as state4
 state "Presentando Examen" as state7
@@ -13,6 +14,9 @@ state state9 <<join>>
 
 state1 -r-> state2 : Crear Examen
 state2 -r-> state2 : Crear Pregunta
+state1 -l-> updateS : Editar Examen
+updateS --> updateS : Editar Preguntas
+state1 --> state1 : Borrar Examen
 state1 --> state3 : Registrar Usuario
 
 state3 --> state4 : Iniciar Sesión

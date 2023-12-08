@@ -7,15 +7,17 @@ actor "Estudiante" as Student
 actor "Usuario" as User
 
 rectangle TéchneLogic {
-usecase "Crear Examen" as CreateT
-usecase "Crear Pregunta" as CreateQ
-usecase "Registrar Usuario" as Register
-usecase "Iniciar Sesión" as Login
-usecase "Cerrar Sesion" as Logout
-usecase "Editar Perfil" as Edit 
-usecase "Consultar Ayuda" as Help
-usecase "Presentar Examen" as Test
-usecase "Solicitar Certificado" as Certify
+    usecase "Crear Examen" as CreateT
+    usecase "Editar Examen" as UpdateT
+    usecase "Borrar Examen" as DeleteT
+    usecase "Crear Pregunta" as CreateQ
+    usecase "Registrar Usuario" as Register
+    usecase "Iniciar Sesión" as Login
+    usecase "Cerrar Sesion" as Logout
+    usecase "Editar Perfil" as Edit 
+    usecase "Consultar Ayuda" as Help
+    usecase "Presentar Examen" as Test
+    usecase "Solicitar Certificado" as Certify
 }
 
 User <|-l- Admin
@@ -23,6 +25,8 @@ User <|-r- Student
 
 Admin -- CreateT
 CreateT <.. CreateQ 
+Admin -- UpdateT
+Admin -- DeleteT
 Admin -- Register
 
 User -- Login
