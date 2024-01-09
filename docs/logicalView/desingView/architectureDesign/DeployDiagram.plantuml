@@ -1,0 +1,7 @@
+@startuml deployDiagram
+
+[téchnelogic.jar] 
+node "Personal Computer" as personalComputer
+personalComputer *-down-> [téchnelogic.jar]
+
+@enduml
