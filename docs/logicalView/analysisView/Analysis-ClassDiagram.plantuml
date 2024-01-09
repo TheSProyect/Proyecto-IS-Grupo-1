@@ -120,16 +120,14 @@ ExamView -l- ExamEndedView
 
 CertificatesView -l- CertificateView
 
-Answers *-r- Questions
-Exam *-r- Answers
+Questions *-r- Answers
+Exam *-r- Questions
 
-Line <|-- Code
-Line <|-- Text
+Line <|-u- Code
+Line <|-u- Text
 
-Code --o Answers
-Code --o Questions
-Text --o Questions
-Text --o Answers
+Line --* Answers
+Line --* Questions
 
 Exam -l- Result
 Result -l- Course
