@@ -1,0 +1,137 @@
+@startuml
+skinparam style strictuml
+
+class ExamsView {
+}
+class ExamView {
+__
+showQuestions()
+showInstructions()
+endExam()
+}
+class ExamEndedView{
+__
+showScore(Score)
+}
+class CertificatesView
+class CertificateView{
+show(Certificate)
+}
+class ResultView{
+__
+showScore(Result)
+}
+
+class NewExamView {
+setName(Name)
+setInstructions(Instructions)
+}
+
+class ExamPublishedView
+class AdminExamView
+
+class CreateExamController{
+__
+createExam()
+createQuestion(questionInfo)
+setQuestions()
+setAnswers()
+completeExamCreation()
+}
+
+class PresentExamController {
+__
+setResult(Option)
+chooseExam(Exam_Name)
+startExam()
+getAnswer()
+getQuestions()
+}
+
+class RequestCertificateController {
+__
+requestCeritifcate(Course_Name)
+getSummary()
+generateCertificate(Summary)
+}
+
+class Questions{
+domain
+}
+class Answers {
+correct_option
+justification
+}
+class Exam {
+name
+instructions
+__
+getQuestion()
+getInstructions()
+}
+class Result {
+elections
+score
+__
+checkAnswers(Elections, CorrectOption)
+}
+
+class Certificate {
+student_info
+}
+
+class Course{
+name
+summary
+}
+
+class Line
+
+class Text
+class Code
+
+CreateExamController -u- NewExamView
+CreateExamController -u- ExamPublishedView
+
+RequestCertificateController -u- CertificatesView
+RequestCertificateController -u- CertificateView
+
+PresentExamController -u- ExamView
+PresentExamController -u- ResultView
+PresentExamController -u- ExamEndedView
+
+CreateExamController -- Exam
+PresentExamController -- Exam
+PresentExamController -- Result
+
+RequestCertificateController -- Certificate
+
+RequestCertificateController -- Course
+
+
+ExamsView -- AdminExamView
+ExamsView -- CertificatesView
+ExamsView -- ExamView
+NewExamView -r- ExamPublishedView
+AdminExamView -r- NewExamView
+
+ExamEndedView -l- ResultView
+ExamView -l- ExamEndedView
+
+CertificatesView -l- CertificateView
+
+Answers *-r- Questions
+Exam *-r- Answers
+
+Line <|-- Code
+Line <|-- Text
+
+Code --o Answers
+Code --o Questions
+Text --o Questions
+Text --o Answers
+
+Exam -l- Result
+Result -l- Course
+Course -l- Certificate
+@enduml
