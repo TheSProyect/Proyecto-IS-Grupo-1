@@ -93,10 +93,17 @@ class Course{
 -profesor:Name
 }
 
-class Line
+class Lines {
+    -line:List<string>
+}
 
-class Text
-class Code
+class Text {
+    -formatText():void
+}
+
+class Code {
+    -formatCode():void
+}
 
 CreateExamController -u- NewExamView
 CreateExamController -u- ExamPublishedView
@@ -131,11 +138,11 @@ CertificatesView -l- CertificateView
 Questions *-r- Answers
 Exam *-r- Questions
 
-Line <|-u- Code
-Line <|-u- Text
+Lines <|-u- Code
+Lines <|-u- Text
 
-Line --* Answers
-Line --* Questions
+Lines --* Answers
+Lines --* Questions
 
 Exam -l- Result
 Result -l- Course
