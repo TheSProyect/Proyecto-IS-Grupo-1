@@ -11,7 +11,7 @@ __
 }
 class ExamEndedView{
 __
--showScore(Score):void
+-showScore(Result):void
 }
 class CertificatesView
 class CertificateView{
@@ -33,7 +33,7 @@ class AdminExamView
 class CreateExamController{
 __
 -createExam():void
--createQuestion(questionInfo):void
+-createQuestion():void
 -setQuestions():void
 -setAnswers():void
 -completeExamCreation():void
@@ -45,7 +45,7 @@ __
 -chooseExam(Exam_Name):void
 -startExam():void
 -getAnswer():Answer
--getQuestions():Question
+-getQuestions():Questions
 }
 
 class RequestCertificateController {
