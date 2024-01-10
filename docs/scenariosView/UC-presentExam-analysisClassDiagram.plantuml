@@ -1,7 +1,7 @@
 @startuml Clases de analisis
 hide footbox
 actor Student
-boundary ":MyExamsView" as MyExamsView
+boundary ":ExamsView" as ExamsView
 boundary ":ExamView" as ExamView
 boundary ":ExamEndedView" as ExamEndedView
 boundary ":AnswersView" as AnswersView
@@ -10,10 +10,10 @@ entity ":Result" as Result
 entity ":Answers" as Answers
 entity ":Questions" as Questions
 
-Student -> MyExamsView
+Student -> ExamsView
 Student -> ExamView
 
-MyExamsView - ExamView
+ExamsView - ExamView
 PresentExamController -down- Questions
 PresentExamController -down- Answers
 ExamView - PresentExamController
