@@ -10,8 +10,8 @@ skinparam ranksep 1
 skinparam nodesep 1
 
 actor "Student" as user 
-boundary ":MyExamsView" as start
-boundary ":MyCertificatesView" as myCertificates
+boundary ":ExamsView" as start
+boundary ":CertificatesView" as myCertificates
 boundary ":CertificateView" as certificateView
 entity ":Course"  as course
 control ":RequestCertificateController" as requestCertificateController
