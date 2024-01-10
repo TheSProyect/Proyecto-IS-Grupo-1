@@ -1,0 +1,49 @@
+@startuml
+skinparam style strictuml
+skinparam noteBackgroundColor transparent
+skinparam noteBorderColor transparent
+
+actor User
+
+boundary ExamAdminView
+boundary NewExamView
+boundary ExamPublishedView
+
+entity Questions
+entity Answers
+
+control NewExamController
+
+User -- ExamAdminView
+note on link
+:manageExams()
+end note
+
+
+User -r-> NewExamView
+note on link
+ 1 :createExams()
+end note
+
+NewExamView -r-> ExamPublishedView 
+note on link
+ 5 :FinishExam(questions, answers)
+end note
+
+NewExamView --> NewExamController 
+note on link
+ 2 :createQuestions(questionInfo)
+end note
+
+NewExamController --> Questions
+note on link
+ 3 :question = setQuestion(questionInfo)
+end note
+
+NewExamController -r-> Answers 
+note on link
+ 4 :answers = setAnswers(questionInfo)
+end note
+
+
+@enduml

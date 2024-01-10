@@ -1,0 +1,26 @@
+@startuml
+skinparam style strictuml
+
+
+actor User
+
+boundary ExamAdminView
+boundary NewExamView
+boundary ExamPublishedView
+
+entity Questions
+
+control NewExamController
+
+User -- ExamAdminView
+User -- NewExamView
+ExamAdminView -r- NewExamView
+NewExamView -r- ExamPublishedView
+
+NewExamView -- NewExamController
+
+
+NewExamController -- Questions
+
+
+@enduml
