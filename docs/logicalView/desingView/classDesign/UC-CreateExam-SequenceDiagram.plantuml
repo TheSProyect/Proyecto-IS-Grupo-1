@@ -1,0 +1,57 @@
+actor User
+
+boundary AdminExamView as AV
+boundary NewExamView as NV
+boundary ExamPublishedView as PV
+
+control NewExamController as C
+
+entity Exam as X
+entity Questions as Q
+entity Answers as A
+
+activate User
+User -> AV : ManageExams()
+activate AV
+
+AV -> NV : 1 : CreateExams()
+deactivate AV
+activate NV
+activate X
+
+NV -> C : 2 : CreateQuestions()
+activate C
+
+loop FinishExam() == false
+
+User -> C : AddQuestion(questioninfo)
+
+C -> X : 3 : SetQuestions(questioninfo)
+X -> Q : SetQuestions(questioninfo)
+activate Q
+
+C -> X : 4 : SetAnswers(questioninfo)
+X -> A : SetAnswers(questioninfo)
+activate A
+
+NV -> User : :showAddedMessage()
+
+end
+NV -> PV : 5 : FinishExam()
+deactivate NV
+activate PV
+
+Q -> X : :getQuestions()
+
+A -> X : :getAnswers()
+
+X -> C : :getQuestions()
+
+X ->  C : :getAnswers()
+
+
+C -> PV : :FinishedExam(questions, answers)
+deactivate C
+
+PV -> User : showFinishedExam(questions, answers)
+deactivate PV
