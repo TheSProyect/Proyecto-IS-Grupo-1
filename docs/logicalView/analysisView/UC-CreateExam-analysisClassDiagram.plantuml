@@ -10,17 +10,17 @@ boundary ExamPublishedView
 
 entity Questions
 
-control NewExamController
+control CreateExamController
 
 User -- ExamAdminView
 User -- NewExamView
 ExamAdminView -r- NewExamView
 NewExamView -r- ExamPublishedView
 
-NewExamView -- NewExamController
+NewExamView -- CreateExamController
 
 
-NewExamController -- Questions
+CreateExamController -- Questions
 
 
 @enduml
