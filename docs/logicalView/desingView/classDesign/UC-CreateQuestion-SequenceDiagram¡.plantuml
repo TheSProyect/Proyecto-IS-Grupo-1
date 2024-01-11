@@ -1,0 +1,24 @@
+actor User
+boundary NewExamView as NV
+
+control CreateExamController as C
+
+entity Exam as X
+entity Questions as Q
+entity Answers as A
+
+activate User
+activate NV
+
+User -> C : AddQuestion(questioninfo)
+
+C -> X : 3 : SetQuestions(questioninfo)
+X -> Q : SetQuestions(questioninfo)
+activate Q
+
+C -> X : 4 : SetAnswers(questioninfo)
+X -> A : SetAnswers(questioninfo)
+activate A
+
+NV -> User : :showAddedMessage()
+deactivate NV
