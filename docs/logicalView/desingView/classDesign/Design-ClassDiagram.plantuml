@@ -1,85 +1,192 @@
 @startuml Design-ClassDiagram
 skinparam style strictuml
 
-class ExamsView {
-}
-class ExamView {
+' Views
+class ExamsView { /' MisExamenes'/
+    -navBar: JPanel
+    -appName: JLabel
+    -linkNavbar: JToolBar
+    -linkText: JLabel
+    -title: JLabel
+    -examTitle: JLable
+    -text: JLabel
+    -textButton: JLabel
+    -examsContainer: JPanel
+    -courseCard: JToolBar
+    -courseList: JList
+    -nextButton: JButton
+    -prevButton: JButton
 __
--showQuestions():void
--showInstructions():void
--endExam():void
 }
-class ExamEndedView{
+class ExamView { /' Examen'/
+    -textButton: JLabel
+    -textQuestion: JLabel
+    -textAnswer: JLabel
+    -answerOption: JPanel
+    -answerList: JList
+    -question: JPanel
+    -questionsList: JList
+    -counter: JPanel
+    -nextButton: JButton
+    -prevButton: JButton
+__  
+    -showQuestions():void
+    -showInstructions():void
+    -endExam():void
+}
+class ExamEndedView{ /' ExamenFinalizado'/
+    -container: JPanel
+    -title: JLabel
+    -text: JLabel
+    -textButton: JLabel
+    -button: JButton
+    -notaFinal: JPanel
 __
 -showScore(Result):void
 }
-class CertificatesView
-class CertificateView{
--show(Certificate):void
-}
-class ResultView{
+class CertificatesView{ /' SolicitarCertificado'/
+    -navBar: JPanel
+    -appName: JLabel
+    -linkNavbar: JToolBar
+    -linkText: JLabel
+
+    -certificatesContainer: JPanel
+    -title: JLabel
+    -titleCourses: JLabel
+    -courseList: JList
+    -courseItem: JPanel
+    -textButton: JLabel
+    -button: JButton
 __
--showScore(Result):void
+}
+class CertificateView{ /' Certificado'/
+    -appName: JLabel
+    -linkNavbar: JToolBar
+    -title: JLabel
+    -linkText: JLabel
+    
+    -certificateContainer: JPanel
+    -titlePage: JLabel
+    -text: JLabel
+    -textName: JLabel
+    
+    -textButton: JLabel
+    -button: JButton
+    -notaFinal: JPanel
+__
+    -show(Certificate):void
+}
+class ResultView{ /' Respuesta 1 y 2'/
+    -question: JPanel
+    -questionsList: JList
+    -nextButton: JButton
+    -prevButton: JButton
+    -exitButton: JButton
+    
+    -questionContainer:JPanel
+    -codeQuestion: JPanel
+    -answersContainer: JPanel
+    -questionTitle: JLabel
+    -textAnswers: JLabel
+    -answerOption: JPanel
+    -textExplanation: JLabel
+    -smallText: JPanel
+    -explanationButton: JButton
+__
+    -showScore(Result):void
 }
 
-class NewExamView {
--setName(Name):void
--setInstructions(Instructions):void
+class NewExamView { /' CrearExamen'/
+    -labels: JLabel
+    -textField: JTextField
+    -codeField: JTextArea
+    -question: JPanel
+    -questionsList: JList
+    -nextButton: JButton
+    -prevButton: JButton
+    -publishButton: JButon
+    -addQuestionButton: JButton
+__
+    -setName(Name):void
+    -setInstructions(Instructions):void
 }
 
-class ExamPublishedView
-class AdminExamView
+class ExamPublishedView{ /' ExamenCreado'/
+    -contaner: JPanel
+    -title: JLabel
+    -text: JLabel
+    -textButton: JLabel
+    -button: JButton
+__
+}
+class AdminExamView{ /' AdministradorExamenes'/
+    -navBar: JPanel
+    -appName: JLabel
+    -linkNavbar: JToolBar
+    -linkText: JLabel
 
+    -examsContainer: JPanel
+    -title: JLabel
+    -titleExamns: JLabel
+    -examsList: JList
+    -examsItem: JPanel
+    -textButton: JLabel
+    -createButton: JButton
+    -editButton: JButton
+}
+
+' Controllers
 class CreateExamController{
 __
--createExam():void
--createQuestion():void
--setQuestions():void
--setAnswers():void
--completeExamCreation():void
+    -createExam():void
+    -createQuestion():void
+    -setQuestions():void
+    -setAnswers():void
+    -completeExamCreation():void
 }
 
 class PresentExamController {
 __
--setResult(Option):void
--chooseExam(Exam_Name):void
--startExam():void
--getAnswer():Answer
--getQuestions():Questions
+    -setResult(Option):void
+    -chooseExam(Exam_Name):void
+    -startExam():void
+    -getAnswer():Answer
+    -getQuestions():Questions
 }
 
 class RequestCertificateController {
 __
--requestCeritifcate(Course_Name):void
--getSummary():string
--generateCertificate(Summary):Certificate
+    -requestCeritifcate(Course_Name):void
+    -getSummary():string
+    -generateCertificate(Summary):Certificate
 }
 
+' Models
 class Questions{
--domain:string
+    -domain:string
 }
 class Answers {
--numOption: int
--correct_option:bool
--justification:string
+    -numOption: int
+    -correct_option:bool
+    -justification:string
 }
 class Exam {
--name:string
--instructions:string
--correctOptions:int[1..*]
+    -name:string
+    -instructions:string
+    -correctOptions:int[1..*]
 __
--getQuestion():Question
--getInstructions():string
+    -getQuestion():Question
+    -getInstructions():string
 }
 class Result {
--elections:int[1...*]
--score:float
+    -elections:int[1...*]
+    -score:float
 __
--checkAnswers(Elections, CorrectOptions):float
+    -checkAnswers(Elections, CorrectOptions):float
 }
 
 class Certificate {
--student:Name
+    -student:Name
 }
 
 class Name {
@@ -88,9 +195,9 @@ class Name {
 }
 
 class Course{
--name:string
--summary:string
--profesor:Name
+    -name:string
+    -summary:string
+    -profesor:Name
 }
 
 class Lines {
