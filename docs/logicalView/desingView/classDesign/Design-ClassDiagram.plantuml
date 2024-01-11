@@ -1,34 +1,46 @@
 @startuml Design-ClassDiagram
 skinparam style strictuml
 
+<<<<<<< HEAD
 class ExamsView {
-}
-class ExamView {
-__
--showQuestions():void
--showInstructions():void
--endExam():void
-}
-class ExamEndedView{
-__
--showScore(Result):void
-}
-class CertificatesView
-class CertificateView{
--show(Certificate):void
-}
-class ResultView{
-__
--showScore(Result):void
+
 }
 
-class NewExamView {
+class ExamView {
+=======
+class ExamsView as "ExamView" <<JFrame>> {
+}
+class ExamView as "ExamView" <<JFrame>> {
+>>>>>>> 15613a1e2de84fb1e9d68da731bd007a4f60b1d7
+__
++showQuestions():void
++showInstructions():void
++endExam():void
+}
+<<<<<<< HEAD
+=======
+class ExamEndedView as "ExamEndedView" <<JFrame>>{
+__
++showScore(Result):void
+}
+class CertificatesView as "CertificatesView" <<JFrame>>
+class CertificateView as "CertificatesView" <<JFrame>>{
++show(Certificate):void
+
+}
+class ResultView as "ResultView" <<JFrame>>{
+__
++showScore(Result):void
+}
+>>>>>>> 15613a1e2de84fb1e9d68da731bd007a4f60b1d7
+
+class NewExamView as "NewExamView" <<JFrame>>{
 -setName(Name):void
 -setInstructions(Instructions):void
 }
 
-class ExamPublishedView
-class AdminExamView
+class ExamPublishedView as "ExamPublishedView" <<JFrame>>
+class AdminExamView as "AdminExamView" <<JFrame>>
 
 class CreateExamController{
 __
@@ -37,22 +49,6 @@ __
 -setQuestions():void
 -setAnswers():void
 -completeExamCreation():void
-}
-
-class PresentExamController {
-__
--setResult(Option):void
--chooseExam(Exam_Name):void
--startExam():void
--getAnswer():Answer
--getQuestions():Questions
-}
-
-class RequestCertificateController {
-__
--requestCeritifcate(Course_Name):void
--getSummary():string
--generateCertificate(Summary):Certificate
 }
 
 class Questions{
@@ -71,82 +67,36 @@ __
 -getQuestion():Question
 -getInstructions():string
 }
-class Result {
--elections:int[1...*]
--score:float
-__
--checkAnswers(Elections, CorrectOptions):float
-}
 
-class Certificate {
--student:Name
-}
-
-class Name {
-    -first:string
-    -last:string
-}
-
-class Course{
--name:string
--summary:string
--profesor:Name
-}
 
 class Lines {
     -line:List<string>
+    +setLines():void
+    +format():void
 }
 
 class Text {
-    -formatText():void
+    +format():void
 }
 
 class Code {
-    -formatCode():void
+    +format():void
 }
 
+ExamsView -- AdminExamView
 CreateExamController -u- NewExamView
 CreateExamController -u- ExamPublishedView
-
-RequestCertificateController -u- CertificatesView
-RequestCertificateController -u- CertificateView
-
-PresentExamController -u- ExamView
-PresentExamController -u- ResultView
-PresentExamController -u- ExamEndedView
-
 CreateExamController -- Exam
-PresentExamController -- Exam
-PresentExamController -- Result
+ExamPublishedView -u-|> ExamView
 
-RequestCertificateController -- Certificate
-
-RequestCertificateController -- Course
-
-
-ExamsView -- AdminExamView
-ExamsView -- CertificatesView
 ExamsView -- ExamView
 NewExamView -r- ExamPublishedView
 AdminExamView -r- NewExamView
-
-ExamEndedView -l- ResultView
-ExamView -l- ExamEndedView
-
-CertificatesView -l- CertificateView
-
 Questions *-r- Answers
 Exam *-r- Questions
-
-Lines <|-u- Code
-Lines <|-u- Text
-
+Lines <|-r- Code
+Lines <|-r- Text
 Lines --* Answers
 Lines --* Questions
 
-Exam -l- Result
-Result -l- Course
-Course -l- Certificate
-Name -u- Certificate
-Name -u- Course
 @enduml
