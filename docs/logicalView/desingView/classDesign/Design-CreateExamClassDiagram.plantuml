@@ -1,0 +1,182 @@
+@startuml Design-ClassDiagram
+skinparam style strictuml
+
+' Ui Components
+class NavBar <<JPanel>>{
+    -appName: JLabel
+    -linkNavbar: JToolBar
+    -linkText: JLabel
+__
+}
+class TextField <<JTextField>>{
+    -label: JLabel
+    -textField: JTextField
+__
+}
+class CodeField <<JPanel>>{
+    -code: JTextArea
+}
+class Button <<JButton>>
+
+class ButtonSlider <<JButton>>{
+    -icon: ImageIcon
+}
+class IconButton <<JButton>>{
+    -textButton: JLabel
+    -icon: ImageIcon
+}
+class CourseCard <<JPanel>>{
+    -courseTitle: JLabel
+    -content: JTextArea
+    -button: Button
+    -courseImage: ImageIcon
+}
+class CourseList <<JList>>
+
+class Slider <<JPanel>>{
+    -nextButton: ButtonSlider
+    -prevButton: ButtonSlider
+    -courseList: CourseList
+}
+class SingleOptionButton <<JRadioButton>>
+class QuestionNumber <<JPanel>>
+class courseItem <<JPanel>>{
+    -courseTitle: JLabel
+    -button:Button
+}
+class Message <<JPanel>>{
+    -title: JLabel
+    -text: JLabel
+    -button: Button
+__
+}
+
+' Views
+class ExamsView as "ExamsView" <<JFrame>> { /' MisExamenes'/
+    -navBar: NavBar
+    -title: JLabel
+    -examTitle: JLable
+    -slider: Slider
+__
+}
+class ExamView as "ExamView" <<JFrame>> { /' Examen'/
+    -option: SingleOptionButton
+    -nextButton: IconButton
+    -prevButton: IconButton
+    -sendButton: IconButton
+    -questionTitle: JLabel
+    -questionsList: JList
+    -questionNumber: QuestionNumber
+    -cronometer: JPanel
+__
+    +showQuestions():void
+    +showInstructions():void
+    +endExam():void
+}
+
+class NewExamView as "NewExamView" <<JFrame>>{ /' CrearExamen'/
+    -labels: JLabel
+    -textField: TextFIeld
+    -codeField: CodeField
+    -questionNumber: QuestionNumber
+    -questionsList: JList
+    -nextButton: IconButton
+    -prevButton: IconButton
+    -publishButton: IconButton
+    -addQuestionButton: IconButton
+__
+    -setName(Name):void
+    -setInstructions(Instructions):void
+}
+
+class ExamPublishedView as "ExamPublishedView" <<JFrame>> {/' ExamenCreado'/
+    -message: Message
+}
+class AdminExamView as "AdminExamView" <<JFrame>>{ /' AdministradorExamenes'/
+    -navBar: NavBar
+    -button: Button
+    -title: JLabel
+    -courseItem: CourseItem
+    -courseList: JList
+__
+}
+
+'Controllers
+class CreateExamController{
+__
+    -createExam():void
+    -createQuestion():void
+    -setQuestions():void
+    -setAnswers():void
+    -completeExamCreation():void
+}
+
+'Models
+class Questions{
+    -domain:string
+}
+class Answers {
+    -numOption: int
+    -correct_option:bool
+    -justification:string
+}
+class Exam {
+    -name:string
+    -instructions:string
+    -correctOptions:int[1..*]
+__
+    -getQuestion():Question
+    -getInstructions():string
+}
+
+
+class Lines {
+    -line:List<string>
+    +setLines():void
+    +format():void
+}
+
+class Text {
+    +format():void
+}
+
+class Code {
+    +format():void
+}
+
+'Relations
+Slider -- ButtonSlider
+Slider -- CourseList
+
+ExamsView -- NavBar
+ExamsView -- Slider
+AdminExamView -- NavBar
+AdminExamView -- Button
+AdminExamView -- CourseItem
+ExamView -- SingleOptionButton
+ExamView -- IconButton
+ExamView -- QuestionNumber
+NewExamView -- TextField
+NewExamView -- CodeField
+NewExamView -- QuestionNumber
+NewExamView -- IconButton
+ExamPublishedView -- Message
+Message -- Button
+
+ExamsView -- AdminExamView
+CreateExamController -u- NewExamView
+CreateExamController -u- ExamPublishedView
+CreateExamController -- Exam
+ExamPublishedView -u-|> ExamView
+
+ExamsView -- ExamView
+NewExamView -r- ExamPublishedView
+AdminExamView -r- NewExamView
+Questions *-r- Answers
+Exam *-r- Questions
+Lines <|-u- Code
+Lines <|-r- Text
+Lines --* Answers
+Lines --* Questions
+
+@enduml

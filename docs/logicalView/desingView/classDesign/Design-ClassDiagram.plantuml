@@ -1,12 +1,12 @@
 @startuml Design-ClassDiagram
 skinparam style strictuml
 
+
+
 ' Views
 class ExamsView { /' MisExamenes'/
-    -navBar: JPanel
-    -appName: JLabel
-    -linkNavbar: JToolBar
-    -linkText: JLabel
+    -navBar: NavBar
+    
     -title: JLabel
     -examTitle: JLable
     -text: JLabel
@@ -45,10 +45,7 @@ __
 -showScore(Result):void
 }
 class CertificatesView{ /' SolicitarCertificado'/
-    -navBar: JPanel
-    -appName: JLabel
-    -linkNavbar: JToolBar
-    -linkText: JLabel
+    -navBar: NavBar
 
     -certificatesContainer: JPanel
     -title: JLabel
@@ -60,10 +57,7 @@ class CertificatesView{ /' SolicitarCertificado'/
 __
 }
 class CertificateView{ /' Certificado'/
-    -appName: JLabel
-    -linkNavbar: JToolBar
-    -title: JLabel
-    -linkText: JLabel
+    -navBar: NavBar
     
     -certificateContainer: JPanel
     -titlePage: JLabel
@@ -120,10 +114,7 @@ class ExamPublishedView{ /' ExamenCreado'/
 __
 }
 class AdminExamView{ /' AdministradorExamenes'/
-    -navBar: JPanel
-    -appName: JLabel
-    -linkNavbar: JToolBar
-    -linkText: JLabel
+    -navBar: NavBar
 
     -examsContainer: JPanel
     -title: JLabel
@@ -134,6 +125,7 @@ class AdminExamView{ /' AdministradorExamenes'/
     -createButton: JButton
     -editButton: JButton
 }
+
 
 ' Controllers
 class CreateExamController{
