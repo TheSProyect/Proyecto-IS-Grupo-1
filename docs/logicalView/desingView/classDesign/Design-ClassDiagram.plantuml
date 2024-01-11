@@ -1,24 +1,46 @@
 @startuml Design-ClassDiagram
 skinparam style strictuml
 
+<<<<<<< HEAD
 class ExamsView {
 
 }
 
 class ExamView {
-__
--showQuestions():void
--showInstructions():void
--endExam():void
+=======
+class ExamsView as "ExamView" <<JFrame>> {
 }
+class ExamView as "ExamView" <<JFrame>> {
+>>>>>>> 15613a1e2de84fb1e9d68da731bd007a4f60b1d7
+__
++showQuestions():void
++showInstructions():void
++endExam():void
+}
+<<<<<<< HEAD
+=======
+class ExamEndedView as "ExamEndedView" <<JFrame>>{
+__
++showScore(Result):void
+}
+class CertificatesView as "CertificatesView" <<JFrame>>
+class CertificateView as "CertificatesView" <<JFrame>>{
++show(Certificate):void
 
-class NewExamView {
+}
+class ResultView as "ResultView" <<JFrame>>{
+__
++showScore(Result):void
+}
+>>>>>>> 15613a1e2de84fb1e9d68da731bd007a4f60b1d7
+
+class NewExamView as "NewExamView" <<JFrame>>{
 -setName(Name):void
 -setInstructions(Instructions):void
 }
 
-class ExamPublishedView
-class AdminExamView
+class ExamPublishedView as "ExamPublishedView" <<JFrame>>
+class AdminExamView as "AdminExamView" <<JFrame>>
 
 class CreateExamController{
 __
