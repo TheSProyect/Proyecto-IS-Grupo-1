@@ -1,30 +1,79 @@
 @startuml Design-Analysis-TraceDiagram
 allow_mixing
+hide members
 
     'analysis class
 boundary AdminExamView 
 boundary NewExamView 
 boundary ExamPublishedView
+boundary ExamView
+boundary ExamsView
 control CreateExamController
 entity Exam
 entity Questions
 entity Answers
+entity Lines
+entity Text
+entity Code
 
     'design class
 class AdminExamViewDes as "AdminExamView" <<JFrame>>
 class NewExamViewDes as "NewExamView" <<JFrame>>
 class ExamPublishedViewDes as "ExamPublishedView" <<JFrame>>
+class ExamViewDes as "ExamView" <<JFrame>>
+class ExamsViewDes as "ExamsView" <<JFrame>>
 class CreateExamControllerDes as "CreateExamController"
 class ExamDes as "Exam"
 class QuestionsDes as "Questions"
 class AnswersDes as "Answers"
+class LinesDes as "Lines"
+class TextDes as "Text"
+class CodeDes as "Code"
+class Slider <<JPanel>>
+class ButtonSlider <<JButton>>
+class CourseList <<JList>>
+class SingleOptionButton <<JRadioButton>>
+class IconButton <<JButton>>
+class QuestionNumber <<JPanel>>
+class CodeField <<JPanel>>
+class TextField <<JTextField>>
+class Message <<JPanel>>
+class Button <<JButton>>
+class NavBar <<JPanel>>
+class CourseItem <<JPanel>>
+class CourseCard <<JPanel>>
 
-AdminExamView <.. AdminExamViewDes: <trace>
-NewExamView <.. NewExamViewDes: <trace>
+ExamsView <... CourseCard: <trace>
+ExamsView <.. Slider: <trace>
+ExamsView <... NavBar: <trace>
+ExamsView <.. ExamsViewDes: <trace>
+ExamsView <... CourseList: <trace>
+ExamsView <.. ButtonSlider: <trace>
+AdminExamView <... AdminExamViewDes: <trace>
+AdminExamView <.. Button: <trace>
+AdminExamView <.. NavBar: <trace>
+AdminExamView <... CourseItem: <trace>
+NewExamView <... NewExamViewDes: <trace>
+NewExamView <.. IconButton: <trace>
+NewExamView <... QuestionNumber: <trace>
+NewExamView <.. CodeField: <trace>
+NewExamView <... TextField: <trace>
 ExamPublishedView <.. ExamPublishedViewDes: <trace>
+ExamPublishedView <... Message: <trace>
+ExamPublishedView <.. Button: <trace>
+ExamView <.. ExamPublishedViewDes: <trace>
+ExamView <... ExamViewDes: <trace>
+ExamView <... QuestionNumber: <trace>
+ExamView <.. IconButton: <trace>
+ExamView <... SingleOptionButton: <trace>
 CreateExamController <.. CreateExamControllerDes: <trace>
 Exam <.. ExamDes: <trace>
 Questions <.. QuestionsDes: <trace>
 Answers <.. AnswersDes: <trace>
+Lines <.. LinesDes: <trace>
+Text <.. TextDes: <trace>
+Code <.. CodeDes: <trace>
+
+ExamsView -[hidden]r- AdminExamView
 
 @enduml

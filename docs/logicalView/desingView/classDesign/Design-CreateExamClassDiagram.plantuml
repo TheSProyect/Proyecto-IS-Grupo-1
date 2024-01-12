@@ -40,7 +40,7 @@ class Slider <<JPanel>>{
 }
 class SingleOptionButton <<JRadioButton>>
 class QuestionNumber <<JPanel>>
-class courseItem <<JPanel>>{
+class CourseItem <<JPanel>>{
     -courseTitle: JLabel
     -button:Button
 }
@@ -150,6 +150,7 @@ Slider -- CourseList
 
 ExamsView -- NavBar
 ExamsView -- Slider
+ExamsView -r- CourseCard
 AdminExamView -- NavBar
 AdminExamView -- Button
 AdminExamView -- CourseItem
