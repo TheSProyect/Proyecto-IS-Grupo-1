@@ -1,164 +1,30 @@
 @startuml Design-Analysis-TraceDiagram
-package analisys {
-    boundary AdminExamViewAnalysis as "AdminExamView"
-    boundary CertificatesViewAnalysis as "CertificatesView"
-    boundary CertificateViewAnalysis as "CertificateView"
-    boundary ExamEndedViewAnalysis as "ExamEndedView"
-    boundary ExamPublishedViewAnalysis as "ExamPublishedView"
-    boundary ExamViewAnalysis as "ExamView"
-    boundary ExamsViewAnalysis as "ExamsView"
-    boundary NewExamViewAnalysis as "NewExamView"
-    boundary ResultViewAnalysis as "ResultView"
-    control RequestCertificateControllerAnalysis as "RequestCertificateController"
-    control PresentExamControllerAnalysis as "PresentExamController"
-    control CreateExamControllerAnalysis as "CreateExamController"
-    entity CertificateAnalysis as "Certificate"
-    entity CourseAnalysis as "Course"
-    entity ResultAnalysis as "Result"
-    entity ExamAnalysis as "Exam"
-    entity QuestionsAnalysis as "Questions"
-    entity AnswersAnalysis as "Answers"
-    entity LineAnalysis as "Line"
-    entity TextAnalysis as "Text"
-    entity CodeAnalysis as "Code"
-}
+allow_mixing
 
-package design {
-    boundary ExamsView
-    boundary ExamView
-    boundary ExamEndedView
-    boundary CertificatesView
-    boundary CertificateView
-    boundary ResultView
-    boundary NewExamView
-    boundary ExamPublishedView
-    boundary AdminExamView
-    control CreateExamController
-    control PresentExamController
-    control RequestCertificateController
-    entity Questions
-    entity Answers
-    entity Exam
-    entity Result
-    entity Certificate
-    entity Name
-    entity Course
-    entity Lines
-    entity Text
-    entity Code
-}
+    'analysis class
+boundary AdminExamView 
+boundary NewExamView 
+boundary ExamPublishedView
+control CreateExamController
+entity Exam
+entity Questions
+entity Answers
 
-ExamViewAnalysis <.. ExamView
-ExamsViewAnalysis <.. ExamsView
-ExamEndedViewAnalysis <.. ExamEndedView
-CertificatesViewAnalysis <.. CertificatesView
-CertificateViewAnalysis <.. CertificateView
-ResultViewAnalysis <.. ResultView
-NewExamViewAnalysis <.. NewExamView
-ExamPublishedViewAnalysis <.. ExamPublishedView
-AdminExamViewAnalysis <.. AdminExamView
-CreateExamControllerAnalysis <.. CreateExamController
-PresentExamControllerAnalysis <.. PresentExamController
-RequestCertificateControllerAnalysis <.. RequestCertificateController
-QuestionsAnalysis <.. Questions
-AnswersAnalysis <.. Answers
-ExamAnalysis <.. Exam
-ResultAnalysis <.. Result
-CertificateAnalysis <.. Certificate
-CourseAnalysis <.. Course
-LineAnalysis <.. Lines
-TextAnalysis <.. Text
-CodeAnalysis <.. Code
+    'design class
+class AdminExamViewDes as "AdminExamView" <<JFrame>>
+class NewExamViewDes as "NewExamView" <<JFrame>>
+class ExamPublishedViewDes as "ExamPublishedView" <<JFrame>>
+class CreateExamControllerDes as "CreateExamController"
+class ExamDes as "Exam"
+class QuestionsDes as "Questions"
+class AnswersDes as "Answers"
 
+AdminExamView <.. AdminExamViewDes: <trace>
+NewExamView <.. NewExamViewDes: <trace>
+ExamPublishedView <.. ExamPublishedViewDes: <trace>
+CreateExamController <.. CreateExamControllerDes: <trace>
+Exam <.. ExamDes: <trace>
+Questions <.. QuestionsDes: <trace>
+Answers <.. AnswersDes: <trace>
 
-
-CreateExamControllerAnalysis -u- NewExamViewAnalysis
-CreateExamControllerAnalysis -u- ExamPublishedViewAnalysis
-
-RequestCertificateControllerAnalysis -u- CertificatesViewAnalysis
-RequestCertificateControllerAnalysis -u- CertificateViewAnalysis
-
-PresentExamControllerAnalysis -u- ExamViewAnalysis
-PresentExamControllerAnalysis -u- ResultViewAnalysis
-PresentExamControllerAnalysis -u- ExamEndedViewAnalysis
-
-CreateExamControllerAnalysis -- ExamAnalysis
-PresentExamControllerAnalysis -- ExamAnalysis
-PresentExamControllerAnalysis -- ResultAnalysis
-
-RequestCertificateControllerAnalysis -- CertificateAnalysis
-RequestCertificateControllerAnalysis -- CourseAnalysis
-
-ExamsViewAnalysis -- AdminExamViewAnalysis
-ExamsViewAnalysis -- CertificatesViewAnalysis
-ExamsViewAnalysis -- ExamViewAnalysis
-NewExamViewAnalysis -r- ExamPublishedViewAnalysis
-AdminExamViewAnalysis -r- NewExamViewAnalysis
-ExamViewAnalysis -[hidden]r- AdminExamViewAnalysis
-
-ExamEndedViewAnalysis -l- ResultViewAnalysis
-ExamViewAnalysis -l- ExamEndedViewAnalysis
-
-CertificatesViewAnalysis -l- CertificateViewAnalysis
-
-QuestionsAnalysis *-r- AnswersAnalysis
-ExamAnalysis *-r- QuestionsAnalysis
-
-LineAnalysis <|-u- CodeAnalysis
-LineAnalysis <|-u- TextAnalysis
-
-LineAnalysis --* AnswersAnalysis
-LineAnalysis --* QuestionsAnalysis
-
-ExamAnalysis -l- ResultAnalysis
-ResultAnalysis -l- CourseAnalysis
-CourseAnalysis -l- CertificateAnalysis
-
-
-
-CreateExamController -u- NewExamView
-CreateExamController -u- ExamPublishedView
-
-RequestCertificateController -u- CertificatesView
-RequestCertificateController -u- CertificateView
-
-PresentExamController -u- ExamView
-PresentExamController -u- ResultView
-PresentExamController -u- ExamEndedView
-
-CreateExamController -- Exam
-PresentExamController -- Exam
-PresentExamController -- Result
-
-RequestCertificateController -- Certificate
-RequestCertificateController -- Course
-
-ExamsView -- AdminExamView
-ExamsView -- CertificatesView
-ExamsView -- ExamView
-NewExamView -r- ExamPublishedView
-AdminExamView -r- NewExamView
-ExamView -[hidden]r- AdminExamView
-
-ExamEndedView -l- ResultView
-ExamView -l- ExamEndedView
-
-CertificatesView -l- CertificateView
-
-Questions *-r- Answers
-Exam *-r- Questions
-
-Lines <|-u- Code
-Lines <|-u- Text
-
-Lines --* Answers
-Lines --* Questions
-
-Exam -l- Result
-Result -l- Course
-Course -l- Certificate
-Name -u- Certificate
-Name -u- Course
-
-Name -[hidden]d- ExamsViewAnalysis
 @enduml

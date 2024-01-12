@@ -1,0 +1,48 @@
+@startuml
+actor User
+
+boundary AdminExamView as AV
+boundary NewExamView as NV
+boundary ExamPublishedView as PV
+
+control CreateExamController as C
+
+entity Exam as X
+entity Questions as Q
+entity Answers as A
+
+activate User
+User -> AV : ManageExams()
+activate AV
+
+AV -> NV : 1 : CreateExams()
+deactivate AV
+activate NV
+activate X
+
+NV -> C : 2 : CreateQuestions()
+activate C
+opt 
+ref over User,A
+Usecase CreateQuestion
+end ref
+end
+NV -> PV : 5 : FinishExam()
+deactivate NV
+activate PV
+
+Q -> X : :getQuestions()
+
+A -> X : :getAnswers()
+
+X -> C : :getQuestions()
+
+X ->  C : :getAnswers()
+
+
+C -> PV : :FinishedExam(questions, answers)
+deactivate C
+
+PV -> User : showFinishedExam(questions, answers)
+deactivate PV
+@enduml
