@@ -5,7 +5,10 @@ skinparam style strictuml
 class NavBar <<JPanel>>{
     -appName: JLabel
     -linkNavbar: JToolBar
-    -linkText: JLabel
+    -homeButton: NavBarButton
+    -adminButton: NavBarButton
+    -certifycateButton: NavBarButton
+    -logOutButton: NavBarButton
 __
 }
 class TextField <<JTextField>>{
