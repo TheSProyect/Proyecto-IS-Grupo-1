@@ -21,8 +21,11 @@ public class ExamsView extends JFrame {
         this.setSize(1024, 720);
         this.setLayout(new BorderLayout());
 
-        navBar = new NavBar();
+        paintNavBar();
+    }
 
+    protected void paintNavBar() {
+        navBar = new NavBar();
         this.add(navBar, BorderLayout.NORTH);
     }
 }
