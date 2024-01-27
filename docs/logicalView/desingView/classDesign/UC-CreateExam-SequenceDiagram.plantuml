@@ -10,39 +10,61 @@ control CreateExamController as C
 entity Exam as X
 entity Questions as Q
 entity Answers as A
-
 activate User
-User -> AV : ManageExams()
 activate AV
 
-AV -> NV : 1 : CreateExams()
+User -> AV : :CreateExam()
+
+AV -> NV : new NewExamView()
 deactivate AV
 activate NV
-activate X
 
-NV -> C : 2 : CreateQuestions()
 activate C
+NV -> C : CreateExam()
+C -> X : new Exam()
+activate X
+X -> Q : new Questions()
+activate Q
+X -> A : new Answers()
+activate A
+
 opt 
+User -> NV : CreateQuestions()
 ref over User,A
 Usecase CreateQuestion
 end ref
+
 end
-NV -> PV : 5 : FinishExam()
+
+User -> NV : FinishExam()
+
+NV --> User : RequestExamInfoPopup
+
+User -> NV : NewExamInfo(ExamInfo)
+
+NV -> C : SetExamInfo(ExamInfo)
+
+C -> X : SetInfo(ExamInfo)
+
+NV-> PV : new ExamPublishedView(name)
 deactivate NV
 activate PV
 
-Q -> X : :getQuestions()
+PV -> C : GetExamInfo(name)
 
-A -> X : :getAnswers()
+C -> X : :getInfo()
 
-X -> C : :getQuestions()
+X -> Q : :getQuestions()
+Q --> X : questions
+X --> C : questions
 
-X ->  C : :getAnswers()
+X -> A : :getAnswers()
+A --> X : answers
+X --> C : answers
 
 
-C -> PV : :FinishedExam(questions, answers)
+C -> PV : showFinishedExam(questions, answers)
 deactivate C
 
-PV -> User : showFinishedExam(questions, answers)
-deactivate PV
+PV --> User : finishedExam
 @enduml
