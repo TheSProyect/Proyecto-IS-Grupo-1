@@ -10,6 +10,8 @@ public class Palette {
     Color lightGray;
     Color gray;
     Color black;
+    Color blue;
+    Color yellow;
 
     public static Palette instance() {
 		if (palette == null){
@@ -24,6 +26,8 @@ public class Palette {
         lightGray = new Color(201,201,201);
         gray = new Color(77,77,77);
         black = new Color(31,31,31);
+        blue = new Color(25, 66, 140);
+        yellow = new Color(247, 167, 39);
 	}
 
     public Color getWhite() {
@@ -46,4 +50,11 @@ public class Palette {
         return black;
     }
 
+    public Color getBlue() {
+        return blue;
+    }
+
+    public Color getYellow() {
+        return yellow;
+    }
 }

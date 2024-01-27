@@ -3,7 +3,7 @@ package main.views.components;
 public class AdminNavBar extends NavBar{
     NavBarButton adminButton;
 
-    protected void drawNavBarButtons() {
+    protected void paintNavBarButtons() {
         homeButton = new NavBarButton("Mis Examenes", "Home_Icon.png", false);
         linkNavbar.add(homeButton);
         linkNavbar.addSeparator();

@@ -3,11 +3,13 @@ package main.views.components;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
@@ -28,26 +30,37 @@ public class NavBar extends JPanel implements ActionListener {
         this.setBackground(Palette.instance().getWhite());
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-        drawAppName();
+        paintAppName();
 
-        drawLinkNavBar();
+        paintLinkNavBar();
 
         this.add(appName);
         this.add(linkNavbar);
     }
 
-    private void drawAppName() {
+    private void paintAppName() {
         appName = new JLabel();
-        appName.setText("TéchneLogic");
-        appName.setFont(new Font("Nunito Sans", Font.BOLD, 20));
-        appName.setForeground(Palette.instance().getBlack());
-        appName.setPreferredSize(new Dimension(200, 80));
+        // appName.setText("TéchneLogic");
+        // appName.setFont(new Font("Nunito Sans", Font.BOLD, 20));
+        // appName.setForeground(Palette.instance().getBlack());
+        appName.setPreferredSize(new Dimension(220, 80));
+        
+        ImageIcon icon = new ImageIcon ("assets/Logo_Header.png");
+        // Image image = icon.getImage(); // transform it 
+        // Image newimg = image.getScaledInstance(122, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        // icon = new ImageIcon(newimg);
+        appName.setIcon(icon);
+        
         appName.setHorizontalAlignment(JLabel.CENTER);
+
+        // appName.setBackground(Palette.instance().getBlue());
+        // appName.setOpaque(true);
+
     }
 
-    private void drawLinkNavBar() {
+    private void paintLinkNavBar() {
         linkNavbar = new JToolBar();
-        linkNavbar.setPreferredSize(new Dimension(824, 80));
+        linkNavbar.setPreferredSize(new Dimension(744, 80));
         linkNavbar.setBackground(Palette.instance().getWhite());
         linkNavbar.setFloatable(false);
         linkNavbar.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 20));
@@ -55,10 +68,10 @@ public class NavBar extends JPanel implements ActionListener {
         Border border = BorderFactory.createLineBorder(Palette.instance().getWhite());
         linkNavbar.setBorder(border);
 
-        this.drawNavBarButtons();
+        this.paintNavBarButtons();
     }
     
-    protected void drawNavBarButtons() {
+    protected void paintNavBarButtons() {
         homeButton = new NavBarButton("Mis Examenes", "Home_Icon.png", false);
         homeButton.addActionListener(this);
         linkNavbar.add(homeButton);

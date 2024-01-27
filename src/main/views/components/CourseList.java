@@ -1,27 +1,29 @@
 package main.views.components;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 import javax.swing.JPanel;
 
 import main.data.Palette;
 
 public class CourseList extends JPanel {
-    CourseCard courseCard;
+    CourseCard courseCardLeft;
+    CourseCard courseCardCenter;
+    CourseCard courseCardRight;
     
     CourseList() {
-        // this.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-        // this.setVisibleRowCount(3);
-        this.setPreferredSize(new Dimension(800,600));
-        this.setBackground(Palette.instance().getLightGray());
+        this.setPreferredSize(new Dimension(800,380));
+        this.setBackground(Palette.instance().getWhite());
+        this.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
 
-        courseCard = new CourseCard();
-        this.add(courseCard);
+        courseCardLeft = new CourseCard();
+        this.add(courseCardLeft);
 
-        courseCard = new CourseCard();
-        this.add(courseCard);
+        courseCardCenter = new CourseCard();
+        this.add(courseCardCenter);
 
-        courseCard = new CourseCard();
-        this.add(courseCard);
+        courseCardRight = new CourseCard();
+        this.add(courseCardRight);
     }
 }

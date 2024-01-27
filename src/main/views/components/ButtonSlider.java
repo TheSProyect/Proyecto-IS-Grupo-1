@@ -2,19 +2,26 @@ package main.views.components;
 
 import java.awt.Dimension;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.border.Border;
 
 import main.data.Palette;
 
 public class ButtonSlider extends JButton {
     ImageIcon icon;
     
-    ButtonSlider() {
-        // icon = new ImageIcon("assets/Arrow_IconPH.png");
-        // this.setIcon(icon);
+    ButtonSlider(String iconName) {
+        icon = new ImageIcon("assets/" + iconName);
+        this.setIcon(icon);
 
-        this.setBackground(Palette.instance().getGray());
-        this.setPreferredSize(new Dimension(30,30));
+        Border border = BorderFactory.createLineBorder(Palette.instance().getWhite());
+        this.setBorder(border);
+
+        this.setBackground(Palette.instance().getWhite());
+        this.setPreferredSize(new Dimension(40,40));
+        this.setFocusable(false);
+
     }
 }

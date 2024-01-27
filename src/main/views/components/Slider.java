@@ -12,15 +12,21 @@ public class Slider extends JPanel {
     CourseList courseList;
 
     public Slider() {
-        this.setPreferredSize(new Dimension(1024, 640));
+        this.setPreferredSize(new Dimension(1024, 500));
         this.setBackground(Palette.instance().getWhite());
         
-        rightButton = new ButtonSlider();
+        
+        leftButton = new ButtonSlider("LeftArrow_Icon.png");
         courseList = new CourseList();
-        leftButton = new ButtonSlider();
+        rightButton = new ButtonSlider("RightArrow_Icon.png");
 
-        this.add(rightButton);
-        this.add(courseList);
+        JPanel spacer = new JPanel();
+        spacer.setPreferredSize(new Dimension(2048, 70));
+        spacer.setBackground(Palette.instance().getWhite());
+
+        this.add(spacer);
         this.add(leftButton);
+        this.add(courseList);
+        this.add(rightButton);
     }
 }

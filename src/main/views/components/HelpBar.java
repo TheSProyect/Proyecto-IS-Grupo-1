@@ -17,7 +17,7 @@ public class HelpBar extends JPanel implements ActionListener{
         this.setBackground(Palette.instance().getWhite());
         this.setLayout(new FlowLayout(FlowLayout.TRAILING));
 
-        helpButton = new NavBarButton("Ayuda", "Home_Icon.png", true);
+        helpButton = new NavBarButton("Ayuda", "Help_Icon.png", true);
         helpButton.addActionListener(this);
 
         this.add(helpButton);
