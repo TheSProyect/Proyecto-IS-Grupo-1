@@ -9,6 +9,7 @@ boundary NewExamView
 boundary ExamPublishedView
 
 entity Questions
+entity Answers
 
 control CreateExamController
 
@@ -21,6 +22,7 @@ NewExamView -- CreateExamController
 
 
 CreateExamController -- Questions
+CreateExamController -r- Answers
 
 
 @enduml

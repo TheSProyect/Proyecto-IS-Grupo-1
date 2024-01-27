@@ -1,4 +1,9 @@
 package main.views.pages;
+import main.views.components.CourseCard;
+import main.views.components.NavBar;
+import main.views.components.Slider;
+import main.views.pages.AdminExamView;
+import main.views.pages.ExamView;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -6,7 +11,6 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import main.views.components.NavBar;
 
 public class ExamsView extends JFrame {
     JLabel title;
