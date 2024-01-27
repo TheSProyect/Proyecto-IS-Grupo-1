@@ -2,25 +2,34 @@
 actor User
 boundary NewExamView as NV
 
-control CreateExamController as C
+control CreateQuestionController as C
 
 entity Exam as X
 entity Questions as Q
 entity Answers as A
 
+activate X
 activate User
 activate NV
-
-User -> C : AddQuestion(questioninfo)
-
-C -> X : 3 : SetQuestions(questioninfo)
-X -> Q : SetQuestions(questioninfo)
 activate Q
-
-C -> X : 4 : SetAnswers(questioninfo)
-X -> A : SetAnswers(questioninfo)
 activate A
 
-NV -> User : :showAddedMessage()
-deactivate NV
+User -> NV : AddQuestion(questioninfo)
+NV -> C : SetQuestionInfo(questioninfo)
+activate C
+
+
+C -> X : SetQuestions(questioninfo)
+
+X -> Q : new Questions(questioninfo)
+
+
+C -> X : SetAnswers(questioninfo)
+X -> A : new Answers(questioninfo)
+
+
+C -> NV : :showAddedMessage()
+deactivate C
+
+NV --> User : addedMessage
 @enduml
