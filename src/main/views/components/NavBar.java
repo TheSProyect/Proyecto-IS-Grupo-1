@@ -2,8 +2,6 @@ package main.views.components;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -40,21 +38,12 @@ public class NavBar extends JPanel implements ActionListener {
 
     private void paintAppName() {
         appName = new JLabel();
-        // appName.setText("TéchneLogic");
-        // appName.setFont(new Font("Nunito Sans", Font.BOLD, 20));
-        // appName.setForeground(Palette.instance().getBlack());
         appName.setPreferredSize(new Dimension(220, 80));
         
         ImageIcon icon = new ImageIcon ("assets/Logo_Header.png");
-        // Image image = icon.getImage(); // transform it 
-        // Image newimg = image.getScaledInstance(122, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-        // icon = new ImageIcon(newimg);
         appName.setIcon(icon);
         
         appName.setHorizontalAlignment(JLabel.CENTER);
-
-        // appName.setBackground(Palette.instance().getBlue());
-        // appName.setOpaque(true);
 
     }
 

@@ -13,7 +13,6 @@ import javax.swing.JSeparator;
 import main.data.Palette;
 import main.views.components.HelpBar;
 import main.views.components.NavBar;
-import main.views.components.NavBarButton;
 import main.views.components.Slider;
 
 public class ExamsView extends JFrame {
