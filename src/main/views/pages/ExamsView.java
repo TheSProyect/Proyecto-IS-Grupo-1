@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.BoxLayout;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
@@ -14,8 +13,9 @@ import main.data.Palette;
 import main.views.components.HelpBar;
 import main.views.components.NavBar;
 import main.views.components.Slider;
+import main.views.templates.Frame;
 
-public class ExamsView extends JFrame {
+public class ExamsView extends Frame {
     JPanel contentPanel;
     JPanel titlePanel;
     JLabel title;
@@ -25,16 +25,18 @@ public class ExamsView extends JFrame {
     HelpBar helpBar;
 
     public ExamsView() {
-        this.setVisible(true);
-        this.setTitle("ExamsView");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setMinimumSize(new Dimension(1024, 720));
-        this.setSize(1024, 720);
-        this.setLayout(new BorderLayout());
-
+        buildFrame();
+        
         paintBorders();
 
         paintContentPanel();
+        
+        this.pack();
+    }
+
+    protected void buildFrame() {
+        createFrame("ExamsView");
+        this.setLayout(new BorderLayout());
     }
 
     protected void paintNavBar() {
@@ -42,7 +44,7 @@ public class ExamsView extends JFrame {
         this.add(navBar, BorderLayout.NORTH);
     }
 
-    private void paintBorders() {
+    protected void paintBorders() {
         paintNavBar();
         
         helpBar = new HelpBar();
@@ -59,7 +61,7 @@ public class ExamsView extends JFrame {
         this.add(borderPanel, BorderLayout.EAST);
     }
 
-    private void paintContentPanel(){
+    protected void paintContentPanel(){
         contentPanel = new JPanel();
         contentPanel.setLayout(new BorderLayout());
         contentPanel.setPreferredSize(new Dimension(944, 560));

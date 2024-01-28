@@ -1,7 +1,6 @@
 package main.views.pages;
 
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -19,6 +18,11 @@ import main.views.components.AdminNavBar;
 public class AdminExamsView extends ExamsView {
     JButton editExam;
     JPanel titleButtonContainer;
+
+    protected void buildFrame() {
+        createFrame("AdminExamsView");
+        this.setLayout(new BorderLayout());
+    }
 
     protected void paintNavBar() {
         navBar = new AdminNavBar();
