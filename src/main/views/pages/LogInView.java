@@ -25,7 +25,6 @@ public class LogInView extends Frame implements ActionListener {
     JButton loginButton;
     
     PlaceholderTextField userTextField;
-    PlaceholderTextField emailTextField;
     PlaceholderTextField passwordTextField;
 
     public LogInView() {
@@ -147,11 +146,9 @@ public class LogInView extends Frame implements ActionListener {
 
     protected void paintTextFields() {
         userTextField = new PlaceholderTextField("Usuario", "Home_Icon.png");
-        // emailTextField = new PlaceholderTextField("Correo electronico", "Home_Icon.png");
         passwordTextField = new PlaceholderTextField("Contraseña", "Home_Icon.png");
 
         infoContainer.add(userTextField);
-        // infoContainer.add(emailTextField);
         infoContainer.add(passwordTextField);
     }
 
@@ -169,7 +166,7 @@ public class LogInView extends Frame implements ActionListener {
         infoContainer.add(buttonContainer);
     }
 
-    private void paintButton(JButton button, Dimension buttonSize) {
+    protected void paintButton(JButton button, Dimension buttonSize) {
         button.setPreferredSize(buttonSize);
         button.setFont(new Font("Nunito Sans", Font.PLAIN, 17));
         button.setBackground(Palette.instance().getBlue());

@@ -1,9 +1,6 @@
 package main.views.pages;
-import main.views.components.CourseCard;
 import main.views.components.NavBar;
 import main.views.components.Slider;
-import main.views.pages.AdminExamView;
-import main.views.pages.ExamView;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -16,8 +13,6 @@ import javax.swing.JSeparator;
 
 import main.data.Palette;
 import main.views.components.HelpBar;
-import main.views.components.NavBar;
-import main.views.components.Slider;
 import main.views.templates.Frame;
 
 public class ExamsView extends Frame {
