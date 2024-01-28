@@ -4,5 +4,6 @@ import main.models.Answers;
 import main.models.Lines;
 
 public class Questions {
+    private String domain;
     
 }

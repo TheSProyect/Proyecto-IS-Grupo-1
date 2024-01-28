@@ -5,5 +5,5 @@ import main.views.pages.ExamView;
 import main.views.components.Message;
 
 public class ExamPublishedView {
-    
+    private Message message;
 }
