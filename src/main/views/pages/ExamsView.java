@@ -72,13 +72,22 @@ public class ExamsView extends JFrame {
 
     }
     
-    private void paintTitlePanel() {
+    protected void paintTitlePanel() {
+        createTitlePanel();
+        paintTitleLabel();
+        paintTitleSeparator();        
+    }
+
+    protected void createTitlePanel() {
         titlePanel = new JPanel();
         titlePanel.setBackground(Palette.instance().getWhite());
         titlePanel.setPreferredSize(new Dimension(944, 60));
-        
         titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
 
+        contentPanel.add(titlePanel, BorderLayout.NORTH);
+    }
+
+    protected void paintTitleLabel() {
         title = new JLabel();
         title.setText("Mis examenes");
         title.setFont(new Font("Nunito Sans", Font.BOLD, 25));
@@ -86,14 +95,14 @@ public class ExamsView extends JFrame {
         title.setHorizontalAlignment(JLabel.LEFT);
         title.setVerticalAlignment(JLabel.BOTTOM);
 
+        titlePanel.add(title);
+    }
+
+    protected void paintTitleSeparator() {
         JSeparator line = new JSeparator();
         line.setForeground(Palette.instance().getLightGray());
         line.setBackground(Palette.instance().getLightGray());
-
-        titlePanel.add(title);
         titlePanel.add(line);
-
-        contentPanel.add(titlePanel, BorderLayout.NORTH);
     }
 
     private void paintSlider() {
