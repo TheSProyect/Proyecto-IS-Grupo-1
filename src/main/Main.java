@@ -1,11 +1,13 @@
 package main;
 
-import main.views.pages.ExamsView;
+import main.views.pages.LogInView;
+// import main.views.pages.ExamsView;
 // import main.views.pages.AdminExamsView;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        new ExamsView();
+        // new ExamsView();
         // new AdminExamsView();
+        new LogInView();
     }
 }
