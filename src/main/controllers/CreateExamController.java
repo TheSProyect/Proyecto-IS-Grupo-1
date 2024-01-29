@@ -1,7 +1,6 @@
 package main.controllers;
 
-import main.views.pages.NewExamView;
-import main.views.pages.ExamPublishedView;
+import main.models.Exam;
 import javax.swing.*;
 
 public class CreateExamController {

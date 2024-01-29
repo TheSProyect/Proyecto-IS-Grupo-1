@@ -5,5 +5,7 @@ import main.models.Lines;
 
 public class Questions {
     private String domain;
+    private Lines[] lines;
+    private Answers[] answers;
     
 }

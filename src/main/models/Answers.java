@@ -5,4 +5,5 @@ public class Answers {
     private int numOption;
     private boolean correct_option;
     private String justification;
+    private Lines[] lines;
 }

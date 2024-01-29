@@ -1,5 +1,7 @@
 package main.models;
 
-public class Text {
+import main.models.Lines;
+
+public class Text extends Lines {
     public void format(){}
 }
