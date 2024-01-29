@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 
 import main.views.components.CodeField;
-import main.views.components.QuestionNumber;
+import main.views.components.QuestionsList;
 import main.views.components.IconButton;
 
 
@@ -18,7 +18,7 @@ public class NewExamView {
     private JLabel labels;
     private TextField textField;
     private CodeField codeField;
-    private QuestionNumber questionNumber;
+    private QuestionsList questionNumber;
     private JList questionsList;
     private IconButton nexButton;
     private IconButton prevButton;
