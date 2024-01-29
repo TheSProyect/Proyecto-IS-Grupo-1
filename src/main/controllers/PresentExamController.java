@@ -1,6 +1,9 @@
 package main.controllers;
 
 import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 import main.models.Answers;
 import main.models.Questions;
@@ -15,8 +18,30 @@ public class PresentExamController {
     private Answers getAnswers(){}
     private Questions getQuestions(){}
 
+    private void readQuestion(String question){
+        String[] answer = new String[10];
+        String[] justification = new String[10];
+        boolean answerCorrect = true; 
+
+        try (BufferedReader br = new BufferedReader(new FileReader(question))) {
+            String line = "_";
+            String questionStatement = br.readLine();
+            for (int i =0, j=0; (line = br.readLine()) != null; i++,j++) {
+                if (line != null && line.length() > 0 && answerCorrect && line.substring(0, 1).equalsIgnoreCase("v")) {
+                    answer[i]= line.substring(1);
+                    justification[j]= br.readLine();
+                    } else {
+                        answer[i]= line;
+                        justification[j]= br.readLine();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+
     private String numberQuestion(String question){
-        
         if (question != null && question.length() > 0) {
             char lastCharacter = question.charAt(question.length() - 1);
             if (Character.isDigit(lastCharacter)) {
@@ -32,15 +57,15 @@ public class PresentExamController {
     private void searchFile(String question, String nameFile, File[] files){
         //llamada recursiva    
         if (files != null) {
-                // Itera sobre los archivos para buscar el archivo
-                for (File file : files) {
-                    if (file.isFile() && file.getName().equals(question)) {
-                        // El archivo fue encontrado
-                        searchFile(numberQuestion(question), nameFile, files);
-                        return;
-                    }
+            for (File file : files) {
+                if (file.isFile() && file.getName().equals(question)) {
+                    // El archivo fue encontrado
+                    readQuestion(question);
+                    searchFile(numberQuestion(question), nameFile, files);
+                    return;
                 }
-                // archivo no encontrado
+            }
+            // archivo no encontrado
         }
     }   
 
