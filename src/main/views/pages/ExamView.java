@@ -4,34 +4,20 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import main.data.Palette;
+// import main.models.Questions;
 import main.views.components.ExamMenu;
 import main.views.components.NavBar;
+import main.views.components.QuestionPanel;
 import main.views.templates.Frame;
 
-// import main.views.pages.ExamsView;
-// import main.views.components.QuestionNumber;
-
-// import javax.swing.JLabel;
-// import javax.swing.JList;
-// import javax.swing.JPanel;
-
-// import main.views.components.IconButton;
-// import main.views.components.SingleOptionButton;
-
 public class ExamView extends Frame {
-    // private SingleOptionButton option;
-    // private IconButton nextButton;
-    // private IconButton prevButton;
-    // private IconButton sendButton;
-    // private JLabel questionTitle;
-    // private JList questionsList;
-    // private QuestionNumber questionNumber;
-    // private JPanel cronometer;
     NavBar navBar;
     JPanel contentPanel;
+    JButton finishExamButton;
 
     public ExamView() {
         buildFrame();
@@ -85,10 +71,8 @@ public class ExamView extends Frame {
     }
 
     private void paintExamPanel() {
-        JPanel examPanel = new JPanel();
-        examPanel.setPreferredSize(new Dimension(544, 560));
-        examPanel.setBackground(Palette.instance().getWhite());
-
+        QuestionPanel examPanel = new QuestionPanel();
+        
         contentPanel.add(examPanel);
     }
 

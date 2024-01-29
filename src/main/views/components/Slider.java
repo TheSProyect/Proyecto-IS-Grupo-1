@@ -2,6 +2,7 @@ package main.views.components;
 
 import java.awt.Dimension;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.data.Palette;
@@ -20,9 +21,8 @@ public class Slider extends JPanel {
         courseList = new CourseList();
         rightButton = new ButtonSlider("RightArrow_Icon.png");
 
-        JPanel spacer = new JPanel();
+        JLabel spacer = new JLabel();
         spacer.setPreferredSize(new Dimension(2048, 70));
-        spacer.setBackground(Palette.instance().getWhite());
 
         this.add(spacer);
         this.add(leftButton);
