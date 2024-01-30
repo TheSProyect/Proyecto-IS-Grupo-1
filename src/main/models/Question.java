@@ -8,4 +8,13 @@ public class Question {
     private Line[] lines;
     private Answer[] answers;
     
+    public String getDomain(){
+        return domain;
+    }
+    public Line[] getLines(){
+        return lines;
+    }
+    public Answer[] getAnswers(){
+        return answers;
+    }
 }
