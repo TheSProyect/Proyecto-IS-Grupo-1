@@ -5,8 +5,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import main.models.Answers;
-import main.models.Questions;
+import main.models.Answer;
+import main.models.Question;
 import main.models.Result;
 import main.models.Exam;
 import javax.swing.*;
@@ -15,8 +15,8 @@ public class PresentExamController {
     //private void setResult(Option){}
     //private void chooseExam(Exam_Name){}
     private void startExam(){}
-    private Answers getAnswers(){}
-    private Questions getQuestions(){}
+    private Answer getAnswers(){}
+    private Question getQuestions(){}
 
     private void readQuestion(String question){
         String[] answer = new String[10];
