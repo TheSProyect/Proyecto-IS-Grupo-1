@@ -4,6 +4,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextPane;
 import javax.swing.border.Border;
 
 import main.data.Palette;
@@ -24,7 +25,7 @@ public class QuestionPanel extends JPanel {
         this.setLayout(new GridBagLayout());
 
         paintDomainPanel("Trabajar con tipos de datos Java");
-        paintQuestionTitle("¿Cuál es el resultado de este código?");
+        paintQuestion("¿Cuál es el resultado de este código?");
         paintCodeField();
         paintOptionsPanel();
 
@@ -65,11 +66,13 @@ public class QuestionPanel extends JPanel {
         domainPanel.add(domainLabel);
     }
 
-    private void paintQuestionTitle(String questionTitleString) {
-        JLabel questionTitle = new JLabel(questionTitleString);
-        questionTitle.setFont(new Font("Nunito Sans", Font.BOLD, 20));
-        questionTitle.setForeground(Palette.instance().getBlack());
-        questionTitle.setPreferredSize(new Dimension(2048,30));
+    private void paintQuestion(String questionTitleString) {
+        JTextPane questionText = new JTextPane();
+        questionText.setText(questionTitleString);
+        questionText.setEditable(false);
+        questionText.setFont(new Font("Nunito Sans", Font.BOLD, 20));
+        questionText.setForeground(Palette.instance().getBlack());
+        questionText.setPreferredSize(new Dimension(2048,30));
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -78,7 +81,7 @@ public class QuestionPanel extends JPanel {
         constraints.gridwidth = 4;
         constraints.fill = GridBagConstraints.BOTH;
 
-        this.add(questionTitle, constraints);
+        this.add(questionText, constraints);
     }
 
     private void paintCodeField() {
