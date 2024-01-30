@@ -8,9 +8,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
@@ -23,13 +24,18 @@ import main.views.components.QuestionPanel;
 import main.views.templates.Frame;
 
 public class ExamView extends Frame implements ActionListener {
-    NavBar navBar;
     JPanel contentPanel;
     JButton finishExamButton;
     JButton prevButton;
     JButton nextButton;
+    List<QuestionPanel> questions;
+    int index;
 
     public ExamView() {
+        questions = new ArrayList<QuestionPanel>();
+        index = 0;
+        inicializateQuestions();
+
         buildFrame();
         paintBorders();
         paintContentPanel();
@@ -43,7 +49,7 @@ public class ExamView extends Frame implements ActionListener {
     }
 
     private void paintNavBar() {
-        navBar = new NavBar();
+        NavBar navBar = new NavBar();
         this.add(navBar, BorderLayout.NORTH);
     }
 
@@ -70,7 +76,7 @@ public class ExamView extends Frame implements ActionListener {
 
         paintMenuPanel();
 
-        paintExamPanel();
+        paintQuestionPanel(index);
 
         paintBottomButtonPanel();
 
@@ -88,16 +94,20 @@ public class ExamView extends Frame implements ActionListener {
         contentPanel.add(menuPanel, constraints);
     }
 
-    private void paintExamPanel() {
-        QuestionPanel examPanel = new QuestionPanel();
+    private void paintQuestionPanel(int questionIndex) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 1;
         constraints.gridy = 0;
         constraints.weightx = 1.0;
         constraints.weighty = 0.5;
         constraints.fill = GridBagConstraints.BOTH;
+
+        for (int i = 0; i < questions.size(); i++) {
+            contentPanel.add(questions.get(i), constraints);
+            questions.get(i).setVisible(false);
+        }
         
-        contentPanel.add(examPanel, constraints);
+        questions.get(index).setVisible(true);
     }
     
     private void paintBottomButtonPanel() {
@@ -156,12 +166,37 @@ public class ExamView extends Frame implements ActionListener {
         button.setFont(new Font("Nunito Sans", Font.BOLD, 15));
         button.setPreferredSize(new Dimension(130, 30));
         button.setFocusable(false);
+        button.addActionListener(this);
 
         Border border = BorderFactory.createLineBorder(Palette.instance().getBlue());
         button.setBorder(border);
     }
 
-    public void showQuestions(){}
+    private void inicializateQuestions() {
+        questions.add(new QuestionPanel("¿Cuál es el resultado de este código?"));
+        questions.add(new QuestionPanel("¿Cuál no es el resultado de este código?"));
+        questions.add(new QuestionPanel("¿Cuál tu cara?"));
+        questions.add(new QuestionPanel("¿Quien te preguntó?"));
+    }
+
+    public void showPreviousQuestions(){
+        if ((index - 1) >= 0) {
+            questions.get(index).setVisible(false);
+            index = index - 1;
+            // paintQuestionPanel(index);
+            questions.get(index).setVisible(true);
+        }
+    }
+
+    private void showNextQuestion() {
+        if ((index + 1) < questions.size()) {
+            questions.get(index).setVisible(false);
+            index = index + 1;
+            // paintQuestionPanel(index);
+            questions.get(index).setVisible(true);
+        }
+    }   
+
     public void showInstructions(){}
     public void endExam(){} 
 
@@ -169,6 +204,15 @@ public class ExamView extends Frame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == finishExamButton) {
             System.out.println("This should show ResultView");
+
+        } else if (e.getSource() == prevButton) {
+            System.out.println("This should change question");
+            showPreviousQuestions();
+
+        } else if (e.getSource() == nextButton) {
+            System.out.println("This should change question");
+            showNextQuestion();
+            // paintQuestionPanel(index, "Next Question");
         }
     }
 

@@ -19,13 +19,13 @@ public class QuestionPanel extends JPanel {
     JPanel domainPanel;
     OptionsPanel optionsPanel;
 
-    public QuestionPanel() {
+    public QuestionPanel(String question) {
         this.setPreferredSize(new Dimension(544, 560));
         this.setBackground(Palette.instance().getWhite());
         this.setLayout(new GridBagLayout());
 
         paintDomainPanel("Trabajar con tipos de datos Java");
-        paintQuestion("¿Cuál es el resultado de este código?");
+        paintQuestion(question);
         paintCodeField();
         paintOptionsPanel();
 
@@ -66,9 +66,9 @@ public class QuestionPanel extends JPanel {
         domainPanel.add(domainLabel);
     }
 
-    private void paintQuestion(String questionTitleString) {
+    private void paintQuestion(String questionString) {
         JTextPane questionText = new JTextPane();
-        questionText.setText(questionTitleString);
+        questionText.setText(questionString);
         questionText.setEditable(false);
         questionText.setFont(new Font("Nunito Sans", Font.BOLD, 20));
         questionText.setForeground(Palette.instance().getBlack());
