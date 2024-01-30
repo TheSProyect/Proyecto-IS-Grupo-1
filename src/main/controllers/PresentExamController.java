@@ -15,8 +15,13 @@ public class PresentExamController {
     //private void setResult(Option){}
     //private void chooseExam(Exam_Name){}
     private void startExam(){}
-    private Answers getAnswers(){}
-    private Questions getQuestions(){}
+    private Answers getAnswers(){
+
+        return this.getAnswers();
+    }
+    private Questions getQuestions(){
+        return this.getQuestions();
+    }
 
     private void readQuestion(String question){
         String[] answer = new String[10];
@@ -70,9 +75,9 @@ public class PresentExamController {
     }   
 
     public void searchFolder() {
-        String directory = "/ruta/del/directorio";
+        String directory = "C:\\Users\\sergio\\Documents";
         //get para obtener nombre del examen
-        String nameFolder = "nombreCarpeta";
+        String nameFolder = "Proyecto-IS-Grupo-1";
         File searchedFolder = new File(directory);
 
         if (searchedFolder.exists() && searchedFolder.isDirectory()) {
