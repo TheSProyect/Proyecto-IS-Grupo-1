@@ -14,15 +14,23 @@ import javax.swing.*;
 public class PresentExamController {
     //private void setResult(Option){}
     //private void chooseExam(Exam_Name){}
+    
+    Exam currentExam = new Exam();
+
     private void startExam(){}
-    private Answers getAnswers(){}
-    private Questions getQuestions(){}
+    private Answers getAnswers(){
+        return this.getAnswers();
+    }
+    private Questions getQuestions(){
+        return this.getQuestions();
+    }
     public static void main(String[] args) throws IOException{
         PresentExamController p = new PresentExamController();
         p.searchFolder();    
     }
 
-    private void readQuestion(String directory, String directorySub, int stop){
+    private void readQuestion(String directory, String directorySub, int stop, int counter){
+        System.out.println("esta en readquestion");
         String questionStatement, question, line, domain;
         String[] answer = new String[10];
         String[] justification = new String[10];
@@ -31,14 +39,19 @@ public class PresentExamController {
             line = "_";
             questionStatement = br.readLine();
             domain = br.readLine();
+            //ahhhhhhh
+            currentExam.setQuestionsExam(questionStatement,domain,counter);
+
             for (int i =0, j=0; ((line = br.readLine()) != null); i++,j++) {
                 if (line != null && line.length() > 0 && answerCorrect && line.substring(0, 1).equalsIgnoreCase("v")) {
                     answer[i]= line.substring(1);
-                    justification[j]= br.readLine();
+                    justification[i]= br.readLine();
                     } else {
                         answer[i]= line;
-                        justification[j]= br.readLine();
+                        justification[i]= br.readLine();
                 }
+                currentExam.setAnswersExam(answer[i],justification[i], i, counter);
+                System.out.println(currentExam.getAnswersQuestionExam(counter, i));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -49,7 +62,7 @@ public class PresentExamController {
             question = (directory.substring(directory.length() - 13));
             question = question.substring(0, question.length() - 4);
             System.out.println((directorySub +"\\"+numberQuestion(question)+".txt"));
-            readQuestion((directorySub +"\\"+numberQuestion(question)+".txt"), directorySub,stop+1);
+            readQuestion((directorySub +"\\"+numberQuestion(question)+".txt"), directorySub,stop+1, counter);
         }
     }
     
@@ -69,12 +82,13 @@ public class PresentExamController {
 
     public void searchFolder() {
         String question, directorySub;
-        String directory = "C:\\Users\\user\\Documents\\exam";
+        String directory = "C:\\Users\\sergio\\Documents";
         //get para obtener nombre del examen
-        String nameFolder = "Discretas";
+        String nameFolder = "Proyecto-IS-Grupo-1";
         File searchedFolder = new File(directory);
 
         if (searchedFolder.exists() && searchedFolder.isDirectory()) {
+            int counter=0;
             File[] files = searchedFolder.listFiles();
             if (files != null) {
                 for (File file : files) {
@@ -83,7 +97,8 @@ public class PresentExamController {
                         question = "Pregunta1.txt";
                         directorySub = directory+ "\\"+ nameFolder;
                         directory = directory + "\\"+ nameFolder + "\\"+ question;
-                        readQuestion(directory, directorySub,0);
+                        readQuestion(directory, directorySub,0,counter);
+                        counter++;
                         return;
                     }
                 }
