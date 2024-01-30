@@ -22,12 +22,12 @@ public class CodeField extends JScrollPane {
     CodeField() {
         buildScrollPane();
         
-        buildCodePane();
+        buildCodePanel();
         paintLineNumber();
         buildCodeField();
     }
 
-    private void buildCodePane() {
+    private void buildCodePanel() {
         codePanel = new JPanel();
         codePanel.setPreferredSize(new Dimension(600,200));
         codePanel.setLayout(new BoxLayout(codePanel, BoxLayout.X_AXIS));
@@ -37,13 +37,13 @@ public class CodeField extends JScrollPane {
 
     private void paintLineNumber() {
         lineNumber = new JTextPane();
-        lineNumber.setPreferredSize(new Dimension(50,200));
+        lineNumber.setPreferredSize(new Dimension(50,150));
         lineNumber.setMaximumSize(new Dimension(50,400));
         
         lineNumber.setForeground(Palette.instance().getGray());
         lineNumber.setFont(new Font("Cascadia Code", Font.PLAIN, 17));
         lineNumber.setBackground(Palette.instance().getBlack());
-        lineNumber.setText("1");
+        lineNumber.setText("1 \n2 \n3 \n4 \n5 \n6 \n7 \n8 \n9 \n10");
         lineNumber.setEditable(false);
 
         Border border = BorderFactory.createEmptyBorder(0, 20, 0, 0);
@@ -54,12 +54,12 @@ public class CodeField extends JScrollPane {
 
     private void buildCodeField() {
         codeField = new JTextPane();
-        codeField.setPreferredSize(new Dimension(400, 200));
+        codeField.setPreferredSize(new Dimension(400, 150));
         
         codeField.setForeground(Palette.instance().getOffWhite());
         codeField.setFont(new Font("Cascadia Code", Font.PLAIN, 17));
         codeField.setBackground(Palette.instance().getBlack());
-        codeField.setText("var i = 1234;");
+        codeField.setText("var i = 1234; \nvar s = \" \" + i; \nif (\"1234\".equals(s)) \n");
         codeField.setEditable(false);
 
         Border border = BorderFactory.createEmptyBorder(0, 15, 0, 0);
