@@ -2,6 +2,7 @@ package main.views.components;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -19,15 +20,16 @@ public class CodeField extends JScrollPane {
     JTextPane codeField;
     JPanel codePanel;
 
-    CodeField() {
+    CodeField(List<String> codeLines) {
         buildScrollPane();
         
-        buildCodePane();
-        paintLineNumber();
-        buildCodeField();
+        buildCodePanel();
+        paintLineNumber(codeLines.size());
+        // paintLineNumber(3);
+        buildCodeField(codeLines);
     }
 
-    private void buildCodePane() {
+    private void buildCodePanel() {
         codePanel = new JPanel();
         codePanel.setPreferredSize(new Dimension(600,200));
         codePanel.setLayout(new BoxLayout(codePanel, BoxLayout.X_AXIS));
@@ -35,15 +37,18 @@ public class CodeField extends JScrollPane {
         this.setViewportView(codePanel);
     }
 
-    private void paintLineNumber() {
+    private void paintLineNumber(int numerOfLines) {
         lineNumber = new JTextPane();
-        lineNumber.setPreferredSize(new Dimension(50,200));
+        lineNumber.setPreferredSize(new Dimension(50,150));
         lineNumber.setMaximumSize(new Dimension(50,400));
         
         lineNumber.setForeground(Palette.instance().getGray());
         lineNumber.setFont(new Font("Cascadia Code", Font.PLAIN, 17));
         lineNumber.setBackground(Palette.instance().getBlack());
-        lineNumber.setText("1");
+
+        for (int i = 1; i <= numerOfLines; i++) {
+            lineNumber.setText(lineNumber.getText() + i + "\n");
+        }
         lineNumber.setEditable(false);
 
         Border border = BorderFactory.createEmptyBorder(0, 20, 0, 0);
@@ -52,14 +57,17 @@ public class CodeField extends JScrollPane {
         codePanel.add(lineNumber);
     }
 
-    private void buildCodeField() {
+    private void buildCodeField(List<String> codelines) {
         codeField = new JTextPane();
-        codeField.setPreferredSize(new Dimension(400, 200));
+        codeField.setPreferredSize(new Dimension(400, 150));
         
         codeField.setForeground(Palette.instance().getOffWhite());
         codeField.setFont(new Font("Cascadia Code", Font.PLAIN, 17));
         codeField.setBackground(Palette.instance().getBlack());
-        codeField.setText("var i = 1234;");
+
+        for (int i = 0; i < codelines.size(); i++) {
+            codeField.setText(codeField.getText() + codelines.get(i) + "\n");
+        }
         codeField.setEditable(false);
 
         Border border = BorderFactory.createEmptyBorder(0, 15, 0, 0);
