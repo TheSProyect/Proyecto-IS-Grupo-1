@@ -15,8 +15,8 @@ public class SingleOptionButton extends JRadioButton implements ActionListener{
     ImageIcon selected;
 
     SingleOptionButton(String option) {
-        notSelected = new ImageIcon("assets/Home_Icon.png");
-        selected = new ImageIcon("assets/Paperclip_Icon.png");
+        notSelected = new ImageIcon("assets/Unselected_Option_Icon.png");
+        selected = new ImageIcon("assets/Selected_Option_Icon.png");
 
         paintRadialButton();
         this.setText(option);

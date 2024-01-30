@@ -1,11 +1,8 @@
 package main.views.components;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
-import javax.swing.border.Border;
 
 import main.data.Palette;
 import java.awt.Dimension;
@@ -13,26 +10,25 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.List;
 
 public class QuestionPanel extends JPanel {
     SingleOptionButton option;
     JPanel domainPanel;
     OptionsPanel optionsPanel;
 
-    public QuestionPanel(String question) {
+    public QuestionPanel() {
         this.setPreferredSize(new Dimension(544, 560));
         this.setBackground(Palette.instance().getWhite());
         this.setLayout(new GridBagLayout());
 
-        paintDomainPanel("Trabajar con tipos de datos Java");
-        paintQuestion(question);
-        paintCodeField();
-        paintOptionsPanel();
-
-        // paintButtonPanel();
+        // paintDomainPanel(questionDomain);
+        // paintQuestion(question);
+        // paintCodeField();
+        // paintOptionsPanel();
     }
 
-    private void paintDomainPanel(String questionDomain) {
+    public void paintDomainPanel(String questionDomain) {
         domainPanel = new JPanel();
         domainPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
         domainPanel.setBackground(Palette.instance().getWhite());
@@ -66,7 +62,7 @@ public class QuestionPanel extends JPanel {
         domainPanel.add(domainLabel);
     }
 
-    private void paintQuestion(String questionString) {
+    public void paintQuestion(String questionString) {
         JTextPane questionText = new JTextPane();
         questionText.setText(questionString);
         questionText.setEditable(false);
@@ -77,6 +73,7 @@ public class QuestionPanel extends JPanel {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 1;
+        constraints.weightx = 1.0;
         constraints.weighty = 0.1;
         constraints.gridwidth = 4;
         constraints.fill = GridBagConstraints.BOTH;
@@ -84,8 +81,8 @@ public class QuestionPanel extends JPanel {
         this.add(questionText, constraints);
     }
 
-    private void paintCodeField() {
-        CodeField codeField = new CodeField();
+    public void paintCodeField(List<String> code) {
+        CodeField codeField = new CodeField(code);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -98,8 +95,8 @@ public class QuestionPanel extends JPanel {
         this.add(codeField, constraints);
     }
 
-    private void paintOptionsPanel() {
-        optionsPanel = new OptionsPanel();
+    public void paintOptionsPanel(List<String> options) {
+        optionsPanel = new OptionsPanel(options);
 
         
         GridBagConstraints constraints = new GridBagConstraints();
