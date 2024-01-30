@@ -1,9 +1,9 @@
 package main.models;
-import main.models.Lines;
+import main.models.Line;
 
-public class Answers {
+public class Answer {
     private int numOption;
     private boolean correct_option;
     private String justification;
-    private Lines[] lines;
+    private Line[] lines;
 }
