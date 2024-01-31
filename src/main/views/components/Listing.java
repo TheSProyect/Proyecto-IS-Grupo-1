@@ -2,6 +2,7 @@ package main.views.components;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.List;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
@@ -17,30 +18,34 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import main.data.Palette;
 
-public class ExamList extends JScrollPane{
+public class Listing extends JScrollPane{
     JPanel titlePanel;
     JLabel title;
-    NavBar navBar;
     Button button;
-    HelpBar helpBar;
     JButton createExam;
     JPanel titleButtonContainer;
-    JPanel examListPanel;
-   
-    public ExamList() {
+    JPanel listingPanel;
     
-        paintExamList();
-        paintExam();
+
+
+
+    public Listing(List<String> elements, String textButton) {
+
+        paintListingPanel();
+        paintListElements(elements, textButton);
+        
+
+
 
     }
 
 
-    private void paintExamList() {
-        examListPanel = new JPanel();
-        examListPanel.setPreferredSize(new Dimension(860, 500));
-        examListPanel.setBackground(Palette.instance().getWhite());
+    private void paintListingPanel() {
+        listingPanel = new JPanel();
+        listingPanel.setPreferredSize(new Dimension(860, 500));
+        listingPanel.setBackground(Palette.instance().getWhite());
 
-        this.setViewportView(examListPanel);
+        this.setViewportView(listingPanel);
         this.setPreferredSize(new Dimension(250, 320));
         this.getVerticalScrollBar().setBackground(Palette.instance().getLightGray());
         changeScrollPaneLook();
@@ -48,13 +53,19 @@ public class ExamList extends JScrollPane{
         Border border = BorderFactory.createLineBorder(Palette.instance().getWhite(), 3);
         this.setBorder(border);
 
-        
     }
 
-    protected void paintExam() {
-        createTitlePanel();
-        TitleButtonContainer();
-        paintTitleSeparator();        
+
+    protected void paintListElements(List<String> elements, String textButton) {
+        String singleElement;
+        for (int i = 0; i < elements.size(); i++) {
+            singleElement = elements.get(i);
+            createTitlePanel();
+            TitleButtonContainer(singleElement, textButton);
+            paintTitleSeparator();
+        
+        }
+                
     }
 
     protected void createTitlePanel() {
@@ -62,7 +73,7 @@ public class ExamList extends JScrollPane{
         titlePanel.setBackground(Palette.instance().getWhite());
         titlePanel.setPreferredSize(new Dimension(860, 60));
         titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
-        examListPanel.add(titlePanel, BorderLayout.NORTH);
+        listingPanel.add(titlePanel, BorderLayout.NORTH);
     }
 
     protected void paintTitleSeparator() {
@@ -72,22 +83,22 @@ public class ExamList extends JScrollPane{
         titlePanel.add(line);
     }
 
-    private void TitleButtonContainer() {
+    private void TitleButtonContainer(String singleElement, String textButton) {
         titleButtonContainer = new JPanel();
         titleButtonContainer.setMaximumSize(new Dimension(1500, 58));
         titleButtonContainer.setLayout(new BoxLayout(titleButtonContainer, BoxLayout.X_AXIS));
         titleButtonContainer.setBackground(Palette.instance().getWhite());
 
-        paintTitleLabel();
+        paintTitleLabel(singleElement);
 
-        paintCreateExamButton();
+        paintCreateExamButton(textButton);
         
         titlePanel.add(titleButtonContainer);
     }
 
-    protected void paintTitleLabel() {
+    protected void paintTitleLabel(String singleElement) {
         title = new JLabel();
-        title.setText("Examen 1 Java");
+        title.setText(singleElement);
         title.setFont(new Font("Nunito Sans", Font.ROMAN_BASELINE, 20));
         title.setPreferredSize(new Dimension(944, 58));
         title.setMaximumSize(new Dimension(2048, 58));
@@ -96,8 +107,8 @@ public class ExamList extends JScrollPane{
         titleButtonContainer.add(title, FlowLayout.LEFT);
     }
 
-    private void paintCreateExamButton() {
-        createExam = new JButton("Presentar Examen");
+    private void paintCreateExamButton(String textButton) {
+        createExam = new JButton(textButton);
         createExam.setFont(new Font("Nunito Sans", Font.BOLD, 15));
         createExam.setForeground(Palette.instance().getWhite());
         createExam.setBackground(Palette.instance().getBlue());
@@ -112,6 +123,7 @@ public class ExamList extends JScrollPane{
         titleButtonContainer.add(createExam);
     }
     
+
     private void changeScrollPaneLook() {
         this.getVerticalScrollBar().setPreferredSize(new Dimension(8, 0));
         this.getVerticalScrollBar().setUI(new BasicScrollBarUI() {

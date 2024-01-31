@@ -6,14 +6,17 @@ import main.views.components.NavBar;
 import main.views.components.AdminNavBar;
 import main.views.components.Button;
 import main.views.components.HelpBar;
-import main.views.components.ExamList;
+import main.views.components.Listing;
 
 
 import main.data.Palette;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Font;   
+import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.FlowLayout;
+
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,6 +25,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.border.Border;
+import javax.swing.text.html.parser.Element;
 
 
 public class AdminExamView extends Frame {
@@ -33,14 +37,17 @@ public class AdminExamView extends Frame {
     HelpBar helpBar;
     JButton createExam;
     JPanel titleButtonContainer;
-    ExamList examList;
+    Listing examListing;
+    List<String> exams;
+
 
     public AdminExamView() {
-        buildFrame();
-        
-        paintBorders();
+        inicializeExams();
 
+        buildFrame();
+        paintBorders();
         paintContentPanel();
+
 
         this.pack();
     }
@@ -81,9 +88,9 @@ public class AdminExamView extends Frame {
 
         paintTitlePanel();
         
-        paintExamList(); 
-        
+        paintExamListing(); 
 
+    
         this.add(contentPanel, BorderLayout.CENTER);
         
     }
@@ -149,10 +156,32 @@ public class AdminExamView extends Frame {
         titleButtonContainer.add(createExam);
     }
 
-    private void paintExamList() {
-        examList = new ExamList();
-        contentPanel.add(examList, BorderLayout.CENTER);
+    private void paintExamListing() {
+        examListing = new Listing(exams, "Presentar Examen");
+        contentPanel.add(examListing);
+        
     }
+
+
+    private void inicializeExams() {
+        // este metodo es de prueba. Terrible lo se
+        // lo que esté entre comentarios no va btw
+
+
+        exams = new ArrayList<String>();
+        // prueba {
+        exams.add("¿Cuál es el resultado de este código?");
+        exams.add("¿Cuál no es el resultado de este código?");
+        exams.add("¿Cuál tu cara?");
+        exams.add("¿Quien te preguntó?");
+        //prueba    
+
+
+
+
+
+    }
+
 
 
 
