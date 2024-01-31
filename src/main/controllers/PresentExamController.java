@@ -143,7 +143,7 @@ public class PresentExamController {
 
     public List<String> getDomain(){
         int j=currentExam.getNumberQuestions();
-        // 
+ 
         //List<Boolean> hasCode = new ArrayList<Boolean>();
         //List<List<String>> code = new ArrayList<List<String>>();
         //List<List<String>> options = new ArrayList<List<String>>();
@@ -151,10 +151,9 @@ public class PresentExamController {
         //options.add(new ArrayList<String>());
         List<String> domain = new ArrayList<String>();
         for(int i=0; i<j; i++){ 
-            //for(int k=0 ; k<; k++){
-
-            //}
-           domain.add(currentExam.getDomainExam(i));
+            //for(int k=0 ; k<currentExam.getNumberAnswersExam(i); k++){
+                domain.add(currentExam.getDomainExam(i));
+           
         }
 
         return domain;

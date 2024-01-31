@@ -187,12 +187,13 @@ public class ExamView extends Frame implements ActionListener {
         //questionsString.add("¿Quien te preguntó?");
         // } prueba
 
-        List<String> domain = new ArrayList<String>();
+        //List<String> domain = new ArrayList<String>();
+        List<String> domain = presentController.getDomain();
         // prueba {
-        domain.add("Trabajar con tipos de datos Java");
-        domain.add("Sufrir Java Swing");
-        domain.add("Por favor funciona");
-        domain.add("Me voy a pegar un tiro");
+        //domain.add("Trabajar con tipos de datos Java");
+        //domain.add("Sufrir Java Swing");
+        //domain.add("Por favor funciona");
+        //domain.add("Me voy a pegar un tiro");
         // } prueba
 
         List<Boolean> hasCode = new ArrayList<Boolean>();

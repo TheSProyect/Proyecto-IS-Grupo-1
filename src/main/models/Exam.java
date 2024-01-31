@@ -37,12 +37,12 @@ public class Exam {
         //return questions2.getQuestions();
         return questions[counter].getQuestions();
     }
-    public String getDomainExam(int counter){
+    public String getDomainExam(int counterQ){
         //return questions2.getQuestions();
-        return questions[counter].getQuestions();
+        return questions[counterQ].getDomain();
     }
-    public int getNumberQuestionExam(int counter){
-        return questions[counter].getNumberQuestion();
+    public int getNumberAnswersExam(int counter){
+        return questions[counter].getNumberAnswers();
     }
 
     public String getAnswersQuestionExam(int counter, int i){

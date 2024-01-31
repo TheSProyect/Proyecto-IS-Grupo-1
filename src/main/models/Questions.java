@@ -27,13 +27,16 @@ public class Questions {
         return statement;
     }
 
-    public int getNumberQuestion(){
-        return 0;
+    public int getNumberAnswers(){
+        return numberAnswers;
     }
     
     public String getAnswersQuestions(int counter){
         //return questions2.getQuestions();
         return answers[counter].getAnswers();
+    }
+    public String getDomain(){
+        return domain;
     }
 
     public void setNumberAnswers(int number){
