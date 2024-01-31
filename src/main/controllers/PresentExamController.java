@@ -84,10 +84,10 @@ public class PresentExamController {
         String question = (directory.substring(directory.length() - removeQuestionFromDirectory));
         question = question.substring(0, question.length() - removeFyleType);
         directory = directory.substring(0, directory.length() - removeQuestionFromDirectory);
-            return (directory +"\\"+numberQuestion(question)+".txt");
+            return (directory +"\\"+changeNumberQuestion(question)+".txt");
     }
     
-    private String numberQuestion(String question){
+    private String changeNumberQuestion(String question){
         int removeNumberOfQuestion = 1;
         if (question != null && question.length() > 0) {
             char lastCharacter = question.charAt(question.length() - removeNumberOfQuestion);
@@ -113,7 +113,6 @@ public class PresentExamController {
             if (files != null) {
                 for (File file : files) {
                     if (file.isDirectory() && file.getName().equals(nameFolder)) {
-                        System.out.println("here");
                         int stop = getNumberQuestion(directory, nameFolder);
                         String question = "Pregunta1.txt";
                         directory = directory + "\\"+ nameFolder + "\\"+ question;

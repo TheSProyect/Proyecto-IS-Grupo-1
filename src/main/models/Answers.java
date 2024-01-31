@@ -14,6 +14,6 @@ public class Answers {
     }
 
     public String getAnswers(){
-        return justification;
+        return name;
     }
 }
