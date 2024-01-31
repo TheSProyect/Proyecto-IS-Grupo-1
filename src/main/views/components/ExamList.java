@@ -1,94 +1,57 @@
-package main.views.pages;
+package main.views.components;
 
-
-import main.views.templates.Frame;
-import main.views.components.NavBar;
-import main.views.components.AdminNavBar;
-import main.views.components.Button;
-import main.views.components.HelpBar;
-import main.views.components.ExamList;
-
-
-import main.data.Palette;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Font;   
+import java.awt.Font;
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.border.Border;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 
+import main.data.Palette;
 
-public class AdminExamView extends Frame {
+public class ExamList extends JScrollPane{
     JPanel titlePanel;
-    JPanel contentPanel;
     JLabel title;
     NavBar navBar;
     Button button;
     HelpBar helpBar;
     JButton createExam;
     JPanel titleButtonContainer;
-    ExamList examList;
-
-    public AdminExamView() {
-        buildFrame();
-        
-        paintBorders();
-
-        paintContentPanel();
-
-        this.pack();
-    }
-
-    protected void buildFrame() {
-        createFrame("ExamsView");
-        this.setLayout(new BorderLayout());
-    }
-
-    protected void paintNavBar() {
-        navBar = new AdminNavBar();
-        this.add(navBar, BorderLayout.NORTH);
-    }
-
-    protected void paintBorders() {
-        paintNavBar();
-        
-        helpBar = new HelpBar();
-        this.add(helpBar, BorderLayout.SOUTH);
-
-        JPanel borderPanel = new JPanel();
-        borderPanel.setPreferredSize(new Dimension(40, 560));
-        borderPanel.setBackground(Palette.instance().getWhite());
-        this.add(borderPanel, BorderLayout.WEST);
-
-        borderPanel = new JPanel();
-        borderPanel.setPreferredSize(new Dimension(40, 560));
-        borderPanel.setBackground(Palette.instance().getWhite());
-        this.add(borderPanel, BorderLayout.EAST);
+    JPanel examListPanel;
+   
+    public ExamList() {
+    
+        paintExamList();
+        paintExam();
 
     }
 
-    protected void paintContentPanel(){
-        contentPanel = new JPanel();
-        contentPanel.setLayout(new BorderLayout());
-        contentPanel.setPreferredSize(new Dimension(944, 560));
-        contentPanel.setBackground(Palette.instance().getWhite());
 
-        paintTitlePanel();
-        
-        paintExamList(); 
-        
+    private void paintExamList() {
+        examListPanel = new JPanel();
+        examListPanel.setPreferredSize(new Dimension(860, 500));
+        examListPanel.setBackground(Palette.instance().getWhite());
 
-        this.add(contentPanel, BorderLayout.CENTER);
+        this.setViewportView(examListPanel);
+        this.setPreferredSize(new Dimension(250, 320));
+        this.getVerticalScrollBar().setBackground(Palette.instance().getLightGray());
+        changeScrollPaneLook();
+
+        Border border = BorderFactory.createLineBorder(Palette.instance().getWhite(), 3);
+        this.setBorder(border);
+
         
     }
 
-    protected void paintTitlePanel() {
+    protected void paintExam() {
         createTitlePanel();
         TitleButtonContainer();
         paintTitleSeparator();        
@@ -97,9 +60,9 @@ public class AdminExamView extends Frame {
     protected void createTitlePanel() {
         titlePanel = new JPanel();
         titlePanel.setBackground(Palette.instance().getWhite());
-        titlePanel.setPreferredSize(new Dimension(944, 60));
+        titlePanel.setPreferredSize(new Dimension(860, 60));
         titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
-        contentPanel.add(titlePanel, BorderLayout.NORTH);
+        examListPanel.add(titlePanel, BorderLayout.NORTH);
     }
 
     protected void paintTitleSeparator() {
@@ -124,8 +87,8 @@ public class AdminExamView extends Frame {
 
     protected void paintTitleLabel() {
         title = new JLabel();
-        title.setText("Administrador de Examenes");
-        title.setFont(new Font("Nunito Sans", Font.BOLD, 25));
+        title.setText("Examen 1 Java");
+        title.setFont(new Font("Nunito Sans", Font.ROMAN_BASELINE, 20));
         title.setPreferredSize(new Dimension(944, 58));
         title.setMaximumSize(new Dimension(2048, 58));
         title.setVerticalAlignment(JLabel.BOTTOM);
@@ -134,7 +97,7 @@ public class AdminExamView extends Frame {
     }
 
     private void paintCreateExamButton() {
-        createExam = new JButton("Crear Examen");
+        createExam = new JButton("Presentar Examen");
         createExam.setFont(new Font("Nunito Sans", Font.BOLD, 15));
         createExam.setForeground(Palette.instance().getWhite());
         createExam.setBackground(Palette.instance().getBlue());
@@ -148,12 +111,34 @@ public class AdminExamView extends Frame {
     
         titleButtonContainer.add(createExam);
     }
+    
+    private void changeScrollPaneLook() {
+        this.getVerticalScrollBar().setPreferredSize(new Dimension(8, 0));
+        this.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+            @Override
+            protected JButton createDecreaseButton(int orientation) {
+                return createZeroButton();
+            }
 
-    private void paintExamList() {
-        examList = new ExamList();
-        contentPanel.add(examList, BorderLayout.CENTER);
+            @Override    
+            protected JButton createIncreaseButton(int orientation) {
+                return createZeroButton();
+            }
+
+            private JButton createZeroButton() {
+                JButton jbutton = new JButton();
+                jbutton.setPreferredSize(new Dimension(0, 0));
+                jbutton.setMinimumSize(new Dimension(0, 0));
+                jbutton.setMaximumSize(new Dimension(0, 0));
+                return jbutton;
+            }
+
+            @Override
+            protected void configureScrollBarColors() {
+                this.thumbColor = Palette.instance().getYellow();
+            }
+        });
     }
-
 
 
 }
