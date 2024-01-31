@@ -16,7 +16,6 @@ public class Questions {
     }
 
     public void setAnswersQuestions(String answer, String justification, Questions question, int i){
-        System.out.println("esta en question");
         for(int j=0 ; j<i+1 ; j++){
             answers[j]= new Answers();
             answers[j].setAnswers(answer, justification, answers[j]);

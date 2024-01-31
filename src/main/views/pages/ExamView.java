@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import main.controllers.PresentExamController;
 import main.data.Palette; 
 import main.views.components.ExamMenu;
 import main.views.components.NavBar;
@@ -29,10 +30,12 @@ public class ExamView extends Frame implements ActionListener {
     JButton nextButton;
     List<QuestionPanel> questions;
     int index;
+    PresentExamController presentController;
 
     public ExamView() {
         questions = new ArrayList<QuestionPanel>();
         index = 0;
+        presentController= new PresentExamController();
         inicializeQuestions();
 
         buildFrame();
@@ -175,13 +178,15 @@ public class ExamView extends Frame implements ActionListener {
         // este metodo es de prueba. Terrible lo se
         // lo que esté entre comentarios no va btw
 
-
-        List<String> questionsString = new ArrayList<String>();
+        //List<String> questionsString = new ArrayList<String>();
+        System.out.println("aver");
+        List<String> questionsString= presentController.getQuestionsStrings();
+        System.out.println("aver2");
         // prueba {
-        questionsString.add("¿Cuál es el resultado de este código?");
-        questionsString.add("¿Cuál no es el resultado de este código?");
-        questionsString.add("¿Cuál tu cara?");
-        questionsString.add("¿Quien te preguntó?");
+        //questionsString.add("¿Cuál es el resultado de este código?");
+        //questionsString.add("¿Cuál no es el resultado de este código?");
+        //questionsString.add("¿Cuál tu cara?");
+        //questionsString.add("¿Quien te preguntó?");
         // } prueba
 
         List<String> domain = new ArrayList<String>();
