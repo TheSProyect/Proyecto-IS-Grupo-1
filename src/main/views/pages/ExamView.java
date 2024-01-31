@@ -179,9 +179,7 @@ public class ExamView extends Frame implements ActionListener {
         // lo que esté entre comentarios no va btw
 
         //List<String> questionsString = new ArrayList<String>();
-        System.out.println("aver");
         List<String> questionsString= presentController.getQuestionsStrings();
-        System.out.println("aver2");
         // prueba {
         //questionsString.add("¿Cuál es el resultado de este código?");
         //questionsString.add("¿Cuál no es el resultado de este código?");

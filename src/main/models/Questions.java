@@ -7,6 +7,7 @@ public class Questions {
     private String statement;
     private String domain;
     private Lines[] lines;
+    private int numberAnswers;
     private Answers[] answers= new Answers[10];
     private int counter=0;
     
@@ -25,10 +26,17 @@ public class Questions {
     public String getQuestions(){
         return statement;
     }
+
+    public int getNumberQuestion(){
+        return 0;
+    }
     
     public String getAnswersQuestions(int counter){
         //return questions2.getQuestions();
         return answers[counter].getAnswers();
     }
 
+    public void setNumberAnswers(int number){
+        numberAnswers=number;
+    }
 }

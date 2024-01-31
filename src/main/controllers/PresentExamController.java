@@ -36,15 +36,16 @@ public class PresentExamController {
     }
 
     private void readQuestion(String directory, int readings, int counter, int stop){
-        System.out.println("readquestion");
         String questionStatement, line, domain;
         String[] answer = new String[10];
         String[] justification = new String[10];
         boolean answerCorrect = true; 
+        currentExam.setNumberQuestions(stop);
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             questionStatement = br.readLine();
             domain = br.readLine();
             currentExam.setQuestionsExam(questionStatement,domain,counter);
+            
             for (int i =0; ((line = br.readLine()) != null); i++) {
                 if (line != null && line.length() > 0 && answerCorrect && line.substring(0, 1).equalsIgnoreCase("v")) {
                     answer[i]= line.substring(1);
@@ -54,7 +55,7 @@ public class PresentExamController {
                         justification[i]= br.readLine();
                         }
                     currentExam.setAnswersExam(answer[i],justification[i], i, counter);
-                    System.out.println(currentExam.getAnswersQuestionExam(counter, i));
+                    currentExam.setNumberAnswers(counter, i);
                     }
                     br.close();     
                 } catch (IOException e) {
@@ -63,6 +64,7 @@ public class PresentExamController {
                 if(readings==stop) {
                     return;
                     } else {
+                        counter++;
                     readQuestion(changeDirectory(directory),readings+1, counter, stop);
         }   
     }
@@ -110,7 +112,7 @@ public class PresentExamController {
 
     public void searchFolder() {
         String directory = System.getProperty("user.dir");
-        //directory = directory+"\\"+"Exams";
+        directory = directory+"\\"+"Exams";
         //get para obtener nombre del examen
         String nameFolder = "Examen1";
         File searchedFolder = new File(directory);
@@ -119,12 +121,10 @@ public class PresentExamController {
             if (files != null) {
                 for (File file : files) {
                     if (file.isDirectory() && file.getName().equals(nameFolder)) {
-                        System.out.println("here");
                         int stop = getNumberQuestion(directory, nameFolder);
                         String question = "Pregunta1.txt";
                         directory = directory + "\\"+ nameFolder + "\\"+ question;
                         readQuestion(directory,1,counter, stop);
-                        counter++;
                         return;
                     }
                 }
@@ -133,21 +133,30 @@ public class PresentExamController {
     }
 
     public List<String> getQuestionsStrings(){
-        int j=2;
-        //List<String> questionsString = new ArrayList<String>();
-        // List<String> domain = new ArrayList<String>();
+        int j=currentExam.getNumberQuestions();
+        List<String> questionsString = new ArrayList<String>();
+        for(int i=0; i<j; i++){ 
+            questionsString.add(currentExam.getQuestionsExam(i));
+        }
+        return questionsString;
+    }
+
+    public List<String> getDomain(){
+        int j=currentExam.getNumberQuestions();
+        // 
         //List<Boolean> hasCode = new ArrayList<Boolean>();
         //List<List<String>> code = new ArrayList<List<String>>();
         //List<List<String>> options = new ArrayList<List<String>>();
         // prueba {
         //options.add(new ArrayList<String>());
-        List<String> questionsString = new ArrayList<String>();
-        //System.out.println("entro en controller");
+        List<String> domain = new ArrayList<String>();
         for(int i=0; i<j; i++){ 
-            System.out.println(currentExam.getQuestionsExam(i)+"te oodio");
-            questionsString.add(currentExam.getQuestionsExam(i));
+            //for(int k=0 ; k<; k++){
+
+            //}
+           domain.add(currentExam.getDomainExam(i));
         }
 
-        return questionsString;
+        return domain;
     }
 }
