@@ -1,7 +1,8 @@
 Enunciado
-Pregunta1
+Dominio
+Respuesta1
 Justificacion
-Pregunta2
+Respuesta2
 Justificacion
-vPregunta3
+vRespuesta3
 just
