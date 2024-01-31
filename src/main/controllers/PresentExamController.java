@@ -36,6 +36,7 @@ public class PresentExamController {
     }
 
     private void readQuestion(String directory, int readings, int counter, int stop){
+        System.out.println("readquestion");
         String questionStatement, line, domain;
         String[] answer = new String[10];
         String[] justification = new String[10];
@@ -132,7 +133,7 @@ public class PresentExamController {
     }
 
     public List<String> getQuestionsStrings(){
-        int j=1;
+        int j=2;
         //List<String> questionsString = new ArrayList<String>();
         // List<String> domain = new ArrayList<String>();
         //List<Boolean> hasCode = new ArrayList<Boolean>();
