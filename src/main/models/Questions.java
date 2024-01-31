@@ -17,10 +17,10 @@ public class Questions {
     }
 
     public void setAnswersQuestions(String answer, String justification, Questions question, int i){
-        for(int j=0 ; j<i+1 ; j++){
-            answers[j]= new Answers();
-            answers[j].setAnswers(answer, justification, answers[j]);
-        }
+        //for(int j=0 ; j<i+1 ; j++){
+            answers[i]= new Answers();
+            answers[i].setAnswers(answer, justification, answers[i]);
+        //}
     }
 
     public String getQuestions(){
@@ -32,6 +32,15 @@ public class Questions {
     }
     
     public String getAnswersQuestions(int counter){
+        //return questions2.getQuestions();
+        return answers[counter].getAnswers();
+    }
+    public String getOptionsQuestion(int counter){
+        //return questions2.getQuestions();
+        return answers[counter].getAnswers();
+    }
+
+    public String getCode(int counter){
         //return questions2.getQuestions();
         return answers[counter].getAnswers();
     }

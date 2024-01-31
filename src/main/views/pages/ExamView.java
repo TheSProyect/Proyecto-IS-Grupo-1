@@ -221,22 +221,23 @@ public class ExamView extends Frame implements ActionListener {
         code.get(2).add("if (\"1234\".equals(s)) ");
         // } prueba
 
-        List<List<String>> options = new ArrayList<List<String>>();
+        //List<List<String>> options = new ArrayList<List<String>>();
+        List<List<String>> options = presentController.getOptions();
         // prueba {
-        options.add(new ArrayList<String>());
-        options.get(0).add("No compila");
-        options.get(0).add("Se ve feo");
-        options.get(0).add("El bit dirty");
-        options.get(0).add("Que?");
-        options.get(0).add("so");
+        //options.add(new ArrayList<String>());
+        //options.get(0).add("No compila");
+        //options.get(0).add("Se ve feo");
+        //options.get(0).add("El bit dirty");
+        //options.get(0).add("Que?");
+        //options.get(0).add("so");
 
         
-        options.add(new ArrayList<String>());
-        options.get(1).add("When I was");
-        options.get(1).add("A young boy");
-        options.get(1).add("My father");
-        options.get(1).add("Took me into the city");
-        options.get(1).add("To see a marching band");
+        //options.add(new ArrayList<String>());
+        //options.get(1).add("When I was");
+        //options.get(1).add("A young boy");
+        //options.get(1).add("My father");
+        //options.get(1).add("Took me into the city");
+        //options.get(1).add("To see a marching band");
 
         
         options.add(new ArrayList<String>());

@@ -38,8 +38,10 @@ public class Exam {
         return questions[counter].getQuestions();
     }
     public String getDomainExam(int counterQ){
-        //return questions2.getQuestions();
         return questions[counterQ].getDomain();
+    }
+    public String getOptionsExam(int counterQuestion, int counterAnswer){
+        return questions[counterQuestion].getOptionsQuestion(counterAnswer);
     }
     public int getNumberAnswersExam(int counter){
         return questions[counter].getNumberAnswers();
