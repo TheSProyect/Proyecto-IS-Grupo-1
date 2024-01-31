@@ -143,63 +143,44 @@ public class PresentExamController {
 
     public List<String> getDomain(){
         int j=currentExam.getNumberQuestions();
- 
-        //List<Boolean> hasCode = new ArrayList<Boolean>();
-        //List<List<String>> code = new ArrayList<List<String>>();
-        //List<List<String>> options = new ArrayList<List<String>>();
-        // prueba {
-        //options.add(new ArrayList<String>());
         List<String> domain = new ArrayList<String>();
         for(int i=0; i<j; i++){ 
-            //for(int k=0 ; k<currentExam.getNumberAnswersExam(i); k++){
                 domain.add(currentExam.getDomainExam(i));
-           
         }
-
         return domain;
     }
 
     public List<Boolean> getHasCode(){
         int j=currentExam.getNumberQuestions();
-        //List<List<String>> code = new ArrayList<List<String>>();
-        //List<List<String>> options = new ArrayList<List<String>>();
-        // prueba {
-        //options.add(new ArrayList<String>());
         List<Boolean> hasCode = new ArrayList<Boolean>();
-        //for(int i=0; i<j; i++){ 
-            //for(int k=0 ; k<currentExam.getNumberAnswersExam(i); k++){
-          //      domain.add(currentExam.getDomainExam(i));
-           
-        //}
-        List<List<String>> options = new ArrayList<List<String>>();
-        // prueba {
-        
+        //falta arreglar
+        for(int i=0; i<j; i++){ 
+            hasCode.add(true);
+        }
         return hasCode;
     }
-
+    public List<List<String>> getCode(){
+        int j=currentExam.getNumberQuestions();
+        List<List<String>> code = new ArrayList<List<String>>();
+        //falta arreglar
+        for(int i=0; i<j; i++){ 
+            code.add(new ArrayList<String>());
+            for(int k=0; k<currentExam.getNumberAnswersExam(i); k++){
+                code.get(i).add(currentExam.getOptionsExam(i,k));
+            }
+        }
+        return code;
+    }
+    
     public List<List<String>> getOptions(){
         int j=currentExam.getNumberQuestions();
         List<List<String>> options = new ArrayList<List<String>>();
         for(int i=0; i<j; i++){ 
-            //domain.add(currentExam.getDomainExam(i));
             options.add(new ArrayList<String>());
             for(int k=0; k<currentExam.getNumberAnswersExam(i); k++){
                 options.get(i).add(currentExam.getOptionsExam(i,k));
             }
-            
-           
         }
-        // prueba {
-        //options.add(new ArrayList<String>());
-        //options.get(0).add("No compila");
-       // options.add(new ArrayList<String>());
-        //options.get(1).add("When I was");
-        //options.add(new ArrayList<String>());
-        //options.get(2).add("One thing");
-        //options.add(new ArrayList<String>());
-        //options.get(3).add("Connection terminated");
-        // } prueba
-        
         return options;
     }
 }
