@@ -154,12 +154,7 @@ public class PresentExamController {
                     readExam(directory,nameFolder);
                 for (File file : files) {
                     if (file.isDirectory() && file.getName().equals(nameFolder)) {
-<<<<<<< HEAD
-                        int stop = getNumberQuestion(directory, nameFolder);
-=======
-                        //int stop = getNumberQuestion(directory, nameFolder);
-                        //readExam(directory,nameFolder);
->>>>>>> 5407cbd036deb8cb488c7f4d5f42cb457d0725ae
+                        stop = getNumberQuestion(directory, nameFolder);
                         String question = "Pregunta1.txt";
                         directory = directory + "\\"+ nameFolder + "\\"+ question;
                         readQuestion(directory,1,counter, stop);
