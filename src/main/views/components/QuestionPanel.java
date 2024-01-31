@@ -3,10 +3,6 @@ package main.views.components;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
-<<<<<<< HEAD
-import javax.swing.border.Border;
-=======
->>>>>>> main
 
 import main.data.Palette;
 import java.awt.Dimension;
@@ -26,17 +22,6 @@ public class QuestionPanel extends JPanel {
         this.setBackground(Palette.instance().getWhite());
         this.setLayout(new GridBagLayout());
 
-<<<<<<< HEAD
-        paintDomainPanel("Trabajar con tipos de datos Java");
-        paintQuestion(question);
-        paintCodeField();
-        paintOptionsPanel();
-
-        // paintButtonPanel();
-    }
-
-    private void paintDomainPanel(String questionDomain) {
-=======
         // paintDomainPanel(questionDomain);
         // paintQuestion(question);
         // paintCodeField();
@@ -44,7 +29,6 @@ public class QuestionPanel extends JPanel {
     }
 
     public void paintDomainPanel(String questionDomain) {
->>>>>>> main
         domainPanel = new JPanel();
         domainPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
         domainPanel.setBackground(Palette.instance().getWhite());
@@ -78,11 +62,7 @@ public class QuestionPanel extends JPanel {
         domainPanel.add(domainLabel);
     }
 
-<<<<<<< HEAD
-    private void paintQuestion(String questionString) {
-=======
     public void paintQuestion(String questionString) {
->>>>>>> main
         JTextPane questionText = new JTextPane();
         questionText.setText(questionString);
         questionText.setEditable(false);
@@ -115,13 +95,8 @@ public class QuestionPanel extends JPanel {
         this.add(codeField, constraints);
     }
 
-<<<<<<< HEAD
-    private void paintOptionsPanel() {
-        optionsPanel = new OptionsPanel();
-=======
     public void paintOptionsPanel(List<String> options) {
         optionsPanel = new OptionsPanel(options);
->>>>>>> main
 
         
         GridBagConstraints constraints = new GridBagConstraints();

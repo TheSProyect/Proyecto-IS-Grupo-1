@@ -30,7 +30,6 @@ public class PresentExamController {
     }
 
     private void readQuestion(String directory, String directorySub, int stop, int counter){
-        System.out.println("esta en readquestion");
         int removeQuestionFromDirectory = 13;
         int removeFyleType = 4;
         String questionStatement, question, line, domain;

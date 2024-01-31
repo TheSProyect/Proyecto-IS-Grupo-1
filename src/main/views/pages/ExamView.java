@@ -33,11 +33,7 @@ public class ExamView extends Frame implements ActionListener {
     public ExamView() {
         questions = new ArrayList<QuestionPanel>();
         index = 0;
-<<<<<<< HEAD
-        inicializateQuestions();
-=======
         inicializeQuestions();
->>>>>>> main
 
         buildFrame();
         paintBorders();
@@ -175,13 +171,6 @@ public class ExamView extends Frame implements ActionListener {
         button.setBorder(border);
     }
 
-<<<<<<< HEAD
-    private void inicializateQuestions() {
-        questions.add(new QuestionPanel("¿Cuál es el resultado de este código?"));
-        questions.add(new QuestionPanel("¿Cuál no es el resultado de este código?"));
-        questions.add(new QuestionPanel("¿Cuál tu cara?"));
-        questions.add(new QuestionPanel("¿Quien te preguntó?"));
-=======
     private void inicializeQuestions() {
         // este metodo es de prueba. Terrible lo se
         // lo que esté entre comentarios no va btw
@@ -274,17 +263,12 @@ public class ExamView extends Frame implements ActionListener {
             question.paintOptionsPanel(options.get(i));
             questions.add(question);
         }
->>>>>>> main
     }
 
     public void showPreviousQuestions(){
         if ((index - 1) >= 0) {
             questions.get(index).setVisible(false);
             index = index - 1;
-<<<<<<< HEAD
-            // paintQuestionPanel(index);
-=======
->>>>>>> main
             questions.get(index).setVisible(true);
         }
     }
@@ -293,10 +277,6 @@ public class ExamView extends Frame implements ActionListener {
         if ((index + 1) < questions.size()) {
             questions.get(index).setVisible(false);
             index = index + 1;
-<<<<<<< HEAD
-            // paintQuestionPanel(index);
-=======
->>>>>>> main
             questions.get(index).setVisible(true);
         }
     }   
@@ -310,22 +290,12 @@ public class ExamView extends Frame implements ActionListener {
             System.out.println("This should show ResultView");
 
         } else if (e.getSource() == prevButton) {
-<<<<<<< HEAD
-            System.out.println("This should change question");
-            showPreviousQuestions();
-
-        } else if (e.getSource() == nextButton) {
-            System.out.println("This should change question");
-            showNextQuestion();
-            // paintQuestionPanel(index, "Next Question");
-=======
             System.out.println("This should xhow next question");
             showPreviousQuestions();
 
         } else if (e.getSource() == nextButton) {
             System.out.println("This should show next question");
             showNextQuestion();
->>>>>>> main
         }
     }
 

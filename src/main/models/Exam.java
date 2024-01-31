@@ -11,6 +11,7 @@ public class Exam {
     private String instructions;
     private int[] correctOptions;
     private Questions[] questions = new Questions[10];
+    
     private Questions getQuestion(){
         return this.questions[0];
     }
