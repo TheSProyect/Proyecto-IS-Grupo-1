@@ -7,31 +7,52 @@ import java.awt.event.*;
 import javax.swing.Timer;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import java.awt.Font;
 
 import main.data.Palette;
 
 public class TimerBlock extends JPanel{
-	private JLabel TwoPoints, MinLabel, SecLabel, TimeRemainingLabel;
+	private JLabel TwoPoints, MinLabel, SecLabel, TimeRemainingLabel, imgLabel;
 	private Timer T;
+	private ImageIcon ClockImg;
 	
 	public TimerBlock(int TimeLimit, JButton stopButton){
 		setLayout(null);
-		this.setBounds(0,0, 300, 200);
+		this.setBounds(20,20, 200, 70);
 		this.setBackground(Palette.instance().getBlue());
 		
 		TwoPoints = new JLabel(":");
-		TwoPoints.setBounds(85, 180, 20, 20);
+		TwoPoints.setBounds(115, 30, 20, 20);
+		TwoPoints.setFont(new Font("Nunito Sans", Font.BOLD, 25));
+		TwoPoints.setForeground(Palette.instance().getWhite());
+		
 		MinLabel = new JLabel(String.valueOf(TimeLimit));
-		MinLabel.setBounds(60, 180, 20, 20);
+		MinLabel.setBounds(85, 30, 30, 20);
+		MinLabel.setFont(new Font("Nunito Sans", Font.BOLD, 25));
+		MinLabel.setForeground(Palette.instance().getWhite());
+		
+		
 		SecLabel = new JLabel("00");
-		SecLabel.setBounds(100, 180, 20, 20);
-		TimeRemainingLabel = new JLabel("Tiempo Restante");
-		TimeRemainingLabel.setBounds(60, 160,80, 20);
+		SecLabel.setBounds(125, 30, 30, 20);
+		SecLabel.setFont(new Font("Nunito Sans", Font.BOLD, 25));
+		SecLabel.setForeground(Palette.instance().getWhite());
+		
+		TimeRemainingLabel = new JLabel("Tiempo restante");
+		TimeRemainingLabel.setBounds(70, 10,200, 20);
+		TimeRemainingLabel.setFont(new Font("Nunito Sans", Font.BOLD, 13));
+		TimeRemainingLabel.setForeground(Palette.instance().getOffWhite());
+		
+		ClockImg = new ImageIcon("assets/Timer_Icon.png");
+		imgLabel = new JLabel("");
+		imgLabel.setBounds(10,10, 55, 55);
+		imgLabel.setIcon(ClockImg);
+		this.add(imgLabel);
 		
 		this.add(TwoPoints);
 		this.add(MinLabel);
 		this.add(SecLabel);
 		this.add(TimeRemainingLabel);
+		
 		
 		
 		
