@@ -114,4 +114,5 @@ public class ExamsView extends Frame {
         slider = new Slider();
         contentPanel.add(slider, BorderLayout.CENTER);
     }
+
 }

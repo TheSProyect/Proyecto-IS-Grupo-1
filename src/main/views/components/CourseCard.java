@@ -17,19 +17,17 @@ import javax.swing.text.StyledDocument;
 import main.data.Palette;
 
 public class CourseCard extends JPanel {
-    JLabel examName;
-    JTextPane courseDescription;
     JButton presentExamButton;
 
-    CourseCard() {
+    CourseCard(String examName) {
         Border border = BorderFactory.createLineBorder(Palette.instance().getYellow(), 2);
         this.setBackground(Palette.instance().getWhite());
         this.setBorder(border);
-        this.setPreferredSize(new Dimension(240, 355));
+        this.setPreferredSize(new Dimension(270, 400));
+        this.setMinimumSize(new Dimension(220, 355));
         
-
         paintSpacer();
-        paintExamName("Java - SE Associate Programmer");
+        paintExamName(examName);
         paintLine();
         paintCourseDescription();
         paintSpacer();
@@ -44,15 +42,22 @@ public class CourseCard extends JPanel {
     }
 
     private void paintExamName(String str) {
-        String[] separated = str.split(" ");
-        for(int i = 0; i < separated.length; i++) {
-            examName = new JLabel();
-            examName.setText(separated[i]);
-            examName.setFont(new Font("Nunito Sans", Font.BOLD, 17));
-            examName.setForeground(Palette.instance().getGray());
-            this.add(examName);
-        }
-        
+        JTextPane examName = new JTextPane();
+        examName.setPreferredSize(new Dimension(210, 70));
+        examName.setText(str);
+        examName.setEditable(false);
+        examName.setForeground(Palette.instance().getGray());
+        examName.setFont(new Font("Nunito Sans", Font.BOLD, 17));
+
+        Border border = BorderFactory.createEmptyBorder(20, 15, 20, 15);
+        examName.setBorder(border);
+
+        StyledDocument doc = examName.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);
+
+        this.add(examName);
     }
 
     private void paintLine() {
@@ -65,8 +70,8 @@ public class CourseCard extends JPanel {
     }
 
     private void paintCourseDescription() {
-        courseDescription = new JTextPane();
-        courseDescription.setPreferredSize(new Dimension(230, 100));
+        JTextPane courseDescription = new JTextPane();
+        courseDescription.setPreferredSize(new Dimension(210, 100));
         courseDescription.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
         courseDescription.setEditable(false);
         courseDescription.setForeground(Palette.instance().getGray());
@@ -107,7 +112,7 @@ public class CourseCard extends JPanel {
 
     private void paintExamCaracteristicPanel(String category, String caracteristic) {
         JPanel caracteristicPanel = new JPanel();
-        caracteristicPanel.setPreferredSize(new Dimension(230, 20));
+        caracteristicPanel.setPreferredSize(new Dimension(210, 20));
         caracteristicPanel.setBackground(Palette.instance().getWhite());
 
         JLabel categoryLabel = new JLabel(category);
