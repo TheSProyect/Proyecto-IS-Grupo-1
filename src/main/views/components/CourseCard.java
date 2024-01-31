@@ -95,6 +95,7 @@ public class CourseCard extends JPanel {
         presentExamButton.setBackground(Palette.instance().getBlue());
         presentExamButton.setPreferredSize(new Dimension(190, 30));
         presentExamButton.setFocusable(false);
+        presentExamButton.addActionListener(null);
 
         Border border = BorderFactory.createLineBorder(Palette.instance().getBlue());
         presentExamButton.setBorder(border);
@@ -128,4 +129,9 @@ public class CourseCard extends JPanel {
 
         this.add(caracteristicPanel);
     }
+
+    public JButton getPresentExamButton() {
+        return presentExamButton;
+    }
+
 }
