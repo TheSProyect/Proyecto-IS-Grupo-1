@@ -21,11 +21,6 @@ public class QuestionPanel extends JPanel {
         this.setPreferredSize(new Dimension(544, 560));
         this.setBackground(Palette.instance().getWhite());
         this.setLayout(new GridBagLayout());
-
-        // paintDomainPanel(questionDomain);
-        // paintQuestion(question);
-        // paintCodeField();
-        // paintOptionsPanel();
     }
 
     public void paintDomainPanel(String questionDomain) {
