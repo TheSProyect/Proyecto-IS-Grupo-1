@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import main.models.Answers;
 import main.models.Questions;
@@ -14,9 +16,13 @@ import javax.swing.*;
 public class PresentExamController {
     //private void setResult(Option){}
     //private void chooseExam(Exam_Name){}
-    
+    private int counter=0;
     Exam currentExam = new Exam();
 
+    public PresentExamController(){
+        
+        this.searchFolder();
+    }
     private void startExam(){}
     private Answers getAnswers(){
         return this.getAnswers();
@@ -38,6 +44,7 @@ public class PresentExamController {
             questionStatement = br.readLine();
             domain = br.readLine();
             currentExam.setQuestionsExam(questionStatement,domain,counter);
+            
             for (int i =0; ((line = br.readLine()) != null); i++) {
                 if (line != null && line.length() > 0 && answerCorrect && line.substring(0, 1).equalsIgnoreCase("v")) {
                     answer[i]= line.substring(1);
@@ -47,7 +54,7 @@ public class PresentExamController {
                         justification[i]= br.readLine();
                         }
                     currentExam.setAnswersExam(answer[i],justification[i], i, counter);
-                    System.out.println(currentExam.getAnswersQuestionExam(counter, i));
+                    currentExam.setNumberAnswers(counter, i);
                     }
                     br.close();     
                 } catch (IOException e) {
@@ -56,8 +63,41 @@ public class PresentExamController {
                 if(readings==stop) {
                     return;
                     } else {
+                        counter++;
                     readQuestion(changeDirectory(directory),readings+1, counter, stop);
         }   
+    }
+    private void readExam(String directory, String nameFolder){
+        String examName, tipoExam, teacherName,descripcion;
+        int numberQuestions, duracion;
+        directory = directory +"\\"+ nameFolder+"\\"+nameFolder+".txt";
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
+            examName = br.readLine();
+            currentExam.setName(examName);
+
+            tipoExam = br.readLine();
+            currentExam.setTipo(tipoExam);
+            
+            numberQuestions = Integer.parseInt((br.readLine()));
+            currentExam.setNumberQuestions(numberQuestions);
+
+            teacherName = br.readLine();
+            currentExam.setTeacherName(teacherName);
+
+            duracion = Integer.parseInt((br.readLine()));
+            currentExam.setDuracion(duracion);
+
+            descripcion = br.readLine();
+            currentExam.setDescripcion(descripcion);
+
+        }catch (IOException e) {
+                e.printStackTrace();
+        }
+            
+            
+       // currentExam.setNumberQuestions(stop);
+
     }
 
     private int getNumberQuestion(String directory, String nameFolder){
@@ -108,20 +148,81 @@ public class PresentExamController {
         String nameFolder = "Examen1";
         File searchedFolder = new File(directory);
         if (searchedFolder.exists() && searchedFolder.isDirectory()) {
-            int counter=0;
             File[] files = searchedFolder.listFiles();
             if (files != null) {
+                int stop = getNumberQuestion(directory, nameFolder);
+                    readExam(directory,nameFolder);
                 for (File file : files) {
                     if (file.isDirectory() && file.getName().equals(nameFolder)) {
+<<<<<<< HEAD
                         int stop = getNumberQuestion(directory, nameFolder);
+=======
+                        //int stop = getNumberQuestion(directory, nameFolder);
+                        //readExam(directory,nameFolder);
+>>>>>>> 5407cbd036deb8cb488c7f4d5f42cb457d0725ae
                         String question = "Pregunta1.txt";
                         directory = directory + "\\"+ nameFolder + "\\"+ question;
                         readQuestion(directory,1,counter, stop);
-                        counter++;
                         return;
                     }
                 }
            }    
         }
+    }
+
+    public List<String> getQuestionsStrings(){
+        int j=currentExam.getNumberQuestions();
+        List<String> questionsString = new ArrayList<String>();
+        for(int i=0; i<j; i++){ 
+            questionsString.add(currentExam.getQuestionsExam(i));
+        }
+        return questionsString;
+    }
+
+    public List<String> getDomain(){
+        int j=currentExam.getNumberQuestions();
+        List<String> domain = new ArrayList<String>();
+        for(int i=0; i<j; i++){ 
+                domain.add(currentExam.getDomainExam(i));
+        }
+        return domain;
+    }
+
+    public List<Boolean> getHasCode(){
+        int j=currentExam.getNumberQuestions();
+        List<Boolean> hasCode = new ArrayList<Boolean>();
+        //falta arreglar
+        for(int i=0; i<j; i++){ 
+            hasCode.add(true);
+        }
+        return hasCode;
+    }
+    public List<List<String>> getCode(){
+        int j=currentExam.getNumberQuestions();
+        List<List<String>> code = new ArrayList<List<String>>();
+        //falta arreglar
+        for(int i=0; i<j; i++){ 
+            code.add(new ArrayList<String>());
+            for(int k=0; k<currentExam.getNumberAnswersExam(i); k++){
+                code.get(i).add(currentExam.getOptionsExam(i,k));
+            }
+        }
+        return code;
+    }
+    
+    public List<List<String>> getOptions(){
+        int j=currentExam.getNumberQuestions();
+        List<List<String>> options = new ArrayList<List<String>>();
+        for(int i=0; i<j; i++){ 
+            options.add(new ArrayList<String>());
+            for(int k=0; k<currentExam.getNumberAnswersExam(i); k++){
+                options.get(i).add(currentExam.getOptionsExam(i,k));
+            }
+        }
+        return options;
+    }
+
+    public int getDuracion(){
+        return currentExam.getDuracion();
     }
 }

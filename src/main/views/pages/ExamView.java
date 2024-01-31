@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import main.controllers.PresentExamController;
 import main.data.Palette; 
 import main.views.components.ExamMenu;
 import main.views.components.NavBar;
@@ -29,10 +30,14 @@ public class ExamView extends Frame implements ActionListener {
     JButton nextButton;
     List<QuestionPanel> questions;
     int index;
+    PresentExamController presentController;
+    Frame examView;
 
-    public ExamView() {
+    public ExamView(Frame examView) {
+        this.examView = examView;
         questions = new ArrayList<QuestionPanel>();
         index = 0;
+        presentController= new PresentExamController();
         inicializeQuestions();
 
         buildFrame();
@@ -83,7 +88,8 @@ public class ExamView extends Frame implements ActionListener {
     }
 
     private void paintMenuPanel() {
-        ExamMenu menuPanel = new ExamMenu();
+        //ExamMenu menuPanel = new ExamMenu();
+        ExamMenu menuPanel = new ExamMenu(presentController.getDuracion());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -172,84 +178,11 @@ public class ExamView extends Frame implements ActionListener {
     }
 
     private void inicializeQuestions() {
-        // este metodo es de prueba. Terrible lo se
-        // lo que esté entre comentarios no va btw
-
-
-        List<String> questionsString = new ArrayList<String>();
-        // prueba {
-        questionsString.add("¿Cuál es el resultado de este código?");
-        questionsString.add("¿Cuál no es el resultado de este código?");
-        questionsString.add("¿Cuál tu cara?");
-        questionsString.add("¿Quien te preguntó?");
-        // } prueba
-
-        List<String> domain = new ArrayList<String>();
-        // prueba {
-        domain.add("Trabajar con tipos de datos Java");
-        domain.add("Sufrir Java Swing");
-        domain.add("Por favor funciona");
-        domain.add("Me voy a pegar un tiro");
-        // } prueba
-
-        List<Boolean> hasCode = new ArrayList<Boolean>();
-        // prueba {
-        hasCode.add(true);
-        hasCode.add(true);
-        hasCode.add(true);
-        hasCode.add(false);
-        // } prueba
-
-        List<List<String>> code = new ArrayList<List<String>>();
-        // prueba {
-        code.add(new ArrayList<String>());
-        code.get(0).add("var i = 1234;");
-        code.get(0).add("var i = 1234;");
-        code.get(0).add("var i = 1234;");
-
-        code.add(new ArrayList<String>());
-        code.get(1).add("var s = \" \" + i; ");
-        code.get(1).add("var p = \" \" + i; ");
-        code.get(1).add("var j = \" \" + i; ");
-        code.get(1).add("var k = \" \" + i; ");
-
-        code.add(new ArrayList<String>());
-        code.get(2).add("if (\"1234\".equals(s)) ");
-        // } prueba
-
-        List<List<String>> options = new ArrayList<List<String>>();
-        // prueba {
-        options.add(new ArrayList<String>());
-        options.get(0).add("No compila");
-        options.get(0).add("Se ve feo");
-        options.get(0).add("El bit dirty");
-        options.get(0).add("Que?");
-        options.get(0).add("so");
-
-        
-        options.add(new ArrayList<String>());
-        options.get(1).add("When I was");
-        options.get(1).add("A young boy");
-        options.get(1).add("My father");
-        options.get(1).add("Took me into the city");
-        options.get(1).add("To see a marching band");
-
-        
-        options.add(new ArrayList<String>());
-        options.get(2).add("One thing");
-        options.get(2).add("I don't know why");
-        options.get(2).add("It doesn't even matter how hard you try");
-        options.get(2).add("Keep that in mind");
-        
-        options.add(new ArrayList<String>());
-        options.get(3).add("Connection terminated");
-        options.get(3).add("I'm sorry to interrupt you, Elizabeth");
-        options.get(3).add("If you still even remember that name");
-        options.get(3).add("But I'm afraid you've been misinformed.");
-        options.get(3).add("You are not here to receive a gift,");
-        options.get(3).add("nor have you been called here by the individual you assume,");
-        options.get(3).add("although, you have indeed been called.");
-        // } prueba
+        List<String> questionsString= presentController.getQuestionsStrings();
+        List<String> domain = presentController.getDomain();
+        List<Boolean> hasCode = presentController.getHasCode();
+        List<List<String>> code = presentController.getCode();
+        List<List<String>> options = presentController.getOptions();
 
         QuestionPanel question;
 
@@ -287,14 +220,13 @@ public class ExamView extends Frame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == finishExamButton) {
-            System.out.println("This should show ResultView");
+            this.dispose();
+            examView.setVisible(true);
 
         } else if (e.getSource() == prevButton) {
-            System.out.println("This should xhow next question");
             showPreviousQuestions();
 
         } else if (e.getSource() == nextButton) {
-            System.out.println("This should show next question");
             showNextQuestion();
         }
     }
