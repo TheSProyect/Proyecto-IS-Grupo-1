@@ -11,9 +11,9 @@ public class Exam {
     private String instructions;
     private int numberQuestions;
     private int[] correctOptions;
-    private Questions[] questions = new Questions[10];
+    private Question[] questions = new Question[10];
     
-    private Questions getQuestion(){
+    private Question getQuestion(){
         return this.questions[0];
     }
     private String getInstructions(){
@@ -21,7 +21,7 @@ public class Exam {
     }
    
     public void setQuestionsExam(String statement, String domain, int counter){
-        questions[counter]=new Questions();
+        questions[counter]=new Question();
         questions[counter].setQuestions(statement,domain,questions[counter]);
     }
 
