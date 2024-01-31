@@ -12,8 +12,20 @@ public class Answers {
         answers.name=answer;
         answers.justification= justification;
     }
-
+//
     public String getAnswers(){
         return name;
+    }
+
+    public void setIsCorrect(Boolean isCorrect, Answers answers){
+        answers.correct_option=isCorrect;
+    }
+
+    public Boolean getIsCorrect(){
+        return correct_option;
+    }
+
+    public String getJustification(){
+        return justification;
     }
 }

@@ -88,7 +88,8 @@ public class ExamView extends Frame implements ActionListener {
     }
 
     private void paintMenuPanel() {
-        ExamMenu menuPanel = new ExamMenu();
+        //ExamMenu menuPanel = new ExamMenu();
+        ExamMenu menuPanel = new ExamMenu(presentController.getDuracion());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;

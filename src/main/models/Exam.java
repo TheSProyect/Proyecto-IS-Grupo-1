@@ -7,9 +7,8 @@ import main.models.Questions;
 import main.models.Result;
 
 public class Exam {
-    private String name;
-    private String instructions;
-    private int numberQuestions;
+    private String name, tipo, instructions, teacherName, descripcion;
+    private int numberQuestions, duracion;
     private int[] correctOptions;
     private Questions[] questions = new Questions[10];
     
@@ -26,12 +25,17 @@ public class Exam {
     }
 
     public void setAnswersExam(String answer, String justification, int i, int counter){
-        questions[counter].setAnswersQuestions(answer, justification, questions[counter],i);
+        questions[counter].setAnswersQuestions(answer, justification,i);
+    }
+    public void setIsCorrectExam(Boolean isCorrect, int i, int counter){
+        questions[counter].setIsCorrectQuestions(isCorrect, i);
+
     }
 
     public void setNumberAnswers(int counter, int number){
         questions[counter].setNumberAnswers(number);
     }
+    
 
     public String getQuestionsExam(int counter){
         //return questions2.getQuestions();
@@ -58,4 +62,43 @@ public class Exam {
     public int getNumberQuestions(){
         return numberQuestions;
     }
+//
+    public void setName(String nameExam){
+        name=nameExam;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setTipo(String tipoExam){
+        tipo=tipoExam;
+    }
+
+    public String getTipo(){
+        return tipo;
+    }
+
+    public void setTeacherName(String name){
+        teacherName=name;
+    }
+    public String getTeacherName(){
+        return teacherName;
+    }
+
+    public void setDuracion(int tiempo){
+        duracion=tiempo;
+    }
+    public int getDuracion(){
+        return duracion;
+    }
+
+    public void setDescripcion(String descripcionExam){
+        descripcion=descripcionExam;
+    }
+    public String getDescripcion(){
+        return descripcion;
+    }
+    
 }
+

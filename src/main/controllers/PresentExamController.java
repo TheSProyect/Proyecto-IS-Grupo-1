@@ -40,7 +40,6 @@ public class PresentExamController {
         String[] answer = new String[10];
         String[] justification = new String[10];
         boolean answerCorrect = true; 
-        currentExam.setNumberQuestions(stop);
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             questionStatement = br.readLine();
             domain = br.readLine();
@@ -67,6 +66,38 @@ public class PresentExamController {
                         counter++;
                     readQuestion(changeDirectory(directory),readings+1, counter, stop);
         }   
+    }
+    private void readExam(String directory, String nameFolder){
+        String examName, tipoExam, teacherName,descripcion;
+        int numberQuestions, duracion;
+        directory = directory +"\\"+ nameFolder+"\\"+nameFolder+".txt";
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
+            examName = br.readLine();
+            currentExam.setName(examName);
+
+            tipoExam = br.readLine();
+            currentExam.setTipo(tipoExam);
+            
+            numberQuestions = Integer.parseInt((br.readLine()));
+            currentExam.setNumberQuestions(numberQuestions);
+
+            teacherName = br.readLine();
+            currentExam.setTeacherName(teacherName);
+
+            duracion = Integer.parseInt((br.readLine()));
+            currentExam.setDuracion(duracion);
+
+            descripcion = br.readLine();
+            currentExam.setDescripcion(descripcion);
+
+        }catch (IOException e) {
+                e.printStackTrace();
+        }
+            
+            
+       // currentExam.setNumberQuestions(stop);
+
     }
 
     private int getNumberQuestion(String directory, String nameFolder){
@@ -119,9 +150,12 @@ public class PresentExamController {
         if (searchedFolder.exists() && searchedFolder.isDirectory()) {
             File[] files = searchedFolder.listFiles();
             if (files != null) {
+                int stop = getNumberQuestion(directory, nameFolder);
+                    readExam(directory,nameFolder);
                 for (File file : files) {
                     if (file.isDirectory() && file.getName().equals(nameFolder)) {
-                        int stop = getNumberQuestion(directory, nameFolder);
+                        //int stop = getNumberQuestion(directory, nameFolder);
+                        //readExam(directory,nameFolder);
                         String question = "Pregunta1.txt";
                         directory = directory + "\\"+ nameFolder + "\\"+ question;
                         readQuestion(directory,1,counter, stop);
@@ -182,5 +216,9 @@ public class PresentExamController {
             }
         }
         return options;
+    }
+
+    public int getDuracion(){
+        return currentExam.getDuracion();
     }
 }

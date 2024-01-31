@@ -16,12 +16,14 @@ public class Questions {
         question.domain=domain;
     }
 
-    public void setAnswersQuestions(String answer, String justification, Questions question, int i){
-        //for(int j=0 ; j<i+1 ; j++){
+    public void setAnswersQuestions(String answer, String justification, int i){
             answers[i]= new Answers();
             answers[i].setAnswers(answer, justification, answers[i]);
-        //}
     }
+
+    public void setIsCorrectQuestions(Boolean isCorrect, int i){
+        answers[i].setIsCorrect(isCorrect,answers[i]);
+}
 
     public String getQuestions(){
         return statement;
@@ -39,7 +41,7 @@ public class Questions {
         //return questions2.getQuestions();
         return answers[counter].getAnswers();
     }
-
+//
     public String getCode(int counter){
         //return questions2.getQuestions();
         return answers[counter].getAnswers();

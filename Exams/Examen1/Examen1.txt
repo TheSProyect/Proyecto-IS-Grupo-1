@@ -1,6 +1,6 @@
 Nombre del examen
 Tipo del examen
-2
+3
 Nombre del profesor
-Duracion
+2
 Descripcion
