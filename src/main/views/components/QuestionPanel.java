@@ -17,15 +17,10 @@ public class QuestionPanel extends JPanel {
     JPanel domainPanel;
     OptionsPanel optionsPanel;
 
-    public QuestionPanel(String question) {
+    public QuestionPanel() {
         this.setPreferredSize(new Dimension(544, 560));
         this.setBackground(Palette.instance().getWhite());
         this.setLayout(new GridBagLayout());
-
-        // paintDomainPanel(questionDomain);
-        // paintQuestion(question);
-        // paintCodeField();
-        // paintOptionsPanel();
     }
 
     public void paintDomainPanel(String questionDomain) {
