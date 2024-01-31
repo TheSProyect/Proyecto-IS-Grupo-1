@@ -18,31 +18,15 @@ public class PresentExamController {
     Exam currentExam = new Exam();
 
     private void startExam(){}
-<<<<<<< HEAD
-    private Answers getAnswers(){
-        return this.getAnswers();
-    }
-    private Questions getQuestions(){
-        return this.getQuestions();
-=======
     //private Answers getAnswers(){}
     //private Questions getQuestions(){}
-    public static void main(String[] args) throws IOException{
-        PresentExamController p = new PresentExamController();
-        p.searchFolder();    
->>>>>>> main
-    }
+    
     public static void main(String[] args) throws IOException{
         PresentExamController p = new PresentExamController();
         p.searchFolder();    
     }
 
-<<<<<<< HEAD
     private void readQuestion(String directory, String directorySub, int stop, int counter){
-        System.out.println("esta en readquestion");
-=======
-    private void readQuestion(String directory, String directorySub, int stop){
->>>>>>> main
         String questionStatement, question, line, domain;
         String[] answer = new String[10];
         String[] justification = new String[10];
@@ -51,12 +35,9 @@ public class PresentExamController {
             line = "_";
             questionStatement = br.readLine();
             domain = br.readLine();
-<<<<<<< HEAD
             //ahhhhhhh
             currentExam.setQuestionsExam(questionStatement,domain,counter);
 
-=======
->>>>>>> main
             for (int i =0, j=0; ((line = br.readLine()) != null); i++,j++) {
                 if (line != null && line.length() > 0 && answerCorrect && line.substring(0, 1).equalsIgnoreCase("v")) {
                     answer[i]= line.substring(1);
@@ -77,11 +58,7 @@ public class PresentExamController {
             question = (directory.substring(directory.length() - 13));
             question = question.substring(0, question.length() - 4);
             System.out.println((directorySub +"\\"+numberQuestion(question)+".txt"));
-<<<<<<< HEAD
             readQuestion((directorySub +"\\"+numberQuestion(question)+".txt"), directorySub,stop+1, counter);
-=======
-            readQuestion((directorySub +"\\"+numberQuestion(question)+".txt"), directorySub,stop+1);
->>>>>>> main
         }
     }
     
@@ -101,11 +78,7 @@ public class PresentExamController {
 
     public void searchFolder() {
         String question, directorySub;
-<<<<<<< HEAD
-        String directory = "C:\\Users\\sergio\\Documents";
-=======
         String directory = "C:\\Users\\user\\Documents\\exam";
->>>>>>> main
         //get para obtener nombre del examen
         String nameFolder = "Discretas";
         File searchedFolder = new File(directory);
@@ -120,12 +93,8 @@ public class PresentExamController {
                         question = "Pregunta1.txt";
                         directorySub = directory+ "\\"+ nameFolder;
                         directory = directory + "\\"+ nameFolder + "\\"+ question;
-<<<<<<< HEAD
                         readQuestion(directory, directorySub,0,counter);
                         counter++;
-=======
-                        readQuestion(directory, directorySub,0);
->>>>>>> main
                         return;
                     }
                 }

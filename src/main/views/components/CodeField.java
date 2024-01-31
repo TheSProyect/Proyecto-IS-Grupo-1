@@ -24,14 +24,9 @@ public class CodeField extends JScrollPane {
         buildScrollPane();
         
         buildCodePanel();
-<<<<<<< HEAD
-        paintLineNumber();
-        buildCodeField();
-=======
         paintLineNumber(codeLines.size());
         // paintLineNumber(3);
         buildCodeField(codeLines);
->>>>>>> main
     }
 
     private void buildCodePanel() {
@@ -50,14 +45,10 @@ public class CodeField extends JScrollPane {
         lineNumber.setForeground(Palette.instance().getGray());
         lineNumber.setFont(new Font("Cascadia Code", Font.PLAIN, 17));
         lineNumber.setBackground(Palette.instance().getBlack());
-<<<<<<< HEAD
-        lineNumber.setText("1 \n2 \n3 \n4 \n5 \n6 \n7 \n8 \n9 \n10");
-=======
 
         for (int i = 1; i <= numerOfLines; i++) {
             lineNumber.setText(lineNumber.getText() + i + "\n");
         }
->>>>>>> main
         lineNumber.setEditable(false);
 
         Border border = BorderFactory.createEmptyBorder(0, 20, 0, 0);
@@ -73,14 +64,10 @@ public class CodeField extends JScrollPane {
         codeField.setForeground(Palette.instance().getOffWhite());
         codeField.setFont(new Font("Cascadia Code", Font.PLAIN, 17));
         codeField.setBackground(Palette.instance().getBlack());
-<<<<<<< HEAD
-        codeField.setText("var i = 1234; \nvar s = \" \" + i; \nif (\"1234\".equals(s)) \n");
-=======
 
         for (int i = 0; i < codelines.size(); i++) {
             codeField.setText(codeField.getText() + codelines.get(i) + "\n");
         }
->>>>>>> main
         codeField.setEditable(false);
 
         Border border = BorderFactory.createEmptyBorder(0, 15, 0, 0);
