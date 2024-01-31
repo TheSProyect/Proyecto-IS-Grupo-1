@@ -1,12 +1,11 @@
 package main.views.components;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.Timer;
-import java.awt.Color;
 import javax.swing.ImageIcon;
+
+import java.awt.Dimension;
 import java.awt.Font;
 
 import main.data.Palette;
@@ -17,28 +16,28 @@ public class TimerBlock extends JPanel{
 	private ImageIcon ClockImg;
 	
 	public TimerBlock(int TimeLimit, JButton stopButton){
-		setLayout(null);
-		this.setBounds(20,20, 200, 70);
+		this.setLayout(null);
+		this.setPreferredSize(new Dimension(200, 75));
 		this.setBackground(Palette.instance().getBlue());
 		
 		TwoPoints = new JLabel(":");
-		TwoPoints.setBounds(115, 30, 20, 20);
+		TwoPoints.setBounds(115, 30, 20, 25);
 		TwoPoints.setFont(new Font("Nunito Sans", Font.BOLD, 25));
 		TwoPoints.setForeground(Palette.instance().getWhite());
 		
 		MinLabel = new JLabel(String.valueOf(TimeLimit));
-		MinLabel.setBounds(85, 30, 30, 20);
+		MinLabel.setBounds(85, 30, 30, 25);
 		MinLabel.setFont(new Font("Nunito Sans", Font.BOLD, 25));
 		MinLabel.setForeground(Palette.instance().getWhite());
 		
 		
 		SecLabel = new JLabel("00");
-		SecLabel.setBounds(125, 30, 30, 20);
+		SecLabel.setBounds(125, 30, 30, 25);
 		SecLabel.setFont(new Font("Nunito Sans", Font.BOLD, 25));
 		SecLabel.setForeground(Palette.instance().getWhite());
 		
 		TimeRemainingLabel = new JLabel("Tiempo restante");
-		TimeRemainingLabel.setBounds(70, 10,200, 20);
+		TimeRemainingLabel.setBounds(70, 10,200, 25);
 		TimeRemainingLabel.setFont(new Font("Nunito Sans", Font.BOLD, 13));
 		TimeRemainingLabel.setForeground(Palette.instance().getOffWhite());
 		
@@ -78,12 +77,14 @@ public class TimerBlock extends JPanel{
 				}
 				if(TimeRemaining<0){
 				T.stop();
-				stopButton.doClick();
+				// stopButton.doClick();
 				}
 			}
 			
 		});
 		T.start();
+
+		// this.validate();
 	}
 	
 	

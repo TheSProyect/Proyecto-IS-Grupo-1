@@ -28,16 +28,19 @@ public class ExamMenu extends JPanel{
     }
 
     private void paintTimer() {
-        JPanel timerPanel = new JPanel();
-        timerPanel.setPreferredSize(new Dimension(200, 70));
-        timerPanel.setBackground(Palette.instance().getBlue());
+        // JPanel timerPanel = new JPanel();
+        // timerPanel.setPreferredSize(new Dimension(200, 70));
+        // timerPanel.setBackground(Palette.instance().getBlue());
+        TimerBlock timer = new TimerBlock(4, null);
+
+        // timerPanel.add(timer);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 1;
         constraints.gridy = 1;
         constraints.weighty = 0.5;
 
-        this.add(timerPanel, constraints);
+        this.add(timer, constraints);
     }
 
     private void paintQuestionsList() {
