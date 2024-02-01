@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 
-
+import main.views.components.GeneratePDFFile;
 import main.models.Certificate;
 import main.models.Course;
 
@@ -24,8 +24,10 @@ public class RequestCertificateController {
     
     public static void main(String[] args) throws IOException{
         RequestCertificateController p = new RequestCertificateController();
-        //p.searchFolderStudent();
-        //p.searchFolderTeacher();    
+        
+        p.searchFolderStudent();
+        p.searchFolderTeacher(); 
+        p.createPDF();   
     }
 
     private void readStudentData(String directory){
@@ -90,6 +92,8 @@ public class RequestCertificateController {
     }
 
     public void createPDF(){
+        GeneratePDFFile creatingPDF = new GeneratePDFFile();
+        creatingPDF.crearPlantilla();
         
     }
 }

@@ -17,11 +17,12 @@ public class Questions {
     }
 
     public void setAnswersQuestions(String answer, String justification, int i){
-            answers[i]= new Answers();
+        //answers[i]= new Answers();
             answers[i].setAnswers(answer, justification, answers[i]);
     }
 
     public void setIsCorrectQuestions(Boolean isCorrect, int i){
+        answers[i]= new Answers();
         answers[i].setIsCorrect(isCorrect,answers[i]);
 }
 

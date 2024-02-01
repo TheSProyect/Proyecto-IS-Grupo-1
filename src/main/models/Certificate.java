@@ -11,6 +11,9 @@ public class Certificate {
         student = new Name();
         student.setName(name);
     }
+    public String getNameStudentCertificate(){
+        return student.getName();
+    }
     public void setNameTeacherCertificate(String name){
         course = new Course();
         course.setNameTeacherCourse(name);
