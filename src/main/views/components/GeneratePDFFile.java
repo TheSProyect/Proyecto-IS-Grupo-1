@@ -5,9 +5,7 @@ package main.views.components;
 import com.itextpdf.*;
 import com.itextpdf.text.*;
 import com.itextpdf.text.Chunk;
-import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
@@ -26,10 +24,14 @@ public class GeneratePDFFile {
         documento=new Document();
         titulo = new Paragraph("plantila personalizada");
     }
+
     public void crearPlantilla(){
         try{
-            archivo=new FileOutputStream(nombre + ".pdf");
-            PdfWriter.getInstance(documento, archivo);
+            String directory = System.getProperty("user.dir");
+            directory = directory + "\\Users\\Students\\Usuario\\" + nombre + ".pdf";
+            //archivo=new FileOutputStream(nombre + ".pdf");
+            PdfWriter.getInstance(documento, new FileOutputStream(directory));
+            //PdfWriter.getInstance(documento, archivo);
             documento.open();
             titulo.setAlignment(1);
 
