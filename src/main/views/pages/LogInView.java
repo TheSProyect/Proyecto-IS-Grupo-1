@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -56,9 +57,11 @@ public class LogInView extends Frame implements ActionListener {
 
     private void paintTitleLabel() {
         JLabel titleLabel = new JLabel();
-        titleLabel.setText("TéchneLogic");
-        titleLabel.setFont(new Font("Nunito Sans", Font.BOLD, 50));
-        titleLabel.setForeground(Palette.instance().getWhite());
+        ImageIcon icon = new ImageIcon("assets/Logo_Login.png");
+        titleLabel.setIcon(icon);
+        // titleLabel.setText("TéchneLogic");
+        // titleLabel.setFont(new Font("Nunito Sans", Font.BOLD, 50));
+        // titleLabel.setForeground(Palette.instance().getWhite());
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         
         titlePanel.add(titleLabel, BorderLayout.CENTER);
@@ -145,8 +148,8 @@ public class LogInView extends Frame implements ActionListener {
     }
 
     protected void paintTextFields() {
-        userTextField = new PlaceholderTextField("Usuario", "Home_Icon.png");
-        passwordTextField = new PlaceholderTextField("Contraseña", "Home_Icon.png");
+        userTextField = new PlaceholderTextField("Usuario", "User_Icon.png");
+        passwordTextField = new PlaceholderTextField("Contraseña", "User_Icon.png");
 
         infoContainer.add(userTextField);
         infoContainer.add(passwordTextField);
@@ -177,7 +180,8 @@ public class LogInView extends Frame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginButton) {
-            System.out.println("This should take you to ExamsView");
+            this.dispose();
+            ExamsView.instance().setVisible(true);
         }
     }
 
