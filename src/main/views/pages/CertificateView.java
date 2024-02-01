@@ -1,6 +1,5 @@
 package main.views.pages;
 
-import main.models.Certificate;
 import main.views.components.IconButton;
 import main.views.components.NavBar;
 import main.views.pages.CertificatesView;
@@ -14,28 +13,29 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
-import javax.swing.JTextField;
 
 import main.controllers.RequestCertificateController;
 import main.data.Palette;
 
 public class CertificateView extends Frame{
     JPanel contentPanel;
+    IconButton downloadButton;
     
     public CertificateView(){
         buildFrame();
         paintBorders();
         paintContentPanel();
+
+        this.pack();
     }
+
     private void buildFrame() {
         createFrame("CertificateView");
         this.setLayout(new BorderLayout());
     }
+
     private void paintNavBar() {
         NavBar navBar = new NavBar();
         this.add(navBar, BorderLayout.NORTH);
@@ -56,18 +56,13 @@ public class CertificateView extends Frame{
     }
 
     private void paintContentPanel() {
-        contentPanel = new JPanel();
         JLabel text;
         JPanel separator;
-        IconButton downloadButton = new IconButton("Descargar", "DownloadIcon.png");
-        GridBagConstraints gbc=new GridBagConstraints();
-        
-        // contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.X_AXIS));
-        contentPanel.setLayout(new GridBagLayout());
-        contentPanel.setPreferredSize(new Dimension(944, 560));
-        contentPanel.setBackground(Palette.instance().getWhite());
+        downloadButton = new IconButton("Descargar", "Download_Icon.png");
+        GridBagConstraints gbc = new GridBagConstraints();
         int separatorFullWidth = 300;
-        
+
+        buildContentPanel();
         
         text = paintText(48, "Certificado de participación");
         text.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
@@ -128,6 +123,14 @@ public class CertificateView extends Frame{
 
         this.add(contentPanel, BorderLayout.CENTER);
     }
+
+    private void buildContentPanel() {
+        contentPanel = new JPanel();
+        contentPanel.setLayout(new GridBagLayout());
+        contentPanel.setPreferredSize(new Dimension(944, 560));
+        contentPanel.setBackground(Palette.instance().getWhite());
+    }
+
     private JLabel paintText(int size, String _text) {
         JLabel text = new JLabel();
         text.setText("<html>" + _text + "</html>");
@@ -137,6 +140,7 @@ public class CertificateView extends Frame{
 
         return text;   
     }
+
     private JPanel paintTitleSeparator(Color color, int width) {
         
         JPanel line = new JPanel();
