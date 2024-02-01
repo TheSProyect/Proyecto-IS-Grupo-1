@@ -6,6 +6,8 @@ package main;
 import main.views.pages.ExamsView;
 // import main.views.pages.AdminExamsView;
 // import main.views.pages.RegisterUserView;
+import main.views.pages.AdminExamView;
+import main.views.pages.CertificatesView;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -15,5 +17,6 @@ public class Main {
         // new RegisterUserView();
         // new ExamView();
         // new CertificateView();
+        new CertificatesView();
     }
 }
