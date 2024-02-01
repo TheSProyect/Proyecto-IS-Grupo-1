@@ -18,10 +18,12 @@ public class Button extends JButton{
         buildFrame();
         paintButton(text);
     }
+
     private void buildFrame(){
         this.setBackground(background);
         this.setPreferredSize(new Dimension(width, height));
     }
+
     protected void paintButton(String text){
         this.setText("<html>" + text + "</html>");
         
@@ -29,5 +31,6 @@ public class Button extends JButton{
         this.setFont(new Font("Nunito Sans", Font.BOLD, 25));
         this.setHorizontalAlignment(JLabel.CENTER);
         this.setVerticalAlignment(JLabel.BOTTOM);
+        this.setFocusable(false);
     }
 }

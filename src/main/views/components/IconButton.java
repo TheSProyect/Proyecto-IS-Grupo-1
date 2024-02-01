@@ -1,9 +1,5 @@
 package main.views.components;
 
-import javax.swing.JLabel;
-
-import java.net.URL;
-
 import javax.swing.ImageIcon;
 
 public class IconButton extends Button {
@@ -12,6 +8,7 @@ public class IconButton extends Button {
         super(text);
         paintIcon(pathIcon);
     }
+    
     private void paintIcon(String pathIcon){
         ImageIcon icon = new ImageIcon("assets/"+pathIcon);
 
