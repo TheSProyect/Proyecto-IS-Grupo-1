@@ -62,12 +62,11 @@ public class NavBar extends JPanel implements ActionListener {
     
     protected void paintNavBarButtons() {
         homeButton = new NavBarButton("Mis Examenes", "Home_Icon.png", false);
-        homeButton.addActionListener(this);
         linkNavbar.add(homeButton);
         linkNavbar.addSeparator();
 
         certifycateButton = new NavBarButton("Solicitar Certificado", "Paperclip_Icon.png", false);
-        certifycateButton.addActionListener(this);
+        // certifycateButton.addActionListener(this);
         linkNavbar.add(certifycateButton);
         linkNavbar.addSeparator();
 
@@ -77,14 +76,16 @@ public class NavBar extends JPanel implements ActionListener {
         linkNavbar.addSeparator();
     }
 
+    public NavBarButton getHomeButton() {
+        return homeButton;
+    }
+
+    public NavBarButton getCertifycateButton() {
+        return certifycateButton;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == logOutButton) {
-            System.out.println ("this should open LoginView");
-        }
-        if (e.getSource() == certifycateButton) {
-            System.out.println ("this should open CertifycatesView");
-        }
         if (e.getSource() == homeButton) {
             System.out.println ("this should open ExamsView");
         }

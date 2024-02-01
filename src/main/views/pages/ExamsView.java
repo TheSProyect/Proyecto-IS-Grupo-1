@@ -112,6 +112,8 @@ public class ExamsView extends Frame implements ActionListener{
     }
     
     private void addActionListener() {
+        navBar.getCertifycateButton().addActionListener(this);
+
         presentExamButtons = slider.getButtons();
 
         for (int i = 0; i < presentExamButtons.size(); i++) {
@@ -122,6 +124,10 @@ public class ExamsView extends Frame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         this.setVisible(false);
-        new ExamView(this);
+        if (e.getSource() == navBar.getCertifycateButton()) {
+            new CertificateView(this);
+        } else {
+            new ExamView(this);
+        }
     }
 }

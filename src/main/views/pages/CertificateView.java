@@ -11,6 +11,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -19,16 +21,20 @@ import javax.swing.JPanel;
 import main.controllers.RequestCertificateController;
 import main.data.Palette;
 
-public class CertificateView extends Frame{
+public class CertificateView extends Frame implements ActionListener{
     JPanel contentPanel;
     IconButton downloadButton;
+    NavBar navBar;
+    Frame examView;
     
-    public CertificateView(){
+    public CertificateView(Frame examView){
+        this.examView = examView;
         buildFrame();
         paintBorders();
         paintContentPanel();
 
         this.pack();
+        addActionListener();
     }
 
     private void buildFrame() {
@@ -37,7 +43,7 @@ public class CertificateView extends Frame{
     }
 
     private void paintNavBar() {
-        NavBar navBar = new NavBar();
+        navBar = new NavBar();
         this.add(navBar, BorderLayout.NORTH);
     }
 
@@ -150,4 +156,15 @@ public class CertificateView extends Frame{
         return line;
     }
   //  private void show(Certificate)(){}
+    private void addActionListener() {
+        navBar.getHomeButton().addActionListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == navBar.getHomeButton()) {
+            this.dispose();
+            examView.setVisible(true);
+        }
+    }
 }
