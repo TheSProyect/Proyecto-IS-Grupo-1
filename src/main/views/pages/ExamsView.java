@@ -20,10 +20,19 @@ import main.views.components.HelpBar;
 import main.views.templates.Frame;
 
 public class ExamsView extends Frame implements ActionListener{
+    private static ExamsView examView;
+
     NavBar navBar;
     Slider slider;
     HelpBar helpBar;
     List<JButton> presentExamButtons;
+
+    public static ExamsView instance() {
+		if (examView == null){
+			examView = new ExamsView();
+		}
+		return examView;
+	}
 
     public ExamsView() {
         buildFrame();
@@ -125,9 +134,9 @@ public class ExamsView extends Frame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         this.setVisible(false);
         if (e.getSource() == navBar.getCertifycateButton()) {
-            new CertificateView(this);
+            new CertificatesView();
         } else {
-            new ExamView(this);
+            new ExamView();
         }
     }
 }

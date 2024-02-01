@@ -11,6 +11,8 @@ import main.data.Palette;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.FlowLayout;
@@ -23,7 +25,7 @@ import javax.swing.JButton;
 import javax.swing.JSeparator;
 
 
-public class CertificatesView extends Frame {
+public class CertificatesView extends Frame implements ActionListener {
     JPanel titlePanel;
     JPanel contentPanel;
     JLabel title;
@@ -34,7 +36,7 @@ public class CertificatesView extends Frame {
     JPanel titleButtonContainer;
     Listing certificateListing;
     List<String> certificates;
-
+    List<JButton> requestCertificateButtons;
 
     public CertificatesView() {
         inicializeCertificates();
@@ -43,8 +45,10 @@ public class CertificatesView extends Frame {
         paintBorders();
         paintContentPanel();
 
-
         this.pack();
+        
+        getRequestCertificateButtons();
+        addActionListener();
     }
 
     protected void buildFrame() {
@@ -53,7 +57,7 @@ public class CertificatesView extends Frame {
     }
 
     protected void paintNavBar() {
-        navBar = new AdminNavBar();
+        navBar = new NavBar();
         this.add(navBar, BorderLayout.NORTH);
     }
 
@@ -87,7 +91,6 @@ public class CertificatesView extends Frame {
 
     
         this.add(contentPanel, BorderLayout.CENTER);
-        
     }
 
     protected void paintTitlePanel() {
@@ -134,34 +137,44 @@ public class CertificatesView extends Frame {
         titleButtonContainer.add(title, FlowLayout.LEFT);
     }
 
-
     private void paintCertificatesListing() {
         certificateListing = new Listing(certificates, "Solicitar Certificado");
         contentPanel.add(certificateListing);
-        
     }
-
 
     private void inicializeCertificates() {
         // este metodo es de prueba. Terrible lo se
         // lo que esté entre comentarios no va btw
 
-
         certificates = new ArrayList<String>();
         // prueba {
-        certificates.add("¿Cuál es el resultado de este código?");
-        certificates.add("¿Cuál no es el resultado de este código?");
-        certificates.add("¿Cuál tu cara?");
-        certificates.add("¿Quien te preguntó?");
+        certificates.add("Curso 1");
+        certificates.add("Curso 2");
+        certificates.add("Curso 3");
+        certificates.add("Curso 4");
         //prueba    
-
-
-
-
-
     }
 
+    private void getRequestCertificateButtons() {
+        requestCertificateButtons = certificateListing.getListingButtons();
+    }
 
+    private void addActionListener() {
+        navBar.getHomeButton().addActionListener(this);
 
+        for (int i = 0; i < requestCertificateButtons.size(); i++) {
+            requestCertificateButtons.get(i).addActionListener(this);
+        }
+    }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == navBar.getHomeButton()) {
+            this.dispose();
+            ExamsView.instance().setVisible(true);
+        } else {
+            this.dispose();
+            new CertificateView();
+        }
+    }
 }

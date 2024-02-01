@@ -25,8 +25,6 @@ public class OptionsPanel extends JPanel implements ActionListener{
 
         createOptionsButtons(optionsString);
         paintOption();
-
-        System.out.println(group.getButtonCount());
     }
 
     private void paintOption() {

@@ -25,10 +25,8 @@ public class CertificateView extends Frame implements ActionListener{
     JPanel contentPanel;
     IconButton downloadButton;
     NavBar navBar;
-    Frame examView;
     
-    public CertificateView(Frame examView){
-        this.examView = examView;
+    public CertificateView(){
         buildFrame();
         paintBorders();
         paintContentPanel();
@@ -164,7 +162,7 @@ public class CertificateView extends Frame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == navBar.getHomeButton()) {
             this.dispose();
-            examView.setVisible(true);
+            ExamsView.instance().setVisible(true);
         }
     }
 }

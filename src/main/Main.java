@@ -17,6 +17,6 @@ public class Main {
         // new RegisterUserView();
         // new ExamView();
         // new CertificateView();
-        new CertificatesView();
+        // new CertificatesView();
     }
 }
