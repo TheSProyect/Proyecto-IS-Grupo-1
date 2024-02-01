@@ -1,7 +1,7 @@
 package main.views.components;
 
 
-import lib.*;
+//import lib.*;
 import com.itextpdf.*;
 import com.itextpdf.text.*;
 import com.itextpdf.text.Chunk;
@@ -51,7 +51,7 @@ public class GeneratePDFFile {
     }
 
     public static void main(String[] args){
-        GeneratePDFFile createPDF= new GeneratePDFFile("Ivan", "Jimena");
+        GeneratePDFFile createPDF= new GeneratePDFFile("Marco", "Jimena");
         createPDF.crearPlantilla();
     }
     
