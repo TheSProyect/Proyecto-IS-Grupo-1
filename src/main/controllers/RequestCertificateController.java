@@ -9,6 +9,7 @@ import java.io.IOException;
 import main.views.components.GeneratePDFFile;
 import main.models.Certificate;
 import main.models.Course;
+import main.models.UserData;
 
 
 public class RequestCertificateController {
@@ -24,17 +25,14 @@ public class RequestCertificateController {
     
     public static void main(String[] args) throws IOException{
         RequestCertificateController p = new RequestCertificateController();
-        
         //p.searchFolderStudent();
         //p.searchFolderTeacher(); 
         p.createPDF();   
     }
 
     private void readStudentData(String directory){
-        String name;
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
-            name = br.readLine();
-            currentCertificate.setNameStudentCertificate(name);
+            currentCertificate.setNameStudentCertificate(br.readLine());
                 br.close();     
             } catch (IOException e) {
                 e.printStackTrace();
@@ -42,19 +40,16 @@ public class RequestCertificateController {
     }
 
     private void readTeacherData(String directory){
-        String name;
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
-            name = br.readLine();
-            currentCertificate.setNameTeacherCertificate(name);
+            currentCertificate.setNameTeacherCertificate(br.readLine());
             br.close();     
             } catch (IOException e) {
                 e.printStackTrace();
         }
     }
-
     public void searchFolderTeacher() {
         String directory = System.getProperty("user.dir");
-        directory = directory+"\\Users\\Teachers";
+        directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users"+File.separator+"Teachers";
         //get para obtener nombre del profesor
         String nameFolderTeacher = "Profesor";
         File searchedFolder = new File(directory);
@@ -63,7 +58,7 @@ public class RequestCertificateController {
             if (files != null) {
                 for (File file : files) {
                     if (file.isDirectory() && file.getName().equals(nameFolderTeacher)) {
-                        directory = directory + "\\" + nameFolderTeacher + "\\" + nameFolderTeacher + ".txt";
+                        directory = directory + File.separator + nameFolderTeacher + File.separator + nameFolderTeacher + ".txt";
                         readTeacherData(directory);
                         return;
                     }
@@ -71,18 +66,19 @@ public class RequestCertificateController {
             }    
         }
     }
+
     public void searchFolderStudent() {
         String directory = System.getProperty("user.dir");
-        directory = directory+"\\Users\\Students";
-        //get para obtener nombre del estudiante
-        String nameFolderStudent = "Usuario";
+        directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users"+File.separator+"Students";
+        UserData data = new UserData(); 
+        String nameFolderStudent = data.getUsername();
         File searchedFolder = new File(directory);
         if (searchedFolder.exists() && searchedFolder.isDirectory()) {
             File[] files = searchedFolder.listFiles();
             if (files != null) {
                 for (File file : files) {
                     if (file.isDirectory() && file.getName().equals(nameFolderStudent)) {
-                        directory = directory + "\\" + nameFolderStudent + "\\" + nameFolderStudent + ".txt";
+                        directory = directory + File.separator + nameFolderStudent + File.separator + nameFolderStudent + ".txt";
                         readStudentData(directory);
                         return;
                     }

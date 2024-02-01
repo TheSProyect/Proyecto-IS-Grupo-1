@@ -16,11 +16,9 @@ import javax.swing.*;
 public class PresentExamController {
     //private void setResult(Option){}
     //private void chooseExam(Exam_Name){}
-    private int counter=0;
     Exam currentExam = new Exam();
 
     public PresentExamController(){
-        
         this.searchFolder();
     }
     private void startExam(){}
@@ -62,50 +60,34 @@ public class PresentExamController {
                 } catch (IOException e) {
                     e.printStackTrace();
             }
-                if(readings==stop) {
-                    return;
-                    } else {
-                        counter++;
+            if(readings==stop) {
+                return;
+                } else {
+                    counter++;
                     readQuestion(changeDirectory(directory),readings+1, counter, stop);
         }   
     }
     private void readExam(String directory, String nameFolder){
-        String examName, tipoExam, teacherName,descripcion;
         int numberQuestions, duracion;
-        directory = directory +"\\"+ nameFolder+"\\"+nameFolder+".txt";
-        
+        directory = directory +File.separator+ nameFolder+File.separator+nameFolder+".txt";
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
-            examName = br.readLine();
-            currentExam.setName(examName);
-
-            tipoExam = br.readLine();
-            currentExam.setTipo(tipoExam);
-            
+            currentExam.setName(br.readLine());
+            currentExam.setTipo(br.readLine());
             numberQuestions = Integer.parseInt((br.readLine()));
             currentExam.setNumberQuestions(numberQuestions);
-
-            teacherName = br.readLine();
-            currentExam.setTeacherName(teacherName);
-
+            currentExam.setTeacherName(br.readLine());
             duracion = Integer.parseInt((br.readLine()));
             currentExam.setDuracion(duracion);
-
-            descripcion = br.readLine();
-            currentExam.setDescripcion(descripcion);
-
-        }catch (IOException e) {
+            currentExam.setDescripcion(br.readLine());
+            }catch (IOException e) {
                 e.printStackTrace();
         }
-            
-            
-       // currentExam.setNumberQuestions(stop);
-
     }
 
     private int getNumberQuestion(String directory, String nameFolder){
         int lineNumberQuestion = 2;
         int numberQuestion = 0;
-        directory = directory +"\\"+ nameFolder+"\\"+nameFolder+".txt";
+        directory = directory +File.separator+ nameFolder+File.separator+nameFolder+".txt";
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             for(int i=0; i<=lineNumberQuestion; i++){
                 br.readLine();
@@ -126,7 +108,7 @@ public class PresentExamController {
         String question = (directory.substring(directory.length() - removeQuestionFromDirectory));
         question = question.substring(0, question.length() - removeFyleType);
         directory = directory.substring(0, directory.length() - removeQuestionFromDirectory);
-            return (directory +"\\"+changeNumberQuestion(question)+".txt");
+        return (directory +File.separator+changeNumberQuestion(question)+".txt");
     }
     
     private String changeNumberQuestion(String question){
@@ -145,7 +127,7 @@ public class PresentExamController {
 
     public void searchFolder() {
         String directory = System.getProperty("user.dir");
-        directory = directory+"\\"+"Exams";
+        directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Exams";
         //get para obtener nombre del examen
         String nameFolder = "Examen1";
         File searchedFolder = new File(directory);
@@ -153,12 +135,12 @@ public class PresentExamController {
             File[] files = searchedFolder.listFiles();
             if (files != null) {
                 int stop = getNumberQuestion(directory, nameFolder);
+                int counter =0;
                     readExam(directory,nameFolder);
                 for (File file : files) {
                     if (file.isDirectory() && file.getName().equals(nameFolder)) {
                         stop = getNumberQuestion(directory, nameFolder);
-                        String question = "Pregunta1.txt";
-                        directory = directory + "\\"+ nameFolder + "\\"+ question;
+                        directory = directory + File.separator+ nameFolder + File.separator+ "Pregunta1.txt";
                         readQuestion(directory,1,counter, stop);
                         return;
                     }
@@ -180,7 +162,7 @@ public class PresentExamController {
         int j=currentExam.getNumberQuestions();
         List<String> domain = new ArrayList<String>();
         for(int i=0; i<j; i++){ 
-                domain.add(currentExam.getDomainExam(i));
+            domain.add(currentExam.getDomainExam(i));
         }
         return domain;
     }

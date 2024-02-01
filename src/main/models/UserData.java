@@ -2,12 +2,9 @@ package main.models;
 
 public class UserData {
 	private String Username, Password;
-	private boolean isAdmin = true;
+	private boolean isAdmin = true;	
 	
-	public UserData(){
-		
-		
-	}
+	public UserData(){}
 	
 	public void setUsername(String Name){
 		Username = Name;

@@ -38,7 +38,7 @@ public class GeneratePDFFile {
         try{
             nombre=RCController.getNameStudentController();
             String directory = System.getProperty("user.dir");
-            directory = directory + File.separator + "src"+File.separator+"data"+File.separator+"Users"+File.separator+"Students"+File.separator+nombre+File.separator+ nombre + ".pdf";
+            directory = directory + "\\Users\\Students\\Usuario\\" + nombre + ".pdf";
             //archivo=new FileOutputStream(nombre + ".pdf");
             PdfWriter.getInstance(documento, new FileOutputStream(directory));
             //PdfWriter.getInstance(documento, archivo);
