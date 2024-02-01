@@ -6,8 +6,9 @@ import main.controllers.PresentExamController;
 import main.models.Questions;
 import main.models.Result;
 
-public class Exam {
-    private String name, tipo, instructions, teacherName, descripcion;
+public class Exam extends Course{
+    private Course course;
+    private String tipo, instructions, descripcion;
     private int numberQuestions, duracion;
     private int[] correctOptions;
     private Questions[] questions = new Questions[10];
@@ -29,7 +30,6 @@ public class Exam {
     }
     public void setIsCorrectExam(Boolean isCorrect, int i, int counter){
         questions[counter].setIsCorrectQuestions(isCorrect, i);
-
     }
 
     public void setNumberAnswers(int counter, int number){
@@ -63,12 +63,12 @@ public class Exam {
         return numberQuestions;
     }
 //
-    public void setName(String nameExam){
-        name=nameExam;
+    public void setName(String nameCourse){
+        course.setNameCourse(nameCourse);
     }
 
     public String getName(){
-        return name;
+        return course.getNameCourse();
     }
 
     public void setTipo(String tipoExam){
@@ -80,10 +80,10 @@ public class Exam {
     }
 
     public void setTeacherName(String name){
-        teacherName=name;
+        course.setNameTeacherCourse(name);
     }
     public String getTeacherName(){
-        return teacherName;
+        return course.getNameTeacher();
     }
 
     public void setDuracion(int tiempo){

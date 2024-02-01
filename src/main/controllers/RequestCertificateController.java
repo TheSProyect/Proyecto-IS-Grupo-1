@@ -4,9 +4,10 @@ import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-
-import main.views.components.GeneratePDFFile;
+import main.models.GeneratePDFFile;
 import main.models.Certificate;
 import main.models.Course;
 import main.models.UserData;
@@ -28,6 +29,32 @@ public class RequestCertificateController {
         //p.searchFolderStudent();
         //p.searchFolderTeacher(); 
         p.createPDF();   
+    }
+    private String nameCourses(File file){
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            return br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+        }
+        return "-";
+    }
+
+    public void showCertificates(){
+        List<String> namesCourses = new ArrayList<>();
+        String nameFolderStudent = currentCertificate.getNameStudentCertificate();
+        String directory = System.getProperty("user.dir");
+        directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users"+File.separator+"Students"+File.separator+nameFolderStudent;
+        File searchedFolder = new File(directory);
+        if (searchedFolder.exists() && searchedFolder.isDirectory()) {
+            File[] files = searchedFolder.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isDirectory() && !(file.getName().equals(nameFolderStudent))) {
+                        namesCourses.add(nameCourses(file));
+                    }
+                }
+            }    
+        }
     }
 
     private void readStudentData(String directory){
@@ -90,7 +117,6 @@ public class RequestCertificateController {
     public void createPDF(){
         GeneratePDFFile creatingPDF = new GeneratePDFFile();
         creatingPDF.crearPlantilla();
-        
     }
     public String getNameStudentController(){
         return currentCertificate.getNameStudentCertificate();

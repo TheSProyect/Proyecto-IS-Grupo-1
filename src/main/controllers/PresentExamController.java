@@ -3,6 +3,7 @@ package main.controllers;
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 import main.models.Answers;
 import main.models.Questions;
 import main.models.Result;
+import main.models.UserData;
 import main.models.Exam;
 import javax.swing.*;
 
@@ -32,7 +34,42 @@ public class PresentExamController {
         PresentExamController p = new PresentExamController();
         p.searchFolder();    
     }
+    public void examFinished(){
+        UserData data = new UserData(); 
+        String nameFolderStudent = data.getUsername();
+        String directory = System.getProperty("user.dir");
+        directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users"+File.separator+"Students"+ File.separator+nameFolderStudent;
+        //get para obtener el nombre del curso y del examen
+        String nameCourse = "Course1.txt";
+        String nameExam = "Exam1";
+        try {
+            File file = new File(directory, nameCourse);
+            if (file.createNewFile()) {
+                FileWriter writer = new FileWriter(file);
+                writer.write(nameCourse+"\n"+ nameExam+ "\n");
+                writer.write(currentExam.getSummary());
+                writer.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void showExamsName(){
+        String directory = System.getProperty("user.dir");
+        directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Exams";
+        File searchedFolder = new File(directory);
+        if (searchedFolder.exists() && searchedFolder.isDirectory()) {
+            File[] files = searchedFolder.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    readExam(directory, file.getName());
+                    //hay q ver q se hace aqui para que se muestre la info de los examenes para examsView
+                }
+            }
+        }    
+    }
+    
     private void readQuestion(String directory, int readings, int counter, int stop){
         String questionStatement, line, domain;
         String[] answer = new String[10];
@@ -128,7 +165,9 @@ public class PresentExamController {
     public void searchFolder() {
         String directory = System.getProperty("user.dir");
         directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Exams";
-        //get para obtener nombre del examen
+        //get para obtener nombre del examen y del curso
+        //arreglar
+        String nameCourse = "Course1";
         String nameFolder = "Examen1";
         File searchedFolder = new File(directory);
         if (searchedFolder.exists() && searchedFolder.isDirectory()) {
@@ -140,7 +179,7 @@ public class PresentExamController {
                 for (File file : files) {
                     if (file.isDirectory() && file.getName().equals(nameFolder)) {
                         stop = getNumberQuestion(directory, nameFolder);
-                        directory = directory + File.separator+ nameFolder + File.separator+ "Pregunta1.txt";
+                        directory = directory + File.separator + nameCourse + File.separator + nameFolder + File.separator+ "Pregunta1.txt";
                         readQuestion(directory,1,counter, stop);
                         return;
                     }
