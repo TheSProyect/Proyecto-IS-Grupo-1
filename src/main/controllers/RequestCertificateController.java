@@ -25,8 +25,8 @@ public class RequestCertificateController {
     public static void main(String[] args) throws IOException{
         RequestCertificateController p = new RequestCertificateController();
         
-        p.searchFolderStudent();
-        p.searchFolderTeacher(); 
+        //p.searchFolderStudent();
+        //p.searchFolderTeacher(); 
         p.createPDF();   
     }
 
@@ -95,5 +95,14 @@ public class RequestCertificateController {
         GeneratePDFFile creatingPDF = new GeneratePDFFile();
         creatingPDF.crearPlantilla();
         
+    }
+    public String getNameStudentController(){
+        return currentCertificate.getNameStudentCertificate();
+    }
+    public String getCourseController(){
+        return currentCertificate.getNameCourse();
+    }
+    public String getNameTeacherController(){
+        return currentCertificate.getNameTeacher();
     }
 }

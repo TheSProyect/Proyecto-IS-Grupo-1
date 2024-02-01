@@ -4,6 +4,7 @@ package main.views.components;
 //import lib.*;
 import main.models.Course;
 import main.models.Certificate;
+import main.controllers.RequestCertificateController;
 import com.itextpdf.*;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -16,11 +17,13 @@ public class GeneratePDFFile {
     Document documento;
     FileOutputStream archivo;
     Paragraph titulo, text, course, name, teacher;
+    String nombre, curso, profesor;
     Font fuenteTitulo= new Font();
     Font fuenteSmall = new Font();
     Font fuenteName = new Font();
-    Certificate currenCertificate;
-    Course currentCourse;
+    RequestCertificateController RCController= new RequestCertificateController();
+    //Certificate currenCertificate;
+    //Course currentCourse;
 
     public GeneratePDFFile(){
         
@@ -33,7 +36,7 @@ public class GeneratePDFFile {
 
     public void crearPlantilla(){
         try{
-            String nombre=currenCertificate.getNameStudentCertificate();
+            nombre=RCController.getNameStudentController();
             String directory = System.getProperty("user.dir");
             directory = directory + "\\Users\\Students\\Usuario\\" + nombre + ".pdf";
             //archivo=new FileOutputStream(nombre + ".pdf");
@@ -57,7 +60,7 @@ public class GeneratePDFFile {
             documento.add(Chunk.NEWLINE);
             documento.add(Chunk.NEWLINE);
 
-            name= new Paragraph("Nombre Apellido",fuenteName);
+            name= new Paragraph(nombre,fuenteName);
             name.setAlignment(1);
             documento.add(name);
             documento.add(Chunk.NEWLINE);
@@ -67,7 +70,9 @@ public class GeneratePDFFile {
             text.setAlignment(1);
             documento.add(text);
             
+            //curso=RCController.getCourseController();
             course= new Paragraph("Java SE - Java Associate Programmer", fuenteSmall);
+            //course= new Paragraph(curso, fuenteSmall);
             course.setAlignment(1);
             documento.add(course);
             documento.add(Chunk.NEWLINE);
@@ -79,7 +84,9 @@ public class GeneratePDFFile {
             text.setAlignment(1);
             documento.add(text);
             
-            teacher= new Paragraph("Profesor/a: Paula Herrero", fuenteSmall);
+            profesor=RCController.getNameTeacherController();
+            teacher= new Paragraph("Profesor/a: "+ profesor, fuenteSmall);
+            //teacher= new Paragraph("Profesor/a: Paula Herrero", fuenteSmall);
             teacher.setAlignment(1);
             documento.add(teacher);
             
