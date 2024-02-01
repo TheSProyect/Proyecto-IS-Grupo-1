@@ -2,22 +2,25 @@ package main.views.components;
 
 
 //import lib.*;
+import main.models.Course;
+import main.models.Certificate;
 import com.itextpdf.*;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 
-
+//curso tiene teacher y nombre
 
 import java.io.*;
 
 public class GeneratePDFFile {
-    String nombre, apellido, fecha;
     Document documento;
     FileOutputStream archivo;
     Paragraph titulo, text, course, name, teacher;
     Font fuenteTitulo= new Font();
     Font fuenteSmall = new Font();
     Font fuenteName = new Font();
+    Certificate currenCertificate;
+    Course currentCourse;
 
     public GeneratePDFFile(){
         
@@ -30,6 +33,7 @@ public class GeneratePDFFile {
 
     public void crearPlantilla(){
         try{
+            String nombre=currenCertificate.getNameStudentCertificate();
             String directory = System.getProperty("user.dir");
             directory = directory + "\\Users\\Students\\Usuario\\" + nombre + ".pdf";
             //archivo=new FileOutputStream(nombre + ".pdf");
