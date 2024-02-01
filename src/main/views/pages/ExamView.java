@@ -31,10 +31,8 @@ public class ExamView extends Frame implements ActionListener {
     List<QuestionPanel> questions;
     int index;
     PresentExamController presentController;
-    Frame examView;
 
-    public ExamView(Frame examView) {
-        this.examView = examView;
+    public ExamView() {
         questions = new ArrayList<QuestionPanel>();
         index = 0;
         presentController= new PresentExamController();
@@ -221,7 +219,7 @@ public class ExamView extends Frame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == finishExamButton) {
             this.dispose();
-            examView.setVisible(true);
+            ExamsView.instance().setVisible(true);
 
         } else if (e.getSource() == prevButton) {
             showPreviousQuestions();

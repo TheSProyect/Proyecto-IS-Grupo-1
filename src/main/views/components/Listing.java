@@ -2,6 +2,7 @@ package main.views.components;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -25,18 +26,12 @@ public class Listing extends JScrollPane{
     JButton createExam;
     JPanel titleButtonContainer;
     JPanel listingPanel;
-    
-
-
+    List<JButton> listingButtons;
 
     public Listing(List<String> elements, String textButton) {
-
+        listingButtons = new ArrayList<JButton>();
         paintListingPanel();
         paintListElements(elements, textButton);
-        
-
-
-
     }
 
 
@@ -63,9 +58,7 @@ public class Listing extends JScrollPane{
             createTitlePanel();
             TitleButtonContainer(singleElement, textButton);
             paintTitleSeparator();
-        
-        }
-                
+        }       
     }
 
     protected void createTitlePanel() {
@@ -121,9 +114,9 @@ public class Listing extends JScrollPane{
         createExam.setMaximumSize(new Dimension(150, 30));
     
         titleButtonContainer.add(createExam);
+        listingButtons.add(createExam);
     }
     
-
     private void changeScrollPaneLook() {
         this.getVerticalScrollBar().setPreferredSize(new Dimension(8, 0));
         this.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
@@ -152,5 +145,7 @@ public class Listing extends JScrollPane{
         });
     }
 
-
+    public List<JButton> getListingButtons() {
+        return listingButtons;
+    }
 }
