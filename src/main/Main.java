@@ -1,5 +1,6 @@
 package main;
 
+// import main.views.pages.CertificateView;
 // import main.views.pages.ExamView;
 // import main.views.pages.LogInView;
 import main.views.pages.ExamsView;
@@ -13,5 +14,6 @@ public class Main {
         // new LogInView();
         // new RegisterUserView();
         // new ExamView();
+        // new CertificateView();
     }
 }

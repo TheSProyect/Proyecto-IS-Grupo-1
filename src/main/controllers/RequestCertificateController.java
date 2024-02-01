@@ -5,6 +5,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+
+
 import main.models.Certificate;
 import main.models.Course;
 
@@ -14,10 +16,16 @@ public class RequestCertificateController {
     private String getSummary(){}
     private Certificate generateCertificate(Summary){}*/
     Certificate currentCertificate = new Certificate();
+    public RequestCertificateController(){
+        this.searchFolderStudent();
+        this.searchFolderTeacher();
+    }
+
+    
     public static void main(String[] args) throws IOException{
         RequestCertificateController p = new RequestCertificateController();
-        p.searchFolderStudent();
-        p.searchFolderTeacher();    
+        //p.searchFolderStudent();
+        //p.searchFolderTeacher();    
     }
 
     private void readStudentData(String directory){
@@ -79,5 +87,9 @@ public class RequestCertificateController {
                 }
             }    
         }
+    }
+
+    public void createPDF(){
+        
     }
 }
