@@ -1,4 +1,4 @@
-
+package main.models;
 
 public class UserData {
 	private String Username, Password;
