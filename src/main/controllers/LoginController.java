@@ -24,7 +24,7 @@ public class LoginController {
 	
 	public boolean searchUser(String Username){
 		String directory = System.getProperty("user.dir");
-        directory = directory+"\\Users\\Teachers\\"+Username+".txt";
+        directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users"+File.separator+"Teachers"+File.separator+ Username +".txt";
 		
 		try(BufferedReader adminReader = new BufferedReader(new FileReader(directory))){
 			currentUser.setUsername(Username);
@@ -39,7 +39,7 @@ public class LoginController {
 			
 		} catch (IOException e){
 			directory = System.getProperty("user.dir");
-			directory = directory+"\\Users\\Students\\"+Username+".txt";
+			directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users"+File.separator+"Students"+File.separator+ Username +".txt";
 			try(BufferedReader userReader = new BufferedReader(new FileReader(directory))){
 			currentUser.setUsername(Username);
 			
