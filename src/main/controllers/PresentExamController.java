@@ -49,9 +49,11 @@ public class PresentExamController {
                 if (line != null && line.length() > 0 && answerCorrect && line.substring(0, 1).equalsIgnoreCase("v")) {
                     answer[i]= line.substring(1);
                     justification[i]= br.readLine();
+                    currentExam.setIsCorrectExam(true, i, counter);
                     } else {
                         answer[i]= line;
                         justification[i]= br.readLine();
+                        currentExam.setIsCorrectExam(false, i, counter);
                         }
                     currentExam.setAnswersExam(answer[i],justification[i], i, counter);
                     currentExam.setNumberAnswers(counter, i);

@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 
-
+import main.views.components.GeneratePDFFile;
 import main.models.Certificate;
 import main.models.Course;
 
@@ -90,6 +90,7 @@ public class RequestCertificateController {
     }
 
     public void createPDF(){
+        GeneratePDFFile creatingPDF = new GeneratePDFFile();
         
     }
 }
