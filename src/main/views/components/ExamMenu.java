@@ -27,17 +27,49 @@ public class ExamMenu extends JPanel{
         paintQuestionsList();
     }
 
+    public ExamMenu(int time) {
+        this.setMinimumSize(new Dimension(Size.instance().getExamMenu()));
+        this.setPreferredSize(new Dimension(Size.instance().getExamMenu()));
+        this.setMaximumSize(new Dimension(Size.instance().getExamMenu()));
+        this.setBackground(Palette.instance().getWhite());
+        // this.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 50));
+        this.setLayout(new GridBagLayout());
+
+        paintTimer2(time);
+
+        paintQuestionsList();
+    }
+
     private void paintTimer() {
-        JPanel timerPanel = new JPanel();
-        timerPanel.setPreferredSize(new Dimension(200, 70));
-        timerPanel.setBackground(Palette.instance().getBlue());
+        // JPanel timerPanel = new JPanel();
+        // timerPanel.setPreferredSize(new Dimension(200, 70));
+        // timerPanel.setBackground(Palette.instance().getBlue());
+        TimerBlock timer = new TimerBlock(4, null);
+
+        // timerPanel.add(timer);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 1;
         constraints.gridy = 1;
         constraints.weighty = 0.5;
 
-        this.add(timerPanel, constraints);
+        this.add(timer, constraints);
+    }
+
+    private void paintTimer2(int time) {
+        // JPanel timerPanel = new JPanel();
+        // timerPanel.setPreferredSize(new Dimension(200, 70));
+        // timerPanel.setBackground(Palette.instance().getBlue());
+        TimerBlock timer = new TimerBlock(time, null);
+
+        // timerPanel.add(timer);
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 1;
+        constraints.gridy = 1;
+        constraints.weighty = 0.5;
+
+        this.add(timer, constraints);
     }
 
     private void paintQuestionsList() {
