@@ -1,7 +1,6 @@
 package main.views.pages;
 import main.views.templates.Frame;
 import main.views.components.NavBar;
-import main.views.components.AdminNavBar;
 import main.views.components.Button;
 import main.views.components.HelpBar;
 import main.views.components.Listing;
@@ -26,6 +25,8 @@ import javax.swing.JSeparator;
 
 
 public class CertificatesView extends Frame implements ActionListener {
+    private static CertificatesView certificatesView;
+
     JPanel titlePanel;
     JPanel contentPanel;
     JLabel title;
@@ -37,6 +38,13 @@ public class CertificatesView extends Frame implements ActionListener {
     Listing certificateListing;
     List<String> certificates;
     List<JButton> requestCertificateButtons;
+
+    public static CertificatesView instance() {
+		if (certificatesView == null){
+			certificatesView = new CertificatesView();
+		}
+		return certificatesView;
+	}
 
     public CertificatesView() {
         inicializeCertificates();
@@ -169,11 +177,10 @@ public class CertificatesView extends Frame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        this.setVisible(false);
         if (e.getSource() == navBar.getHomeButton()) {
-            this.dispose();
             ExamsView.instance().setVisible(true);
         } else {
-            this.dispose();
             new CertificateView();
         }
     }
