@@ -20,7 +20,7 @@ public class NavBar extends JPanel implements ActionListener {
     JLabel linkText;
     JToolBar linkNavbar;
     NavBarButton homeButton;
-    NavBarButton certifycateButton;
+    NavBarButton certificateButton;
     NavBarButton logOutButton;
     
     public NavBar() {
@@ -65,9 +65,9 @@ public class NavBar extends JPanel implements ActionListener {
         linkNavbar.add(homeButton);
         linkNavbar.addSeparator();
 
-        certifycateButton = new NavBarButton("Solicitar Certificado", "Paperclip_Icon.png", false);
+        certificateButton = new NavBarButton("Solicitar Certificado", "Paperclip_Icon.png", false);
         // certifycateButton.addActionListener(this);
-        linkNavbar.add(certifycateButton);
+        linkNavbar.add(certificateButton);
         linkNavbar.addSeparator();
 
         logOutButton = new NavBarButton("Cerrar sesión", "LogOut_Icon.png", true);
@@ -80,8 +80,8 @@ public class NavBar extends JPanel implements ActionListener {
         return homeButton;
     }
 
-    public NavBarButton getCertifycateButton() {
-        return certifycateButton;
+    public NavBarButton getCertificateButton() {
+        return certificateButton;
     }
 
     @Override

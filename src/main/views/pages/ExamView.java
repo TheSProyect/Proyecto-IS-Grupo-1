@@ -24,6 +24,7 @@ import main.views.components.QuestionPanel;
 import main.views.templates.Frame;
 
 public class ExamView extends Frame implements ActionListener {
+    NavBar navBar;
     JPanel contentPanel;
     JButton finishExamButton;
     JButton prevButton;
@@ -43,6 +44,7 @@ public class ExamView extends Frame implements ActionListener {
         paintContentPanel();
 
         this.pack();
+        addActionListener();
     }
 
     private void buildFrame() {
@@ -51,7 +53,7 @@ public class ExamView extends Frame implements ActionListener {
     }
 
     private void paintNavBar() {
-        NavBar navBar = new NavBar();
+        navBar = new NavBar();
         this.add(navBar, BorderLayout.NORTH);
     }
 
@@ -212,6 +214,11 @@ public class ExamView extends Frame implements ActionListener {
         }
     }   
 
+    private void addActionListener() {
+        navBar.getHomeButton().addActionListener(this);
+        navBar.getCertificateButton().addActionListener(this);
+    }
+
     public void showInstructions(){}
     public void endExam(){} 
 
@@ -226,6 +233,12 @@ public class ExamView extends Frame implements ActionListener {
 
         } else if (e.getSource() == nextButton) {
             showNextQuestion();
+        } else if (e.getSource() == navBar.getHomeButton()) {
+            this.dispose();
+            ExamsView.instance().setVisible(true);
+        } else if (e.getSource() == navBar.getCertificateButton()) {
+            this.dispose();
+            CertificatesView.instance().setVisible(true);
         }
     }
 

@@ -155,6 +155,8 @@ public class CertificateView extends Frame implements ActionListener{
     }
   //  private void show(Certificate)(){}
     private void addActionListener() {
+        navBar.getCertificateButton().addActionListener(this);
+
         navBar.getHomeButton().addActionListener(this);
     }
 
@@ -163,6 +165,9 @@ public class CertificateView extends Frame implements ActionListener{
         if (e.getSource() == navBar.getHomeButton()) {
             this.dispose();
             ExamsView.instance().setVisible(true);
+        } else if (e.getSource() == navBar.getCertificateButton()) {
+            this.dispose();
+            CertificatesView.instance().setVisible(true);
         }
     }
 }
