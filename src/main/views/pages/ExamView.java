@@ -75,21 +75,22 @@ public class ExamView extends Frame implements ActionListener {
         contentPanel = new JPanel();
         // contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.X_AXIS));
         contentPanel.setLayout(new GridBagLayout());
-        contentPanel.setPreferredSize(new Dimension(944, 560));
+        contentPanel.setPreferredSize(new Dimension(944, 640));
         contentPanel.setBackground(Palette.instance().getWhite());
 
-        paintMenuPanel();
+        
 
         paintQuestionPanel(index);
 
         paintBottomButtonPanel();
+        
+        paintMenuPanel();
 
         this.add(contentPanel, BorderLayout.CENTER);
     }
 
     private void paintMenuPanel() {
-        //ExamMenu menuPanel = new ExamMenu();
-        ExamMenu menuPanel = new ExamMenu(presentController.getDuracion());
+        ExamMenu menuPanel = new ExamMenu(presentController.getDuracion(), finishExamButton);
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -117,10 +118,15 @@ public class ExamView extends Frame implements ActionListener {
     
     private void paintBottomButtonPanel() {
         paintFinishExamButton();
-        paintButtonPanel();
+        paintQuestionButtonPanel();
     }
 
     private void paintFinishExamButton() {
+        JPanel finishExamPanel = new JPanel();
+        finishExamPanel.setBackground(Palette.instance().getWhite());
+        finishExamPanel.setMaximumSize(new Dimension(300, 80));
+
+
         finishExamButton = new JButton("Terminar Examen");
         finishExamButton.setFont(new Font("Nunito Sans", Font.BOLD, 15));
         finishExamButton.setForeground(Palette.instance().getWhite());
@@ -132,19 +138,23 @@ public class ExamView extends Frame implements ActionListener {
         Border border = BorderFactory.createLineBorder(Palette.instance().getBlue());
         finishExamButton.setBorder(border);
 
+        finishExamPanel.add(finishExamButton);
+
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 1;
-        // constraints.weighty = 0.5;
+        // constraints.weightx = 1.0;
+        constraints.weighty = 0.5;
+        constraints.fill = GridBagConstraints.BOTH;
 
-        contentPanel.add(finishExamButton, constraints);
+        contentPanel.add(finishExamPanel, constraints);
     }
     
-    private void paintButtonPanel() {
+    private void paintQuestionButtonPanel() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.TRAILING));
         buttonPanel.setBackground(Palette.instance().getWhite());
-        // buttonPanel.setPreferredSize(new Dimension(1024, 200));
+        // buttonPanel.setPreferredSize(new Dimension(1024, 80));
 
         prevButton = new JButton("Anterior");
         paintButton(prevButton);
@@ -158,8 +168,7 @@ public class ExamView extends Frame implements ActionListener {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 1;
         constraints.gridy = 1;
-        constraints.weighty = 0;
-        // constraints.gridwidth = 4;
+        constraints.weighty = 0.5;
         constraints.fill = GridBagConstraints.BOTH;
 
         contentPanel.add(buttonPanel, constraints);
@@ -233,12 +242,15 @@ public class ExamView extends Frame implements ActionListener {
 
         } else if (e.getSource() == nextButton) {
             showNextQuestion();
+
         } else if (e.getSource() == navBar.getHomeButton()) {
             this.dispose();
             ExamsView.instance().setVisible(true);
+
         } else if (e.getSource() == navBar.getCertificateButton()) {
             this.dispose();
             CertificatesView.instance().setVisible(true);
+
         }
     }
 

@@ -77,7 +77,7 @@ public class TimerBlock extends JPanel{
 				}
 				if(TimeRemaining<0){
 				T.stop();
-				// stopButton.doClick();
+				stopButton.doClick();
 				}
 			}
 			

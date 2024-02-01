@@ -21,7 +21,7 @@ import main.views.templates.Frame;
 
 public class ExamsView extends Frame implements ActionListener{
     private static ExamsView examView;
-
+    
     NavBar navBar;
     Slider slider;
     HelpBar helpBar;
