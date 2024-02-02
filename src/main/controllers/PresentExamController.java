@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.models.Answers;
-import main.models.Questions;
+import main.models.Answer;
+import main.models.Question;
 import main.models.Result;
 import main.models.UserData;
 import main.models.Exam;
@@ -24,10 +24,10 @@ public class PresentExamController {
         this.searchFolder();
     }
     private void startExam(){}
-    private Answers getAnswers(){
+    private Answer getAnswers(){
         return this.getAnswers();
     }
-    private Questions getQuestions(){
+    private Question getQuestions(){
         return this.getQuestions();
     }
     public static void main(String[] args) throws IOException{
@@ -85,7 +85,6 @@ public class PresentExamController {
     }
     
     private void readQuestion(String directory, int readings, int counter, int stop){
-        System.out.println("estoy en read");
         String questionStatement, line, domain;
         String[] answer = new String[10];
         String[] justification = new String[10];
@@ -94,7 +93,6 @@ public class PresentExamController {
             questionStatement = br.readLine();
             domain = br.readLine();
             currentExam.setQuestionsExam(questionStatement,domain,counter);
-            System.out.println(currentExam.getQuestionsExam(counter) + " counter en read");
             
             for (int i =0; ((line = br.readLine()) != null); i++) {
                 if (line != null && line.length() > 0 && answerCorrect && line.substring(0, 1).equalsIgnoreCase("v")) {
@@ -146,7 +144,6 @@ public class PresentExamController {
                 br.readLine();
                 if(i==lineNumberQuestion-1){
                     numberQuestion = Integer.parseInt((br.readLine()));
-                    System.out.println(numberQuestion + "number");
                     }
                 }
             return numberQuestion;
@@ -187,17 +184,13 @@ public class PresentExamController {
         String nameFolder = "Examen1";
         directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Exams"+File.separator+nameCourse;
         File searchedFolder = new File(directory);
-        System.out.println("antes del if");
-        System.out.println(directory);
         if (searchedFolder.exists() && searchedFolder.isDirectory()) {
-            System.out.println("primer if");
             File[] files = searchedFolder.listFiles();
             if (files != null) {
                 int stop = getNumberQuestion(directory, nameFolder);
                 int counter =0;
                     readExam(directory,nameFolder);
                 for (File file : files) {
-                    System.out.println("for");
                     if (file.isDirectory() && file.getName().equals(nameFolder)) {
                         stop = getNumberQuestion(directory, nameFolder);
                         directory = directory + File.separator + nameFolder + File.separator+ "Pregunta1.txt";
@@ -213,7 +206,6 @@ public class PresentExamController {
         int j=currentExam.getNumberQuestions();
         List<String> questionsString = new ArrayList<String>();
         for(int i=0; i<j; i++){ 
-            System.out.println("en la lista");
             questionsString.add(currentExam.getQuestionsExam(i));
         }
         return questionsString;

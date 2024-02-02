@@ -1,18 +1,17 @@
 package main.models;
 
-import main.models.Answers;
+import main.models.Answer;
 import main.models.Lines;
 
-public class Questions {
+public class Question {
     private String statement;
     private String domain;
     private Lines[] lines;
     private int numberAnswers;
-    private Answers[] answers= new Answers[10];
+    private Answer[] answers= new Answer[10];
     //private int counter=0;
     
-    public void setQuestions(String statement, String domain, Questions question){
-        System.out.println("entra en setQuestion");
+    public void setQuestions(String statement, String domain, Question question){
         question.statement=statement;
         question.domain=domain;
     }
@@ -23,7 +22,7 @@ public class Questions {
     }
 
     public void setIsCorrectQuestions(Boolean isCorrect, int i){
-        answers[i]= new Answers();
+        answers[i]= new Answer();
         answers[i].setIsCorrect(isCorrect,answers[i]);
 }
 
