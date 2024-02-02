@@ -23,10 +23,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.border.Border;
-import javax.swing.text.html.parser.Element;
 
 
-public class AdminExamView extends Frame {
+public class AdminExamView extends JPanel {
     JPanel titlePanel;
     JPanel contentPanel;
     JLabel title;
@@ -45,13 +44,10 @@ public class AdminExamView extends Frame {
         buildFrame();
         paintBorders();
         paintContentPanel();
-
-
-        this.pack();
     }
 
     protected void buildFrame() {
-        createFrame("ExamsView");
+        Frame.instance().setTitle("ExamsView");
         this.setLayout(new BorderLayout());
     }
 

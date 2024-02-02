@@ -20,7 +20,7 @@ public class AdminExamsView extends ExamsView {
     JPanel titleButtonContainer;
 
     protected void buildFrame() {
-        createFrame("AdminExamsView");
+        Frame.instance().setTitle("AdminExamsView");
         this.setLayout(new BorderLayout());
     }
 
