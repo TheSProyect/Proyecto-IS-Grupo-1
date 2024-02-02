@@ -29,3 +29,40 @@
 ### Prototipado Interactivo
 - [Prototipado en Figma](https://www.figma.com/proto/t3JwDM1Ml5MX22OzwAK5At/Modelo-de-Prototipos-IS---Grupo-1?page-id=0%3A1&type=design&node-id=1-2&viewport=-156%2C482%2C0.15&t=mA4RJ4fKFYQQwOEy-1&scaling=min-zoom&starting-point-node-id=1%3A2&show-proto-sidebar=1&mode=design)
 - [Pantallas](/out/docs/PROTOTYPES.md)
+
+## Modelado de Análisis
+### Diagrama de clases de analisis
+![Modelado de Análisis : Diagrama de clases de analisis](out\docs\logicalView\analysisView\Analysis-ClassDiagram\Analysis-ClassDiagram.png)
+
+### Diagrama de clases de análisis y de colaboración de casos de uso prioritarios
+#### UC1-Create Exam
+![Modelado de Análisis : Diagrama de clases de analisis](out\docs\logicalView\analysisView\UC-CreateExam-analysisClassDiagram\UC-CreateExam-analysisClassDiagram.png)
+![Modelado de Análisis : Diagrama de colaboracion](out\docs\logicalView\analysisView\UC-CreateExam-comunicationDiagram\UC-CreateExam-comunicationDiagram.png)
+
+#### UC2-Present Exam
+![Modelado de Análisis : Diagrama de clases de analisis](out\docs\logicalView\analysisView\UC-presentExam-analysisClassDiagram\Clasesdeanalisis.png)
+![Modelado de Análisis : Diagrama de colaboracion](out\docs\logicalView\analysisView\UC-presentExam-comunicationDiagram\Clasesdeanalisis.png)
+
+#### UC3-Request Certificate
+![Modelado de Análisis : Diagrama de clases de analisis](out\docs\logicalView\analysisView\UC-requestCetificate-analysisClassDiagram\UC-requestCertificate-analysisClassDiagram.png)
+![Modelado de Análisis : Diagrama de colaboracion](out\docs\logicalView\analysisView\UC-requestCertificate-analysisCommunicationDiagram\UC-requestCertificate-analysisCommunicationDiagram.png)
+
+### Diagrama de paquetes de análisis
+![Modelado de Análisis : Diagrama de paquetes](out\docs\logicalView\analysisView\Analysis-PackageDiagram\Analysis-PackageDiagram.png)
+
+## Modelo de Diseño
+
+### Diagrama de clases
+![Modelado de Diseño : Diagrama de clases](out\docs\logicalView\desingView\classDesign\Design-CreateExamClassDiagram\Design-ClassDiagram.png)
+
+### Diagrama de secuencia
+![Modelado de Diseño : Diagrama de secuencia-CreateExam](out\docs\logicalView\desingView\classDesign\UC-CreateExam-SequenceDiagram\UC-CreateExam-SequenceDiagram.png)
+![Modelado de Diseño : Diagrama de secuencia-CreateQuestion](out\docs\logicalView\desingView\classDesign\UC-CreateQuestion-SequenceDiagram¡\UC-CreateQuestion-SequenceDiagram¡.png)
+
+### Diagrama de Traza
+![Modelado de Diseño : Diagrama de traza](out\docs\logicalView\desingView\packageDesign\Design-TraceDiagram\Design-Analysis-TraceDiagram.png)
+
+## Modelo de Despliegue
+![Modelado de Despliegue](out\docs\logicalView\desingView\architectureDesign\DeployDiagram\deployDiagram.png)
+
+#### Utilizamos la libreria externa iTextPDF version 5.5.12, se encuentra en la carpeta lib dentro de src. La llama la entidad GeneratePDFFile
