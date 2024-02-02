@@ -22,7 +22,6 @@ public class RequestCertificateController {
         this.searchFolderStudent();
         this.searchFolderTeacher();
     }
-
     
     public static void main(String[] args) throws IOException{
         RequestCertificateController p = new RequestCertificateController();

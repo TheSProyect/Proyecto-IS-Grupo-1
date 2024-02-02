@@ -56,6 +56,7 @@ public class PresentExamController {
     }
 
     public void showExamsName(){
+        List<List<String>> examsInformation = new ArrayList<List<String>>();
         String directory = System.getProperty("user.dir");
         directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Exams";
         File searchedFolder = new File(directory);
@@ -64,10 +65,22 @@ public class PresentExamController {
             if (files != null) {
                 for (File file : files) {
                     readExam(directory, file.getName());
-                    //hay q ver q se hace aqui para que se muestre la info de los examenes para examsView
+                    examsInformation.add(new ArrayList<String>());
+                    examsInformation.add(readInformation());
                 }
             }
-        }    
+        }
+    }    
+    
+    private List<String> readInformation(){
+        List<String> examInformation = new ArrayList<String>();
+        examInformation.add((currentExam.getNameCourse()));
+        examInformation.add((currentExam.getDescription()));
+        examInformation.add((currentExam.getTypeExam()));
+        String duration = Integer.toString(currentExam.getDuration());
+        examInformation.add(duration);
+        examInformation.add((currentExam.getNameTeacher()));
+        return examInformation;
     }
     
     private void readQuestion(String directory, int readings, int counter, int stop){
@@ -108,13 +121,13 @@ public class PresentExamController {
         int numberQuestions, duracion;
         directory = directory +File.separator+ nameFolder+File.separator+nameFolder+".txt";
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
-            currentExam.setName(br.readLine());
+            currentExam.setNameExam(br.readLine());
             currentExam.setTipo(br.readLine());
             numberQuestions = Integer.parseInt((br.readLine()));
             currentExam.setNumberQuestions(numberQuestions);
             currentExam.setTeacherName(br.readLine());
             duracion = Integer.parseInt((br.readLine()));
-            currentExam.setDuracion(duracion);
+            currentExam.setDuration(duracion);
             currentExam.setDescripcion(br.readLine());
             }catch (IOException e) {
                 e.printStackTrace();
@@ -165,8 +178,8 @@ public class PresentExamController {
     public void searchFolder() {
         String directory = System.getProperty("user.dir");
         directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Exams";
-        //get para obtener nombre del examen y del curso
-        //arreglar
+        //String nameCourse = currentExam.getNameCourse();
+        //String nameFolder = currentExam.getNameExam();
         String nameCourse = "Course1";
         String nameFolder = "Examen1";
         File searchedFolder = new File(directory);
@@ -241,6 +254,6 @@ public class PresentExamController {
     }
 
     public int getDuracion(){
-        return currentExam.getDuracion();
+        return currentExam.getDuration();
     }
 }
