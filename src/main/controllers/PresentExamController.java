@@ -79,6 +79,7 @@ public class PresentExamController {
             questionStatement = br.readLine();
             domain = br.readLine();
             currentExam.setQuestionsExam(questionStatement,domain,counter);
+            System.out.println(currentExam.getQuestionsExam(counter));
             
             for (int i =0; ((line = br.readLine()) != null); i++) {
                 if (line != null && line.length() > 0 && answerCorrect && line.substring(0, 1).equalsIgnoreCase("v")) {
@@ -130,6 +131,7 @@ public class PresentExamController {
                 br.readLine();
                 if(i==lineNumberQuestion-1){
                     numberQuestion = Integer.parseInt((br.readLine()));
+                    System.out.println(numberQuestion + "number");
                     }
                 }
             return numberQuestion;
@@ -170,16 +172,23 @@ public class PresentExamController {
         String nameCourse = "Course1";
         String nameFolder = "Examen1";
         File searchedFolder = new File(directory);
+        System.out.println("antes del if");
+        System.out.println(directory);
         if (searchedFolder.exists() && searchedFolder.isDirectory()) {
+            System.out.println("primer if");
             File[] files = searchedFolder.listFiles();
             if (files != null) {
+                System.out.println("2do if");
                 int stop = getNumberQuestion(directory, nameFolder);
                 int counter =0;
                     readExam(directory,nameFolder);
                 for (File file : files) {
+                    System.out.println("for");
                     if (file.isDirectory() && file.getName().equals(nameFolder)) {
+                        System.out.println("3er if");
                         stop = getNumberQuestion(directory, nameFolder);
                         directory = directory + File.separator + nameCourse + File.separator + nameFolder + File.separator+ "Pregunta1.txt";
+                        System.out.println(directory);
                         readQuestion(directory,1,counter, stop);
                         return;
                     }
