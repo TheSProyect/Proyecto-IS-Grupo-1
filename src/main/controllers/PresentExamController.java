@@ -64,8 +64,8 @@ public class PresentExamController {
             File[] files = searchedFolder.listFiles();
             if (files != null) {
                 for (File file : files) {
-                    readExam(directory, file.getName());
-                    examsInformation.add(new ArrayList<String>());
+                 //   readExam(directory, file.getName(), directory);
+                    //examsInformation.add(new ArrayList<String>());
                     examsInformation.add(readInformation());
                 }
             }
@@ -117,9 +117,9 @@ public class PresentExamController {
                     readQuestion(changeDirectory(directory),readings+1, counter, stop);
         }   
     }
-    private void readExam(String directory, String nameFolder){
+    private void readExam(String directory, String nameFolder, String nameCourse){
         int numberQuestions, duracion;
-        directory = directory +File.separator+ nameFolder+File.separator+nameFolder+".txt";
+        directory = directory +File.separator+nameCourse+File.separator+ nameFolder+File.separator+nameFolder+".txt";
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentExam.setNameExam(br.readLine());
             currentExam.setTipo(br.readLine());
@@ -134,10 +134,10 @@ public class PresentExamController {
         }
     }
 
-    private int getNumberQuestion(String directory, String nameFolder){
+    private int getNumberQuestion(String directory, String nameFolder, String nameCourse){
         int lineNumberQuestion = 2;
         int numberQuestion = 0;
-        directory = directory +File.separator+ nameFolder+File.separator+nameFolder+".txt";
+        directory = directory +File.separator+ nameCourse+File.separator+nameFolder+File.separator+nameFolder+".txt";
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             for(int i=0; i<=lineNumberQuestion; i++){
                 br.readLine();
@@ -186,12 +186,12 @@ public class PresentExamController {
         if (searchedFolder.exists() && searchedFolder.isDirectory()) {
             File[] files = searchedFolder.listFiles();
             if (files != null) {
-                int stop = getNumberQuestion(directory, nameFolder);
+                int stop = getNumberQuestion(directory, nameFolder, nameCourse);
                 int counter =0;
-                    readExam(directory,nameFolder);
+                    readExam(directory,nameFolder,nameCourse);
                 for (File file : files) {
                     if (file.isDirectory() && file.getName().equals(nameFolder)) {
-                        stop = getNumberQuestion(directory, nameFolder);
+                        stop = getNumberQuestion(directory, nameFolder, nameCourse);
                         directory = directory + File.separator + nameCourse + File.separator + nameFolder + File.separator+ "Pregunta1.txt";
                         readQuestion(directory,1,counter, stop);
                         return;
