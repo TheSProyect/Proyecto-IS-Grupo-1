@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import main.controllers.PresentExamController;
-import main.models.Questions;
+import main.models.Question;
 import main.models.Result;
 import main.models.Name;
 
@@ -16,7 +16,7 @@ public class Exam extends Course{
     private String type, instructions, description;
     private int numberQuestions, duration;
     private int[] correctOptions;
-    private Questions[] questions = new Questions[10];
+    private Question[] questions = new Question[10];
     
     public Exam(){
         String directory = System.getProperty("user.dir");
@@ -28,7 +28,7 @@ public class Exam extends Course{
         }
     }
 
-    private Questions getQuestion(){
+    private Question getQuestion(){
         return this.questions[0];
     }
     
@@ -37,7 +37,7 @@ public class Exam extends Course{
     }
    
     public void setQuestionsExam(String statement, String domain, int counter){
-        questions[counter]=new Questions();
+        questions[counter]=new Question();
         questions[counter].setQuestions(statement,domain,questions[counter]);
     }
 
@@ -80,6 +80,7 @@ public class Exam extends Course{
     }
 
     public void setNameCourse(String nameCourse){
+        course = new Course();
         course.setNameCourse(nameCourse);
     }
 
@@ -103,6 +104,7 @@ public class Exam extends Course{
     }
 
     public void setTeacherName(String name){
+        course=new Course();
         course.setNameTeacherCourse(name);
     }
     public String getTeacherName(){

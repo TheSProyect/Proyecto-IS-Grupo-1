@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.models.Answers;
-import main.models.Questions;
+import main.models.Answer;
+import main.models.Question;
 import main.models.Result;
 import main.models.UserData;
 import main.models.Exam;
@@ -24,10 +24,10 @@ public class PresentExamController {
         this.searchFolder();
     }
     private void startExam(){}
-    private Answers getAnswers(){
+    private Answer getAnswers(){
         return this.getAnswers();
     }
-    private Questions getQuestions(){
+    private Question getQuestions(){
         return this.getQuestions();
     }
     public static void main(String[] args) throws IOException{
