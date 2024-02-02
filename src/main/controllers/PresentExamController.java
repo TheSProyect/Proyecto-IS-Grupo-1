@@ -34,6 +34,7 @@ public class PresentExamController {
         PresentExamController p = new PresentExamController();
         p.searchFolder();    
     }
+    
     public void examFinished(){
         UserData data = new UserData(); 
         String nameFolderStudent = data.getUsername();
