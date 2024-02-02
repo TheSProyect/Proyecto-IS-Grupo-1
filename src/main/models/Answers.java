@@ -12,7 +12,6 @@ public class Answers {
         answers.name=answer;
         answers.justification= justification;
     }
-//
     public String getAnswers(){
         return name;
     }

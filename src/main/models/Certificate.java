@@ -1,11 +1,11 @@
 package main.models;
 
 import main.models.Name;
-import main.models.Course;
+import main.models.Exam;
 
 public class Certificate {
     private Name student;
-    private Course course;
+    private Exam course;
 
     public void setNameStudentCertificate(String name){
         student = new Name();
@@ -15,7 +15,7 @@ public class Certificate {
         return student.getName();
     }
     public void setNameTeacherCertificate(String name){
-        course = new Course();
+        course = new Exam();
         course.setNameTeacherCourse(name);
     }
     public String getNameCourse(){

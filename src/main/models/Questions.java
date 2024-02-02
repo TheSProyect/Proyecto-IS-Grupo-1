@@ -9,9 +9,10 @@ public class Questions {
     private Lines[] lines;
     private int numberAnswers;
     private Answers[] answers= new Answers[10];
-    private int counter=0;
+    //private int counter=0;
     
     public void setQuestions(String statement, String domain, Questions question){
+        System.out.println("entra en setQuestion");
         question.statement=statement;
         question.domain=domain;
     }
