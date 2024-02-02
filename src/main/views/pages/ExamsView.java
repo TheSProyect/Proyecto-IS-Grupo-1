@@ -19,7 +19,7 @@ import main.data.Palette;
 import main.views.components.HelpBar;
 import main.views.templates.Frame;
 
-public class ExamsView extends Frame implements ActionListener{
+public class ExamsView extends JPanel implements ActionListener{
     private static ExamsView examView;
     
     NavBar navBar;
@@ -41,12 +41,13 @@ public class ExamsView extends Frame implements ActionListener{
 
         paintContentPanel();
         
-        this.pack();
+        
         addActionListener();
+        this.validate();
     }
 
     protected void buildFrame() {
-        createFrame("ExamsView");
+        Frame.instance().setTitle("ExamsView");
         this.setLayout(new BorderLayout());
     }
 
@@ -132,9 +133,9 @@ public class ExamsView extends Frame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.setVisible(false);
+        // this.setVisible(false);
         if (e.getSource() == navBar.getCertificateButton()) {
-            CertificatesView.instance().setVisible(true);
+            Frame.instance().setView(CertificatesView.instance());
         } else {
             new ExamView();
         }

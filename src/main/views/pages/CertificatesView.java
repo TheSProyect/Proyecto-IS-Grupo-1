@@ -24,7 +24,7 @@ import javax.swing.JButton;
 import javax.swing.JSeparator;
 
 
-public class CertificatesView extends Frame implements ActionListener {
+public class CertificatesView extends JPanel implements ActionListener {
     private static CertificatesView certificatesView;
 
     JPanel titlePanel;
@@ -52,15 +52,13 @@ public class CertificatesView extends Frame implements ActionListener {
         buildFrame();
         paintBorders();
         paintContentPanel();
-
-        this.pack();
         
         getRequestCertificateButtons();
         addActionListener();
     }
 
     protected void buildFrame() {
-        createFrame("CertificatesView");
+        Frame.instance().setTitle("CertificatesView");
         this.setLayout(new BorderLayout());
     }
 
@@ -177,9 +175,9 @@ public class CertificatesView extends Frame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.setVisible(false);
+        // this.setVisible(false);
         if (e.getSource() == navBar.getHomeButton()) {
-            ExamsView.instance().setVisible(true);
+            Frame.instance().setView(ExamsView.instance());
         } else {
             new CertificateView();
         }
