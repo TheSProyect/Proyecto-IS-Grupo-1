@@ -1,7 +1,7 @@
 package main.models;
 
 import main.models.Name;
-import main.models.Course;
+import main.models.Exam;
 
 public class Certificate {
     private Name student;
