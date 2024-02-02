@@ -46,6 +46,10 @@ public class CertificatesView extends JPanel implements ActionListener {
 		return certificatesView;
 	}
 
+    public static void deleteInstance() {
+        certificatesView = null;
+    }
+
     public CertificatesView() {
         inicializeCertificates();
 
@@ -167,6 +171,7 @@ public class CertificatesView extends JPanel implements ActionListener {
 
     private void addActionListener() {
         navBar.getHomeButton().addActionListener(this);
+        navBar.getLogOutButton().addActionListener(this);
 
         for (int i = 0; i < requestCertificateButtons.size(); i++) {
             requestCertificateButtons.get(i).addActionListener(this);
@@ -178,8 +183,13 @@ public class CertificatesView extends JPanel implements ActionListener {
         // this.setVisible(false);
         if (e.getSource() == navBar.getHomeButton()) {
             Frame.instance().setView(ExamsView.instance());
+            Frame.instance().setTitle("ExamsView");
+        } else if (e.getSource() == navBar.getLogOutButton()) {
+            CertificatesView.deleteInstance();
+            ExamsView.deleteInstance();
+            Frame.instance().setView(new LogInView());
         } else {
-            new CertificateView();
+            Frame.instance().setView(new CertificateView());
         }
     }
 }

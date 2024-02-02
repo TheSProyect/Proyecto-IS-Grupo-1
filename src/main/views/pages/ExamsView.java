@@ -34,13 +34,16 @@ public class ExamsView extends JPanel implements ActionListener{
 		return examView;
 	}
 
+    public static void deleteInstance() {
+        examView = null;
+    }
+
     public ExamsView() {
         buildFrame();
         
         paintBorders();
 
         paintContentPanel();
-        
         
         addActionListener();
         this.validate();
@@ -123,6 +126,7 @@ public class ExamsView extends JPanel implements ActionListener{
     
     private void addActionListener() {
         navBar.getCertificateButton().addActionListener(this);
+        navBar.getLogOutButton().addActionListener(this);
 
         presentExamButtons = slider.getButtons();
 
@@ -136,8 +140,13 @@ public class ExamsView extends JPanel implements ActionListener{
         // this.setVisible(false);
         if (e.getSource() == navBar.getCertificateButton()) {
             Frame.instance().setView(CertificatesView.instance());
+            Frame.instance().setTitle("CertificatesView");
+        } else if (e.getSource() == navBar.getLogOutButton()) {
+            CertificatesView.deleteInstance();
+            ExamsView.deleteInstance();
+            Frame.instance().setView(new LogInView());
         } else {
-            new ExamView();
+            Frame.instance().setView(new ExamView());
         }
     }
 }

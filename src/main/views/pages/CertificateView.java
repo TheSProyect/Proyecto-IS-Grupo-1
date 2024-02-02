@@ -2,7 +2,6 @@ package main.views.pages;
 
 import main.views.components.IconButton;
 import main.views.components.NavBar;
-import main.views.pages.CertificatesView;
 import main.views.templates.Frame;
 
 import java.awt.BorderLayout;
@@ -21,7 +20,7 @@ import javax.swing.JPanel;
 import main.controllers.RequestCertificateController;
 import main.data.Palette;
 
-public class CertificateView extends Frame implements ActionListener{
+public class CertificateView extends JPanel implements ActionListener{
     JPanel contentPanel;
     IconButton downloadButton;
     NavBar navBar;
@@ -31,12 +30,11 @@ public class CertificateView extends Frame implements ActionListener{
         paintBorders();
         paintContentPanel();
 
-        this.pack();
         addActionListener();
     }
 
     private void buildFrame() {
-        createFrame("CertificateView");
+        Frame.instance().setTitle("CertificateView");
         this.setLayout(new BorderLayout());
     }
 
@@ -155,19 +153,23 @@ public class CertificateView extends Frame implements ActionListener{
     }
   //  private void show(Certificate)(){}
     private void addActionListener() {
-        navBar.getCertificateButton().addActionListener(this);
-
         navBar.getHomeButton().addActionListener(this);
+        navBar.getCertificateButton().addActionListener(this);
+        navBar.getLogOutButton().addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == navBar.getHomeButton()) {
-            this.dispose();
-            ExamsView.instance().setVisible(true);
+            Frame.instance().setView(ExamsView.instance());
+            Frame.instance().setTitle("ExamsView");
         } else if (e.getSource() == navBar.getCertificateButton()) {
-            this.dispose();
-            CertificatesView.instance().setVisible(true);
+            Frame.instance().setView(CertificatesView.instance());
+            Frame.instance().setTitle("CertificatesView");
+        } else if (e.getSource() == navBar.getLogOutButton()) {
+            CertificatesView.deleteInstance();
+            ExamsView.deleteInstance();
+            Frame.instance().setView(new LogInView());
         }
     }
 }

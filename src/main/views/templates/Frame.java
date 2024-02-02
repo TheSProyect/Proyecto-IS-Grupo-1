@@ -1,13 +1,8 @@
 package main.views.templates;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-
 import javax.swing.JFrame;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import main.data.Palette;
 import main.data.Size;
 
 public class Frame extends JFrame{
@@ -31,13 +26,11 @@ public class Frame extends JFrame{
     public void setView(JPanel view) {
         if (this.view != null) {
             this.remove(this.view);
-            System.out.println("Removed");
         }
         this.view = view;
-        view.validate();
         this.add(view);
-
-        this.validate();
-        System.out.println("Here");
+        
+        view.repaint();
+        this.pack();
     }
 }
