@@ -24,7 +24,7 @@ import javax.swing.JButton;
 import javax.swing.JSeparator;
 
 
-public class CertificatesView extends Frame implements ActionListener {
+public class CertificatesView extends JPanel implements ActionListener {
     private static CertificatesView certificatesView;
 
     JPanel titlePanel;
@@ -46,21 +46,23 @@ public class CertificatesView extends Frame implements ActionListener {
 		return certificatesView;
 	}
 
+    public static void deleteInstance() {
+        certificatesView = null;
+    }
+
     public CertificatesView() {
         inicializeCertificates();
 
         buildFrame();
         paintBorders();
         paintContentPanel();
-
-        this.pack();
         
         getRequestCertificateButtons();
         addActionListener();
     }
 
     protected void buildFrame() {
-        createFrame("CertificatesView");
+        Frame.instance().setTitle("CertificatesView");
         this.setLayout(new BorderLayout());
     }
 
@@ -169,6 +171,7 @@ public class CertificatesView extends Frame implements ActionListener {
 
     private void addActionListener() {
         navBar.getHomeButton().addActionListener(this);
+        navBar.getLogOutButton().addActionListener(this);
 
         for (int i = 0; i < requestCertificateButtons.size(); i++) {
             requestCertificateButtons.get(i).addActionListener(this);
@@ -177,11 +180,16 @@ public class CertificatesView extends Frame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.setVisible(false);
+        // this.setVisible(false);
         if (e.getSource() == navBar.getHomeButton()) {
-            ExamsView.instance().setVisible(true);
+            Frame.instance().setView(ExamsView.instance());
+            Frame.instance().setTitle("ExamsView");
+        } else if (e.getSource() == navBar.getLogOutButton()) {
+            CertificatesView.deleteInstance();
+            ExamsView.deleteInstance();
+            Frame.instance().setView(new LogInView());
         } else {
-            new CertificateView();
+            Frame.instance().setView(new CertificateView());
         }
     }
 }

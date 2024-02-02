@@ -23,7 +23,7 @@ import main.views.components.NavBar;
 import main.views.components.QuestionPanel;
 import main.views.templates.Frame;
 
-public class ExamView extends Frame implements ActionListener {
+public class ExamView extends JPanel implements ActionListener {
     NavBar navBar;
     JPanel contentPanel;
     JButton finishExamButton;
@@ -43,12 +43,11 @@ public class ExamView extends Frame implements ActionListener {
         paintBorders();
         paintContentPanel();
 
-        this.pack();
         addActionListener();
     }
 
     private void buildFrame() {
-        createFrame("ExamView");
+        Frame.instance().setTitle("ExamView");
         this.setLayout(new BorderLayout());
     }
 
@@ -73,13 +72,11 @@ public class ExamView extends Frame implements ActionListener {
 
     private void paintContentPanel() {
         contentPanel = new JPanel();
-        // contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.X_AXIS));
         contentPanel.setLayout(new GridBagLayout());
         contentPanel.setPreferredSize(new Dimension(944, 640));
         contentPanel.setBackground(Palette.instance().getWhite());
 
         
-
         paintQuestionPanel(index);
 
         paintBottomButtonPanel();
@@ -226,6 +223,7 @@ public class ExamView extends Frame implements ActionListener {
     private void addActionListener() {
         navBar.getHomeButton().addActionListener(this);
         navBar.getCertificateButton().addActionListener(this);
+        navBar.getLogOutButton().addActionListener(this);
     }
 
     public void showInstructions(){}
@@ -234,9 +232,8 @@ public class ExamView extends Frame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == finishExamButton) {
-            this.dispose();
-            ExamsView.instance().setVisible(true);
-
+            Frame.instance().setView(ExamsView.instance());
+            Frame.instance().setTitle("ExamsView");
         } else if (e.getSource() == prevButton) {
             showPreviousQuestions();
 
@@ -244,13 +241,16 @@ public class ExamView extends Frame implements ActionListener {
             showNextQuestion();
 
         } else if (e.getSource() == navBar.getHomeButton()) {
-            this.dispose();
-            ExamsView.instance().setVisible(true);
+            Frame.instance().setView(ExamsView.instance());
+            Frame.instance().setTitle("ExamsView");
 
         } else if (e.getSource() == navBar.getCertificateButton()) {
-            this.dispose();
-            CertificatesView.instance().setVisible(true);
-
+            Frame.instance().setView(CertificatesView.instance());
+            Frame.instance().setTitle("CertificatesView");
+        } else if (e.getSource() == navBar.getLogOutButton()) {
+            CertificatesView.deleteInstance();
+            ExamsView.deleteInstance();
+            Frame.instance().setView(new LogInView());
         }
     }
 

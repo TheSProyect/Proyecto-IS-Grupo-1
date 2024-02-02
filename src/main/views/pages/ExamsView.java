@@ -19,7 +19,7 @@ import main.data.Palette;
 import main.views.components.HelpBar;
 import main.views.templates.Frame;
 
-public class ExamsView extends Frame implements ActionListener{
+public class ExamsView extends JPanel implements ActionListener{
     private static ExamsView examView;
     
     NavBar navBar;
@@ -34,6 +34,10 @@ public class ExamsView extends Frame implements ActionListener{
 		return examView;
 	}
 
+    public static void deleteInstance() {
+        examView = null;
+    }
+
     public ExamsView() {
         buildFrame();
         
@@ -41,12 +45,12 @@ public class ExamsView extends Frame implements ActionListener{
 
         paintContentPanel();
         
-        this.pack();
         addActionListener();
+        this.validate();
     }
 
     protected void buildFrame() {
-        createFrame("ExamsView");
+        Frame.instance().setTitle("ExamsView");
         this.setLayout(new BorderLayout());
     }
 
@@ -122,6 +126,7 @@ public class ExamsView extends Frame implements ActionListener{
     
     private void addActionListener() {
         navBar.getCertificateButton().addActionListener(this);
+        navBar.getLogOutButton().addActionListener(this);
 
         presentExamButtons = slider.getButtons();
 
@@ -132,11 +137,16 @@ public class ExamsView extends Frame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.setVisible(false);
+        // this.setVisible(false);
         if (e.getSource() == navBar.getCertificateButton()) {
-            CertificatesView.instance().setVisible(true);
+            Frame.instance().setView(CertificatesView.instance());
+            Frame.instance().setTitle("CertificatesView");
+        } else if (e.getSource() == navBar.getLogOutButton()) {
+            CertificatesView.deleteInstance();
+            ExamsView.deleteInstance();
+            Frame.instance().setView(new LogInView());
         } else {
-            new ExamView();
+            Frame.instance().setView(new ExamView());
         }
     }
 }

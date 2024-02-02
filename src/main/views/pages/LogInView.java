@@ -19,7 +19,7 @@ import main.data.Size;
 import main.views.components.PlaceholderTextField;
 import main.views.templates.Frame;
 
-public class LogInView extends Frame implements ActionListener {
+public class LogInView extends JPanel implements ActionListener {
     JPanel titlePanel;
     JPanel loginPanel;
     JPanel infoContainer;
@@ -32,14 +32,12 @@ public class LogInView extends Frame implements ActionListener {
         buildFrame();
         paintTitlePanel();
         paintLoginPanel();
-        
-        this.pack();
     }
 
     protected void buildFrame() {
-        createFrame("LogInView");
+        Frame.instance().setTitle("LogInView");
         
-        this.setLayout(new BoxLayout(this.getContentPane(),BoxLayout.X_AXIS));
+        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
     }
 
     private void paintTitlePanel() {
@@ -180,8 +178,7 @@ public class LogInView extends Frame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginButton) {
-            this.dispose();
-            ExamsView.instance().setVisible(true);
+            Frame.instance().setView(ExamsView.instance());
         }
     }
 

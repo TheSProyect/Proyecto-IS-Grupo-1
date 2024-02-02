@@ -84,6 +84,10 @@ public class NavBar extends JPanel implements ActionListener {
         return certificateButton;
     }
 
+    public NavBarButton getLogOutButton() {
+        return logOutButton;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == homeButton) {
