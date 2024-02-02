@@ -1,9 +1,9 @@
 package main.controllers;
 
-import main.models.Answers;
+import main.models.Answer;
 import main.models.Exam;
 import main.models.Lines;
-import main.models.Questions;
+import main.models.Question;
 
 import java.io.File;
 import java.io.FileWriter;
