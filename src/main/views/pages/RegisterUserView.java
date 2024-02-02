@@ -20,9 +20,9 @@ public class RegisterUserView extends LogInView{
     PlaceholderTextField emailTextField;
 
     protected void buildFrame() {
-        createFrame("RegisterUserView");
+        Frame.instance().setTitle("RegisterUserView");
         
-        this.setLayout(new BoxLayout(this.getContentPane(),BoxLayout.X_AXIS));
+        this.setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
     }
     
     protected void paintLoginTitleLabel() {
