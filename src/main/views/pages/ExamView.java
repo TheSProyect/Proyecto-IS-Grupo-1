@@ -17,11 +17,10 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import main.controllers.PresentExamController;
-import main.data.Palette; 
+import main.utils.Palette;
 import main.views.components.ExamMenu;
 import main.views.components.NavBar;
 import main.views.components.QuestionPanel;
-import main.views.templates.Frame;
 
 public class ExamView extends JPanel implements ActionListener {
     NavBar navBar;

@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.Border;
 
-import main.data.Palette;
+import main.utils.Palette;
 
 public class NavBarButton extends JButton {
     ImageIcon icon;

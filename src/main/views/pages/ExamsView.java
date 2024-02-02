@@ -15,9 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
-import main.data.Palette;
+import main.utils.Palette;
 import main.views.components.HelpBar;
-import main.views.templates.Frame;
 
 public class ExamsView extends JPanel implements ActionListener{
     private static ExamsView examView;

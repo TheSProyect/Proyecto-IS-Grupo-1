@@ -14,10 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
-import main.data.Palette;
-import main.data.Size;
+import main.utils.Palette;
+import main.utils.Size;
 import main.views.components.PlaceholderTextField;
-import main.views.templates.Frame;
 
 public class LogInView extends JPanel implements ActionListener {
     JPanel titlePanel;

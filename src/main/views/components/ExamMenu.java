@@ -8,8 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import main.data.Palette;
-import main.data.Size;
+import main.utils.Palette;
+import main.utils.Size;
 
 public class ExamMenu extends JPanel{
     JScrollPane questionsListScrollPane;

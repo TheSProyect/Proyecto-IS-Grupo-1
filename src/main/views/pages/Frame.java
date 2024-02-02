@@ -1,9 +1,9 @@
-package main.views.templates;
+package main.views.pages;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import main.data.Size;
+import main.utils.Size;
 
 public class Frame extends JFrame{
     private static Frame frame;

@@ -4,7 +4,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
-import main.data.Palette;
+import main.utils.Palette;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;

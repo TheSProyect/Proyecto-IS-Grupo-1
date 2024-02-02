@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import main.data.Palette;
+import main.utils.Palette;
 
 public class HelpBar extends JPanel implements ActionListener{
     NavBarButton helpButton;

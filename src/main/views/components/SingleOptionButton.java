@@ -7,7 +7,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JRadioButton;
 
-import main.data.Palette;
+import main.utils.Palette;
 
 public class SingleOptionButton extends JRadioButton {
     ImageIcon notSelected;

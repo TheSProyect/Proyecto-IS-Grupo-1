@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-import main.data.Palette;
+import main.utils.Palette;
 import main.views.components.AdminNavBar;
 
 public class AdminExamsView extends ExamsView {

@@ -9,7 +9,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 
-import main.data.Palette;
+import main.utils.Palette;
 
 public class OptionsPanel extends JPanel implements ActionListener{
     List<SingleOptionButton> options;

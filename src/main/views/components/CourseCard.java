@@ -14,7 +14,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
-import main.data.Palette;
+import main.utils.Palette;
 
 public class CourseCard extends JPanel {
     JButton presentExamButton;

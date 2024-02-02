@@ -10,8 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import main.data.Palette;
-import main.data.Size;
+import main.utils.Palette;
+import main.utils.Size;
 import main.views.components.PlaceholderTextField;
 
 public class RegisterUserView extends LogInView{

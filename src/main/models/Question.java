@@ -1,12 +1,12 @@
 package main.models;
 
 import main.models.Answer;
-import main.models.Lines;
+import main.models.Line;
 
 public class Question {
     private String statement;
     private String domain;
-    private Lines[] lines;
+    private Line[] lines;
     private int numberAnswers;
     private Answer[] answers= new Answer[10];
     //private int counter=0;

@@ -1,4 +1,4 @@
-package main.data;
+package main.utils;
 
 import java.awt.Color;
 

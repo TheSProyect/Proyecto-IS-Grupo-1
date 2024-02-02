@@ -2,7 +2,6 @@ package main.views.pages;
 
 import main.views.components.IconButton;
 import main.views.components.NavBar;
-import main.views.templates.Frame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -18,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.controllers.RequestCertificateController;
-import main.data.Palette;
+import main.utils.Palette;
 
 public class CertificateView extends JPanel implements ActionListener{
     JPanel contentPanel;

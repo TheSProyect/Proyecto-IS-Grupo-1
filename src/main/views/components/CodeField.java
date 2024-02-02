@@ -13,7 +13,7 @@ import javax.swing.JTextPane;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
-import main.data.Palette;
+import main.utils.Palette;
 
 public class CodeField extends JScrollPane {
     JTextPane lineNumber;

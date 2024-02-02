@@ -3,12 +3,13 @@ package main.views.components;
 import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.Timer;
+
+import main.utils.Palette;
+
 import javax.swing.ImageIcon;
 
 import java.awt.Dimension;
 import java.awt.Font;
-
-import main.data.Palette;
 
 public class TimerBlock extends JPanel{
 	private JLabel TwoPoints, MinLabel, SecLabel, TimeRemainingLabel, imgLabel;

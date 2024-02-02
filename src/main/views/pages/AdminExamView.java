@@ -1,15 +1,13 @@
 package main.views.pages;
 
 
-import main.views.templates.Frame;
 import main.views.components.NavBar;
+import main.utils.Palette;
 import main.views.components.AdminNavBar;
 import main.views.components.Button;
 import main.views.components.HelpBar;
 import main.views.components.Listing;
 
-
-import main.data.Palette;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;

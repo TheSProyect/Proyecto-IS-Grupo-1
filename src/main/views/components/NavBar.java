@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.border.Border;
 
-import main.data.Palette;
+import main.utils.Palette;
 
 public class NavBar extends JPanel implements ActionListener {
     JLabel appName;

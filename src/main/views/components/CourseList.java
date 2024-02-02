@@ -9,7 +9,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import main.data.Palette;
+import main.utils.Palette;
 
 public class CourseList extends JPanel {
     List<CourseCard> courseCard;

@@ -17,7 +17,7 @@ import javax.swing.JSeparator;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
-import main.data.Palette;
+import main.utils.Palette;
 
 public class Listing extends JScrollPane{
     JPanel titlePanel;

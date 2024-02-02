@@ -7,7 +7,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import main.data.Palette;
+import main.utils.Palette;
 
 public class Button extends JButton{
     private int height = 48;
