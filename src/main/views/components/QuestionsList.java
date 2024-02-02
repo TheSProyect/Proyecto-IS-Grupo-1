@@ -9,7 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
-import main.data.Palette;
+import main.utils.Palette;
 
 public class QuestionsList extends JScrollPane{
     JPanel questionsListPanel;

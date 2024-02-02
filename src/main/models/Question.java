@@ -9,19 +9,23 @@ public class Question {
     private Line[] lines;
     private int numberAnswers;
     private Answer[] answers= new Answer[10];
-    private int counter=0;
+    //private int counter=0;
+
     
     public void setQuestions(String statement, String domain, Question question){
         question.statement=statement;
         question.domain=domain;
     }
 
-    public void setAnswersQuestions(String answer, String justification, Question question, int i){
-        //for(int j=0 ; j<i+1 ; j++){
-            answers[i]= new Answer();
+    public void setAnswersQuestions(String answer, String justification, int i){
+        //answers[i]= new Answers();
             answers[i].setAnswers(answer, justification, answers[i]);
-        //}
     }
+
+    public void setIsCorrectQuestions(Boolean isCorrect, int i){
+        answers[i]= new Answer();
+        answers[i].setIsCorrect(isCorrect,answers[i]);
+}
 
     public String getQuestions(){
         return statement;
@@ -39,7 +43,7 @@ public class Question {
         //return questions2.getQuestions();
         return answers[counter].getAnswers();
     }
-
+//
     public String getCode(int counter){
         //return questions2.getQuestions();
         return answers[counter].getAnswers();

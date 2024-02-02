@@ -8,17 +8,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
-import main.data.Palette;
-import main.data.Size;
+import main.utils.Palette;
+import main.utils.Size;
 import main.views.components.PlaceholderTextField;
-import main.views.templates.Frame;
 
-public class LogInView extends Frame implements ActionListener {
+public class LogInView extends JPanel implements ActionListener {
     JPanel titlePanel;
     JPanel loginPanel;
     JPanel infoContainer;
@@ -31,14 +31,12 @@ public class LogInView extends Frame implements ActionListener {
         buildFrame();
         paintTitlePanel();
         paintLoginPanel();
-        
-        this.pack();
     }
 
     protected void buildFrame() {
-        createFrame("LogInView");
+        Frame.instance().setTitle("LogInView");
         
-        this.setLayout(new BoxLayout(this.getContentPane(),BoxLayout.X_AXIS));
+        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
     }
 
     private void paintTitlePanel() {
@@ -56,9 +54,11 @@ public class LogInView extends Frame implements ActionListener {
 
     private void paintTitleLabel() {
         JLabel titleLabel = new JLabel();
-        titleLabel.setText("TéchneLogic");
-        titleLabel.setFont(new Font("Nunito Sans", Font.BOLD, 50));
-        titleLabel.setForeground(Palette.instance().getWhite());
+        ImageIcon icon = new ImageIcon("assets/Logo_Login.png");
+        titleLabel.setIcon(icon);
+        // titleLabel.setText("TéchneLogic");
+        // titleLabel.setFont(new Font("Nunito Sans", Font.BOLD, 50));
+        // titleLabel.setForeground(Palette.instance().getWhite());
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         
         titlePanel.add(titleLabel, BorderLayout.CENTER);
@@ -145,8 +145,8 @@ public class LogInView extends Frame implements ActionListener {
     }
 
     protected void paintTextFields() {
-        userTextField = new PlaceholderTextField("Usuario", "Home_Icon.png");
-        passwordTextField = new PlaceholderTextField("Contraseña", "Home_Icon.png");
+        userTextField = new PlaceholderTextField("Usuario", "User_Icon.png");
+        passwordTextField = new PlaceholderTextField("Contraseña", "User_Icon.png");
 
         infoContainer.add(userTextField);
         infoContainer.add(passwordTextField);
@@ -177,7 +177,7 @@ public class LogInView extends Frame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginButton) {
-            System.out.println("This should take you to ExamsView");
+            Frame.instance().setView(ExamsView.instance());
         }
     }
 

@@ -4,10 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import main.data.Palette;
+import main.utils.Palette;
 
 public class Slider extends JPanel implements ActionListener{
     ButtonSlider rightButton;
@@ -31,6 +33,10 @@ public class Slider extends JPanel implements ActionListener{
         this.add(leftButton, BorderLayout.WEST);
         this.add(courseList, BorderLayout.CENTER);
         this.add(rightButton, BorderLayout.EAST);
+    }
+
+    public List<JButton> getButtons() {
+        return courseList.getButtons();
     }
 
     @Override

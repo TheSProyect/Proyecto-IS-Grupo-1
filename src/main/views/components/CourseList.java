@@ -6,9 +6,10 @@ import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import main.data.Palette;
+import main.utils.Palette;
 
 public class CourseList extends JPanel {
     List<CourseCard> courseCard;
@@ -105,5 +106,15 @@ public class CourseList extends JPanel {
         this.add(courseCard.get(index[2]), constraintsRight);
         this.revalidate();
         this.repaint();
+    }
+
+    public List<JButton> getButtons() {
+        List<JButton> buttons = new ArrayList<JButton>();
+
+        for (int i = 0; i < courseCard.size(); i++) {
+            buttons.add(courseCard.get(i).getPresentExamButton());
+        }
+
+        return buttons;
     }
 }

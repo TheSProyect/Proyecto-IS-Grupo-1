@@ -13,14 +13,14 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.border.Border;
 
-import main.data.Palette;
+import main.utils.Palette;
 
 public class NavBar extends JPanel implements ActionListener {
     JLabel appName;
     JLabel linkText;
     JToolBar linkNavbar;
     NavBarButton homeButton;
-    NavBarButton certifycateButton;
+    NavBarButton certificateButton;
     NavBarButton logOutButton;
     
     public NavBar() {
@@ -62,13 +62,12 @@ public class NavBar extends JPanel implements ActionListener {
     
     protected void paintNavBarButtons() {
         homeButton = new NavBarButton("Mis Examenes", "Home_Icon.png", false);
-        homeButton.addActionListener(this);
         linkNavbar.add(homeButton);
         linkNavbar.addSeparator();
 
-        certifycateButton = new NavBarButton("Solicitar Certificado", "Paperclip_Icon.png", false);
-        certifycateButton.addActionListener(this);
-        linkNavbar.add(certifycateButton);
+        certificateButton = new NavBarButton("Solicitar Certificado", "Paperclip_Icon.png", false);
+        // certifycateButton.addActionListener(this);
+        linkNavbar.add(certificateButton);
         linkNavbar.addSeparator();
 
         logOutButton = new NavBarButton("Cerrar sesión", "LogOut_Icon.png", true);
@@ -77,14 +76,20 @@ public class NavBar extends JPanel implements ActionListener {
         linkNavbar.addSeparator();
     }
 
+    public NavBarButton getHomeButton() {
+        return homeButton;
+    }
+
+    public NavBarButton getCertificateButton() {
+        return certificateButton;
+    }
+
+    public NavBarButton getLogOutButton() {
+        return logOutButton;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == logOutButton) {
-            System.out.println ("this should open LoginView");
-        }
-        if (e.getSource() == certifycateButton) {
-            System.out.println ("this should open CertifycatesView");
-        }
         if (e.getSource() == homeButton) {
             System.out.println ("this should open ExamsView");
         }

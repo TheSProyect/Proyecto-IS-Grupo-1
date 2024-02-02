@@ -1,4 +1,4 @@
-package main.data;
+package main.utils;
 
 import java.awt.Color;
 
@@ -10,6 +10,7 @@ public class Palette {
     Color lightGray;
     Color gray;
     Color black;
+    Color transparentBlack;
     Color blue;
     Color yellow;
 
@@ -28,6 +29,7 @@ public class Palette {
         black = new Color(31,31,31);
         blue = new Color(25, 66, 140);
         yellow = new Color(247, 167, 39);
+        transparentBlack = new Color(31, 31, 31, 70);
 	}
 
     public Color getWhite() {
@@ -57,4 +59,9 @@ public class Palette {
     public Color getYellow() {
         return yellow;
     }
+
+    public Color getTransparentBlack() {
+        return transparentBlack;
+    }
+
 }

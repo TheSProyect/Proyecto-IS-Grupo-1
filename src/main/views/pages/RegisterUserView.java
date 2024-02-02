@@ -10,8 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import main.data.Palette;
-import main.data.Size;
+import main.utils.Palette;
+import main.utils.Size;
 import main.views.components.PlaceholderTextField;
 
 public class RegisterUserView extends LogInView{
@@ -20,9 +20,9 @@ public class RegisterUserView extends LogInView{
     PlaceholderTextField emailTextField;
 
     protected void buildFrame() {
-        createFrame("RegisterUserView");
+        Frame.instance().setTitle("RegisterUserView");
         
-        this.setLayout(new BoxLayout(this.getContentPane(),BoxLayout.X_AXIS));
+        this.setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
     }
     
     protected void paintLoginTitleLabel() {

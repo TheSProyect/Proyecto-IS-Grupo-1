@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-import main.data.Palette;
+import main.utils.Palette;
 
 public class PlaceholderTextField extends JPanel implements FocusListener {
     String str;

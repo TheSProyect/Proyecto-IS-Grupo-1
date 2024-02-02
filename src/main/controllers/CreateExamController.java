@@ -17,7 +17,8 @@ public class CreateExamController {
 
     public void createExam(String name, String examType, int questionsCount, String teacherName, int duration, String description ){
         //crear carpetas
-        folder = new File("exams/"+ name);
+        String directory = System.getProperty("user.dir");
+        folder = new File(directory+ "\\exams\\"+ name);
         if (!folder.exists()) {
             folder.mkdir();
         }   
@@ -66,3 +67,4 @@ public class CreateExamController {
     public void setAnswers(){}
     public void completeExamCreation(){}
 }
+

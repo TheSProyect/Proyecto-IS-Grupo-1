@@ -16,9 +16,9 @@ public class AdminNavBar extends NavBar{
         linkNavbar.add(adminButton);
         linkNavbar.addSeparator();
 
-        certifycateButton = new NavBarButton("Solicitar Certificado", "Paperclip_Icon.png", false);
-        certifycateButton.addActionListener(this);
-        linkNavbar.add(certifycateButton);
+        certificateButton = new NavBarButton("Solicitar Certificado", "Paperclip_Icon.png", false);
+        certificateButton.addActionListener(this);
+        linkNavbar.add(certificateButton);
         linkNavbar.addSeparator();
 
         logOutButton = new NavBarButton("Cerrar sesión", "LogOut_Icon.png", true);
@@ -35,7 +35,7 @@ public class AdminNavBar extends NavBar{
         if (e.getSource() == adminButton){
             System.out.println ("this should open RegisterUserView");
         }
-        if (e.getSource() == certifycateButton) {
+        if (e.getSource() == certificateButton) {
             System.out.println ("this should open CertifycatesView");
         }
         if (e.getSource() == homeButton) {

@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-import main.data.Palette;
+import main.utils.Palette;
 import main.views.components.AdminNavBar;
 
 public class AdminExamsView extends ExamsView {
@@ -20,7 +20,7 @@ public class AdminExamsView extends ExamsView {
     JPanel titleButtonContainer;
 
     protected void buildFrame() {
-        createFrame("AdminExamsView");
+        Frame.instance().setTitle("AdminExamsView");
         this.setLayout(new BorderLayout());
     }
 
@@ -29,13 +29,19 @@ public class AdminExamsView extends ExamsView {
         this.add(navBar, BorderLayout.NORTH);
     }
 
-    protected void paintTitlePanel() {
-        createTitlePanel();
-        adminTitleButtonContainer();
-        paintTitleSeparator();        
+    protected void paintTitlePanel(JPanel contentPanel) {
+        JPanel titlePanel = new JPanel();
+        titlePanel.setBackground(Palette.instance().getWhite());
+        titlePanel.setPreferredSize(new Dimension(944, 60));
+        titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
+
+        contentPanel.add(titlePanel, BorderLayout.NORTH);
+        
+        adminTitleButtonContainer(titlePanel);
+        paintTitleSeparator(titlePanel);         
     }
 
-    private void adminTitleButtonContainer() {
+    private void adminTitleButtonContainer(JPanel titlePanel) {
         titleButtonContainer = new JPanel();
         titleButtonContainer.setMaximumSize(new Dimension(1500, 58));
         titleButtonContainer.setLayout(new BoxLayout(titleButtonContainer, BoxLayout.X_AXIS));
@@ -49,7 +55,7 @@ public class AdminExamsView extends ExamsView {
     }
 
     protected void paintTitleLabel() {
-        title = new JLabel();
+        JLabel title = new JLabel();
         title.setText("Mis examenes");
         title.setFont(new Font("Nunito Sans", Font.BOLD, 25));
         title.setPreferredSize(new Dimension(944, 58));

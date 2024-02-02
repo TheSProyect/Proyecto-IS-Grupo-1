@@ -2,25 +2,24 @@ package main.views.components;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JRadioButton;
 
-import main.data.Palette;
+import main.utils.Palette;
 
-public class SingleOptionButton extends JRadioButton implements ActionListener{
+public class SingleOptionButton extends JRadioButton {
     ImageIcon notSelected;
     ImageIcon selected;
 
-    SingleOptionButton(String option) {
+    SingleOptionButton(String option, ButtonGroup group) {
         notSelected = new ImageIcon("assets/Unselected_Option_Icon.png");
         selected = new ImageIcon("assets/Selected_Option_Icon.png");
 
         paintRadialButton();
         this.setText(option);
-        
+        group.add(this);
     }
 
     private void paintRadialButton() {
@@ -31,18 +30,13 @@ public class SingleOptionButton extends JRadioButton implements ActionListener{
         this.setIcon(notSelected);
         this.setFont(new Font("Nunito Sans", Font.PLAIN, 20));
         this.setFocusable(false);
-
-        this.addActionListener(this);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (this.getIcon() == notSelected) {
+    public void paintIcon() {
+        if (this.isSelected() && this.getIcon() == notSelected) {
             this.setIcon(selected);
-        } else if (this.getIcon() == selected) {
+        } else if (!this.isSelected() && this.getIcon() == selected) {
             this.setIcon(notSelected);
         }
     }
-
-
 }

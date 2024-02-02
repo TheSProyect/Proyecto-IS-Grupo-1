@@ -14,7 +14,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
-import main.data.Palette;
+import main.utils.Palette;
 
 public class CourseCard extends JPanel {
     JButton presentExamButton;
@@ -95,6 +95,7 @@ public class CourseCard extends JPanel {
         presentExamButton.setBackground(Palette.instance().getBlue());
         presentExamButton.setPreferredSize(new Dimension(190, 30));
         presentExamButton.setFocusable(false);
+        presentExamButton.addActionListener(null);
 
         Border border = BorderFactory.createLineBorder(Palette.instance().getBlue());
         presentExamButton.setBorder(border);
@@ -128,4 +129,9 @@ public class CourseCard extends JPanel {
 
         this.add(caracteristicPanel);
     }
+
+    public JButton getPresentExamButton() {
+        return presentExamButton;
+    }
+
 }

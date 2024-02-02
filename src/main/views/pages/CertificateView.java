@@ -1,10 +1,7 @@
 package main.views.pages;
 
-import main.models.Certificate;
 import main.views.components.IconButton;
 import main.views.components.NavBar;
-import main.views.pages.CertificatesView;
-import main.views.templates.Frame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,32 +9,36 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
-import javax.swing.JTextField;
 
 import main.controllers.RequestCertificateController;
-import main.data.Palette;
+import main.utils.Palette;
 
-public class CertificateView extends Frame{
+public class CertificateView extends JPanel implements ActionListener{
     JPanel contentPanel;
+    IconButton downloadButton;
+    NavBar navBar;
     
     public CertificateView(){
         buildFrame();
         paintBorders();
         paintContentPanel();
+
+        addActionListener();
     }
+
     private void buildFrame() {
-        createFrame("CertificateView");
+        Frame.instance().setTitle("CertificateView");
         this.setLayout(new BorderLayout());
     }
+
     private void paintNavBar() {
-        NavBar navBar = new NavBar();
+        navBar = new NavBar();
         this.add(navBar, BorderLayout.NORTH);
     }
 
@@ -56,18 +57,13 @@ public class CertificateView extends Frame{
     }
 
     private void paintContentPanel() {
-        contentPanel = new JPanel();
         JLabel text;
         JPanel separator;
-        IconButton downloadButton = new IconButton("Descargar", "DownloadIcon.png");
-        GridBagConstraints gbc=new GridBagConstraints();
-        
-        // contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.X_AXIS));
-        contentPanel.setLayout(new GridBagLayout());
-        contentPanel.setPreferredSize(new Dimension(944, 560));
-        contentPanel.setBackground(Palette.instance().getWhite());
+        downloadButton = new IconButton("Descargar", "Download_Icon.png");
+        GridBagConstraints gbc = new GridBagConstraints();
         int separatorFullWidth = 300;
-        
+
+        buildContentPanel();
         
         text = paintText(48, "Certificado de participación");
         text.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
@@ -128,6 +124,14 @@ public class CertificateView extends Frame{
 
         this.add(contentPanel, BorderLayout.CENTER);
     }
+
+    private void buildContentPanel() {
+        contentPanel = new JPanel();
+        contentPanel.setLayout(new GridBagLayout());
+        contentPanel.setPreferredSize(new Dimension(944, 560));
+        contentPanel.setBackground(Palette.instance().getWhite());
+    }
+
     private JLabel paintText(int size, String _text) {
         JLabel text = new JLabel();
         text.setText("<html>" + _text + "</html>");
@@ -137,6 +141,7 @@ public class CertificateView extends Frame{
 
         return text;   
     }
+
     private JPanel paintTitleSeparator(Color color, int width) {
         
         JPanel line = new JPanel();
@@ -146,4 +151,24 @@ public class CertificateView extends Frame{
         return line;
     }
   //  private void show(Certificate)(){}
+    private void addActionListener() {
+        navBar.getHomeButton().addActionListener(this);
+        navBar.getCertificateButton().addActionListener(this);
+        navBar.getLogOutButton().addActionListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == navBar.getHomeButton()) {
+            Frame.instance().setView(ExamsView.instance());
+            Frame.instance().setTitle("ExamsView");
+        } else if (e.getSource() == navBar.getCertificateButton()) {
+            Frame.instance().setView(CertificatesView.instance());
+            Frame.instance().setTitle("CertificatesView");
+        } else if (e.getSource() == navBar.getLogOutButton()) {
+            CertificatesView.deleteInstance();
+            ExamsView.deleteInstance();
+            Frame.instance().setView(new LogInView());
+        }
+    }
 }
