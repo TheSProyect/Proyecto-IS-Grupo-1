@@ -40,7 +40,8 @@ public class PresentExamController {
         String nameFolderStudent = data.getUsername();
         String directory = System.getProperty("user.dir");
         directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users"+File.separator+"Students"+ File.separator+nameFolderStudent;
-        //get para obtener el nombre del curso y del examen
+        //String nameCourse = currentExam.getNameCourse();
+        //String nameExam = currentExam.getNameExam();
         String nameCourse = "Course1.txt";
         String nameExam = "Exam1";
         try {
@@ -56,7 +57,7 @@ public class PresentExamController {
         }
     }
 
-    public void showExamsName(){
+    public void showExamsInformation(){
         List<List<String>> examsInformation = new ArrayList<List<String>>();
         String directory = System.getProperty("user.dir");
         directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Exams";
@@ -65,9 +66,18 @@ public class PresentExamController {
             File[] files = searchedFolder.listFiles();
             if (files != null) {
                 for (File file : files) {
-                    //readExam(directory, file.getName(), directory);
-                    //examsInformation.add(new ArrayList<String>());
-                    examsInformation.add(readInformation());
+                    directory = directory + File.separator + file.getName();
+                    File searchedFolderExam = new File(directory);
+                    if (searchedFolder.exists() && searchedFolder.isDirectory()) {
+                        File[] filesExams = searchedFolderExam.listFiles();
+                        if (files != null) {
+                            for (File fileExam : filesExams) {
+                                readExam(directory, fileExam.getName());
+                                examsInformation.add(new ArrayList<String>());
+                                examsInformation.add(readInformation());
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -118,6 +128,7 @@ public class PresentExamController {
                     readQuestion(changeDirectory(directory),readings+1, counter, stop);
         }   
     }
+    
     private void readExam(String directory, String nameFolder){
         int numberQuestions, duracion;
         directory = directory +File.separator+ nameFolder+File.separator+nameFolder+".txt";
@@ -189,7 +200,7 @@ public class PresentExamController {
             if (files != null) {
                 int stop = getNumberQuestion(directory, nameFolder);
                 int counter =0;
-                    readExam(directory,nameFolder);
+                readExam(directory,nameFolder);
                 for (File file : files) {
                     if (file.isDirectory() && file.getName().equals(nameFolder)) {
                         stop = getNumberQuestion(directory, nameFolder);
