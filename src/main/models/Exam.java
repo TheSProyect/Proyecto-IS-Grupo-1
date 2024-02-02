@@ -11,7 +11,7 @@ import main.models.Result;
 import main.models.Name;
 
 public class Exam extends Course{
-    private Course course;
+    private Course course = new Course();
     private Name name;
     private String type, instructions, description;
     private int numberQuestions, duration;
