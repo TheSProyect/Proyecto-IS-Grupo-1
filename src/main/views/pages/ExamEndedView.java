@@ -1,26 +1,69 @@
 package main.views.pages;
 
 import main.views.components.ExamMenu;
+import main.views.components.QuestionPanel;
 import main.views.components.ResultsBlock;
 
 import java.awt.GridBagConstraints;
+import java.awt.event.ActionEvent;
+import java.util.List;
 
 import main.controllers.PresentExamController;
 
-public class ExamEndedView extends ExamView {
-    //private void showScore(Result){}
+public class ExamEndedView extends ExamTemplateView {
+    PresentExamController presentController;
+
+    ExamEndedView(List<QuestionPanel> questions, PresentExamController presentController) {
+        this.questions = questions;
+        this.presentController = presentController;
+        index = 0;
+
+        buildFrame("ExamEndedView");
+        paintBorders();
+        paintContentPanel();
+        inicializeQuestions();
+
+        addActionListener();
+    }
     
     protected void paintMenuPanel() {
-        int numCorrectQuestions =  15;
-        ResultsBlock results = new ResultsBlock(numCorrectQuestions, questions.size());
+        ResultsBlock results = new ResultsBlock();
         menuPanel = new ExamMenu(results, questions.size());
-        
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        constraints.weighty = 0.5;
-        constraints.fill = GridBagConstraints.BOTH;
+        menuPanel.setCurrentQuestion(index);
 
-        contentPanel.add(menuPanel, constraints);
+        results.paintResults(showScore(), questions.size());
+        
+        contentPanel.add(menuPanel, menuPanelConstraints());
+    }
+
+    protected void inicializeQuestions() {
+        for (int i = 0; i < questions.size(); i++) {
+            questions.get(i).disableOptions();
+        }
+    }
+
+    private int showScore(){
+        int numCorrectQuestions = 0;
+
+        for (int i = 0; i < questions.size(); i++) {
+            int selectedOption = questions.get(i).getSelectedOption();
+            if (selectedOption == -1) {
+                menuPanel.getQuestionListItems().get(i).setIcons("Wrong_Unselected_Icon", "Wrong_Selected_Icon");
+            // } else if (presentController.isCorrect(i, selectedOption)) {
+            //     numCorrectQuestions++;
+            //     menuPanel.getQuestionListItems().get(i).setIcons("Correct_Unselected_Icon", "Correct_Selected_Icon");
+            } else {
+                menuPanel.getQuestionListItems().get(i).setIcons("Wrong_Unselected_Icon", "Wrong_Selected_Icon");
+            }
+        }
+
+        return numCorrectQuestions;
+    }
+
+    protected void actionEventInBottomLeftButton(ActionEvent e) {
+        if(e.getSource() == finishExamButton) {
+            Frame.instance().setView(ExamsView.instance());
+            Frame.instance().setTitle("ExamsView");
+        } 
     }
 }

@@ -44,6 +44,21 @@ public class OptionsPanel extends JPanel implements ActionListener{
         return answered;
     }
 
+    public int getSelectedOption() {
+        for (int i = 0; i < options.size(); i++) {
+            if (options.get(i).isSelected()) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void disableOptions() {
+        for(int i = 0; i < options.size(); i++) {
+            options.get(i).setEnabled(false);
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         answered = true;
