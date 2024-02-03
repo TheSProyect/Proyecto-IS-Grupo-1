@@ -11,13 +11,14 @@ import javax.swing.border.Border;
 import main.utils.Palette;
 
 public class QuestionListItem extends JButton {
-    ImageIcon notAnswered;
-    ImageIcon current;
+    ImageIcon notCurrentIcon;
+    ImageIcon currentIcon;
+    boolean currentQuestion;
 
     QuestionListItem(int questionNumber) {
         buildButton();
         setIcons();
-        paintIcon(notAnswered);
+        paintIcon(notCurrentIcon);
         paintButtonText(questionNumber);
     }
     
@@ -32,7 +33,8 @@ public class QuestionListItem extends JButton {
     }
 
     private void setIcons() {
-        notAnswered = new ImageIcon("src/assets/Unselected_Option_Icon.png");
+        notCurrentIcon = new ImageIcon("src/assets/Unselected_Option_Icon.png");
+        currentIcon = new ImageIcon("src/assets/Selected_Option_Icon.png");
     }
 
     private void paintIcon(ImageIcon icon) {
@@ -45,5 +47,21 @@ public class QuestionListItem extends JButton {
         this.setFont(new Font("Nunito Sans", Font.PLAIN, 25));
     }
 
-    
+    public void setCurrentQuestion(boolean currentQuestion) {
+        this.currentQuestion = currentQuestion;
+        
+        if (this.getIcon() == notCurrentIcon && currentQuestion) {
+            this.setIcon(currentIcon);
+            this.setFont(new Font("Nunito Sans", Font.BOLD, 25));
+            this.setForeground(Palette.instance().getBlack());
+        } else if (this.getIcon() == currentIcon && !currentQuestion) {
+            this.setIcon(notCurrentIcon);
+            this.setFont(new Font("Nunito Sans", Font.PLAIN, 25));
+            this.setForeground(Palette.instance().getLightGray());
+        }
+    }
+
+    public boolean isCurrentQuestion() {
+        return currentQuestion;
+    }
 }

@@ -28,6 +28,7 @@ public class ExamView extends NavBarTemplateView {
     List<QuestionPanel> questions;
     int index;
     PresentExamController presentController;
+    ExamMenu menuPanel;
 
     public ExamView() {
         questions = new ArrayList<QuestionPanel>();
@@ -39,7 +40,7 @@ public class ExamView extends NavBarTemplateView {
         paintBorders();
         paintContentPanel();
 
-        addActionListenerNavbar();
+        addActionListener();
     }
 
     private void paintContentPanel() {
@@ -58,8 +59,9 @@ public class ExamView extends NavBarTemplateView {
         this.add(contentPanel, BorderLayout.CENTER);
     }
 
-    private void paintMenuPanel() {
-        ExamMenu menuPanel = new ExamMenu(presentController.getDuracion(), finishExamButton, questions.size());
+    protected void paintMenuPanel() {
+        menuPanel = new ExamMenu(presentController.getDuracion(), finishExamButton, questions.size());
+        
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -192,14 +194,38 @@ public class ExamView extends NavBarTemplateView {
         }
     }   
 
+    private void showConcreteQuestion(int questionNumber) {
+        questions.get(index).setVisible(false);
+            index = questionNumber;
+            questions.get(index).setVisible(true);
+    }
+
+    private void addActionListener() {
+        addActionListenerNavbar();
+
+        for(int i = 0; i < menuPanel.getQuestionListItems().size(); i++) {
+            menuPanel.getQuestionListItems().get(i).addActionListener(this);
+        }
+    }
+
+    private void actionEventInExamMenu(ActionEvent e) {
+        for(int i = 0; i < menuPanel.getQuestionListItems().size(); i++) {
+            if (e.getSource() == menuPanel.getQuestionListItems().get(i)) {
+                menuPanel.setCurrentQuestion(i);
+                showConcreteQuestion(i);
+                break;
+            }
+        }
+    }
+
     public void showInstructions(){}
     public void endExam(){} 
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == finishExamButton) {
-            Frame.instance().setView(ExamsView.instance());
-            Frame.instance().setTitle("ExamsView");
+            Frame.instance().setView(new ExamEndedView());
+            Frame.instance().setTitle("ExamEndedView");
         } else if (e.getSource() == prevButton) {
             showPreviousQuestions();
 
@@ -207,6 +233,7 @@ public class ExamView extends NavBarTemplateView {
             showNextQuestion();
 
         } else {
+            actionEventInExamMenu(e);
             actionEventInNavBar(e);
         }
     }

@@ -77,4 +77,18 @@ public class QuestionsList extends JScrollPane{
             }
         });
     }
+
+    public List<QuestionListItem> getQuestionListItems() {
+        return questionsListItems;
+    }
+
+    public void setCurrentQuestion(int currentQuestionNumber) {
+        for (int i = 0; i < questionsListItems.size(); i++) {
+            if (i == currentQuestionNumber && !questionsListItems.get(i).isCurrentQuestion()) {
+                questionsListItems.get(i).setCurrentQuestion(true);
+            } else if (questionsListItems.get(i).isCurrentQuestion()) {
+                questionsListItems.get(i).setCurrentQuestion(false);
+            }
+        }
+    }
 }
