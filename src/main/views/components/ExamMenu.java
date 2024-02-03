@@ -15,7 +15,7 @@ public class ExamMenu extends JPanel{
     JScrollPane questionsListScrollPane;
     QuestionsList questionsList;
 
-    public ExamMenu(int time, JButton exitExamButton) {
+    public ExamMenu(int time, JButton exitExamButton, int questionAmount) {
         this.setMinimumSize(new Dimension(Size.instance().getExamMenu()));
         this.setPreferredSize(new Dimension(Size.instance().getExamMenu()));
         this.setMaximumSize(new Dimension(Size.instance().getExamMenu()));
@@ -24,7 +24,7 @@ public class ExamMenu extends JPanel{
 
         paintTimer(time, exitExamButton);
 
-        paintQuestionsList();
+        paintQuestionsList(questionAmount);
     }
 
     private void paintTimer(int time, JButton exitExamButton) {
@@ -38,8 +38,8 @@ public class ExamMenu extends JPanel{
         this.add(timer, constraints);
     }
 
-    private void paintQuestionsList() {
-        questionsList = new QuestionsList();
+    private void paintQuestionsList(int questionAmount) {
+        questionsList = new QuestionsList(questionAmount);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 1;

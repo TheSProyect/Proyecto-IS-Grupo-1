@@ -40,7 +40,7 @@ public class NavBar extends JPanel implements ActionListener {
         appName = new JLabel();
         appName.setPreferredSize(new Dimension(220, 80));
         
-        ImageIcon icon = new ImageIcon ("assets/Logo_Header.png");
+        ImageIcon icon = new ImageIcon ("src/assets/Logo_Header.png");
         appName.setIcon(icon);
         
         appName.setHorizontalAlignment(JLabel.CENTER);

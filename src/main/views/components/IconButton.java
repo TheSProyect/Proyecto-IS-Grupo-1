@@ -10,7 +10,7 @@ public class IconButton extends Button {
     }
     
     private void paintIcon(String pathIcon){
-        ImageIcon icon = new ImageIcon("assets/"+pathIcon);
+        ImageIcon icon = new ImageIcon("src/assets/"+pathIcon);
 
         this.setIcon(icon);
     }

@@ -13,7 +13,7 @@ public class ButtonSlider extends JButton {
     ImageIcon icon;
     
     ButtonSlider(String iconName) {
-        icon = new ImageIcon("assets/" + iconName);
+        icon = new ImageIcon("src/assets/" + iconName);
         this.setIcon(icon);
 
         Border border = BorderFactory.createLineBorder(Palette.instance().getWhite());

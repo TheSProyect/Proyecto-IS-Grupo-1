@@ -42,7 +42,7 @@ public class TimerBlock extends JPanel{
 		TimeRemainingLabel.setFont(new Font("Nunito Sans", Font.BOLD, 13));
 		TimeRemainingLabel.setForeground(Palette.instance().getOffWhite());
 		
-		ClockImg = new ImageIcon("assets/Timer_Icon.png");
+		ClockImg = new ImageIcon("src/assets/Timer_Icon.png");
 		imgLabel = new JLabel("");
 		imgLabel.setBounds(10,10, 55, 55);
 		imgLabel.setIcon(ClockImg);

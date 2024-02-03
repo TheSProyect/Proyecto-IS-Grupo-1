@@ -59,7 +59,7 @@ public class ExamView extends NavBarTemplateView {
     }
 
     private void paintMenuPanel() {
-        ExamMenu menuPanel = new ExamMenu(presentController.getDuracion(), finishExamButton);
+        ExamMenu menuPanel = new ExamMenu(presentController.getDuracion(), finishExamButton, questions.size());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
