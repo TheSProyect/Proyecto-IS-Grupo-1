@@ -34,6 +34,7 @@ public class Listing extends JScrollPane{
         paintListElements(elements);
     }
 
+    
     private void paintListingPanel() {
         listingPanel = new JPanel();
         listingPanel.setPreferredSize(new Dimension(860, 500));
@@ -57,6 +58,7 @@ public class Listing extends JScrollPane{
             titlePanel.setBackground(Palette.instance().getWhite());
             titlePanel.setPreferredSize(new Dimension(860, 60));
             titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
+            
             listingPanel.add(titlePanel, BorderLayout.NORTH);
             
             TitleButtonContainer(titlePanel);
