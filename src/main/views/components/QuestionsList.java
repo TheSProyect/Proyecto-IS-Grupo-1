@@ -83,6 +83,10 @@ public class QuestionsList extends JScrollPane{
     }
 
     public void setCurrentQuestion(int currentQuestionNumber) {
+        if (questionsListItems.get(currentQuestionNumber).isCurrentQuestion()) {
+            return;
+        }
+        
         for (int i = 0; i < questionsListItems.size(); i++) {
             if (i == currentQuestionNumber && !questionsListItems.get(i).isCurrentQuestion()) {
                 questionsListItems.get(i).setCurrentQuestion(true);

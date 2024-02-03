@@ -14,10 +14,12 @@ public class QuestionListItem extends JButton {
     ImageIcon notCurrentIcon;
     ImageIcon currentIcon;
     boolean currentQuestion;
+    boolean answered;
 
     QuestionListItem(int questionNumber) {
+        answered = false;
         buildButton();
-        setIcons("Unanswered_Icon.png", "Unanswered_Icon.png");
+        setIcons("Unanswered_Icon", "Unanswered_Icon");
         paintIcon(notCurrentIcon);
         paintButtonText(questionNumber);
     }
@@ -32,9 +34,17 @@ public class QuestionListItem extends JButton {
         this.setFocusable(false);
     }
 
-    private void setIcons(String unselectedIconFile, String selectedIconFile) {
-        notCurrentIcon = new ImageIcon("src/assets/"+ unselectedIconFile);
-        currentIcon = new ImageIcon("src/assets/" + selectedIconFile);
+    public void setIcons(String unselectedIconFile, String selectedIconFile) {
+        boolean isCurrentIcon = this.getIcon() == currentIcon;
+
+        notCurrentIcon = new ImageIcon("src/assets/"+ unselectedIconFile + ".png");
+        currentIcon = new ImageIcon("src/assets/" + selectedIconFile + ".png");
+
+        if (isCurrentIcon) {
+            paintIcon(currentIcon);
+        } else {
+            paintIcon(notCurrentIcon);
+        }
     }
 
     private void paintIcon(ImageIcon icon) {
