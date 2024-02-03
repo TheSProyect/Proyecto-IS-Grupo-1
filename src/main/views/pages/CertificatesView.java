@@ -1,6 +1,5 @@
 package main.views.pages;
 import main.utils.Palette;
-import main.views.components.Button;
 import main.views.components.Listing;
 
 import java.awt.BorderLayout;
@@ -21,13 +20,6 @@ import javax.swing.JSeparator;
 
 public class CertificatesView extends HelpBarTemplateView {
     private static CertificatesView certificatesView;
-
-    JPanel titlePanel;
-    JPanel contentPanel;
-    JLabel title;
-    Button button;
-    JButton createExam;
-    JPanel titleButtonContainer;
     Listing certificateListing;
     List<String> certificates;
     List<JButton> requestCertificateButtons;
@@ -55,54 +47,51 @@ public class CertificatesView extends HelpBarTemplateView {
     }
 
     protected void paintContentPanel(){
-        contentPanel = new JPanel();
+        JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BorderLayout());
         contentPanel.setPreferredSize(new Dimension(944, 560));
         contentPanel.setBackground(Palette.instance().getWhite());
 
-        paintTitlePanel();
+        paintTitlePanel(contentPanel);
         
-        paintCertificatesListing(); 
+        paintCertificatesListing(contentPanel); 
 
     
         this.add(contentPanel, BorderLayout.CENTER);
     }
 
-    protected void paintTitlePanel() {
-        createTitlePanel();
-        TitleContainer();
-        paintTitleSeparator();        
-    }
-
-    protected void createTitlePanel() {
-        titlePanel = new JPanel();
+    protected void paintTitlePanel(JPanel contentPanel) {
+        JPanel titlePanel = new JPanel();
         titlePanel.setBackground(Palette.instance().getWhite());
         titlePanel.setPreferredSize(new Dimension(944, 60));
         titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
+
         contentPanel.add(titlePanel, BorderLayout.NORTH);
+        TitleContainer(titlePanel);
+        paintTitleSeparator(titlePanel);        
     }
 
-    protected void paintTitleSeparator() {
+    protected void paintTitleSeparator(JPanel titlePanel) {
         JSeparator line = new JSeparator();
         line.setForeground(Palette.instance().getLightGray());
         line.setBackground(Palette.instance().getLightGray());
         titlePanel.add(line);
     }
 
-    private void TitleContainer() {
-        titleButtonContainer = new JPanel();
+    private void TitleContainer(JPanel titlePanel) {
+        JPanel titleButtonContainer = new JPanel();
         titleButtonContainer.setMaximumSize(new Dimension(1500, 58));
         titleButtonContainer.setLayout(new BoxLayout(titleButtonContainer, BoxLayout.X_AXIS));
         titleButtonContainer.setBackground(Palette.instance().getWhite());
 
-        paintTitleLabel();
+        paintTitleLabel(titleButtonContainer);
 
         
         titlePanel.add(titleButtonContainer);
     }
 
-    protected void paintTitleLabel() {
-        title = new JLabel();
+    protected void paintTitleLabel(JPanel titleButtonContainer) {
+        JLabel title = new JLabel();
         title.setText("Mis Certificados");
         title.setFont(new Font("Nunito Sans", Font.BOLD, 25));
         title.setPreferredSize(new Dimension(944, 58));
@@ -111,8 +100,9 @@ public class CertificatesView extends HelpBarTemplateView {
 
         titleButtonContainer.add(title, FlowLayout.LEFT);
     }
+    
 
-    private void paintCertificatesListing() {
+    private void paintCertificatesListing(JPanel contentPanel) {
         certificateListing = new Listing(certificates, "Solicitar Certificado");
         contentPanel.add(certificateListing);
     }

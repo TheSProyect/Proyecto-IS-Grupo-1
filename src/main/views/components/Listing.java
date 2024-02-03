@@ -20,20 +20,19 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 import main.utils.Palette;
 
 public class Listing extends JScrollPane{
-    JPanel titlePanel;
-    JLabel title;
-    Button button;
-    JButton createExam;
-    JPanel titleButtonContainer;
     JPanel listingPanel;
     List<JButton> listingButtons;
+    String singleElement;
+    String textButton;
 
-    public Listing(List<String> elements, String textButton) {
+
+    public Listing(List<String> elements, String TextButton) {
         listingButtons = new ArrayList<JButton>();
+        textButton = TextButton;
+       
         paintListingPanel();
-        paintListElements(elements, textButton);
+        paintListElements(elements);
     }
-
 
     private void paintListingPanel() {
         listingPanel = new JPanel();
@@ -50,47 +49,43 @@ public class Listing extends JScrollPane{
 
     }
 
-
-    protected void paintListElements(List<String> elements, String textButton) {
-        String singleElement;
+    protected void paintListElements(List<String> elements) {
         for (int i = 0; i < elements.size(); i++) {
             singleElement = elements.get(i);
-            createTitlePanel();
-            TitleButtonContainer(singleElement, textButton);
-            paintTitleSeparator();
+            
+            JPanel titlePanel = new JPanel();
+            titlePanel.setBackground(Palette.instance().getWhite());
+            titlePanel.setPreferredSize(new Dimension(860, 60));
+            titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
+            listingPanel.add(titlePanel, BorderLayout.NORTH);
+            
+            TitleButtonContainer(titlePanel);
+            paintTitleSeparator(titlePanel);
         }       
     }
 
-    protected void createTitlePanel() {
-        titlePanel = new JPanel();
-        titlePanel.setBackground(Palette.instance().getWhite());
-        titlePanel.setPreferredSize(new Dimension(860, 60));
-        titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
-        listingPanel.add(titlePanel, BorderLayout.NORTH);
-    }
-
-    protected void paintTitleSeparator() {
+    protected void paintTitleSeparator(JPanel titlePanel) {
         JSeparator line = new JSeparator();
         line.setForeground(Palette.instance().getLightGray());
         line.setBackground(Palette.instance().getLightGray());
         titlePanel.add(line);
     }
 
-    private void TitleButtonContainer(String singleElement, String textButton) {
-        titleButtonContainer = new JPanel();
+    private void TitleButtonContainer(JPanel titlePanel) {
+        JPanel titleButtonContainer = new JPanel();
         titleButtonContainer.setMaximumSize(new Dimension(1500, 58));
         titleButtonContainer.setLayout(new BoxLayout(titleButtonContainer, BoxLayout.X_AXIS));
         titleButtonContainer.setBackground(Palette.instance().getWhite());
 
-        paintTitleLabel(singleElement);
+        paintTitleLabel(titleButtonContainer);
 
-        paintCreateExamButton(textButton);
+        paintCreateButton(titleButtonContainer);
         
         titlePanel.add(titleButtonContainer);
     }
 
-    protected void paintTitleLabel(String singleElement) {
-        title = new JLabel();
+    protected void paintTitleLabel(JPanel titleButtonContainer) {
+        JLabel title = new JLabel();
         title.setText(singleElement);
         title.setFont(new Font("Nunito Sans", Font.ROMAN_BASELINE, 20));
         title.setPreferredSize(new Dimension(944, 58));
@@ -100,21 +95,21 @@ public class Listing extends JScrollPane{
         titleButtonContainer.add(title, FlowLayout.LEFT);
     }
 
-    private void paintCreateExamButton(String textButton) {
-        createExam = new JButton(textButton);
-        createExam.setFont(new Font("Nunito Sans", Font.BOLD, 15));
-        createExam.setForeground(Palette.instance().getWhite());
-        createExam.setBackground(Palette.instance().getBlue());
-        createExam.setFocusable(false);
+    private void paintCreateButton(JPanel titleButtonContainer) {
+        JButton button = new JButton(textButton);
+        button.setFont(new Font("Nunito Sans", Font.BOLD, 15));
+        button.setForeground(Palette.instance().getWhite());
+        button.setBackground(Palette.instance().getBlue());
+        button.setFocusable(false);
 
         Border border = BorderFactory.createLineBorder(Palette.instance().getBlue());
-        createExam.setBorder(border);
+        button.setBorder(border);
 
-        createExam.setPreferredSize(new Dimension(150, 30));
-        createExam.setMaximumSize(new Dimension(150, 30));
+        button.setPreferredSize(new Dimension(150, 30));
+        button.setMaximumSize(new Dimension(150, 30));
     
-        titleButtonContainer.add(createExam);
-        listingButtons.add(createExam);
+        titleButtonContainer.add(button);
+        listingButtons.add(button);
     }
     
     private void changeScrollPaneLook() {
