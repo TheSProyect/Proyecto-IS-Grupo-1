@@ -2,11 +2,9 @@ package main.views.components;
 
 import javax.swing.*;
 import java.awt.event.*;
-import javax.swing.Timer;
+import java.io.File;
 
 import main.utils.Palette;
-
-import javax.swing.ImageIcon;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -56,7 +54,10 @@ public class TimerBlock extends JPanel{
 	}
 
 	public void paintImageIcon(ImageIcon Img, JLabel imgLabel){
-		Img = new ImageIcon("assets/Timer_Icon.png");
+		String directory = System.getProperty("user.dir");
+        directory = directory+File.separator+"src"+File.separator+"assets"+File.separator;
+		directory = directory+"Timer_Icon.png";
+		Img = new ImageIcon(directory);
 		imgLabel = new JLabel("");
 		imgLabel.setBounds(10,10, 55, 55);
 		imgLabel.setIcon(Img);
