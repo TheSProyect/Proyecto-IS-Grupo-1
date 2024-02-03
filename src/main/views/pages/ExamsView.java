@@ -1,12 +1,10 @@
 package main.views.pages;
-import main.views.components.NavBar;
 import main.views.components.Slider;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -16,14 +14,11 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
 import main.utils.Palette;
-import main.views.components.HelpBar;
 
-public class ExamsView extends JPanel implements ActionListener{
+public class ExamsView extends HelpBarTemplateView {
     private static ExamsView examView;
     
-    NavBar navBar;
     Slider slider;
-    HelpBar helpBar;
     List<JButton> presentExamButtons;
 
     public static ExamsView instance() {
@@ -38,7 +33,7 @@ public class ExamsView extends JPanel implements ActionListener{
     }
 
     public ExamsView() {
-        buildFrame();
+        buildFrame("ExamsView");
         
         paintBorders();
 
@@ -46,33 +41,6 @@ public class ExamsView extends JPanel implements ActionListener{
         
         addActionListener();
         this.validate();
-    }
-
-    protected void buildFrame() {
-        Frame.instance().setTitle("ExamsView");
-        this.setLayout(new BorderLayout());
-    }
-
-    protected void paintNavBar() {
-        navBar = new NavBar();
-        this.add(navBar, BorderLayout.NORTH);
-    }
-
-    protected void paintBorders() {
-        paintNavBar();
-        
-        helpBar = new HelpBar();
-        this.add(helpBar, BorderLayout.SOUTH);
-
-        JPanel borderPanel = new JPanel();
-        borderPanel.setPreferredSize(new Dimension(40, 560));
-        borderPanel.setBackground(Palette.instance().getWhite());
-        this.add(borderPanel, BorderLayout.WEST);
-
-        borderPanel = new JPanel();
-        borderPanel.setPreferredSize(new Dimension(40, 560));
-        borderPanel.setBackground(Palette.instance().getWhite());
-        this.add(borderPanel, BorderLayout.EAST);
     }
 
     protected void paintContentPanel(){
@@ -124,8 +92,7 @@ public class ExamsView extends JPanel implements ActionListener{
     }
     
     private void addActionListener() {
-        navBar.getCertificateButton().addActionListener(this);
-        navBar.getLogOutButton().addActionListener(this);
+        addActionListenerNavbar();
 
         presentExamButtons = slider.getButtons();
 
@@ -134,18 +101,17 @@ public class ExamsView extends JPanel implements ActionListener{
         }
     }
 
+    private void actionEventInCourseCard(ActionEvent e) {
+        for (int i = 0; i < presentExamButtons.size(); i++) {
+            if (e.getSource() == presentExamButtons.get(i)) {
+                Frame.instance().setView(new ExamView());
+            }
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        // this.setVisible(false);
-        if (e.getSource() == navBar.getCertificateButton()) {
-            Frame.instance().setView(CertificatesView.instance());
-            Frame.instance().setTitle("CertificatesView");
-        } else if (e.getSource() == navBar.getLogOutButton()) {
-            CertificatesView.deleteInstance();
-            ExamsView.deleteInstance();
-            Frame.instance().setView(new LogInView());
-        } else {
-            Frame.instance().setView(new ExamView());
-        }
+        actionEventInNavBar(e);
+        actionEventInCourseCard(e);
     }
 }

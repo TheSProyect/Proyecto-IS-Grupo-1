@@ -7,7 +7,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +18,9 @@ import javax.swing.border.Border;
 import main.controllers.PresentExamController;
 import main.utils.Palette;
 import main.views.components.ExamMenu;
-import main.views.components.NavBar;
 import main.views.components.QuestionPanel;
 
-public class ExamView extends JPanel implements ActionListener {
-    NavBar navBar;
+public class ExamView extends NavBarTemplateView {
     JPanel contentPanel;
     JButton finishExamButton;
     JButton prevButton;
@@ -38,35 +35,11 @@ public class ExamView extends JPanel implements ActionListener {
         presentController= new PresentExamController();
         inicializeQuestions();
 
-        buildFrame();
+        buildFrame("ExamView");
         paintBorders();
         paintContentPanel();
 
-        addActionListener();
-    }
-
-    private void buildFrame() {
-        Frame.instance().setTitle("ExamView");
-        this.setLayout(new BorderLayout());
-    }
-
-    private void paintNavBar() {
-        navBar = new NavBar();
-        this.add(navBar, BorderLayout.NORTH);
-    }
-
-    private void paintBorders() {
-        paintNavBar();
-
-        JPanel borderPanel = new JPanel();
-        borderPanel.setPreferredSize(new Dimension(40, 560));
-        borderPanel.setBackground(Palette.instance().getWhite());
-        this.add(borderPanel, BorderLayout.WEST);
-
-        borderPanel = new JPanel();
-        borderPanel.setPreferredSize(new Dimension(40, 560));
-        borderPanel.setBackground(Palette.instance().getWhite());
-        this.add(borderPanel, BorderLayout.EAST);
+        addActionListenerNavbar();
     }
 
     private void paintContentPanel() {
@@ -219,12 +192,6 @@ public class ExamView extends JPanel implements ActionListener {
         }
     }   
 
-    private void addActionListener() {
-        navBar.getHomeButton().addActionListener(this);
-        navBar.getCertificateButton().addActionListener(this);
-        navBar.getLogOutButton().addActionListener(this);
-    }
-
     public void showInstructions(){}
     public void endExam(){} 
 
@@ -239,17 +206,8 @@ public class ExamView extends JPanel implements ActionListener {
         } else if (e.getSource() == nextButton) {
             showNextQuestion();
 
-        } else if (e.getSource() == navBar.getHomeButton()) {
-            Frame.instance().setView(ExamsView.instance());
-            Frame.instance().setTitle("ExamsView");
-
-        } else if (e.getSource() == navBar.getCertificateButton()) {
-            Frame.instance().setView(CertificatesView.instance());
-            Frame.instance().setTitle("CertificatesView");
-        } else if (e.getSource() == navBar.getLogOutButton()) {
-            CertificatesView.deleteInstance();
-            ExamsView.deleteInstance();
-            Frame.instance().setView(new LogInView());
+        } else {
+            actionEventInNavBar(e);
         }
     }
 

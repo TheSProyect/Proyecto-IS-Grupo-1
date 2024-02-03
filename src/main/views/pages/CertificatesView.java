@@ -1,15 +1,12 @@
 package main.views.pages;
-import main.views.components.NavBar;
 import main.utils.Palette;
 import main.views.components.Button;
-import main.views.components.HelpBar;
 import main.views.components.Listing;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.FlowLayout;
@@ -17,20 +14,18 @@ import java.awt.FlowLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-    import javax.swing.BoxLayout;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 
 
-public class CertificatesView extends JPanel implements ActionListener {
+public class CertificatesView extends HelpBarTemplateView {
     private static CertificatesView certificatesView;
 
     JPanel titlePanel;
     JPanel contentPanel;
     JLabel title;
-    NavBar navBar;
     Button button;
-    HelpBar helpBar;
     JButton createExam;
     JPanel titleButtonContainer;
     Listing certificateListing;
@@ -51,40 +46,12 @@ public class CertificatesView extends JPanel implements ActionListener {
     public CertificatesView() {
         inicializeCertificates();
 
-        buildFrame();
+        buildFrame("CertificatesView");
         paintBorders();
         paintContentPanel();
         
         getRequestCertificateButtons();
         addActionListener();
-    }
-
-    protected void buildFrame() {
-        Frame.instance().setTitle("CertificatesView");
-        this.setLayout(new BorderLayout());
-    }
-
-    protected void paintNavBar() {
-        navBar = new NavBar();
-        this.add(navBar, BorderLayout.NORTH);
-    }
-
-    protected void paintBorders() {
-        paintNavBar();
-        
-        helpBar = new HelpBar();
-        this.add(helpBar, BorderLayout.SOUTH);
-
-        JPanel borderPanel = new JPanel();
-        borderPanel.setPreferredSize(new Dimension(40, 560));
-        borderPanel.setBackground(Palette.instance().getWhite());
-        this.add(borderPanel, BorderLayout.WEST);
-
-        borderPanel = new JPanel();
-        borderPanel.setPreferredSize(new Dimension(40, 560));
-        borderPanel.setBackground(Palette.instance().getWhite());
-        this.add(borderPanel, BorderLayout.EAST);
-
     }
 
     protected void paintContentPanel(){
@@ -168,26 +135,24 @@ public class CertificatesView extends JPanel implements ActionListener {
     }
 
     private void addActionListener() {
-        navBar.getHomeButton().addActionListener(this);
-        navBar.getLogOutButton().addActionListener(this);
+        addActionListenerNavbar();
 
         for (int i = 0; i < requestCertificateButtons.size(); i++) {
             requestCertificateButtons.get(i).addActionListener(this);
         }
     }
 
+    private void actionEventInCourseListing(ActionEvent e) {
+        for (int i = 0; i < requestCertificateButtons.size(); i++) {
+            if (e.getSource() == requestCertificateButtons.get(i)) {
+                Frame.instance().setView(new CertificateView());
+            }
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        // this.setVisible(false);
-        if (e.getSource() == navBar.getHomeButton()) {
-            Frame.instance().setView(ExamsView.instance());
-            Frame.instance().setTitle("ExamsView");
-        } else if (e.getSource() == navBar.getLogOutButton()) {
-            CertificatesView.deleteInstance();
-            ExamsView.deleteInstance();
-            Frame.instance().setView(new LogInView());
-        } else {
-            Frame.instance().setView(new CertificateView());
-        }
+        actionEventInNavBar(e);
+        actionEventInCourseListing(e);
     }
 }

@@ -1,7 +1,6 @@
 package main.views.pages;
 
 import main.views.components.IconButton;
-import main.views.components.NavBar;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -10,7 +9,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -19,41 +17,16 @@ import javax.swing.JPanel;
 import main.controllers.RequestCertificateController;
 import main.utils.Palette;
 
-public class CertificateView extends JPanel implements ActionListener{
+public class CertificateView extends HelpBarTemplateView{
     JPanel contentPanel;
     IconButton downloadButton;
-    NavBar navBar;
     
     public CertificateView(){
-        buildFrame();
+        buildFrame("CertificateView");
         paintBorders();
         paintContentPanel();
 
         addActionListener();
-    }
-
-    private void buildFrame() {
-        Frame.instance().setTitle("CertificateView");
-        this.setLayout(new BorderLayout());
-    }
-
-    private void paintNavBar() {
-        navBar = new NavBar();
-        this.add(navBar, BorderLayout.NORTH);
-    }
-
-    private void paintBorders() {
-        paintNavBar();
-
-        JPanel borderPanel = new JPanel();
-        borderPanel.setPreferredSize(new Dimension(40, 560));
-        borderPanel.setBackground(Palette.instance().getWhite());
-        this.add(borderPanel, BorderLayout.WEST);
-
-        borderPanel = new JPanel();
-        borderPanel.setPreferredSize(new Dimension(40, 560));
-        borderPanel.setBackground(Palette.instance().getWhite());
-        this.add(borderPanel, BorderLayout.EAST);
     }
 
     private void paintContentPanel() {
@@ -150,25 +123,14 @@ public class CertificateView extends JPanel implements ActionListener{
         line.setPreferredSize(new Dimension(width, 3));
         return line;
     }
-  //  private void show(Certificate)(){}
+  
+    //  private void show(Certificate)(){}
     private void addActionListener() {
-        navBar.getHomeButton().addActionListener(this);
-        navBar.getCertificateButton().addActionListener(this);
-        navBar.getLogOutButton().addActionListener(this);
+        addActionListenerNavbar();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == navBar.getHomeButton()) {
-            Frame.instance().setView(ExamsView.instance());
-            Frame.instance().setTitle("ExamsView");
-        } else if (e.getSource() == navBar.getCertificateButton()) {
-            Frame.instance().setView(CertificatesView.instance());
-            Frame.instance().setTitle("CertificatesView");
-        } else if (e.getSource() == navBar.getLogOutButton()) {
-            CertificatesView.deleteInstance();
-            ExamsView.deleteInstance();
-            Frame.instance().setView(new LogInView());
-        }
+        actionEventInNavBar(e);
     }
 }
