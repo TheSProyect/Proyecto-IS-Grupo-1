@@ -17,7 +17,7 @@ public class QuestionListItem extends JButton {
 
     QuestionListItem(int questionNumber) {
         buildButton();
-        setIcons();
+        setIcons("Unanswered_Icon.png", "Unanswered_Icon.png");
         paintIcon(notCurrentIcon);
         paintButtonText(questionNumber);
     }
@@ -32,9 +32,9 @@ public class QuestionListItem extends JButton {
         this.setFocusable(false);
     }
 
-    private void setIcons() {
-        notCurrentIcon = new ImageIcon("src/assets/Unselected_Option_Icon.png");
-        currentIcon = new ImageIcon("src/assets/Selected_Option_Icon.png");
+    private void setIcons(String unselectedIconFile, String selectedIconFile) {
+        notCurrentIcon = new ImageIcon("src/assets/"+ unselectedIconFile);
+        currentIcon = new ImageIcon("src/assets/" + selectedIconFile);
     }
 
     private void paintIcon(ImageIcon icon) {
@@ -49,7 +49,7 @@ public class QuestionListItem extends JButton {
 
     public void setCurrentQuestion(boolean currentQuestion) {
         this.currentQuestion = currentQuestion;
-        
+
         if (this.getIcon() == notCurrentIcon && currentQuestion) {
             this.setIcon(currentIcon);
             this.setFont(new Font("Nunito Sans", Font.BOLD, 25));

@@ -1,8 +1,7 @@
 package main.views.pages;
 
-import main.views.pages.ResultView;
 import main.views.components.ExamMenu;
-import main.views.pages.ExamView;
+import main.views.components.ResultsBlock;
 
 import java.awt.GridBagConstraints;
 
@@ -12,7 +11,9 @@ public class ExamEndedView extends ExamView {
     //private void showScore(Result){}
     
     protected void paintMenuPanel() {
-        menuPanel = new ExamMenu(questions.size());
+        int numCorrectQuestions =  15;
+        ResultsBlock results = new ResultsBlock(numCorrectQuestions, questions.size());
+        menuPanel = new ExamMenu(results, questions.size());
         
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;

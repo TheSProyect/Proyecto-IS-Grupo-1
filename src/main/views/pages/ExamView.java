@@ -19,6 +19,7 @@ import main.controllers.PresentExamController;
 import main.utils.Palette;
 import main.views.components.ExamMenu;
 import main.views.components.QuestionPanel;
+import main.views.components.TimerBlock;
 
 public class ExamView extends NavBarTemplateView {
     JPanel contentPanel;
@@ -60,7 +61,8 @@ public class ExamView extends NavBarTemplateView {
     }
 
     protected void paintMenuPanel() {
-        menuPanel = new ExamMenu(presentController.getDuracion(), finishExamButton, questions.size());
+        TimerBlock timer = new TimerBlock(presentController.getDuracion(), finishExamButton);
+        menuPanel = new ExamMenu(timer, questions.size());
         
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;

@@ -16,18 +16,10 @@ public class ExamMenu extends JPanel{
     JScrollPane questionsListScrollPane;
     QuestionsList questionsList;
 
-    public ExamMenu(int time, JButton exitExamButton, int questionAmount) {
+    public ExamMenu(JPanel block, int questionAmount) {
         buildExamMenuPanel();
 
-        paintTimer(time, exitExamButton);
-
-        paintQuestionsList(questionAmount);
-    }
-
-    public ExamMenu(int questionAmount) {
-        buildExamMenuPanel();
-
-        paintResults(questionAmount);
+        paintBlock(block);
 
         paintQuestionsList(questionAmount);
     }
@@ -40,28 +32,13 @@ public class ExamMenu extends JPanel{
         this.setLayout(new GridBagLayout());
     }
 
-    private void paintTimer(int time, JButton exitExamButton) {
-        TimerBlock timer = new TimerBlock(time, exitExamButton);
-
+    private void paintBlock(JPanel block) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 1;
         constraints.gridy = 1;
         constraints.weighty = 0.5;
 
-        this.add(timer, constraints);
-    }
-
-    private void paintResults(int numCorrectQuestions) {
-        JPanel resultsPanel = new JPanel();
-		this.setPreferredSize(new Dimension(200, 75));
-		this.setMaximumSize(new Dimension(200, 75));
-		this.setBackground(Palette.instance().getYellow());
-
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = 1;
-        constraints.gridy = 1;
-
-        this.add(resultsPanel, constraints);
+        this.add(block, constraints);
     }
 
     private void paintQuestionsList(int questionAmount) {
