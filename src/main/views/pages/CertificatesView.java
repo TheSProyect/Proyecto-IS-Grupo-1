@@ -117,10 +117,6 @@ public class CertificatesView extends HelpBarTemplateView {
         certificates.add("Curso 2");
         certificates.add("Curso 3");
         certificates.add("Curso 4");
-        certificates.add("Curso 1");
-        certificates.add("Curso 2");
-        certificates.add("Curso 3");
-        certificates.add("Curso 4");
         
         //prueba    
     }

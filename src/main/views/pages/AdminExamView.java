@@ -21,7 +21,6 @@ import javax.swing.border.Border;
 
 public class AdminExamView extends CertificatesView {
 
-
     protected void paintNavBar() {
         buildFrame("AdminExamView");
 
@@ -29,7 +28,6 @@ public class AdminExamView extends CertificatesView {
         this.add(navBar, BorderLayout.NORTH);
     }
 
-    
     protected void paintTitleLabel(JPanel titleButtonContainer) {
         JLabel title = new JLabel();
         title.setText("Administrador de Examenes");
@@ -41,6 +39,7 @@ public class AdminExamView extends CertificatesView {
         titleButtonContainer.add(title, FlowLayout.LEFT);
         paintCreateButton(titleButtonContainer);
     }
+
     private void paintCreateButton(JPanel titleButtonContainer) {
         JButton button = new JButton("Crear Examen");
         button.setFont(new Font("Nunito Sans", Font.BOLD, 15));
