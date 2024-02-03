@@ -14,7 +14,6 @@ import java.awt.GridBagLayout;
 import java.util.List;
 
 public class QuestionPanel extends JPanel {
-    SingleOptionButton option;
     JPanel domainPanel;
     OptionsPanel optionsPanel;
 
@@ -107,5 +106,13 @@ public class QuestionPanel extends JPanel {
 
     public boolean isAnswered() {
         return optionsPanel.isAnswered();
+    }
+
+    public int getSelectedOption() {
+        return optionsPanel.getSelectedOption();
+    }
+
+    public void disableOptions() {
+        optionsPanel.disableOptions();
     }
 }
