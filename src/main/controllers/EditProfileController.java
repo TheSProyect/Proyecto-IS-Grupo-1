@@ -53,17 +53,28 @@ public class EditProfileController {
 
     }
 
-    public void setNewMail(String newMail){
+    public void setNewUserInfo(String newMail, String newPassword) throws IOException{
         UserData currentUser = new UserData();
         currentUser.setMail(newMail);
-    }
-
-    public void setNewPassword(String newPassword){
-        UserData currentUser = new UserData();
         currentUser.setPassword(newPassword);
 
-    }
+        String directory = System.getProperty("user.dir");
+        String folder;
+        if(currentUser.isAdmin()){
+            folder = "Teachers";
+        } else {
+            folder = "Students";
+        }
+        
+        directory = directory+File.separator+"src"+File.separator;
+        directory = directory+"data"+File.separator+"Users"+File.separator;
+        directory = directory+folder+File.separator+ currentUser.getUsername() +".txt";
 
+        BufferedWriter writer = new BufferedWriter(new FileWriter(directory, true));
+        writer.write(newPassword + "\n" + newMail);
+        writer.close();
+
+    }
     
 }
 
