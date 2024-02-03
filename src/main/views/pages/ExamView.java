@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
@@ -19,6 +20,7 @@ import main.controllers.PresentExamController;
 import main.utils.Palette;
 import main.views.components.ExamMenu;
 import main.views.components.QuestionPanel;
+import main.views.components.TimerBlock;
 
 public class ExamView extends NavBarTemplateView {
     JPanel contentPanel;
@@ -28,6 +30,7 @@ public class ExamView extends NavBarTemplateView {
     List<QuestionPanel> questions;
     int index;
     PresentExamController presentController;
+    ExamMenu menuPanel;
 
     public ExamView() {
         questions = new ArrayList<QuestionPanel>();
@@ -39,7 +42,7 @@ public class ExamView extends NavBarTemplateView {
         paintBorders();
         paintContentPanel();
 
-        addActionListenerNavbar();
+        addActionListener();
     }
 
     private void paintContentPanel() {
@@ -58,17 +61,6 @@ public class ExamView extends NavBarTemplateView {
         this.add(contentPanel, BorderLayout.CENTER);
     }
 
-    private void paintMenuPanel() {
-        ExamMenu menuPanel = new ExamMenu(presentController.getDuracion(), finishExamButton);
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        constraints.weighty = 0.5;
-        constraints.fill = GridBagConstraints.BOTH;
-
-        contentPanel.add(menuPanel, constraints);
-    }
-
     private void paintQuestionPanel(int questionIndex) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 1;
@@ -83,6 +75,19 @@ public class ExamView extends NavBarTemplateView {
         }
         
         questions.get(index).setVisible(true);
+    }
+
+    protected void paintMenuPanel() {
+        TimerBlock timer = new TimerBlock(presentController.getDuracion(), finishExamButton);
+        menuPanel = new ExamMenu(timer, questions.size());
+        
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.weighty = 0.5;
+        constraints.fill = GridBagConstraints.BOTH;
+
+        contentPanel.add(menuPanel, constraints);
     }
     
     private void paintBottomButtonPanel() {
@@ -192,14 +197,45 @@ public class ExamView extends NavBarTemplateView {
         }
     }   
 
+    private void showConcreteQuestion(int questionNumber) {
+        questions.get(index).setVisible(false);
+            index = questionNumber;
+            questions.get(index).setVisible(true);
+    }
+
+    private void addActionListener() {
+        addActionListenerNavbar();
+
+        for(int i = 0; i < menuPanel.getQuestionListItems().size(); i++) {
+            menuPanel.getQuestionListItems().get(i).addActionListener(this);
+        }
+    }
+
+    private void actionEventInExamMenu(ActionEvent e) {
+        ImageIcon unansweredIcon = new ImageIcon("src/assets/Unanswered_Icon.png");
+        boolean unanswered = !(menuPanel.getQuestionListItems().get(index).getIcon() == unansweredIcon);
+        
+        if (questions.get(index).isAnswered() && unanswered) {
+            menuPanel.getQuestionListItems().get(index).setIcons("Answered_Unselected_Icon", "Answered_Selected_Icon");
+        }
+
+        for(int i = 0; i < menuPanel.getQuestionListItems().size(); i++) {
+            if (e.getSource() == menuPanel.getQuestionListItems().get(i)) {
+                menuPanel.setCurrentQuestion(i);
+                showConcreteQuestion(i);
+                break;
+            }
+        }
+    }
+
     public void showInstructions(){}
     public void endExam(){} 
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == finishExamButton) {
-            Frame.instance().setView(ExamsView.instance());
-            Frame.instance().setTitle("ExamsView");
+            Frame.instance().setView(new ExamEndedView());
+            Frame.instance().setTitle("ExamEndedView");
         } else if (e.getSource() == prevButton) {
             showPreviousQuestions();
 
@@ -207,6 +243,7 @@ public class ExamView extends NavBarTemplateView {
             showNextQuestion();
 
         } else {
+            actionEventInExamMenu(e);
             actionEventInNavBar(e);
         }
     }

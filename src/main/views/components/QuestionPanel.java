@@ -105,5 +105,7 @@ public class QuestionPanel extends JPanel {
         this.add(optionsPanel, constraints);
     }
 
-    
+    public boolean isAnswered() {
+        return optionsPanel.isAnswered();
+    }
 }

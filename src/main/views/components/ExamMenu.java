@@ -3,6 +3,7 @@ package main.views.components;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -15,31 +16,33 @@ public class ExamMenu extends JPanel{
     JScrollPane questionsListScrollPane;
     QuestionsList questionsList;
 
-    public ExamMenu(int time, JButton exitExamButton) {
+    public ExamMenu(JPanel block, int questionAmount) {
+        buildExamMenuPanel();
+
+        paintBlock(block);
+
+        paintQuestionsList(questionAmount);
+    }
+
+    private void buildExamMenuPanel() {
         this.setMinimumSize(new Dimension(Size.instance().getExamMenu()));
         this.setPreferredSize(new Dimension(Size.instance().getExamMenu()));
         this.setMaximumSize(new Dimension(Size.instance().getExamMenu()));
         this.setBackground(Palette.instance().getWhite());
         this.setLayout(new GridBagLayout());
-
-        paintTimer(time, exitExamButton);
-
-        paintQuestionsList();
     }
 
-    private void paintTimer(int time, JButton exitExamButton) {
-        TimerBlock timer = new TimerBlock(time, exitExamButton);
-
+    private void paintBlock(JPanel block) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 1;
         constraints.gridy = 1;
         constraints.weighty = 0.5;
 
-        this.add(timer, constraints);
+        this.add(block, constraints);
     }
 
-    private void paintQuestionsList() {
-        questionsList = new QuestionsList();
+    private void paintQuestionsList(int questionAmount) {
+        questionsList = new QuestionsList(questionAmount);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 1;
@@ -47,5 +50,13 @@ public class ExamMenu extends JPanel{
         constraints.weighty = 1.5;
         
         this.add(questionsList, constraints);
+    }
+
+    public List<QuestionListItem> getQuestionListItems() {
+        return questionsList.getQuestionListItems();
+    }
+
+    public void setCurrentQuestion(int currentQuestionNumber) {
+        questionsList.setCurrentQuestion(currentQuestionNumber);
     }
 }

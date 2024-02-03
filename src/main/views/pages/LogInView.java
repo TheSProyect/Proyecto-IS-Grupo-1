@@ -54,7 +54,7 @@ public class LogInView extends JPanel implements ActionListener {
 
     private void paintTitleLabel() {
         JLabel titleLabel = new JLabel();
-        ImageIcon icon = new ImageIcon("assets/Logo_Login.png");
+        ImageIcon icon = new ImageIcon("src/assets/Logo_Login.png");
         titleLabel.setIcon(icon);
         // titleLabel.setText("TéchneLogic");
         // titleLabel.setFont(new Font("Nunito Sans", Font.BOLD, 50));

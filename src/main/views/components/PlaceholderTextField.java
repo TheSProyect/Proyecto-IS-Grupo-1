@@ -41,7 +41,7 @@ public class PlaceholderTextField extends JPanel implements FocusListener {
     }
 
     private void paintIcon(String iconFilename) {
-        ImageIcon imageIcon = new ImageIcon("assets/" + iconFilename);;
+        ImageIcon imageIcon = new ImageIcon("src/assets/" + iconFilename);;
         icon = new JLabel();
         icon.setPreferredSize(new Dimension(35,35));
         icon.setIcon(imageIcon);

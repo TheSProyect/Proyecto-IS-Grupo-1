@@ -11,34 +11,41 @@ import javax.swing.border.Border;
 import main.utils.Palette;
 
 public class NavBarButton extends JButton {
-    ImageIcon icon;
-    Border border;
-    
     public NavBarButton(String buttonName, String iconFileName, boolean leftAling) {
-        border = BorderFactory.createEmptyBorder();
+        buildButton();
+        
+        setButtonText(buttonName);
+        
+        setButtonIcon(iconFileName, leftAling);
+    }
+
+    private void buildButton() {
+        Border border = BorderFactory.createEmptyBorder();
         this.setBorder(border);
         this.setPreferredSize(new Dimension(150, 40));
+        this.setForeground(Palette.instance().getLightGray());
+        this.setBackground(Palette.instance().getWhite());
+        this.setFocusable(false);
+    }
 
-        icon = new ImageIcon("assets/" + iconFileName);
+    private void setButtonIcon(String iconFileName, boolean leftAling) {
+        ImageIcon icon = new ImageIcon("src/assets/" + iconFileName);
         this.setIcon(icon);
+        this.setIconTextGap(15);
 
+        if (leftAling) {
+            this.setHorizontalTextPosition(JButton.LEFT);
+        }
+    }
+
+    private void setButtonText(String buttonName) {
         if(isTwoWords(buttonName)) {
             String[] separated = buttonName.split(" ");
             this.setText("<html>" + separated[0] + "<br/>" + separated[1] + "</html>");
         } else {
             this.setText(buttonName);
         }
-        
         this.setFont(new Font("Nunito Sans", Font.PLAIN, 15));
-        this.setIconTextGap(15);
-
-        if (leftAling) {
-            this.setHorizontalTextPosition(JButton.LEFT);
-        }
-
-        this.setForeground(Palette.instance().getLightGray());
-        this.setBackground(Palette.instance().getWhite());
-        this.setFocusable(false);
     }
 
     private boolean isTwoWords(String str) {

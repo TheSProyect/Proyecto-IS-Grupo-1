@@ -40,9 +40,14 @@ public class OptionsPanel extends JPanel implements ActionListener{
         }
     }
 
+    public boolean isAnswered() {
+        return answered;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         answered = true;
+
         for (int i = 0; i < options.size(); i++) {
             options.get(i).paintIcon();
         }
