@@ -1,7 +1,7 @@
 package main.models;
 
 public class UserData {
-	private String Username, Password;
+	private String Username, Password, Mail;
 	private boolean isAdmin = true;	
 	
 	public UserData(){}
@@ -18,6 +18,10 @@ public class UserData {
 		isAdmin = Admin;
 	}
 	
+	public void setMail(String Email){
+		Mail = Email;
+	}
+
 	public String getUsername(){
 		return Username;
 	}
@@ -29,4 +33,9 @@ public class UserData {
 	public boolean isAdmin(){
 		return isAdmin;
 	}
+
+	public String getMail(){
+		return Mail;
+	}
+
 }
