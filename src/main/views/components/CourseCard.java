@@ -63,7 +63,7 @@ public class CourseCard extends JPanel {
 
     private void paintLine() {
         JSeparator line = new JSeparator();
-        line.setPreferredSize(new Dimension(200,1));
+        line.setPreferredSize(new Dimension(200,10));
         line.setForeground(Palette.instance().getLightGray());
         line.setBackground(Palette.instance().getLightGray());
 
@@ -72,7 +72,7 @@ public class CourseCard extends JPanel {
 
     private void paintCourseDescription() {
         JTextPane courseDescription = new JTextPane();
-        courseDescription.setPreferredSize(new Dimension(210, 100));
+        courseDescription.setPreferredSize(new Dimension(210, 115));
         courseDescription.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
         courseDescription.setEditable(false);
         courseDescription.setForeground(Palette.instance().getGray());
