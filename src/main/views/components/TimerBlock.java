@@ -3,6 +3,7 @@ package main.views.components;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
+import java.sql.Time;
 
 import main.utils.Palette;
 
@@ -10,21 +11,16 @@ import java.awt.Dimension;
 import java.awt.Font;
 
 public class TimerBlock extends JPanel{
-	private JLabel TwoPoints, MinLabel, SecLabel, TimeRemainingLabel, imgLabel;
+	private JLabel TimeLabel, TimeRemainingLabel, imgLabel;
 	private Timer T;
 	private ImageIcon ClockImg;
 
 	public TimerBlock(int TimeLimit, JButton stopButton){
 		this.paintPanel();
 		
-		JLabel TwoPoints = new JLabel(":");
-		this.paintTimeLabel(TwoPoints, 115);
+		JLabel TimeLabel = new JLabel(TimerFormat(String.valueOf(TimeLimit))+":00");
+		this.paintTimeLabel(TimeLabel);
 		
-		JLabel MinLabel = new JLabel(TimerFormat(String.valueOf(TimeLimit)));
-		this.paintTimeLabel(MinLabel, 88);
-		
-		JLabel SecLabel = new JLabel("00");
-		this.paintTimeLabel(SecLabel, 122);
 		
 		TimeRemainingLabel = new JLabel("Tiempo restante");
 		TimeRemainingLabel.setBounds(70, 10,200, 25);
@@ -35,13 +31,13 @@ public class TimerBlock extends JPanel{
 
 		this.paintImageIcon(ClockImg, imgLabel);
 		
-		T = new Timer(1000, setActionListener(stopButton, MinLabel, SecLabel));
+		T = new Timer(1000, setActionListener(stopButton, TimeLabel));
 		T.start();
 
 	}
 
-	public void paintTimeLabel(JLabel label, int width){
-		label.setBounds(width, 30, 35, 25);
+	public void paintTimeLabel(JLabel label){
+		label.setBounds(88, 30, 80, 25);
 		label.setForeground(Palette.instance().getWhite());
 		label.setFont(new Font("Nunito Sans", Font.BOLD, 24));
 		this.add(label);
@@ -64,15 +60,16 @@ public class TimerBlock extends JPanel{
 		this.add(imgLabel);
 	}
 
-	public ActionListener setActionListener(JButton stopButton, JLabel MinLabel, JLabel SecLabel){
+	public ActionListener setActionListener(JButton stopButton, JLabel TimeLabel){
 		ActionListener taskPerformer = new ActionListener() {
-			int TimeRemaining = 10;
+			int TimeRemaining;
 			public void actionPerformed(ActionEvent e){
-				TimeRemaining = (Integer.parseInt(MinLabel.getText())*60 + (Integer.parseInt(SecLabel.getText())));
+				String[] parts = TimeLabel.getText().split(":");
+				
+				TimeRemaining = (Integer.parseInt(parts[0])*60) + (Integer.parseInt(parts[1]));
 				
 				TimeRemaining--;
-				MinLabel.setText(TimerFormat(String.valueOf(TimeRemaining/60)));
-				SecLabel.setText(TimerFormat(String.valueOf(TimeRemaining%60)));
+				TimeLabel.setText(TimerFormat(String.valueOf(TimeRemaining/60))+":"+TimerFormat(String.valueOf(TimeRemaining%60)));
 				
 				if(TimeRemaining<0){
 				T.stop();
