@@ -31,13 +31,12 @@ public class PresentExamController {
     }
     public static void main(String[] args) throws IOException{
         PresentExamController p = new PresentExamController();
-       // p.searchFolder();    
     }
 
     public void examFinished(){
         //UserData data = new UserData(); 
-        //String nameFolderStudent = data.getUsername();
-        String nameFolderStudent = "Usuario";  
+        //String nameFolderStudent = data.getUsername(); 
+        String nameFolderStudent = "Usuario";
         String directory = System.getProperty("user.dir");
         directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users"+File.separator+"Students"+ File.separator+nameFolderStudent;
         //String nameCourse = currentExam.getNameCourse();
@@ -202,6 +201,7 @@ public class PresentExamController {
         int indexForNameCourse = 1;
         String nameFolder = informationsExam[indexForNameFolder];
         String nameCourse = informationsExam[indexForNameCourse];
+        System.out.println(nameFolder);
         directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Exams"+File.separator+nameCourse;
         File searchedFolder = new File(directory);
         if (searchedFolder.exists() && searchedFolder.isDirectory()) {

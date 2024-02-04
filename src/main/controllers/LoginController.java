@@ -8,7 +8,7 @@ import java.io.IOException;
 import main.utils.UserData;
 
 public class LoginController {
-	UserData currentUser = UserData.instance();
+	public UserData currentUser = UserData.instance();
 	public LoginController(){
 		
 		
@@ -17,7 +17,6 @@ public class LoginController {
 	public static void main(String[] args) throws IOException{
         
 	}
-	
 	
 	
 	public boolean searchUser(String Username){

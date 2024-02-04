@@ -4,4 +4,4 @@ Tipo del examen
 Nombre del profesor
 2
 Descripcion
-Nombre del curso
+Course1
