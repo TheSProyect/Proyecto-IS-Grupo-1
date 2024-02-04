@@ -2,6 +2,8 @@ package main.utils;
 
 import java.awt.Dimension;
 
+import javax.swing.Popup;
+
 public class Size {
     private static Size size;
 
@@ -11,6 +13,7 @@ public class Size {
     Dimension smallLoginButton;
     Dimension bigLoginButton;
     Dimension examMenu;
+    Dimension popup;
     
     public static Size instance() {
 		if (size == null){
@@ -26,6 +29,7 @@ public class Size {
         smallLoginButton = new Dimension(148, 42);
         bigLoginButton = new Dimension(314, 42);
         examMenu = new Dimension(300, 560);
+        popup = new Dimension(500, 300);
     }
 
     public Dimension getDefaultFrame() {
@@ -50,5 +54,9 @@ public class Size {
 
     public Dimension getExamMenu() {
         return examMenu;
+    }
+
+    public Dimension getPopupDimension() {
+        return popup;
     }
 }

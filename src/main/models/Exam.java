@@ -96,7 +96,6 @@ public class Exam extends Course{
     }
 
     public void setNameCourse(String nameCourse){
-        course = new Course();
         course.setNameCourse(nameCourse);
     }
 
@@ -120,10 +119,9 @@ public class Exam extends Course{
     }
 
     public void setTeacherName(String name){
-        course=new Course();
         course.setNameTeacherCourse(name);
     }
-    public String getTeacherName(){
+    public String getNameTeacher(){
         return course.getNameTeacher();
     }
 
@@ -139,5 +137,11 @@ public class Exam extends Course{
     }
     public String getDescription(){
         return description;
+    }
+    public boolean isVisit(){
+        return course.isVisit();
+    }
+    public void setVisit(boolean visit){
+        course.setVisit(visit);
     }
 }
