@@ -36,8 +36,9 @@ public class PresentExamController {
     }
 
     public void examFinished(){
-        UserData data = new UserData(); 
-        String nameFolderStudent = data.getUsername();
+        //UserData data = new UserData(); 
+        //String nameFolderStudent = data.getUsername();
+        String nameFolderStudent = "Usuario";  
         String directory = System.getProperty("user.dir");
         directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users"+File.separator+"Students"+ File.separator+nameFolderStudent;
         //String nameCourse = currentExam.getNameCourse();
@@ -57,7 +58,7 @@ public class PresentExamController {
         }
     }
 
-    public void showExamsInformation(){
+    public List<List<String>> showExamsInformation(){
         List<List<String>> examsInformation = new ArrayList<List<String>>();
         String directory = System.getProperty("user.dir");
         directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Exams";
@@ -66,31 +67,46 @@ public class PresentExamController {
             File[] files = searchedFolder.listFiles();
             if (files != null) {
                 for (File file : files) {
-                    directory = directory + File.separator + file.getName();
-                    File searchedFolderExam = new File(directory);
-                    if (searchedFolder.exists() && searchedFolder.isDirectory()) {
+                    if((file.getName()).equals("Instructions.txt")){
+                        break;
+                        } else {
+                    String directorySub = directory + File.separator + file.getName();
+                    File searchedFolderExam = new File(directorySub);
+                    if (searchedFolderExam.exists() && searchedFolderExam.isDirectory()) {
                         File[] filesExams = searchedFolderExam.listFiles();
-                        if (files != null) {
+                        if (filesExams != null) {
                             for (File fileExam : filesExams) {
-                                readExam(directory, fileExam.getName());
-                                examsInformation.add(new ArrayList<String>());
-                                examsInformation.add(readInformation());
+                                if((fileExam.getName()).equals("Pregunta1.txt")){
+                                break;
+                                } else {
+                                readExam(directorySub, fileExam.getName());
+                                examsInformation.add(readInformation(file.getName()));
+                                for (List<String> examInformation : examsInformation) {
+                                    for (String nombre : examInformation) {
+                                        System.out.print(nombre + " ");
+                                    }
+                                    System.out.println();
+                                }
+                            }
                             }
                         }
                     }
                 }
             }
         }
+    }
+        return examsInformation;
     }    
     
-    private List<String> readInformation(){
+    private List<String> readInformation(String nameCourse){
         List<String> examInformation = new ArrayList<String>();
-        examInformation.add((currentExam.getNameCourse()));
+        examInformation.add(currentExam.getNameExam());
         examInformation.add((currentExam.getDescription()));
         examInformation.add((currentExam.getTypeExam()));
         String duration = Integer.toString(currentExam.getDuration());
         examInformation.add(duration);
         examInformation.add((currentExam.getNameTeacher()));
+        examInformation.add(currentExam.getNameCourse());
         return examInformation;
     }
     
@@ -103,7 +119,6 @@ public class PresentExamController {
             questionStatement = br.readLine();
             domain = br.readLine();
             currentExam.setQuestionsExam(questionStatement,domain,counter);
-            
             for (int i =0; ((line = br.readLine()) != null); i++) {
                 if (line != null && line.length() > 0 && answerCorrect && line.substring(0, 1).equalsIgnoreCase("v")) {
                     answer[i]= line.substring(1);
@@ -141,6 +156,7 @@ public class PresentExamController {
             duracion = Integer.parseInt((br.readLine()));
             currentExam.setDuration(duracion);
             currentExam.setDescripcion(br.readLine());
+            currentExam.setNameCourse(br.readLine());
             }catch (IOException e) {
                 e.printStackTrace();
         }
@@ -188,6 +204,7 @@ public class PresentExamController {
     }  
 
     public void searchFolder() {
+        showExamsInformation();
         String directory = System.getProperty("user.dir");
         //String nameCourse = currentExam.getNameCourse();
         //String nameFolder = currentExam.getNameExam();
