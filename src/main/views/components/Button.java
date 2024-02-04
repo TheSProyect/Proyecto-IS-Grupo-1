@@ -30,7 +30,7 @@ public class Button extends JButton{
         this.setForeground(Palette.instance().getOffWhite());
         this.setFont(new Font("Nunito Sans", Font.BOLD, 25));
         this.setHorizontalAlignment(JLabel.CENTER);
-        this.setVerticalAlignment(JLabel.BOTTOM);
+        this.setVerticalAlignment(JLabel.CENTER);
         this.setFocusable(false);
     }
 }
