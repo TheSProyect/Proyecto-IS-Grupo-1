@@ -197,12 +197,14 @@ public class PresentExamController {
         return question;
     }  
 
-    public void searchFolder() {
+    public void searchFolder(String [] informationsExam) {
         String directory = System.getProperty("user.dir");
-        //String nameCourse = currentExam.getNameCourse();
-        //String nameFolder = currentExam.getNameExam();
-        String nameCourse = "Course1";
-        String nameFolder = "Examen1";
+        int indexForNameFolder = 0;
+        int indexForNameCourse = 1;
+        String nameFolder = informationsExam[indexForNameFolder];
+        String nameCourse = informationsExam[indexForNameCourse];
+        //String nameCourse = "Course1";
+        //String nameFolder = "Examen1";
         directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Exams"+File.separator+nameCourse;
         File searchedFolder = new File(directory);
         if (searchedFolder.exists() && searchedFolder.isDirectory()) {

@@ -48,7 +48,7 @@ public class RequestCertificateController {
             File[] files = searchedFolder.listFiles();
             if (files != null) {
                 for (File file : files) {
-                    if (file.isDirectory() && !(file.getName().equals(nameFolderStudent))) {
+                    if (file.isDirectory() && !(file.getName().equals("Password"))) {
                         namesCourses.add(nameCourses(file));
                     }
                 }
