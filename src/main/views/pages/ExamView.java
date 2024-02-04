@@ -39,7 +39,7 @@ public class ExamView extends ExamTemplateView {
     }
 
     protected void inicializeQuestions() {
-        // presentController.searchFolder(examID);
+        presentController.searchFolder(examID);
         List<String> questionsString= presentController.getQuestionsStrings();
         List<String> domain = presentController.getDomain();
         List<Boolean> hasCode = presentController.getHasCode();
