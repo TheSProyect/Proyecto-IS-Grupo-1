@@ -1,6 +1,7 @@
 package main.views.components;
 
 import javax.swing.ImageIcon;
+import javax.swing.plaf.metal.MetalButtonUI;
 
 public class IconButton extends Button {
 

@@ -13,6 +13,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+import javax.swing.plaf.metal.MetalButtonUI;
 
 import main.utils.Palette;
 import main.views.components.ExamMenu;
@@ -84,6 +85,7 @@ public abstract class ExamTemplateView extends NavBarTemplateView {
 
         finishExamButton = new JButton("Terminar Examen");
         finishExamButton.setFont(new Font("Nunito Sans", Font.BOLD, 15));
+        finishExamButton.setUI(new MetalButtonUI());
         finishExamButton.setForeground(Palette.instance().getWhite());
         finishExamButton.setBackground(Palette.instance().getBlue());
         finishExamButton.setPreferredSize(new Dimension(190, 30));
@@ -132,6 +134,7 @@ public abstract class ExamTemplateView extends NavBarTemplateView {
     private void paintButton(JButton button) {
         button.setForeground(Palette.instance().getWhite());
         button.setBackground(Palette.instance().getBlue());
+        button.setUI(new MetalButtonUI());
         button.setFont(new Font("Nunito Sans", Font.BOLD, 15));
         button.setPreferredSize(new Dimension(130, 30));
         button.setFocusable(false);

@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextPane;
 import javax.swing.border.Border;
+import javax.swing.plaf.metal.MetalButtonUI;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -91,6 +92,7 @@ public class CourseCard extends JPanel {
     private void paintPresentExamButton() {
         presentExamButton = new JButton("Presentar Examen");
         presentExamButton.setFont(new Font("Nunito Sans", Font.BOLD, 15));
+        presentExamButton.setUI(new MetalButtonUI());
         presentExamButton.setForeground(Palette.instance().getWhite());
         presentExamButton.setBackground(Palette.instance().getBlue());
         presentExamButton.setPreferredSize(new Dimension(190, 30));
