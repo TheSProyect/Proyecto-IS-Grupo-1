@@ -1,9 +1,18 @@
 package main.models;
 
+import main.views.pages.Frame;
+
 public class UserData {
+	private static UserData user;
 	private String Username, Password, Mail;
 	private boolean isAdmin = true;	
 	
+	public static UserData instace(){
+		if (user == null){
+			user = new UserData();
+		}
+		return user;
+	}
 	public UserData(){}
 	
 	public void setUsername(String Name){

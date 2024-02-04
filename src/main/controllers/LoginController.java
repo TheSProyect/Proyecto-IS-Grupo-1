@@ -11,6 +11,7 @@ import main.models.UserData;
 
 public class LoginController {
 	UserData currentUser = new UserData();
+	//UserData currentUser = UserData.instace();
 	public LoginController(){
 		
 		

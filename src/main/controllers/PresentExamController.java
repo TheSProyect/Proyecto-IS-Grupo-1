@@ -276,6 +276,6 @@ public class PresentExamController {
         currentExam.setResultExam(numCorrectQuestions);
         // esa impresion seria lo que hay que escribir como string en el .txt
         //System.out.println(currentExam.getResultExam()+ "/"+currentExam.getNumberQuestions());
-        //System.out.println(currentExam.getUsuario());
+        System.out.println(currentExam.getUsuario());
     }
 }
