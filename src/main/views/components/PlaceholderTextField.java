@@ -65,6 +65,10 @@ public class PlaceholderTextField extends JPanel implements FocusListener {
         this.add(textField);
     }
 
+    public JTextField getTextField() {
+        return textField;
+    }
+    
     @Override
     public void focusGained(FocusEvent e) {
         if (textField.getText().equals(str)) {
