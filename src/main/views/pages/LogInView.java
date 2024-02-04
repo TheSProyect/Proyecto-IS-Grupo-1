@@ -185,19 +185,27 @@ public class LogInView extends JPanel implements ActionListener {
             //reemplazar los System.out con sus respectivos Popups
 
             if(userTextField.getTextField().equals("") || passwordTextField.getTextField().equals("")){
+                
                 System.out.println("Se deben llenar todos los campos");
+            
             } else if(LoginControl.searchUser(userTextField.getTextField())){
 
                 if(LoginControl.verifyPassWord(passwordTextField.getTextField())){
+                    
                     Frame.instance().setView(ExamsView.instance());
+                
                 } else {
+                    
                     System.out.println("Contraseña incorrecta");
+                
                 }
 
             } else {
+                
                 System.out.println("Usuario no existe");
-            }
 
+            }
+            
             //Frame.instance().setView(ExamsView.instance());
         }
     }

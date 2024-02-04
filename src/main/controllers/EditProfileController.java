@@ -14,18 +14,24 @@ public class EditProfileController {
     public EditProfileController(){
         
     
-
     }
-
 
     public boolean setNewUsername(String newUsername) throws IOException{
         UserData currentUser = UserData.instance();
-        String directory = System.getProperty("user.dir");
+
+        if(newUsername == currentUser.getUsername()){
+            return true;
+        }
+
+        String directory;
         if(currentUser.isAdmin()){
-		directory = System.getProperty("user.dir");
-        directory = directory+File.separator+"src"+File.separator;
-        directory = directory+"data"+File.separator+"Users"+File.separator;
-        directory = directory+"Teachers"+File.separator+ newUsername +".txt";
+            directory = searchedDirectory("Teachers", newUsername);
+        } else {
+            directory = searchedDirectory("Users", newUsername);
+        }
+
+
+		
         File adminfile = new File(directory);
         
         if(adminfile.exists()){
@@ -36,7 +42,6 @@ public class EditProfileController {
             return true;
         }
         
-        } else {
             directory = System.getProperty("user.dir");
             directory = directory+File.separator+"src"+File.separator;
             directory = directory+"data"+File.separator+"Users"+File.separator;
@@ -49,12 +54,11 @@ public class EditProfileController {
                 currentUser.setUsername(newUsername);
                 return true;
             }
-        }
 
     }
 
     public void setNewUserInfo(String newMail, String newPassword) throws IOException{
-        UserData currentUser =UserData.instance();
+        UserData currentUser = UserData.instance();
         currentUser.setMail(newMail);
         currentUser.setPassword(newPassword);
 
@@ -74,6 +78,17 @@ public class EditProfileController {
         writer.write(newPassword + "\n" + newMail);
         writer.close();
 
+    }
+
+    public String searchedDirectory(String folder, String Username){
+		String directory = System.getProperty("user.dir");
+		directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users";
+		directory = directory+File.separator+folder+File.separator+Username+File.separator+"Password.txt";
+		return directory;
+	}
+
+    public boolean userAlreadyExists(){
+        return false;
     }
     
 }
