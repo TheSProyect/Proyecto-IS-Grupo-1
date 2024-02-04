@@ -21,10 +21,10 @@ public class TimerBlock extends JPanel{
 		this.paintTimeLabel(TwoPoints, 115);
 		
 		JLabel MinLabel = new JLabel(TimerFormat(String.valueOf(TimeLimit)));
-		this.paintTimeLabel(MinLabel, 85);
+		this.paintTimeLabel(MinLabel, 88);
 		
 		JLabel SecLabel = new JLabel("00");
-		this.paintTimeLabel(SecLabel, 125);
+		this.paintTimeLabel(SecLabel, 122);
 		
 		TimeRemainingLabel = new JLabel("Tiempo restante");
 		TimeRemainingLabel.setBounds(70, 10,200, 25);
@@ -41,9 +41,9 @@ public class TimerBlock extends JPanel{
 	}
 
 	public void paintTimeLabel(JLabel label, int width){
-		label.setBounds(width, 30, 30, 25);
+		label.setBounds(width, 30, 35, 25);
 		label.setForeground(Palette.instance().getWhite());
-		label.setFont(new Font("Nunito Sans", Font.BOLD, 25));
+		label.setFont(new Font("Nunito Sans", Font.BOLD, 24));
 		this.add(label);
 	}
 	
