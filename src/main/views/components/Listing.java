@@ -38,7 +38,7 @@ public class Listing extends JScrollPane{
     
     private void paintListingPanel() {
         listingPanel = new JPanel();
-        listingPanel.setPreferredSize(new Dimension(860, 500));
+        listingPanel.setPreferredSize(new Dimension(860, 1500));
         listingPanel.setBackground(Palette.instance().getWhite());
 
         this.setViewportView(listingPanel);
@@ -109,8 +109,8 @@ public class Listing extends JScrollPane{
         Border border = BorderFactory.createLineBorder(Palette.instance().getBlue());
         button.setBorder(border);
 
-        button.setPreferredSize(new Dimension(150, 30));
-        button.setMaximumSize(new Dimension(150, 30));
+        button.setPreferredSize(new Dimension(190, 30));
+        button.setMaximumSize(new Dimension(190, 30));
     
         titleButtonContainer.add(button);
         listingButtons.add(button);
