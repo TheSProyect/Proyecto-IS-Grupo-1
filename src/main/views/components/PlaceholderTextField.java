@@ -18,7 +18,6 @@ public class PlaceholderTextField extends JPanel implements FocusListener {
     String str;
     JLabel icon;
     JTextField textField;
-    Border inside;
     boolean isEmpty = true;
 
     public PlaceholderTextField(String str, String iconFilename) {
@@ -32,12 +31,10 @@ public class PlaceholderTextField extends JPanel implements FocusListener {
     }
 
     private void paintContainer() {
-        inside = BorderFactory.createEmptyBorder(0, 0, 0, 0);
         Border outside = BorderFactory.createLineBorder(Palette.instance().getLightGray(), 2);
-        Border border = BorderFactory.createCompoundBorder(outside, inside);
+        this.setBorder(outside);
 
         this.setPreferredSize(new Dimension(314,48));
-        this.setBorder(border);
         this.setBackground(Palette.instance().getOffWhite());
     }
 
@@ -52,16 +49,15 @@ public class PlaceholderTextField extends JPanel implements FocusListener {
 
     private void paintTextField() {
         textField = new JTextField();
-        textField.setPreferredSize(new Dimension(265,35));
+        textField.setPreferredSize(new Dimension(235,35));
         textField.setText(this.str);
         textField.setFont(new Font("Nunito Sans", Font.PLAIN, 17));
         textField.setForeground(Palette.instance().getLightGray());
         textField.setBackground(Palette.instance().getOffWhite());
         textField.addFocusListener(this);
+
+        Border inside = BorderFactory.createEmptyBorder(0, 0, 0, 0);
         textField.setBorder(inside);
-
-        
-
         
         this.add(textField);
     }

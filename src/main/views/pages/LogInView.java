@@ -21,8 +21,6 @@ import main.utils.Size;
 import main.views.components.PlaceholderTextField;
 
 public class LogInView extends JPanel implements ActionListener {
-    JPanel titlePanel;
-    JPanel loginPanel;
     JPanel infoContainer;
     JButton loginButton;
     
@@ -42,44 +40,39 @@ public class LogInView extends JPanel implements ActionListener {
     }
 
     private void paintTitlePanel() {
-        titlePanel = new JPanel();
+        JPanel titlePanel = new JPanel();
         titlePanel.setBackground(Palette.instance().getBlue());
         titlePanel.setPreferredSize(new Dimension(546,720));
-        // titlePanel.setMaximumSize(new Dimension(546,720));
 
         titlePanel.setLayout(new BorderLayout());
 
-        paintTitleLabel();
+        paintTitleLabel(titlePanel);
 
         this.add(titlePanel);
     }
 
-    private void paintTitleLabel() {
+    private void paintTitleLabel(JPanel titlePanel) {
         JLabel titleLabel = new JLabel();
         ImageIcon icon = new ImageIcon("src/assets/Logo_Login.png");
         titleLabel.setIcon(icon);
-        // titleLabel.setText("TéchneLogic");
-        // titleLabel.setFont(new Font("Nunito Sans", Font.BOLD, 50));
-        // titleLabel.setForeground(Palette.instance().getWhite());
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         
         titlePanel.add(titleLabel, BorderLayout.CENTER);
     }
 
     private void paintLoginPanel() {
-        loginPanel = new JPanel();
+        JPanel loginPanel = new JPanel();
         loginPanel.setPreferredSize(new Dimension(478,720));
         loginPanel.setLayout(new BorderLayout());
         loginPanel.setMinimumSize(new Dimension(478,678));
-        // titlePanel.setMaximumSize(new Dimension(1024,720));
 
-        buildLoginPanelBorders();
-        buildInfoContainer();
+        buildLoginPanelBorders(loginPanel);
+        buildInfoContainer(loginPanel);
 
         this.add(loginPanel);
     }
 
-    private void buildLoginPanelBorders() {
+    private void buildLoginPanelBorders(JPanel loginPanel) {
         JPanel border = new JPanel();
         border.setPreferredSize(Size.instance().getLogInTopBottomBoder());
         border.setBackground(Palette.instance().getWhite());
@@ -101,22 +94,22 @@ public class LogInView extends JPanel implements ActionListener {
         loginPanel.add(border, BorderLayout.EAST);
     }
 
-    private void buildInfoContainer() {
-        infoContainer = new JPanel();
+    private void buildInfoContainer(JPanel loginPanel) {
+        JPanel infoContainer = new JPanel();
         infoContainer.setPreferredSize(new Dimension(478,478));
         infoContainer.setBackground(Palette.instance().getWhite());
         infoContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 1024, 15));
 
-        paintLoginTitleLabel();
-        paintLoginText();
-        paintLoginSeparator();
-        paintTextFields();
-        paintButtonContainer();
+        paintLoginTitleLabel(infoContainer);
+        paintLoginText(infoContainer);
+        paintLoginSeparator(infoContainer);
+        paintTextFields(infoContainer);
+        paintButtonContainer(infoContainer);
 
         loginPanel.add(infoContainer, BorderLayout.CENTER);
     }
 
-    protected void paintLoginTitleLabel() {
+    protected void paintLoginTitleLabel(JPanel infoContainer) {
         JLabel loginTitleLabel = new JLabel();
         loginTitleLabel.setText("Inicia Sesión");
         loginTitleLabel.setFont(new Font("Nunito Sans", Font.BOLD, 30));
@@ -127,7 +120,7 @@ public class LogInView extends JPanel implements ActionListener {
         infoContainer.add(loginTitleLabel);
     }
 
-    protected void paintLoginText() {
+    protected void paintLoginText(JPanel infoContainer) {
         JLabel loginTextLabel = new JLabel();
         loginTextLabel.setText("Estás a un paso de tus evaluaciones");
         loginTextLabel.setFont(new Font("Nunito Sans", Font.PLAIN, 15));
@@ -137,7 +130,7 @@ public class LogInView extends JPanel implements ActionListener {
         infoContainer.add(loginTextLabel);
     }
 
-    private void paintLoginSeparator() {
+    private void paintLoginSeparator(JPanel infoContainer) {
         JSeparator line = new JSeparator();
         line.setPreferredSize(new Dimension(478,2));
         line.setForeground(Palette.instance().getYellow());
@@ -146,15 +139,15 @@ public class LogInView extends JPanel implements ActionListener {
         infoContainer.add(line);
     }
 
-    protected void paintTextFields() {
-        userTextField = new PlaceholderTextField("Usuario", "User_Icon.png");
-        passwordTextField = new PlaceholderTextField("Contraseña", "User_Icon.png");
+    protected void paintTextFields(JPanel infoContainer) {
+        userTextField = new PlaceholderTextField("Usuario", "User_Login_Icon.png");
+        passwordTextField = new PlaceholderTextField("Contraseña", "Unlock_Login_Icon.png");
 
         infoContainer.add(userTextField);
         infoContainer.add(passwordTextField);
     }
 
-    protected void paintButtonContainer() {
+    protected void paintButtonContainer(JPanel infoContainer) {
         JPanel buttonContainer = new JPanel();
         buttonContainer.setPreferredSize(new Dimension(478,44));
         buttonContainer.setBackground(Palette.instance().getWhite());
