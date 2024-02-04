@@ -15,8 +15,10 @@ public class Exam extends Course{
     private Name name;
     private String type, instructions, description;
     private int numberQuestions, duration;
+    private Result results;
     private int[] correctOptions;
     private Question[] questions = new Question[10];
+    //private UserData usuario;
     
     public Exam(){
         String directory = System.getProperty("user.dir");
@@ -27,7 +29,13 @@ public class Exam extends Course{
                 e.printStackTrace();
         }
     }
+    //public Exam(UserData user){
+       // this.usuario=user;
+    //}
 
+    //public String getUsuario(){
+     //   return usuario.getUsername();
+    //}
     private Question getQuestion(){
         return this.questions[0];
     }
@@ -51,8 +59,13 @@ public class Exam extends Course{
     public void setNumberAnswers(int counter, int number){
         questions[counter].setNumberAnswers(number);
     }
-    
-
+    public void setResultExam(int numCorrectQuestions){
+        results = new Result();
+        results.setScore(numCorrectQuestions);
+    }
+    public int getResultExam(){
+        return results.getScore();
+    }
     public String getQuestionsExam(int counter){
         //return questions2.getQuestions();
         return questions[counter].getQuestions();
@@ -71,6 +84,9 @@ public class Exam extends Course{
         return questions[counter].getAnswersQuestions(i);
     }
 
+    public Boolean getIsCorrectExam(int counter, int i){
+        return questions[counter].getIsCorrectQuestion(i);
+    }
     public void setNumberQuestions(int number){
         numberQuestions=number;
     }
