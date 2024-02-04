@@ -17,20 +17,16 @@ public class LoginController {
 	}
 	
 	public static void main(String[] args) throws IOException{
-        LoginController loginC = new LoginController();
+        
 	}
 	
 	
 	
 	public boolean searchUser(String Username){
-		String directory = System.getProperty("user.dir");
-        directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users"+File.separator+"Teachers"+File.separator+ Username +".txt";
 		
-		try(BufferedReader adminReader = new BufferedReader(new FileReader(directory))){
+		try(BufferedReader Reader = new BufferedReader(new FileReader(searchedDirectory("Teachers")+Username))){
 			currentUser.setUsername(Username);
-			String currentPassword = adminReader.readLine();
-			currentPassword = adminReader.readLine();
-			currentPassword = adminReader.readLine();
+			String currentPassword = Reader.readLine();
 
 			currentUser.setPassword(currentPassword);
 			
@@ -38,9 +34,8 @@ public class LoginController {
 			return true;
 			
 		} catch (IOException e){
-			directory = System.getProperty("user.dir");
-			directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users"+File.separator+"Students"+File.separator+ Username +".txt";
-			try(BufferedReader userReader = new BufferedReader(new FileReader(directory))){
+			
+			try(BufferedReader userReader = new BufferedReader(new FileReader(searchedDirectory("Students")))){
 			currentUser.setUsername(Username);
 			
 			String currentPassword = userReader.readLine();
@@ -50,6 +45,7 @@ public class LoginController {
 			
 			currentUser.setIsAdmin(false);
 			return true;
+
 			} catch (IOException ee){
 				
 			return false;
@@ -57,6 +53,13 @@ public class LoginController {
 		}
 		
 		
+	}
+
+	public String searchedDirectory(String folder){
+		String directory = System.getProperty("user.dir");
+		directory = directory+File.separator+"src"+File.separator+"data"+File.separator+folder;
+		directory = directory+File.separator;
+		return directory;
 	}
 	
 	public boolean verifyPassWord(String AttemptedPassword){
