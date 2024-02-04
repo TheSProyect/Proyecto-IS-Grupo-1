@@ -76,7 +76,26 @@ public class ExamView extends ExamTemplateView {
             }
         }
     }
+    
+    protected void showPreviousQuestions(){
+        if ((index - 1) >= 0) {
+            setAnsweredQuestion();
+            questions.get(index).setVisible(false);
+            index = index - 1;
+            menuPanel.setCurrentQuestion(index);
+            questions.get(index).setVisible(true);
+        }
+    }
 
+    protected void showNextQuestion() {
+        if ((index + 1) < questions.size()) {
+            setAnsweredQuestion();
+            questions.get(index).setVisible(false);
+            index = index + 1;
+            menuPanel.setCurrentQuestion(index);
+            questions.get(index).setVisible(true);
+        }
+    }  
     protected void actionEventInBottomLeftButton(ActionEvent e) {
         if(e.getSource() == finishExamButton) {
             Frame.instance().setView(new ExamEndedView(questions, presentController));

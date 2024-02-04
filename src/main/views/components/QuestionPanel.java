@@ -1,5 +1,6 @@
 package main.views.components;
 
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
@@ -7,15 +8,18 @@ import javax.swing.JTextPane;
 import main.utils.Palette;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
-public class QuestionPanel extends JPanel {
+public class QuestionPanel extends JPanel implements ActionListener {
     JPanel domainPanel;
     OptionsPanel optionsPanel;
+    Button explicationButton;
+    ExplicationPanel explicationPanel;
 
     public QuestionPanel() {
         this.setPreferredSize(new Dimension(544, 560));
@@ -24,37 +28,48 @@ public class QuestionPanel extends JPanel {
     }
 
     public void paintDomainPanel(String questionDomain) {
-        domainPanel = new JPanel();
-        domainPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
-        domainPanel.setBackground(Palette.instance().getWhite());
+        buildDomainPanel();
 
         paintDomainLabel(questionDomain);
+        paintExplicationButton();
         
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        // constraints.weighty = 0.1;
-        constraints.gridwidth = 4;
-        constraints.fill = GridBagConstraints.BOTH;
-        
-        this.add(domainPanel, constraints);
+        this.add(domainPanel, createDomainPanelConstraints());
     }
 
-    private void paintDomainLabel(String questionDomain) {
+    protected void buildDomainPanel() {
+        domainPanel = new JPanel();
+        domainPanel.setLayout(new BoxLayout(domainPanel, BoxLayout.X_AXIS));
+        domainPanel.setBackground(Palette.instance().getWhite());
+        // domainPanel.setPreferredSize(new Dimension(544, 40));
+    }
+
+    protected void paintDomainLabel(String questionDomain) {
         JLabel domainLabel = new JLabel();
-        domainLabel.setText("Dominio:");
-        domainLabel.setFont(new Font("Nunito Sans", Font.BOLD, 15));
-        domainLabel.setForeground(Palette.instance().getGray());
-        domainLabel.setVerticalAlignment(JLabel.BOTTOM);
-
-        domainPanel.add(domainLabel);
-
-        domainLabel = new JLabel();
-        domainLabel.setText(questionDomain);
+        domainLabel.setText("<html> <b> Dominio: </b>" + questionDomain);
         domainLabel.setFont(new Font("Nunito Sans", Font.PLAIN, 15));
         domainLabel.setForeground(Palette.instance().getGray());
         domainLabel.setVerticalAlignment(JLabel.BOTTOM);
         domainPanel.add(domainLabel);
+    }
+
+    private void paintExplicationButton() {
+        explicationButton = new Button("Explicación");
+        explicationButton.setPreferredSize(new Dimension(130, 30));
+        explicationButton.setMaximumSize(new Dimension(130, 30));
+        explicationButton.setVisible(false);
+        explicationButton.addActionListener(this);
+
+        domainPanel.add(explicationButton);
+    }
+
+    protected GridBagConstraints createDomainPanelConstraints() {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.weighty = 0.1;
+        constraints.gridwidth = 4;
+        constraints.fill = GridBagConstraints.BOTH;
+        return constraints;
     }
 
     public void paintQuestion(String questionString) {
@@ -63,13 +78,12 @@ public class QuestionPanel extends JPanel {
         questionText.setEditable(false);
         questionText.setFont(new Font("Nunito Sans", Font.BOLD, 20));
         questionText.setForeground(Palette.instance().getBlack());
-        questionText.setPreferredSize(new Dimension(2048,30));
+        questionText.setPreferredSize(new Dimension(1024,30));
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 1;
         constraints.weightx = 1.0;
-        constraints.weighty = 0.1;
         constraints.gridwidth = 4;
         constraints.fill = GridBagConstraints.BOTH;
 
@@ -83,7 +97,7 @@ public class QuestionPanel extends JPanel {
         constraints.gridx = 0;
         constraints.gridy = 2;
         constraints.weightx = 1.0;
-        constraints.weighty = 1.0;
+        constraints.weighty = 0.5;
         constraints.gridwidth = 4;
         constraints.fill = GridBagConstraints.BOTH;
 
@@ -93,15 +107,18 @@ public class QuestionPanel extends JPanel {
     public void paintOptionsPanel(List<String> options) {
         optionsPanel = new OptionsPanel(options);
 
-        
+        this.add(optionsPanel, createOptionPanelConstraints());
+    }
+
+    private GridBagConstraints createOptionPanelConstraints() {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 3;
-        constraints.weighty = 0.5;
+        constraints.weighty = 0.7;
         constraints.gridwidth = 4;
         constraints.fill = GridBagConstraints.BOTH;
 
-        this.add(optionsPanel, constraints);
+        return constraints;
     }
 
     public boolean isAnswered() {
@@ -114,5 +131,25 @@ public class QuestionPanel extends JPanel {
 
     public void disableOptions() {
         optionsPanel.disableOptions();
+    }
+
+    public void setExplicationButtonVisible() {
+        explicationButton.setVisible(true);
+        this.repaint();
+    }
+
+    public void paintExplicationPanel(List<String> text) {
+        explicationPanel = new ExplicationPanel(text);
+        this.add(explicationPanel, createOptionPanelConstraints());
+        explicationPanel.setVisible(false);
+        this.repaint();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == explicationButton) {
+            optionsPanel.setVisible(!optionsPanel.isVisible());
+            explicationPanel.setVisible(!explicationPanel.isVisible());
+        }
     }
 }
