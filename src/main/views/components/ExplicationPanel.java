@@ -1,21 +1,48 @@
 package main.views.components;
 
+import java.awt.Dimension;
+import java.awt.Font;
+import java.util.List;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicScrollBarUI;
-
-import com.itextpdf.awt.geom.Dimension;
 
 import main.utils.Palette;
 
 public class ExplicationPanel extends JScrollPane {
-    ExplicationPanel() {
+    JTextPane explicationText;
 
+    ExplicationPanel(List<String> text) {
+        paintScroll();
+        paintTextPane();
+        writeText(text);
     }
+
+    private void writeText(List<String> text) {
+        // explicationText.setContentType("text/html");
+        // explicationText.setText("<html>");
+        System.out.println(text.size());
+        for(int i = 0; i < text.size(); i ++) {
+            explicationText.setText(explicationText.getText() + text.get(i) + "\n\n");
+        }
+        // explicationText.setText(explicationText.getText() +"</html>");
+    }
+
+    private void paintTextPane() {
+        explicationText = new JTextPane();
+        explicationText.setBackground(Palette.instance().getWhite());
+        explicationText.setForeground(Palette.instance().getGray());
+        explicationText.setFont(new Font("Nunito Sans", Font.PLAIN, 15));
+
+        this.setViewportView(explicationText);
+    }
+
     private void paintScroll() {
-        this.setPreferredSize(new Dimension(250, 320));
+        this.setPreferredSize(new Dimension(250, 350));
         this.getVerticalScrollBar().setBackground(Palette.instance().getLightGray());
         changeScrollPaneLook();
 

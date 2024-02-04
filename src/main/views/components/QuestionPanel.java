@@ -11,12 +11,14 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
-public class QuestionPanel extends JPanel {
+public class QuestionPanel extends JPanel implements ActionListener {
     JPanel domainPanel;
     OptionsPanel optionsPanel;
-    Button explication;
+    Button explicationButton;
     ExplicationPanel explicationPanel;
 
     public QuestionPanel() {
@@ -51,12 +53,13 @@ public class QuestionPanel extends JPanel {
     }
 
     private void paintExplicationButton() {
-        explication = new Button("Explicación");
-        explication.setPreferredSize(new Dimension(130, 30));
-        explication.setMaximumSize(new Dimension(130, 30));
-        explication.setVisible(false);
+        explicationButton = new Button("Explicación");
+        explicationButton.setPreferredSize(new Dimension(130, 30));
+        explicationButton.setMaximumSize(new Dimension(130, 30));
+        explicationButton.setVisible(false);
+        explicationButton.addActionListener(this);
 
-        domainPanel.add(explication);
+        domainPanel.add(explicationButton);
     }
 
     protected GridBagConstraints createDomainPanelConstraints() {
@@ -95,7 +98,7 @@ public class QuestionPanel extends JPanel {
         constraints.gridx = 0;
         constraints.gridy = 2;
         constraints.weightx = 1.0;
-        constraints.weighty = 1.0;
+        constraints.weighty = 0.5;
         constraints.gridwidth = 4;
         constraints.fill = GridBagConstraints.BOTH;
 
@@ -105,7 +108,10 @@ public class QuestionPanel extends JPanel {
     public void paintOptionsPanel(List<String> options) {
         optionsPanel = new OptionsPanel(options);
 
-        
+        this.add(optionsPanel, createOptionPanelConstraints());
+    }
+
+    private GridBagConstraints createOptionPanelConstraints() {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 3;
@@ -113,7 +119,7 @@ public class QuestionPanel extends JPanel {
         constraints.gridwidth = 4;
         constraints.fill = GridBagConstraints.BOTH;
 
-        this.add(optionsPanel, constraints);
+        return constraints;
     }
 
     public boolean isAnswered() {
@@ -129,11 +135,22 @@ public class QuestionPanel extends JPanel {
     }
 
     public void setExplicationButtonVisible() {
-        explication.setVisible(true);
+        explicationButton.setVisible(true);
         this.repaint();
     }
 
-    public void paintExplicationPanel() {
-        
+    public void paintExplicationPanel(List<String> text) {
+        explicationPanel = new ExplicationPanel(text);
+        this.add(explicationPanel, createOptionPanelConstraints());
+        explicationPanel.setVisible(false);
+        this.repaint();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == explicationButton) {
+            optionsPanel.setVisible(!optionsPanel.isVisible());
+            explicationPanel.setVisible(!explicationPanel.isVisible());
+        }
     }
 }
