@@ -15,7 +15,7 @@ public class Question {
         question.statement=statement;
         question.domain=domain;
     }
-
+//
     public void setAnswersQuestions(String answer, String justification, int i){
         //answers[i]= new Answers();
             answers[i].setAnswers(answer, justification, answers[i]);
@@ -37,6 +37,9 @@ public class Question {
     public String getAnswersQuestions(int counter){
         //return questions2.getQuestions();
         return answers[counter].getAnswers();
+    }
+    public Boolean getIsCorrectQuestion(int counter){
+        return answers[counter].getIsCorrect();
     }
     public String getOptionsQuestion(int counter){
         //return questions2.getQuestions();

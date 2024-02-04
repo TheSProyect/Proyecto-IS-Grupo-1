@@ -268,4 +268,14 @@ public class PresentExamController {
     public int getDuracion(){
         return currentExam.getDuration();
     }
+
+    public Boolean isCorrect(int indexQuestion, int indexSelectedAnswer){
+        return currentExam.getIsCorrectExam(indexQuestion, indexSelectedAnswer);
+    }
+    public void setResultExamC(int numCorrectQuestions){
+        currentExam.setResultExam(numCorrectQuestions);
+        // esa impresion seria lo que hay que escribir como string en el .txt
+        //System.out.println(currentExam.getResultExam()+ "/"+currentExam.getNumberQuestions());
+        //System.out.println(currentExam.getUsuario());
+    }
 }
