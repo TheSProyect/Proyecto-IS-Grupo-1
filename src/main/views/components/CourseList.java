@@ -74,12 +74,12 @@ public class CourseList extends JPanel {
         showCoursePanel();
     }
 
-    public void setCourseCards(List<String> examNames, List<String> courseDesc, List<List<String>> examsCaracteristics) {
+    public void setCourseCards(List<List<String>> examsInfoList) {
         courseCard = new ArrayList<CourseCard>();
-        for (int i = 0; i < examNames.size(); i++) {
-            courseCard.add(new CourseCard(examNames.get(i)));
-            courseCard.get(i).paintCourseDescription(courseDesc.get(i));
-            courseCard.get(i).paintExamCaracteristics(examsCaracteristics.get(i));
+        for (int i = 0; i < examsInfoList.size(); i++) {
+            courseCard.add(new CourseCard(examsInfoList.get(i).get(0)));
+            courseCard.get(i).paintCourseDescription(examsInfoList.get(i).get(1));
+            courseCard.get(i).paintExamCaracteristics(examsInfoList.get(i));
         }
 
         inicializeCarrousel();

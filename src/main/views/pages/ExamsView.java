@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
+import main.controllers.PresentExamController;
 import main.utils.Palette;
 
 public class ExamsView extends HelpBarTemplateView {
@@ -21,8 +22,8 @@ public class ExamsView extends HelpBarTemplateView {
     
     Slider slider;
     List<JButton> presentExamButtons;
-    List<String> examsNames;
-    List<String> courseName;
+    List<List<String>> examsIDs;
+    PresentExamController presentExamController;
 
     public static ExamsView instance() {
 		if (examView == null){
@@ -97,38 +98,19 @@ public class ExamsView extends HelpBarTemplateView {
     }
     
     private void paintCourseList() {
-        //BORRAR {
-        examsNames = new ArrayList<String>();
-        examsNames.add("Primer Examen");
-        examsNames.add("Segundo Examen");
-        examsNames.add("Tercer Examen");
+        presentExamController = new PresentExamController();
+        examsIDs = new ArrayList<List<String>>();
+        List<List<String>> examsInformation = presentExamController.showExamsInformation();
+        int indexExamName = 0;
+        int indexExamCourse = 5;
 
-        List<String> courseDesc = new ArrayList<String>();
-        courseDesc.add("Se entiende por examen un instrumento de evaluación cuya función es proporcionar información sobre determinadas características de un candidato");
-        courseDesc.add("tales como la amplitud de sus conocimientos y su grado de control lingüístico y su actuación de una forma tal que dichas características puedan medirse.");
-        courseDesc.add("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce laoreet augue nibh, a pulvinar nisl mattis facilisis. Mauris elit velit, efficitur sed elementum et.bv");
+        for (int i = 0; i < examsInformation.size(); i++) {
+            examsIDs.add(new ArrayList<String>());
+            examsIDs.get(i).add(examsInformation.get(i).get(indexExamName));
+            examsIDs.get(i).add(examsInformation.get(i).get(indexExamCourse));
+        }
         
-        List<List<String>> examsCaracteristics = new ArrayList<List<String>>();
-        examsCaracteristics.add(new ArrayList<String>());
-        examsCaracteristics.get(0).add("Examen de Java");
-        examsCaracteristics.get(0).add("60 minutos");
-        examsCaracteristics.get(0).add("Paula Herrero");
-        examsCaracteristics.get(0).add("Java");
-
-        examsCaracteristics.add(new ArrayList<String>());
-        examsCaracteristics.get(1).add("Examen de Java Swing");
-        examsCaracteristics.get(1).add("30 minutos");
-        examsCaracteristics.get(1).add("Paola Geneses");
-        examsCaracteristics.get(1).add("Java Swing");
-
-        examsCaracteristics.add(new ArrayList<String>());
-        examsCaracteristics.get(2).add("Examen de C++");
-        examsCaracteristics.get(2).add("10 minutos");
-        examsCaracteristics.get(2).add("Susana Oria");
-        examsCaracteristics.get(2).add("C++");
-        //}
-
-        slider.setCourseCards(examsNames, courseDesc, examsCaracteristics);
+        slider.setCourseCards(examsInformation);
     }
 
     private void addActionListener() {
@@ -148,7 +130,7 @@ public class ExamsView extends HelpBarTemplateView {
     private void actionEventInCourseCard(ActionEvent e) {
         for (int i = 0; i < presentExamButtons.size(); i++) {
             if (e.getSource() == presentExamButtons.get(i)) {
-                Frame.instance().setView(new ExamView());
+                Frame.instance().setView(new ExamView(presentExamController, examsIDs.get(i)));
             }
         }
     }

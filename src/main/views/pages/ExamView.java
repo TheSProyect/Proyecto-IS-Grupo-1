@@ -13,11 +13,13 @@ import main.views.components.TimerBlock;
 
 public class ExamView extends ExamTemplateView {
     PresentExamController presentController;
+    String[] examID;
 
-    public ExamView() {
+    public ExamView(PresentExamController presentExamController, List<String> examID) {
         questions = new ArrayList<QuestionPanel>();
         index = 0;
-        presentController = new PresentExamController();
+        this.presentController = presentExamController;
+        this.examID = new String[]{examID.get(0), examID.get(1)};
         inicializeQuestions();
 
         buildFrame("ExamView");

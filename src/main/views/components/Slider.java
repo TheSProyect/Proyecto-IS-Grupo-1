@@ -39,11 +39,11 @@ public class Slider extends JPanel implements ActionListener{
         return courseList.getButtons();
     }
 
-    public void setCourseCards(List<String> examNames, List<String> courseDesc, List<List<String>> examsCaracteristics) {
-        courseList.setCourseCards(examNames, courseDesc, examsCaracteristics);
+    public void setCourseCards(List<List<String>> examsInfoList) {
+        courseList.setCourseCards(examsInfoList);
 
         int maxAmountOfCardsInView = 3;
-        if (examNames.size() <= maxAmountOfCardsInView) {
+        if (examsInfoList.size() <= maxAmountOfCardsInView) {
             leftButton.setEnabled(false);
             rightButton.setEnabled(false);
         }
