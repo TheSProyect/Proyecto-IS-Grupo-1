@@ -10,10 +10,11 @@ import java.util.List;
 import main.models.UserData;
 
 public class LoginController {
-	UserData currentUser = new UserData();
-	//UserData currentUser = UserData.instace();
+	//UserData currentUser = new UserData();
+	UserData currentUser = UserData.instace();
 	public LoginController(){
-		
+		System.out.println("entra en longin controller");
+		Boolean nose = this.searchUser(currentUser.getUsername());
 		
 	}
 	
@@ -29,6 +30,7 @@ public class LoginController {
 		
 		try(BufferedReader adminReader = new BufferedReader(new FileReader(directory))){
 			currentUser.setUsername(Username);
+			System.out.println(currentUser.getUsername());
 			String currentPassword = adminReader.readLine();
 			currentPassword = adminReader.readLine();
 			currentPassword = adminReader.readLine();
@@ -43,7 +45,7 @@ public class LoginController {
 			directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users"+File.separator+"Students"+File.separator+ Username +".txt";
 			try(BufferedReader userReader = new BufferedReader(new FileReader(directory))){
 			currentUser.setUsername(Username);
-			
+			System.out.println(currentUser.getUsername());
 			String currentPassword = userReader.readLine();
 			currentPassword = userReader.readLine();
 			currentPassword = userReader.readLine();
@@ -71,5 +73,6 @@ public class LoginController {
 	public boolean isAdmin(){
 		return currentUser.isAdmin();
 	}
+	
 	
 }

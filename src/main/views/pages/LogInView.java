@@ -18,6 +18,7 @@ import javax.swing.plaf.metal.MetalButtonUI;
 import main.utils.Palette;
 import main.utils.Size;
 import main.views.components.PlaceholderTextField;
+import main.controllers.LoginController;
 
 public class LogInView extends JPanel implements ActionListener {
     JPanel titlePanel;
@@ -32,6 +33,7 @@ public class LogInView extends JPanel implements ActionListener {
         buildFrame();
         paintTitlePanel();
         paintLoginPanel();
+        LoginController loginController = new LoginController();
     }
 
     protected void buildFrame() {
