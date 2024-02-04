@@ -146,7 +146,7 @@ public abstract class ExamTemplateView extends NavBarTemplateView {
 
     protected abstract void inicializeQuestions();
 
-    public void showPreviousQuestions(){
+    protected void showPreviousQuestions(){
         if ((index - 1) >= 0) {
             questions.get(index).setVisible(false);
             index = index - 1;
@@ -155,7 +155,7 @@ public abstract class ExamTemplateView extends NavBarTemplateView {
         }
     }
 
-    private void showNextQuestion() {
+    protected void showNextQuestion() {
         if ((index + 1) < questions.size()) {
             questions.get(index).setVisible(false);
             index = index + 1;

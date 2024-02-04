@@ -19,6 +19,7 @@ public class PlaceholderTextField extends JPanel implements FocusListener {
     JLabel icon;
     JTextField textField;
     Border inside;
+    boolean isEmpty = true;
 
     public PlaceholderTextField(String str, String iconFilename) {
         paintContainer();
@@ -65,8 +66,16 @@ public class PlaceholderTextField extends JPanel implements FocusListener {
         this.add(textField);
     }
 
+    public String getTextField() {
+        if(isEmpty){
+            return "";
+        }
+        return textField.getText();
+    }
+
     @Override
     public void focusGained(FocusEvent e) {
+        isEmpty = false;
         if (textField.getText().equals(str)) {
             textField.setText("");
             textField.setForeground(Palette.instance().getBlack());
@@ -75,9 +84,11 @@ public class PlaceholderTextField extends JPanel implements FocusListener {
 
     @Override
     public void focusLost(FocusEvent e) {
+        
         if (textField.getText().isEmpty()) {
             textField.setForeground(Palette.instance().getLightGray());
             textField.setText(str);
+            isEmpty = true;
         }
     }
 }
