@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.plaf.metal.MetalButtonUI;
 
 import main.utils.Palette;
 import main.utils.Size;
@@ -169,6 +170,7 @@ public class LogInView extends JPanel implements ActionListener {
     protected void paintButton(JButton button, Dimension buttonSize) {
         button.setPreferredSize(buttonSize);
         button.setFont(new Font("Nunito Sans", Font.PLAIN, 17));
+        button.setUI(new MetalButtonUI());
         button.setBackground(Palette.instance().getBlue());
         button.setForeground(Palette.instance().getWhite());
         button.setFocusable(false);

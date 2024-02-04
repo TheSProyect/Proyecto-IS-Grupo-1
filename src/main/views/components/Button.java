@@ -6,6 +6,7 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.plaf.metal.MetalButtonUI;
 
 import main.utils.Palette;
 
@@ -20,6 +21,7 @@ public class Button extends JButton{
     }
 
     private void buildFrame(){
+        this.setUI(new MetalButtonUI());
         this.setBackground(background);
         this.setPreferredSize(new Dimension(width, height));
     }

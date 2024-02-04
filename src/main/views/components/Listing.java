@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicScrollBarUI;
+import javax.swing.plaf.metal.MetalButtonUI;
 
 import main.utils.Palette;
 
@@ -102,6 +103,7 @@ public class Listing extends JScrollPane{
         button.setFont(new Font("Nunito Sans", Font.BOLD, 15));
         button.setForeground(Palette.instance().getWhite());
         button.setBackground(Palette.instance().getBlue());
+        button.setUI(new MetalButtonUI());
         button.setFocusable(false);
 
         Border border = BorderFactory.createLineBorder(Palette.instance().getBlue());
