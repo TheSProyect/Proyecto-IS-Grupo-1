@@ -38,7 +38,7 @@ public class RequestCertificateController {
         return "-";
     }
 
-    public void showCertificates(){
+    public List<String> showCertificates(){
         List<String> namesCourses = new ArrayList<>();
         String nameFolderStudent = currentCertificate.getNameStudentCertificate();
         String directory = System.getProperty("user.dir");
@@ -54,6 +54,7 @@ public class RequestCertificateController {
                 }
             }    
         }
+        return namesCourses;
     }
 
     private void readStudentData(String directory){
