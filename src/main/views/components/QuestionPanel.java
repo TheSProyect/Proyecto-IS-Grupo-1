@@ -78,7 +78,7 @@ public class QuestionPanel extends JPanel implements ActionListener {
         questionText.setEditable(false);
         questionText.setFont(new Font("Nunito Sans", Font.BOLD, 20));
         questionText.setForeground(Palette.instance().getBlack());
-        questionText.setPreferredSize(new Dimension(2048,30));
+        questionText.setPreferredSize(new Dimension(1024,30));
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -115,7 +115,7 @@ public class QuestionPanel extends JPanel implements ActionListener {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 3;
-        constraints.weighty = 0.5;
+        constraints.weighty = 0.7;
         constraints.gridwidth = 4;
         constraints.fill = GridBagConstraints.BOTH;
 
