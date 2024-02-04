@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import main.models.UserData;
 
@@ -24,9 +22,9 @@ public class LoginController {
 	
 	public boolean searchUser(String Username){
 		
-		try(BufferedReader Reader = new BufferedReader(new FileReader(searchedDirectory("Teachers")+Username))){
+		try(BufferedReader adminR = new BufferedReader(new FileReader(searchedDirectory("Teachers", Username)))){
 			currentUser.setUsername(Username);
-			String currentPassword = Reader.readLine();
+			String currentPassword = adminR.readLine();
 
 			currentUser.setPassword(currentPassword);
 			
@@ -35,12 +33,10 @@ public class LoginController {
 			
 		} catch (IOException e){
 			
-			try(BufferedReader userReader = new BufferedReader(new FileReader(searchedDirectory("Students")))){
+			try(BufferedReader userR = new BufferedReader(new FileReader(searchedDirectory("Students", Username)))){
 			currentUser.setUsername(Username);
 			
-			String currentPassword = userReader.readLine();
-			currentPassword = userReader.readLine();
-			currentPassword = userReader.readLine();
+			String currentPassword = userR.readLine();
 			currentUser.setPassword(currentPassword);
 			
 			currentUser.setIsAdmin(false);
@@ -55,15 +51,14 @@ public class LoginController {
 		
 	}
 
-	public String searchedDirectory(String folder){
+	public String searchedDirectory(String folder, String Username){
 		String directory = System.getProperty("user.dir");
-		directory = directory+File.separator+"src"+File.separator+"data"+File.separator+folder;
-		directory = directory+File.separator;
+		directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users";
+		directory = directory+File.separator+folder+File.separator+Username+File.separator+"Password.txt";
 		return directory;
 	}
 	
 	public boolean verifyPassWord(String AttemptedPassword){
-		
 		if((currentUser.getPassword()).equals(AttemptedPassword)){
 			return true;
 		}
