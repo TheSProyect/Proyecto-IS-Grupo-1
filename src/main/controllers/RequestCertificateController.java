@@ -38,7 +38,7 @@ public class RequestCertificateController {
         return "-";
     }
 
-    public void showCertificates(){
+    public List<String> showCertificates(){
         List<String> namesCourses = new ArrayList<>();
         String nameFolderStudent = currentCertificate.getNameStudentCertificate();
         String directory = System.getProperty("user.dir");
@@ -48,12 +48,13 @@ public class RequestCertificateController {
             File[] files = searchedFolder.listFiles();
             if (files != null) {
                 for (File file : files) {
-                    if (file.isDirectory() && !(file.getName().equals(nameFolderStudent))) {
+                    if (file.isDirectory() && !(file.getName().equals("Password"))) {
                         namesCourses.add(nameCourses(file));
                     }
                 }
             }    
         }
+        return namesCourses;
     }
 
     private void readStudentData(String directory){
