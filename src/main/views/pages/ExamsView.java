@@ -22,7 +22,7 @@ public class ExamsView extends HelpBarTemplateView {
     
     Slider slider;
     List<JButton> presentExamButtons;
-    List<List<String>> examsIDs;
+    List<String[]> examsIDs;
     PresentExamController presentExamController;
 
     public static ExamsView instance() {
@@ -99,15 +99,15 @@ public class ExamsView extends HelpBarTemplateView {
     
     private void paintCourseList() {
         presentExamController = new PresentExamController();
-        examsIDs = new ArrayList<List<String>>();
+        examsIDs = new ArrayList<String[]>();
         List<List<String>> examsInformation = presentExamController.showExamsInformation();
         int indexExamName = 0;
         int indexExamCourse = 5;
 
         for (int i = 0; i < examsInformation.size(); i++) {
-            examsIDs.add(new ArrayList<String>());
-            examsIDs.get(i).add(examsInformation.get(i).get(indexExamName));
-            examsIDs.get(i).add(examsInformation.get(i).get(indexExamCourse));
+            String examName = examsInformation.get(i).get(indexExamName);
+            String examCourse = examsInformation.get(i).get(indexExamCourse);
+            examsIDs.add(new String[]{examName, examCourse});
         }
         
         slider.setCourseCards(examsInformation);

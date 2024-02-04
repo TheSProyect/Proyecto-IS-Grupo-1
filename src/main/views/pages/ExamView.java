@@ -15,11 +15,12 @@ public class ExamView extends ExamTemplateView {
     PresentExamController presentController;
     String[] examID;
 
-    public ExamView(PresentExamController presentExamController, List<String> examID) {
+    public ExamView(PresentExamController presentExamController, String[] examID) {
         questions = new ArrayList<QuestionPanel>();
         index = 0;
         this.presentController = presentExamController;
-        this.examID = new String[]{examID.get(0), examID.get(1)};
+        this.examID = examID;
+
         inicializeQuestions();
 
         buildFrame("ExamView");
@@ -38,6 +39,7 @@ public class ExamView extends ExamTemplateView {
     }
 
     protected void inicializeQuestions() {
+        // presentController.searchFolder(examID);
         List<String> questionsString= presentController.getQuestionsStrings();
         List<String> domain = presentController.getDomain();
         List<Boolean> hasCode = presentController.getHasCode();
