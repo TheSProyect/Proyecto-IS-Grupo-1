@@ -21,9 +21,7 @@ public class CourseList extends JPanel {
     CourseList() {
         buildCourseListPanel();
         inicializeGridConstraints();
-        inicializeCourseList();
-        index = new int[]{0, 1, 2};
-        showCoursePanel();
+        // showCoursePanel();
     }
 
     private void buildCourseListPanel() {
@@ -33,9 +31,19 @@ public class CourseList extends JPanel {
     }
 
     private void showCoursePanel() {
-        this.add(courseCard.get(index[0]), constraintsLeft);
-        this.add(courseCard.get(index[1]), constraintsCenter);
-        this.add(courseCard.get(index[2]), constraintsRight);
+        int leftCard = 1;
+        int centerCard = 2;
+        int rightCard = 3;
+
+        if (index.length >= leftCard) {
+            this.add(courseCard.get(index[0]), constraintsLeft);
+        }
+        if (index.length >= centerCard) {
+            this.add(courseCard.get(index[1]), constraintsCenter);
+        }
+        if (index.length == rightCard) {
+            this.add(courseCard.get(index[2]), constraintsRight);
+        }
     }
 
     private void inicializeGridConstraints() {
@@ -52,17 +60,46 @@ public class CourseList extends JPanel {
         constraintsRight.weightx = 1.0;
     }
 
-    private void inicializeCourseList() {
+    private void inicializeCarrousel() {
+        int maxAmountOfCourseCardsInView = 3;
+        if (courseCard.size() >= maxAmountOfCourseCardsInView) {
+            index = new int[]{0, 1, 2};
+        } else {
+            index = new int[courseCard.size()];
+            for (int i = 0; i < courseCard.size(); i++) {
+                index[i] = i;
+            }
+        }
+
+        showCoursePanel();
+    }
+
+    public void setCourseCards(List<String> examNames, List<String> courseDesc, List<List<String>> examsCaracteristics) {
         courseCard = new ArrayList<CourseCard>();
-        courseCard.add(new CourseCard("Java - SE Associate Programmer"));
-        courseCard.add(new CourseCard("Otro examen"));
-        courseCard.add(new CourseCard("El siguiente XD"));
-        courseCard.add(new CourseCard("Este examen no se debe ver hasta tocar la flecha"));
-        courseCard.add(new CourseCard("Siguiente examen chikibaby"));
-        courseCard.add(new CourseCard("El mejor examen del mundo y asi"));
+        for (int i = 0; i < examNames.size(); i++) {
+            courseCard.add(new CourseCard(examNames.get(i)));
+            courseCard.get(i).paintCourseDescription(courseDesc.get(i));
+            courseCard.get(i).paintExamCaracteristics(examsCaracteristics.get(i));
+        }
+
+        inicializeCarrousel();
+    }
+
+    private boolean cannotMove() {
+        if (index == null) {
+            return true;
+        } else if (index.length == courseCard.size()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void moveLeft() {
+        if (cannotMove()) {
+            return;
+        }
+       
         this.remove(courseCard.get(index[2]));
         this.remove(courseCard.get(index[1]));
         this.remove(courseCard.get(index[0]));
@@ -86,6 +123,10 @@ public class CourseList extends JPanel {
     }
 
     public void moveRight() {
+        if (cannotMove()) {
+            return;
+        }
+
         this.remove(courseCard.get(index[2]));
         this.remove(courseCard.get(index[1]));
         this.remove(courseCard.get(index[0]));
@@ -109,12 +150,17 @@ public class CourseList extends JPanel {
     }
 
     public List<JButton> getButtons() {
-        List<JButton> buttons = new ArrayList<JButton>();
+        if (courseCard == null) {
+            return null;
 
-        for (int i = 0; i < courseCard.size(); i++) {
-            buttons.add(courseCard.get(i).getPresentExamButton());
+        } else {
+            List<JButton> buttons = new ArrayList<JButton>();
+
+            for (int i = 0; i < courseCard.size(); i++) {
+                buttons.add(courseCard.get(i).getPresentExamButton());
+            }
+
+            return buttons;
         }
-
-        return buttons;
     }
 }

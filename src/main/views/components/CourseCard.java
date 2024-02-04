@@ -2,6 +2,9 @@ package main.views.components;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -10,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextPane;
 import javax.swing.border.Border;
-import javax.swing.plaf.metal.MetalButtonUI;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -18,34 +20,30 @@ import javax.swing.text.StyledDocument;
 import main.utils.Palette;
 
 public class CourseCard extends JPanel {
-    JButton presentExamButton;
+    Button presentExamButton;
 
     CourseCard(String examName) {
+        buildPanel();
+        paintExamName(examName);
+        paintLine();
+        // paintCourseDescription();
+        paintPresentExamButton();
+        // paintExamCaracteristics();
+    }
+
+    private void buildPanel() {
         Border border = BorderFactory.createLineBorder(Palette.instance().getYellow(), 2);
         this.setBackground(Palette.instance().getWhite());
         this.setBorder(border);
         this.setPreferredSize(new Dimension(270, 400));
         this.setMinimumSize(new Dimension(220, 355));
-        
-        paintSpacer();
-        paintExamName(examName);
-        paintLine();
-        paintCourseDescription();
-        paintSpacer();
-        paintPresentExamButton();
-        paintExamCaracteristics();
-    }
-    
-    private void paintSpacer() {
-        JLabel spacer = new JLabel();
-        spacer.setPreferredSize(new Dimension(240, 20));
-        this.add(spacer);
+        this.setLayout(new GridBagLayout());
     }
 
-    private void paintExamName(String str) {
+    public void paintExamName(String examTitle) {
         JTextPane examName = new JTextPane();
         examName.setPreferredSize(new Dimension(210, 70));
-        examName.setText(str);
+        examName.setText(examTitle);
         examName.setEditable(false);
         examName.setForeground(Palette.instance().getGray());
         examName.setFont(new Font("Nunito Sans", Font.BOLD, 17));
@@ -58,7 +56,11 @@ public class CourseCard extends JPanel {
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
 
-        this.add(examName);
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridy = 0;
+        constraints.fill = GridBagConstraints.BOTH;
+
+        this.add(examName, constraints);
     }
 
     private void paintLine() {
@@ -67,13 +69,16 @@ public class CourseCard extends JPanel {
         line.setForeground(Palette.instance().getLightGray());
         line.setBackground(Palette.instance().getLightGray());
 
-        this.add(line);
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridy = 1;
+
+        this.add(line, constraints);
     }
 
-    private void paintCourseDescription() {
+    public void paintCourseDescription(String courseDesc) {
         JTextPane courseDescription = new JTextPane();
         courseDescription.setPreferredSize(new Dimension(210, 115));
-        courseDescription.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
+        courseDescription.setText(courseDesc);
         courseDescription.setEditable(false);
         courseDescription.setForeground(Palette.instance().getGray());
         courseDescription.setFont(new Font("Nunito Sans", Font.PLAIN, 12));
@@ -86,50 +91,55 @@ public class CourseCard extends JPanel {
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
 
-        this.add(courseDescription);
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridy = 2;
+        constraints.weightx = 1;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+
+        this.add(courseDescription, constraints);
     }
 
     private void paintPresentExamButton() {
-        presentExamButton = new JButton("Presentar Examen");
-        presentExamButton.setFont(new Font("Nunito Sans", Font.BOLD, 15));
-        presentExamButton.setUI(new MetalButtonUI());
-        presentExamButton.setForeground(Palette.instance().getWhite());
-        presentExamButton.setBackground(Palette.instance().getBlue());
+        presentExamButton = new Button("Presentar Examen");
         presentExamButton.setPreferredSize(new Dimension(190, 30));
-        presentExamButton.setFocusable(false);
-        presentExamButton.addActionListener(null);
 
-        Border border = BorderFactory.createLineBorder(Palette.instance().getBlue());
-        presentExamButton.setBorder(border);
+        JPanel buttonContainer = new JPanel();
+        buttonContainer.setBackground(Palette.instance().getWhite());
+        buttonContainer.add(presentExamButton);
 
-        this.add(presentExamButton);
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridy = 4;
+
+        this.add(buttonContainer, constraints);
     }
 
-    private void paintExamCaracteristics() {
-        paintExamCaracteristicPanel("Tipo:", "Examen de Java");
+    public void paintExamCaracteristics(List<String> caracteristics) {
+        paintExamCaracteristicPanel("<b>Tipo: </b>" + caracteristics.get(0), 5);
         
-        paintExamCaracteristicPanel("Duración:", "60 minutos");
+        paintExamCaracteristicPanel("<b>Duración: </b>" + caracteristics.get(1), 6);
         
-        paintExamCaracteristicPanel("Profesor:", "Paula Herrero");
+        paintExamCaracteristicPanel("<b>Profesor: </b>" + caracteristics.get(2), 7);
+
+        paintExamCaracteristicPanel("<b>Curso: </b>" + caracteristics.get(3), 8);
     }
 
-    private void paintExamCaracteristicPanel(String category, String caracteristic) {
+    private void paintExamCaracteristicPanel(String caracteristic, int gridy) {
         JPanel caracteristicPanel = new JPanel();
-        caracteristicPanel.setPreferredSize(new Dimension(210, 20));
+        caracteristicPanel.setPreferredSize(new Dimension(210, 25));
         caracteristicPanel.setBackground(Palette.instance().getWhite());
 
-        JLabel categoryLabel = new JLabel(category);
-        categoryLabel.setForeground(Palette.instance().getGray());
-        categoryLabel.setFont(new Font("Nunito Sans", Font.BOLD, 12));
-
-        JLabel caracteristicLabel = new JLabel(caracteristic);
+        JLabel caracteristicLabel = new JLabel("<html>" + caracteristic + "</html>");
         caracteristicLabel.setForeground(Palette.instance().getGray());
         caracteristicLabel.setFont(new Font("Nunito Sans", Font.PLAIN, 12));
 
-        caracteristicPanel.add(categoryLabel);
         caracteristicPanel.add(caracteristicLabel);
 
-        this.add(caracteristicPanel);
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridy = gridy;
+        constraints.fill = GridBagConstraints.BOTH;
+
+        this.add(caracteristicPanel, constraints);
     }
 
     public JButton getPresentExamButton() {

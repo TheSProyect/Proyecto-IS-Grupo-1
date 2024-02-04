@@ -1,12 +1,10 @@
 package main.views.components;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.border.Border;
 import javax.swing.plaf.metal.MetalButtonUI;
 
