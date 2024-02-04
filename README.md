@@ -65,4 +65,5 @@
 ## Modelo de Despliegue
 ![Modelado de Despliegue](out/docs/logicalView/desingView/architectureDesign/DeployDiagram/deployDiagram.png)
 
+## Modelo de Implementacion
 #### Utilizamos la libreria externa iTextPDF version 5.5.12, se encuentra en la carpeta lib dentro de src. La llama la entidad GeneratePDFFile

@@ -49,14 +49,14 @@ public class ExamEndedView extends ExamTemplateView {
             int selectedOption = questions.get(i).getSelectedOption();
             if (selectedOption == -1) {
                 menuPanel.getQuestionListItems().get(i).setIcons("Wrong_Unselected_Icon", "Wrong_Selected_Icon");
-            // } else if (presentController.isCorrect(i, selectedOption)) {
-            //     numCorrectQuestions++;
-            //     menuPanel.getQuestionListItems().get(i).setIcons("Correct_Unselected_Icon", "Correct_Selected_Icon");
+             } else if (presentController.isCorrect(i, selectedOption)) {
+                 numCorrectQuestions++;
+                 menuPanel.getQuestionListItems().get(i).setIcons("Correct_Unselected_Icon", "Correct_Selected_Icon");
             } else {
                 menuPanel.getQuestionListItems().get(i).setIcons("Wrong_Unselected_Icon", "Wrong_Selected_Icon");
             }
         }
-
+        presentController.setResultExamC(numCorrectQuestions);
         return numCorrectQuestions;
     }
 
