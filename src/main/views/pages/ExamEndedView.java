@@ -4,7 +4,6 @@ import main.views.components.ExamMenu;
 import main.views.components.QuestionPanel;
 import main.views.components.ResultsBlock;
 
-import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
@@ -39,6 +38,7 @@ public class ExamEndedView extends ExamTemplateView {
     protected void inicializeQuestions() {
         for (int i = 0; i < questions.size(); i++) {
             questions.get(i).disableOptions();
+            questions.get(i).setExplicationButtonVisible();
         }
     }
 

@@ -1,5 +1,6 @@
 package main.views.components;
 
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
@@ -7,7 +8,6 @@ import javax.swing.JTextPane;
 import main.utils.Palette;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -16,6 +16,8 @@ import java.util.List;
 public class QuestionPanel extends JPanel {
     JPanel domainPanel;
     OptionsPanel optionsPanel;
+    Button explication;
+    ExplicationPanel explicationPanel;
 
     public QuestionPanel() {
         this.setPreferredSize(new Dimension(544, 560));
@@ -24,37 +26,47 @@ public class QuestionPanel extends JPanel {
     }
 
     public void paintDomainPanel(String questionDomain) {
-        domainPanel = new JPanel();
-        domainPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
-        domainPanel.setBackground(Palette.instance().getWhite());
+        buildDomainPanel();
 
         paintDomainLabel(questionDomain);
+        paintExplicationButton();
         
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        // constraints.weighty = 0.1;
-        constraints.gridwidth = 4;
-        constraints.fill = GridBagConstraints.BOTH;
-        
-        this.add(domainPanel, constraints);
+        this.add(domainPanel, createDomainPanelConstraints());
     }
 
-    private void paintDomainLabel(String questionDomain) {
+    protected void buildDomainPanel() {
+        domainPanel = new JPanel();
+        domainPanel.setLayout(new BoxLayout(domainPanel, BoxLayout.X_AXIS));
+        domainPanel.setBackground(Palette.instance().getWhite());
+        // domainPanel.setPreferredSize(new Dimension(544, 40));
+    }
+
+    protected void paintDomainLabel(String questionDomain) {
         JLabel domainLabel = new JLabel();
-        domainLabel.setText("Dominio:");
-        domainLabel.setFont(new Font("Nunito Sans", Font.BOLD, 15));
-        domainLabel.setForeground(Palette.instance().getGray());
-        domainLabel.setVerticalAlignment(JLabel.BOTTOM);
-
-        domainPanel.add(domainLabel);
-
-        domainLabel = new JLabel();
-        domainLabel.setText(questionDomain);
+        domainLabel.setText("<html> <b> Dominio: </b>" + questionDomain);
         domainLabel.setFont(new Font("Nunito Sans", Font.PLAIN, 15));
         domainLabel.setForeground(Palette.instance().getGray());
         domainLabel.setVerticalAlignment(JLabel.BOTTOM);
         domainPanel.add(domainLabel);
+    }
+
+    private void paintExplicationButton() {
+        explication = new Button("Explicación");
+        explication.setPreferredSize(new Dimension(130, 30));
+        explication.setMaximumSize(new Dimension(130, 30));
+        explication.setVisible(false);
+
+        domainPanel.add(explication);
+    }
+
+    protected GridBagConstraints createDomainPanelConstraints() {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.weighty = 0.1;
+        constraints.gridwidth = 4;
+        constraints.fill = GridBagConstraints.BOTH;
+        return constraints;
     }
 
     public void paintQuestion(String questionString) {
@@ -114,5 +126,14 @@ public class QuestionPanel extends JPanel {
 
     public void disableOptions() {
         optionsPanel.disableOptions();
+    }
+
+    public void setExplicationButtonVisible() {
+        explication.setVisible(true);
+        this.repaint();
+    }
+
+    public void paintExplicationPanel() {
+        
     }
 }
