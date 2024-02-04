@@ -9,24 +9,29 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.Border;
 
 import main.controllers.RequestCertificateController;
 import main.utils.Palette;
 
 public class CertificateView extends JPanel implements ActionListener{
     JPanel contentPanel;
-    IconButton downloadButton;
+    
     NavBar navBar;
     
     public CertificateView(){
         buildFrame();
-        paintBorders();
+        paintNavBar();
         paintContentPanel();
 
         addActionListener();
@@ -42,89 +47,86 @@ public class CertificateView extends JPanel implements ActionListener{
         this.add(navBar, BorderLayout.NORTH);
     }
 
-    private void paintBorders() {
-        paintNavBar();
-
-        JPanel borderPanel = new JPanel();
-        borderPanel.setPreferredSize(new Dimension(40, 560));
-        borderPanel.setBackground(Palette.instance().getWhite());
-        this.add(borderPanel, BorderLayout.WEST);
-
-        borderPanel = new JPanel();
-        borderPanel.setPreferredSize(new Dimension(40, 560));
-        borderPanel.setBackground(Palette.instance().getWhite());
-        this.add(borderPanel, BorderLayout.EAST);
-    }
-
     private void paintContentPanel() {
-        JLabel text;
-        JPanel separator;
-        downloadButton = new IconButton("Descargar", "Download_Icon.png");
+        IconButton downloadButton = new IconButton("Descargar", "Download_Icon.png");
         GridBagConstraints gbc = new GridBagConstraints();
-        int separatorFullWidth = 300;
+        int separatorFullWidth = 668;
+        int separatorMediumWidth = 460;
+        Color textColor = Palette.instance().getBlack();
+        Color textBlueColor = Palette.instance().getBlue();
 
         buildContentPanel();
         
-        text = paintText(48, "Certificado de participación");
-        text.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        contentPanel.add(text, gbc);
+        paintText(48, "Certificado de participación", textColor, 0, 10, 0);
 
-        separator = paintTitleSeparator(Palette.instance().getLightGray(), separatorFullWidth);
-        gbc.gridy = 1;
-        contentPanel.add(separator, gbc);
+        paintSeparator(Palette.instance().getLightGray(), separatorFullWidth, 1);
 
-        text = paintText(20, "Se le otorga el presente a:");
-        text.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 0));
-        gbc.gridy = 2;
-        contentPanel.add(text, gbc);
-
-        text = paintText(64, "Nombre Apellido");
-        text.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-        gbc.gridy = 3;
-        contentPanel.add(text, gbc);
+        paintText(20, "Se le otorga el presente a:",textBlueColor, 2, 0, 40);
+        paintText(64, "Nombre Apellido", textBlueColor, 3, 10, 0);
         
-        separator = paintTitleSeparator(Palette.instance().getYellow(), separatorFullWidth);
-        gbc.gridy = 4;
-        contentPanel.add(separator, gbc);
+        paintSeparator(Palette.instance().getYellow(), separatorFullWidth, 4);
 
-        text = paintText(20, "Por su participación en el examen para aspirar a");
-        text.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
-        gbc.gridy = 5;
-        contentPanel.add(text, gbc);
-        text = paintText(20, "Java SE - Java Associate Programmer");
-        text.setBorder(BorderFactory.createEmptyBorder(0, 0, 40, 0));
-        gbc.gridy = 6;
-        contentPanel.add(text, gbc);
+        paintText(20, "Por su participación en el examen para aspirar a", textColor, 5, 0, 40);
 
-        separator = paintTitleSeparator(Palette.instance().getLightGray(), separatorFullWidth);
-        gbc.gridy = 7;
-        contentPanel.add(separator, gbc);
+        paintText(20,  "Java SE - Java Associate Programmer", textColor, 6, 40, 0);
 
-        text = paintText(20, "Examen realizado por:");
-        text.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
-        gbc.gridy = 8;
-        contentPanel.add(text, gbc);
-        text = paintText(20, "Profesor/a: Paula Herrero");
-        text.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
-        gbc.gridy = 9;
-        contentPanel.add(text, gbc);
+        paintSeparator(Palette.instance().getLightGray(), separatorMediumWidth, 7);
 
-        separator = paintTitleSeparator(Palette.instance().getLightGray(), separatorFullWidth);
-        gbc.gridy = 10;
-        contentPanel.add(separator, gbc);
-
-        separator = paintTitleSeparator(Palette.instance().getOffWhite(), separatorFullWidth);
+        paintNote();
         
-        gbc.gridy = 11;
-        contentPanel.add(separator, gbc);
-        gbc.gridy = 12;
+        paintText(20,  "Examen realizado por:", textColor, 10, 0, 20);
+        
+        paintText(20,  "Profesor/a: Paula Herrero", textColor, 11, 20, 0);
+
+        paintSeparator(Palette.instance().getLightGray(), separatorMediumWidth, 12);
+
+        
+        gbc.gridy = 13;
+        gbc.insets = new Insets(20, 0, 0, 0); 
         contentPanel.add(downloadButton, gbc);
 
-        this.add(contentPanel, BorderLayout.CENTER);
+        paintScrollPanel();
     }
+    private void paintScrollPanel(){
+        JScrollPane scrollPane = new JScrollPane(contentPanel);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setBorder(null);
 
+        this.add(scrollPane, BorderLayout.CENTER);
+    }
+    private void paintNote(){
+        JPanel container = new JPanel();
+        GridBagConstraints gbc = new GridBagConstraints();
+        ImageIcon icon = new ImageIcon("assets/folderIcon.png");
+        JLabel text = new JLabel(icon);
+        Color textBlueColor = Palette.instance().getBlue();
+
+        container.setLayout(new GridBagLayout());
+        container.setBackground(Palette.instance().getOffWhite());
+        
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridheight = 2;
+        container.add(text, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridheight = 1;
+        text = setText(15, "Nota final", textBlueColor);
+        container.add(text, gbc);
+
+        gbc.gridy = 1;
+        text = setText(32, "15 / 20", textBlueColor);
+        container.add(text, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 8;
+        gbc.gridwidth = 2; 
+        
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        contentPanel.add(container, gbc);
+    }
+   
     private void buildContentPanel() {
         contentPanel = new JPanel();
         contentPanel.setLayout(new GridBagLayout());
@@ -132,23 +134,36 @@ public class CertificateView extends JPanel implements ActionListener{
         contentPanel.setBackground(Palette.instance().getWhite());
     }
 
-    private JLabel paintText(int size, String _text) {
+    private JLabel setText(int size, String _text, Color color) {
         JLabel text = new JLabel();
         text.setText("<html>" + _text + "</html>");
         text.setFont(new Font("Nunito Sans", Font.BOLD, size));
         text.setHorizontalAlignment(JLabel.CENTER);
         text.setVerticalAlignment(JLabel.BOTTOM);
+        text.setForeground(color);
 
         return text;   
     }
+    private void paintText(int size, String _text, Color color, int row, int borderBottom, int borderTop){
+        JLabel text = setText(size, _text, color);
+        GridBagConstraints gbc = new GridBagConstraints();
 
-    private JPanel paintTitleSeparator(Color color, int width) {
-        
-        JPanel line = new JPanel();
-        line.setForeground(color);
-        line.setBackground(color);
-        line.setPreferredSize(new Dimension(width, 3));
-        return line;
+        text.setBorder(BorderFactory.createEmptyBorder(borderTop, 0, borderBottom, 0));
+        gbc.gridx = 0;
+        gbc.gridy = row;
+        contentPanel.add(text, gbc);
+    }
+
+    private void paintSeparator(Color color, int width, int row) {
+        GridBagConstraints gbc = new GridBagConstraints();
+        JPanel separator = new JPanel();
+        separator.setForeground(color);
+        separator.setBackground(color);
+        separator.setPreferredSize(new Dimension(width, 3));
+        separator.setMaximumSize(new Dimension(width, 3));
+
+        gbc.gridy = row;
+        contentPanel.add(separator, gbc);
     }
   //  private void show(Certificate)(){}
     private void addActionListener() {
