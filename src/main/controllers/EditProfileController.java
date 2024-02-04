@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import main.models.UserData;
+import main.utils.UserData;
 
 public class EditProfileController {
 
@@ -19,7 +19,7 @@ public class EditProfileController {
 
 
     public boolean setNewUsername(String newUsername) throws IOException{
-        UserData currentUser = new UserData();
+        UserData currentUser = UserData.instance();
         String directory = System.getProperty("user.dir");
         if(currentUser.isAdmin()){
 		directory = System.getProperty("user.dir");
@@ -54,7 +54,7 @@ public class EditProfileController {
     }
 
     public void setNewUserInfo(String newMail, String newPassword) throws IOException{
-        UserData currentUser = new UserData();
+        UserData currentUser =UserData.instance();
         currentUser.setMail(newMail);
         currentUser.setPassword(newPassword);
 

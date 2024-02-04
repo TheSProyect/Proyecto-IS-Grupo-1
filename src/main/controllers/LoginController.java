@@ -5,10 +5,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import main.models.UserData;
+import main.utils.UserData;
 
 public class LoginController {
-	UserData currentUser = new UserData();
+	UserData currentUser = UserData.instance();
 	public LoginController(){
 		
 		

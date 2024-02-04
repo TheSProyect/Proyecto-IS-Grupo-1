@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.models.GeneratePDFFile;
+import main.utils.UserData;
 import main.models.Certificate;
 import main.models.Course;
-import main.models.UserData;
 
 
 public class RequestCertificateController {

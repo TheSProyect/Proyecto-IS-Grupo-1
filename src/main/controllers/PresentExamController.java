@@ -11,7 +11,7 @@ import java.util.List;
 import main.models.Answer;
 import main.models.Question;
 import main.models.Result;
-import main.models.UserData;
+import main.utils.UserData;
 import main.models.Exam;
 import javax.swing.*;
 

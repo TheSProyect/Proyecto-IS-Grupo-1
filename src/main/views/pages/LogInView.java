@@ -184,7 +184,6 @@ public class LogInView extends JPanel implements ActionListener {
             
             //reemplazar los System.out con sus respectivos Popups
 
-            
             if(userTextField.getTextField().equals("") || passwordTextField.getTextField().equals("")){
                 System.out.println("Se deben llenar todos los campos");
             } else if(LoginControl.searchUser(userTextField.getTextField())){
