@@ -32,7 +32,7 @@ public class PresentExamController {
     }
     public static void main(String[] args) throws IOException{
         PresentExamController p = new PresentExamController();
-        p.searchFolder();    
+       // p.searchFolder();    
     }
 
     public void examFinished(){
@@ -70,32 +70,26 @@ public class PresentExamController {
                     if((file.getName()).equals("Instructions.txt")){
                         break;
                         } else {
-                    String directorySub = directory + File.separator + file.getName();
-                    File searchedFolderExam = new File(directorySub);
-                    if (searchedFolderExam.exists() && searchedFolderExam.isDirectory()) {
-                        File[] filesExams = searchedFolderExam.listFiles();
-                        if (filesExams != null) {
-                            for (File fileExam : filesExams) {
-                                if((fileExam.getName()).equals("Pregunta1.txt")){
-                                break;
-                                } else {
-                                readExam(directorySub, fileExam.getName());
-                                examsInformation.add(readInformation(file.getName()));
-                                for (List<String> examInformation : examsInformation) {
-                                    for (String nombre : examInformation) {
-                                        System.out.print(nombre + " ");
+                        String directorySub = directory + File.separator + file.getName();
+                        File searchedFolderExam = new File(directorySub);
+                        if (searchedFolderExam.exists() && searchedFolderExam.isDirectory()) {
+                            File[] filesExams = searchedFolderExam.listFiles();
+                                if (filesExams != null) {
+                                    for (File fileExam : filesExams) {
+                                        if((fileExam.getName()).equals("Pregunta1.txt")){
+                                            break;
+                                            } else {
+                                                readExam(directorySub, fileExam.getName());
+                                                examsInformation.add(readInformation(file.getName()));  
                                     }
-                                    System.out.println();
                                 }
-                            }
                             }
                         }
                     }
                 }
             }
         }
-    }
-        return examsInformation;
+      return examsInformation;
     }    
     
     private List<String> readInformation(String nameCourse){
@@ -204,7 +198,6 @@ public class PresentExamController {
     }  
 
     public void searchFolder() {
-        showExamsInformation();
         String directory = System.getProperty("user.dir");
         //String nameCourse = currentExam.getNameCourse();
         //String nameFolder = currentExam.getNameExam();
