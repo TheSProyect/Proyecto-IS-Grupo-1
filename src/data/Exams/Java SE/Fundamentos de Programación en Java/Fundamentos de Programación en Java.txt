@@ -1,7 +1,7 @@
-Fundamentos de Programación en Java
+Fundamentos de Programacion en Java
 Java
 7
 Valeria Ciccolella
 3
 Definiciones basicas en Java
-Course2
+Java SE

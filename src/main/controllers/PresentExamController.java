@@ -62,8 +62,8 @@ public class PresentExamController {
             File[] files = searchedFolder.listFiles();
             if (files != null) {
                 for (File file : files) {
+                    System.out.println("ola"+ file.getName());
                     if((file.getName()).equals("Instructions.txt")){
-                        break;
                         } else {
                         String directorySub = directory + File.separator + file.getName();
                         File searchedFolderExam = new File(directorySub);
@@ -71,8 +71,7 @@ public class PresentExamController {
                             File[] filesExams = searchedFolderExam.listFiles();
                                 if (filesExams != null) {
                                     for (File fileExam : filesExams) {
-                                        if((fileExam.getName()).equals("Pregunta1.txt")){
-                                            break;
+                                        if((fileExam.getName().startsWith("Pregunta"))){
                                             } else {
                                                 readExam(directorySub, fileExam.getName());
                                                 examsInformation.add(readInformation(file.getName()));  
