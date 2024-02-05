@@ -1,4 +1,4 @@
-¿Qué función se usa para añadir un elemento a un vector?
+¿Que funcion se usa para añadir un elemento a un vector?
 doim3
 pop
 just1

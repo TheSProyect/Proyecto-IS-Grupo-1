@@ -40,7 +40,6 @@ public class ExamEndedView extends ExamTemplateView {
         List<List<String>> explication = presentController.getJustification();
         
         for (int i = 0; i < questions.size(); i++) {
-            questions.get(i).disableOptions();
             questions.get(i).setExplicationButtonVisible();
             questions.get(i).paintExplicationPanel(explication.get(i));
         }

@@ -1,4 +1,4 @@
-¿Qué clase se usa para escribir a un fichero?
+¿Que clase se usa para escribir a un fichero?
 dom4
 vofstream
 just1

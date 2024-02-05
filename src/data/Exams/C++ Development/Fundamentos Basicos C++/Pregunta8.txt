@@ -1,10 +1,10 @@
 El operador % hace referencia a:
 dom8
-vEl resto de una división de dos numeros
+vEl resto de una division de dos numeros
 just1
-La división de dos numeros
+La division de dos numeros
 just2
-La multiplicación de dos numeros
+La multiplicacion de dos numeros
 just3
 La raiz cuadrada de un valor
 just4

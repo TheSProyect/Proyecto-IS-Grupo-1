@@ -1,4 +1,4 @@
-¿Qué código de los siguientes tiene que ver con la herencia?
+¿Que codigo de los siguientes tiene que ver con la herencia?
 Propiedades de las clases
 vpublic class Componente extends Producto
 just1
