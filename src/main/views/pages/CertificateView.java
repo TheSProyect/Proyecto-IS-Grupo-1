@@ -1,25 +1,32 @@
 package main.views.pages;
 
 import main.views.components.IconButton;
+import main.views.components.ResultsBlock;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
-import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.JTextPane;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+
 
 import main.controllers.RequestCertificateController;
 import main.utils.Palette;
 
 public class CertificateView extends HelpBarTemplateView{
-    JPanel contentPanel;
-    IconButton downloadButton;
+    GridBagConstraints constraints = new GridBagConstraints();
+
     
     public CertificateView(){
         buildFrame("CertificateView");
@@ -30,100 +37,175 @@ public class CertificateView extends HelpBarTemplateView{
     }
 
     private void paintContentPanel() {
-        JLabel text;
-        JPanel separator;
-        downloadButton = new IconButton("Descargar", "Download_Icon.png");
-        GridBagConstraints gbc = new GridBagConstraints();
-        int separatorFullWidth = 300;
-
-        buildContentPanel();
-        
-        text = paintText(48, "Certificado de participación");
-        text.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        contentPanel.add(text, gbc);
-
-        separator = paintTitleSeparator(Palette.instance().getLightGray(), separatorFullWidth);
-        gbc.gridy = 1;
-        contentPanel.add(separator, gbc);
-
-        text = paintText(20, "Se le otorga el presente a:");
-        text.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 0));
-        gbc.gridy = 2;
-        contentPanel.add(text, gbc);
-
-        text = paintText(64, "Nombre Apellido");
-        text.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-        gbc.gridy = 3;
-        contentPanel.add(text, gbc);
-        
-        separator = paintTitleSeparator(Palette.instance().getYellow(), separatorFullWidth);
-        gbc.gridy = 4;
-        contentPanel.add(separator, gbc);
-
-        text = paintText(20, "Por su participación en el examen para aspirar a");
-        text.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
-        gbc.gridy = 5;
-        contentPanel.add(text, gbc);
-        text = paintText(20, "Java SE - Java Associate Programmer");
-        text.setBorder(BorderFactory.createEmptyBorder(0, 0, 40, 0));
-        gbc.gridy = 6;
-        contentPanel.add(text, gbc);
-
-        separator = paintTitleSeparator(Palette.instance().getLightGray(), separatorFullWidth);
-        gbc.gridy = 7;
-        contentPanel.add(separator, gbc);
-
-        text = paintText(20, "Examen realizado por:");
-        text.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
-        gbc.gridy = 8;
-        contentPanel.add(text, gbc);
-        text = paintText(20, "Profesor/a: Paula Herrero");
-        text.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
-        gbc.gridy = 9;
-        contentPanel.add(text, gbc);
-
-        separator = paintTitleSeparator(Palette.instance().getLightGray(), separatorFullWidth);
-        gbc.gridy = 10;
-        contentPanel.add(separator, gbc);
-
-        separator = paintTitleSeparator(Palette.instance().getOffWhite(), separatorFullWidth);
-        
-        gbc.gridy = 11;
-        contentPanel.add(separator, gbc);
-        gbc.gridy = 12;
-        contentPanel.add(downloadButton, gbc);
-
-        this.add(contentPanel, BorderLayout.CENTER);
-    }
-
-    private void buildContentPanel() {
-        contentPanel = new JPanel();
+        JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new GridBagLayout());
-        contentPanel.setPreferredSize(new Dimension(944, 560));
+        contentPanel.setPreferredSize(new Dimension(500, 560));
         contentPanel.setBackground(Palette.instance().getWhite());
-    }
 
-    private JLabel paintText(int size, String _text) {
-        JLabel text = new JLabel();
-        text.setText("<html>" + _text + "</html>");
-        text.setFont(new Font("Nunito Sans", Font.BOLD, size));
-        text.setHorizontalAlignment(JLabel.CENTER);
-        text.setVerticalAlignment(JLabel.BOTTOM);
+        paintCertificateHeader(contentPanel);
+        paintTitleSeparator(Palette.instance().getLightGray(), contentPanel, 1);
 
-        return text;   
-    }
+        paintName(contentPanel);
+        paintTitleSeparator(Palette.instance().getYellow(), contentPanel, 4);
 
-    private JPanel paintTitleSeparator(Color color, int width) {
+
+        paintCourse("Java SE - Java Associate Programmer", contentPanel);
+        paintSignature (contentPanel);
+        paintTitleSeparator(Palette.instance().getLightGray(), contentPanel, 7);
         
-        JPanel line = new JPanel();
+        paintScore(contentPanel);
+        paintTeacher("Paula Herrero", contentPanel);
+        paintTitleSeparator(Palette.instance().getLightGray(), contentPanel, 10);
+
+        paintDownloadButton(contentPanel);
+
+
+        this.add(contentPanel);
+    }
+
+    private void paintCertificateHeader(JPanel contentPanel) {
+        JTextPane text = new JTextPane();
+        text.setText("Certificado de participación");
+        text.setFont(new Font("Nunito Sans", Font.BOLD, 28));
+        text.setPreferredSize(new Dimension(500, 40));
+        text.setEditable(false);
+
+        centerText(text);
+        setConstraints(0);
+        constraints.insets = new Insets(30, 0, 10, 0);
+
+
+        contentPanel.add(text, constraints);
+    }
+    
+    private void paintText( JPanel contentPanel) {
+        JTextPane text = new JTextPane();
+        text.setText("Se le otorga el presente a:");
+        text.setPreferredSize(new Dimension(350, 22));
+        text.setForeground(Palette.instance().getBlue());
+        text.setFont(new Font("Nunito Sans", Font.PLAIN, 15));
+
+        centerText(text);
+        setConstraints(2);
+        constraints.insets = new Insets(20, 0, 0, 0);
+
+
+        contentPanel.add(text, constraints);
+    }
+
+    private void paintName(JPanel contentPanel) {
+
+        paintText(contentPanel);
+
+        JTextPane text = new JTextPane();
+        text.setText("Jesús Cova");
+        text.setFont(new Font("Nunito Sans", Font.BOLD, 45));
+        text.setPreferredSize(new Dimension(500, 60));
+        text.setEditable(false);
+        text.setForeground(Palette.instance().getBlue());
+        text.setLayout(new GridBagLayout());
+
+
+        centerText(text);
+        setConstraints(3);
+
+        contentPanel.add(text, constraints);
+
+    }
+
+    private void paintTitleSeparator(Color color, JPanel contentPanel, int row) {
+        
+        JSeparator line = new JSeparator();
         line.setForeground(color);
         line.setBackground(color);
-        line.setPreferredSize(new Dimension(width, 3));
-        return line;
+        line.setMinimumSize(new Dimension (10,2));
+
+        setConstraints(row);
+        constraints.insets = new Insets(0, 55, 20, 58);
+        constraints.fill = GridBagConstraints.BOTH;
+        contentPanel.add(line, constraints);
+    }
+
+    private void paintCourse(String str, JPanel contentPanel) {
+        JTextPane text = new JTextPane();
+        text.setText("Por su participación en el examen para aspirar a \n" +  str);
+        text.setPreferredSize(new Dimension(350, 50));
+        text.setForeground(Palette.instance().getBlack());
+        text.setFont(new Font("Nunito Sans", Font.BOLD, 15));
+
+        centerText(text);
+        setConstraints(5);
+
+        contentPanel.add(text, constraints);
+    }
+
+    private void paintSignature (JPanel contentPanel) {
+        ImageIcon icon = new ImageIcon("src/assets/Signature.png");
+        java.awt.Image img = icon.getImage();
+
+        JLabel lbl = new JLabel();
+        lbl.setIcon(icon);
+        setConstraints(6);
+
+        contentPanel.add(lbl, constraints);
+
+        
+       
+    }
+
+    private void paintScore(JPanel contentPanel) {
+        ResultsBlock results = new ResultsBlock();
+        results.paintResults(1, 3);
+        
+
+        setConstraints(7);
+        constraints.insets = new Insets(20, 0, 10, 0);
+
+
+        contentPanel.add(results, constraints);
+        
+    }
+
+    private void paintTeacher(String teacherName, JPanel contentPanel) {
+        JTextPane text = new JTextPane();
+        text.setText("Examen realizado por \n Profesor/a: " +  teacherName);
+        text.setPreferredSize(new Dimension(350, 50));
+        text.setForeground(Palette.instance().getBlack());
+        text.setFont(new Font("Nunito Sans", Font.BOLD, 15));
+
+        centerText(text);
+        setConstraints(9);
+
+        contentPanel.add(text, constraints);
+
+    }
+
+     private void paintDownloadButton(JPanel contentPanel) {
+
+        IconButton downloadButton = new IconButton("Descargar", "Download_Icon.png");
+
+        setConstraints(11);
+        constraints.fill = GridBagConstraints.VERTICAL;
+        contentPanel.add(downloadButton, constraints);
+
+    }
+
+    private void centerText (JTextPane text) {
+        StyledDocument doc = text.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);
+    }
+
+    private void setConstraints (int row) {
+        constraints.gridx = 0;
+        constraints.gridy = row;
+        constraints.insets = new Insets(0, 0, 0, 0);
+        constraints.fill = GridBagConstraints.RELATIVE;
+
     }
   
+
     //  private void show(Certificate)(){}
     private void addActionListener() {
         addActionListenerNavbar();

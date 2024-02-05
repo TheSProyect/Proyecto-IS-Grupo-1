@@ -12,7 +12,7 @@ import main.utils.Palette;
 
 public class Button extends JButton{
     private int height = 30;
-    private int width = 217;
+    private int width = 150;
     
     public Button(String text){
         buildFrame();
@@ -33,8 +33,7 @@ public class Button extends JButton{
         
         this.setForeground(Palette.instance().getOffWhite());
         this.setFont(new Font("Nunito Sans", Font.BOLD, 15));
-        // this.setHorizontalAlignment(JLabel.CENTER);
-        // this.setVerticalAlignment(JLabel.BOTTOM);
+
         this.setFocusable(false);
     }
 }
