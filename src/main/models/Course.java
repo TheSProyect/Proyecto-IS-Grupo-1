@@ -32,4 +32,7 @@ public class Course {
     public String getSummary(){
         return summary;
     }
+    public void setSummary(String score){
+        summary=score;
+    }
 }

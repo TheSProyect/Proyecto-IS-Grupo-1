@@ -62,7 +62,9 @@ public class RequestCertificateController {
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentCertificate.setNameStudentCertificate(currentUser.getUsername());
             currentCertificate.setNameCourse(br.readLine());
-            //currentCertificate.setSummary(br.readLine());
+            //int result=Integer.parseInt((br.readLine()));
+            //currentCertificate.setSummary(result);
+            currentCertificate.setSummary(br.readLine());
             //arreglar aqui, pq summary es int y lo necesitamos string
             currentCertificate.setNameTeacherCertificate(br.readLine());
             br.close();     
