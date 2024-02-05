@@ -5,7 +5,7 @@ import main.models.Exam;
 
 public class Certificate {
     private Name student;
-    private Exam course;
+    private Exam course = new Exam();
 
     public void setNameStudentCertificate(String name){
         student = new Name();
@@ -15,14 +15,19 @@ public class Certificate {
         return student.getName();
     }
     public void setNameTeacherCertificate(String name){
-        course = new Exam();
         course.setNameTeacherCourse(name);
+    }
+    public String getNameTeacher(){
+        return course.getNameTeacher();
+    }
+    public void setNameCourse(String nameCourse){
+        course.setNameCourse(nameCourse);
     }
     public String getNameCourse(){
         return course.getNameCourse();
     }
-    public String getNameTeacher(){
-        return course.getNameTeacher();
+    public void setSummary(int Summary){
+        course.setResultExam(Summary);
     }
     public String getSummary(){
         return course.getSummary();

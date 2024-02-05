@@ -3,6 +3,8 @@ package main.models;
 
 //import lib.*;
 import main.models.Course;
+import main.utils.Directory;
+import main.utils.UserData;
 import main.models.Certificate;
 import main.controllers.RequestCertificateController;
 import com.itextpdf.*;
@@ -35,10 +37,10 @@ public class GeneratePDFFile {
     }
 
     public void crearPlantilla(){
+        Directory currentDirectory = Directory.instance();
         try{
-            nombre=RCController.getNameStudentController();
-            String directory = System.getProperty("user.dir");
-            directory = directory + "\\Users\\Students\\Usuario\\" + nombre + ".pdf";
+            String nombre=RCController.getNameStudentController();
+            String directory = currentDirectory.getDirectoryStudents() +File.separator+ nombre + ".pdf";
             //archivo=new FileOutputStream(nombre + ".pdf");
             PdfWriter.getInstance(documento, new FileOutputStream(directory));
             //PdfWriter.getInstance(documento, archivo);

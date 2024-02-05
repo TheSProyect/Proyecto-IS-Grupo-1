@@ -14,15 +14,14 @@ import main.models.Result;
 import main.utils.UserData;
 import main.models.Exam;
 import javax.swing.*;
+import main.utils.Directory;;
 
 public class PresentExamController {
-    //private void setResult(Option){}
-    //private void chooseExam(Exam_Name){}
     Exam currentExam = new Exam();
+    Directory currentDirectory = Directory.instance();
 
     public PresentExamController(){
     }
-    private void startExam(){}
     private Answer getAnswers(){
         return this.getAnswers();
     }
@@ -34,32 +33,30 @@ public class PresentExamController {
     }
 
     public void examFinished(){
-        //UserData data = new UserData(); 
-        //String nameFolderStudent = data.getUsername(); 
-        String nameFolderStudent = "Usuario";
-        String directory = System.getProperty("user.dir");
-        directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users"+File.separator+"Students"+ File.separator+nameFolderStudent;
-        //String nameCourse = currentExam.getNameCourse();
-        //String nameExam = currentExam.getNameExam();
-        String nameCourse = "Course1.txt";
-        String nameExam = "Exam1";
+        UserData currentUser = UserData.instance();
+        String directory = (currentDirectory.getDirectoryStudents())+File.separator+ currentUser.getUsername();
+        File verifyFile = new File(directory+File.separator + (currentExam.getNameCourse())+".txt");
+        if (verifyFile.exists()) {
+            if (verifyFile.delete()) {                
+            } 
+        }
         try {
-            File file = new File(directory, nameCourse);
+            File file = new File(directory, (currentExam.getNameCourse())+ ".txt");
             if (file.createNewFile()) {
-                FileWriter writer = new FileWriter(file);
-                writer.write(nameCourse+"\n"+ nameExam+ "\n");
-                writer.write(currentExam.getSummary());
+                FileWriter writer = new FileWriter(file);               
+                writer.write((currentExam.getNameCourse()) +"\n"+ (currentExam.getNameExam()) + "\n");
+                writer.write((String.valueOf(currentExam.getResultExam()))+"/"+ currentExam.getNumberQuestions()+ "\n");
+                writer.write(currentExam.getNameTeacher());
                 writer.close();
-            }
-        } catch (IOException e) {
+                }
+           } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public List<List<String>> showExamsInformation(){
         List<List<String>> examsInformation = new ArrayList<List<String>>();
-        String directory = System.getProperty("user.dir");
-        directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Exams";
+        String directory = currentDirectory.getDirectoryExams();
         File searchedFolder = new File(directory);
         if (searchedFolder.exists() && searchedFolder.isDirectory()) {
             File[] files = searchedFolder.listFiles();
@@ -103,14 +100,12 @@ public class PresentExamController {
     }
     
     private void readQuestion(String directory, int readings, int counter, int stop){
-        String questionStatement, line, domain;
+        String line;
         String[] answer = new String[10];
         String[] justification = new String[10];
         boolean answerCorrect = true; 
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
-            questionStatement = br.readLine();
-            domain = br.readLine();
-            currentExam.setQuestionsExam(questionStatement,domain,counter);
+            currentExam.setQuestionsExam((br.readLine()),(br.readLine()),counter);
             for (int i =0; ((line = br.readLine()) != null); i++) {
                 if (line != null && line.length() > 0 && answerCorrect && line.substring(0, 1).equalsIgnoreCase("v")) {
                     answer[i]= line.substring(1);
@@ -137,7 +132,7 @@ public class PresentExamController {
     }
     
     private void readExam(String directory, String nameFolder){
-        int numberQuestions, duracion;
+        int numberQuestions, duration;
         directory = directory +File.separator+ nameFolder+File.separator+nameFolder+".txt";
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentExam.setNameExam(br.readLine());
@@ -145,8 +140,8 @@ public class PresentExamController {
             numberQuestions = Integer.parseInt((br.readLine()));
             currentExam.setNumberQuestions(numberQuestions);
             currentExam.setTeacherName(br.readLine());
-            duracion = Integer.parseInt((br.readLine()));
-            currentExam.setDuration(duracion);
+            duration = Integer.parseInt((br.readLine()));
+            currentExam.setDuration(duration);
             currentExam.setDescripcion(br.readLine());
             currentExam.setNameCourse(br.readLine());
             }catch (IOException e) {
@@ -196,25 +191,23 @@ public class PresentExamController {
     }  
 
     public void searchFolder(String [] informationsExam) {
-        String directory = System.getProperty("user.dir");
         int indexForNameFolder = 0;
         int indexForNameCourse = 1;
+        int questionsRead = 1;
         String nameFolder = informationsExam[indexForNameFolder];
-        String nameCourse = informationsExam[indexForNameCourse];
-        System.out.println(nameFolder);
-        directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Exams"+File.separator+nameCourse;
+        String directory = (currentDirectory.getDirectoryExams())+File.separator+informationsExam[indexForNameCourse];
         File searchedFolder = new File(directory);
         if (searchedFolder.exists() && searchedFolder.isDirectory()) {
             File[] files = searchedFolder.listFiles();
             if (files != null) {
                 int stop = getNumberQuestion(directory, nameFolder);
-                int counter =0;
+                int counter = 0;
                 readExam(directory,nameFolder);
                 for (File file : files) {
                     if (file.isDirectory() && file.getName().equals(nameFolder)) {
                         stop = getNumberQuestion(directory, nameFolder);
                         directory = directory + File.separator + nameFolder + File.separator+ "Pregunta1.txt";
-                        readQuestion(directory,1,counter, stop);
+                        readQuestion(directory,questionsRead,counter, stop);
                         return;
                     }
                 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.models.GeneratePDFFile;
+import main.utils.Directory;
 import main.utils.UserData;
 import main.models.Certificate;
 import main.models.Course;
@@ -17,21 +18,23 @@ public class RequestCertificateController {
     /*private void requestCertificate(Course_Name){}
     private String getSummary(){}
     private Certificate generateCertificate(Summary){}*/
+    Directory currentDirectory = Directory.instance();
     Certificate currentCertificate = new Certificate();
+    UserData currentUser = UserData.instance();
     public RequestCertificateController(){
-        this.searchFolderStudent();
-        this.searchFolderTeacher();
+       // this.searchFolderStudent();
     }
     
     public static void main(String[] args) throws IOException{
         RequestCertificateController p = new RequestCertificateController();
         //p.searchFolderStudent();
-        //p.searchFolderTeacher(); 
         p.createPDF();   
     }
     private String nameCourses(File file){
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            return br.readLine();
+            String nameCourse = br.readLine();
+            br.close();
+            return nameCourse;
             } catch (IOException e) {
                 e.printStackTrace();
         }
@@ -40,15 +43,13 @@ public class RequestCertificateController {
 
     public List<String> showCertificates(){
         List<String> namesCourses = new ArrayList<>();
-        String nameFolderStudent = currentCertificate.getNameStudentCertificate();
-        String directory = System.getProperty("user.dir");
-        directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users"+File.separator+"Students"+File.separator+nameFolderStudent;
+        String directory = currentDirectory.getDirectoryStudents()+File.separator+(currentUser.getUsername());
         File searchedFolder = new File(directory);
         if (searchedFolder.exists() && searchedFolder.isDirectory()) {
             File[] files = searchedFolder.listFiles();
             if (files != null) {
                 for (File file : files) {
-                    if (file.isDirectory() && !(file.getName().equals("Password"))) {
+                    if (file.isDirectory() && !(file.getName().equals("Password")) && !(file.getName().toLowerCase().endsWith(".pdf"))) {
                         namesCourses.add(nameCourses(file));
                     }
                 }
@@ -59,53 +60,27 @@ public class RequestCertificateController {
 
     private void readStudentData(String directory){
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
-            currentCertificate.setNameStudentCertificate(br.readLine());
-                br.close();     
-            } catch (IOException e) {
-                e.printStackTrace();
-        }
-    }
-
-    private void readTeacherData(String directory){
-        try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
+            currentCertificate.setNameStudentCertificate(currentUser.getUsername());
+            currentCertificate.setNameCourse(br.readLine());
+            //currentCertificate.setSummary(br.readLine());
+            //arreglar aqui, pq summary es int y lo necesitamos string
             currentCertificate.setNameTeacherCertificate(br.readLine());
             br.close();     
             } catch (IOException e) {
                 e.printStackTrace();
         }
     }
-    public void searchFolderTeacher() {
-        String directory = System.getProperty("user.dir");
-        directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users"+File.separator+"Teachers";
-        //get para obtener nombre del profesor
-        String nameFolderTeacher = "Profesor";
-        File searchedFolder = new File(directory);
-        if (searchedFolder.exists() && searchedFolder.isDirectory()) {
-            File[] files = searchedFolder.listFiles();
-            if (files != null) {
-                for (File file : files) {
-                    if (file.isDirectory() && file.getName().equals(nameFolderTeacher)) {
-                        directory = directory + File.separator + nameFolderTeacher + File.separator + nameFolderTeacher + ".txt";
-                        readTeacherData(directory);
-                        return;
-                    }
-                }
-            }    
-        }
-    }
 
-    public void searchFolderStudent() {
-        String directory = System.getProperty("user.dir");
-        directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users"+File.separator+"Students";
-        UserData data = new UserData(); 
-        String nameFolderStudent = data.getUsername();
+    public void searchFolderStudent(String nameCourse) {
+        String directory = currentDirectory.getDirectoryStudents();
+        String nameFolderStudent = currentUser.getUsername();
         File searchedFolder = new File(directory);
         if (searchedFolder.exists() && searchedFolder.isDirectory()) {
             File[] files = searchedFolder.listFiles();
             if (files != null) {
                 for (File file : files) {
                     if (file.isDirectory() && file.getName().equals(nameFolderStudent)) {
-                        directory = directory + File.separator + nameFolderStudent + File.separator + nameFolderStudent + ".txt";
+                        directory = directory + File.separator + nameFolderStudent + File.separator + nameCourse + ".txt";
                         readStudentData(directory);
                         return;
                     }
@@ -119,10 +94,13 @@ public class RequestCertificateController {
         creatingPDF.crearPlantilla();
     }
     public String getNameStudentController(){
-        return currentCertificate.getNameStudentCertificate();
+        return currentUser.getUsername();
     }
-    public String getCourseController(){
+    public String getNameCourseController(){
         return currentCertificate.getNameCourse();
+    }
+    public String getResultExamController(){
+        return currentCertificate.getSummary();
     }
     public String getNameTeacherController(){
         return currentCertificate.getNameTeacher();

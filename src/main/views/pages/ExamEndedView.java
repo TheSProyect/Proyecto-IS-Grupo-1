@@ -78,6 +78,7 @@ public class ExamEndedView extends ExamTemplateView {
             }
         }
         presentController.setResultExamC(numCorrectQuestions);
+        presentController.examFinished();
         return numCorrectQuestions;
     }
 

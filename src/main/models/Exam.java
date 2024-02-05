@@ -29,13 +29,6 @@ public class Exam extends Course{
                 e.printStackTrace();
         }
     }
-    //public Exam(UserData user){
-       // this.usuario=user;
-    //}
-
-    //public String getUsuario(){
-     //   return usuario.getUsername();
-    //}
     private Question getQuestion(){
         return this.questions[0];
     }
