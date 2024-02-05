@@ -62,7 +62,7 @@ public class PresentExamController {
             File[] files = searchedFolder.listFiles();
             if (files != null) {
                 for (File file : files) {
-                    System.out.println("ola"+ file.getName());
+                    //System.out.println("ola"+ file.getName());
                     if((file.getName()).equals("Instructions.txt")){
                         } else {
                         String directorySub = directory + File.separator + file.getName();
