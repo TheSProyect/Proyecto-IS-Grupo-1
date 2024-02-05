@@ -42,7 +42,7 @@ public class RequestCertificateController {
     }
 
     public List<String> showCertificates(){
-        List<String> namesCourses = new ArrayList<>();
+        List<String> namesCourses = new ArrayList<String>();
         String directory = currentDirectory.getDirectoryStudents()+File.separator+(currentUser.getUsername());
         File searchedFolder = new File(directory);
         if (searchedFolder.exists() && searchedFolder.isDirectory()) {
