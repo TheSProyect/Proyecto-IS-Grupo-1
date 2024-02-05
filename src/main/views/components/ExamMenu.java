@@ -16,10 +16,24 @@ public class ExamMenu extends JPanel{
     JScrollPane questionsListScrollPane;
     QuestionsList questionsList;
 
+    /* */
+    TimerBlock returnBlock;
+
     public ExamMenu(JPanel block, int questionAmount) {
         buildExamMenuPanel();
 
         paintBlock(block);
+
+        paintQuestionsList(questionAmount);
+    }
+
+    /* */
+    public ExamMenu(TimerBlock block, int questionAmount) {
+        buildExamMenuPanel();
+
+        paintBlock(block);
+
+        this.returnBlock = block;
 
         paintQuestionsList(questionAmount);
     }
@@ -58,5 +72,10 @@ public class ExamMenu extends JPanel{
 
     public void setCurrentQuestion(int currentQuestionNumber) {
         questionsList.setCurrentQuestion(currentQuestionNumber);
+    }
+
+    /* */
+    public TimerBlock getBlock(){
+        return this.returnBlock;
     }
 }

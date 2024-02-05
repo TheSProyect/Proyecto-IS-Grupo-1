@@ -69,12 +69,15 @@ public class TimerBlock extends JPanel{
 				TimeRemaining = (Integer.parseInt(parts[0])*60) + (Integer.parseInt(parts[1]));
 				
 				TimeRemaining--;
-				TimeLabel.setText(TimerFormat(String.valueOf(TimeRemaining/60))+":"+TimerFormat(String.valueOf(TimeRemaining%60)));
-				
+
 				if(TimeRemaining<0){
-				T.stop();
-				stopButton.doClick();
+					T.stop();
+					stopButton.doClick();
+				} else {
+
+				TimeLabel.setText(TimerFormat(String.valueOf(TimeRemaining/60))+":"+TimerFormat(String.valueOf(TimeRemaining%60)));
 				}
+				
 			}
 		};
 		return taskPerformer;
@@ -87,4 +90,7 @@ public class TimerBlock extends JPanel{
 		return Time;
 	}
 	
+	public void StopTimer(){
+		this.T.stop();
+	}
 }

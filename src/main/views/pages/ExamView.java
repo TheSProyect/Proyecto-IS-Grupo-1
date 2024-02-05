@@ -16,14 +16,12 @@ public class ExamView extends ExamTemplateView {
     PresentExamController presentController;
     String[] examID;
     ExamEndedPopup popup;
-    boolean actionEnable;
 
     public ExamView(PresentExamController presentExamController, String[] examID) {
         questions = new ArrayList<QuestionPanel>();
         index = 0;
         this.presentController = presentExamController;
         this.examID = examID;
-        actionEnable = true;
 
         inicializeQuestions();
 
@@ -118,17 +116,14 @@ public class ExamView extends ExamTemplateView {
         return numCorrectQuestions;
     }
 
-    private void disableEvents() {
-        actionEnable = false;
-        for(QuestionPanel question : questions) {
-            question.disableOptions();
-        }
-    }   
-
     protected void actionEventInBottomLeftButton(ActionEvent e) {
         if(e.getSource() == finishExamButton) {
-            disableEvents();
-            popup = new ExamEndedPopup(caculateResult(), questions.size());
+
+            /* */
+            this.menuPanel.getBlock().StopTimer();
+
+            int numCorrectQuestions = caculateResult();
+            popup = new ExamEndedPopup(numCorrectQuestions, questions.size());
             PopUp.instance().setView(popup);
 
             popup.getButton().addActionListener(this);
@@ -150,21 +145,17 @@ public class ExamView extends ExamTemplateView {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (!actionEnable) {
-            actionEventInPopUp(e);
+        actionEventInBottomLeftButton(e);
+        if (e.getSource() == prevButton) {
+            showPreviousQuestions();
+
+        } else if (e.getSource() == nextButton) {
+            showNextQuestion();
 
         } else {
-            actionEventInBottomLeftButton(e);
             actionEventInExamMenu(e);
             actionEventInNavBar(e);
-
-            if (e.getSource() == prevButton) {
-                showPreviousQuestions();
-    
-            } else if (e.getSource() == nextButton) {
-                showNextQuestion();
-    
-            }
+            actionEventInPopUp(e);
         }
     }
 }
