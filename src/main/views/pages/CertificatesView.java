@@ -17,12 +17,15 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 
+import main.controllers.RequestCertificateController;
+
 
 public class CertificatesView extends HelpBarTemplateView {
     private static CertificatesView certificatesView;
     Listing certificateListing;
     List<String> certificates;
     List<JButton> requestCertificateButtons;
+    RequestCertificateController requestCertificateController;
 
     public static CertificatesView instance() {
 		if (certificatesView == null){
@@ -36,7 +39,7 @@ public class CertificatesView extends HelpBarTemplateView {
     }
 
     public CertificatesView() {
-        inicializeCertificates();
+        // inicializeCertificates();
 
         buildFrame("CertificatesView");
         paintBorders();
@@ -103,23 +106,27 @@ public class CertificatesView extends HelpBarTemplateView {
     
 
     protected void paintCertificatesListing(JPanel contentPanel) {
+        requestCertificateController = new RequestCertificateController();
+        certificates = new ArrayList<String>();
+        certificates = requestCertificateController.showCertificates();
+
         certificateListing = new Listing(certificates, "Solicitar Certificado");
         contentPanel.add(certificateListing);
     }
 
-    private void inicializeCertificates() {
-        // este metodo es de prueba. Terrible lo se
-        // lo que esté entre comentarios no va btw
+    // private void inicializeCertificates() {
+    //     // este metodo es de prueba. Terrible lo se
+    //     // lo que esté entre comentarios no va btw
 
-        certificates = new ArrayList<String>();
-        // prueba {
-        certificates.add("Curso 1");
-        certificates.add("Curso 2");
-        certificates.add("Curso 3");
-        certificates.add("Curso 4");
+    //     certificates = new ArrayList<String>();
+    //     // prueba {
+    //     certificates.add("Curso 1");
+    //     certificates.add("Curso 2");
+    //     certificates.add("Curso 3");
+    //     certificates.add("Curso 4");
         
-        //prueba    
-    }
+    //     //prueba    
+    // }
 
     private void getRequestCertificateButtons() {
         requestCertificateButtons = certificateListing.getListingButtons();
