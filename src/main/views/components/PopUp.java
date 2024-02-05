@@ -39,6 +39,7 @@ public class PopUp extends JFrame {
         this.add(view);
         
         view.repaint();
+        this.setAlwaysOnTop(true);
         this.pack();
     }
 
