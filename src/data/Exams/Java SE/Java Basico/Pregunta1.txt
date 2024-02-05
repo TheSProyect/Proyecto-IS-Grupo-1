@@ -1,4 +1,4 @@
-¿Qué método hay que invocar para ejecutar un programa en Java?
+¿Que metodo hay que invocar para ejecutar un programa en Java?
 Metodos en Java
 vmain
 En Java, el metodo principal para invocar un programa es mediante el metodo 'main'.

@@ -1,4 +1,4 @@
-¿Qué manipulador se usa para definir la anchura del campo a imprimir?
+¿Que manipulador se usa para definir la anchura del campo a imprimir?
 dom5
 swidth
 just1

@@ -1,10 +1,10 @@
-¿Qué elementos definen a un objeto?
+¿Que elementos definen a un objeto?
 Propiedades de objetos
 Sus cardinalidad y su tipo
 just1
-vSus atributos y sus métodos
+vSus atributos y sus metodos
 just2
-La forma en que establece comunicación e intercambia mensajes
+La forma en que establece comunicacion e intercambia mensajes
 just3
 Su interfaz y los eventos asociados
 just4

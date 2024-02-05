@@ -1,4 +1,4 @@
-¿Qué símbolo se usa para definir un destructor de clase?
+¿Que simbolo se usa para definir un destructor de clase?
 dom7
 -
 just1
