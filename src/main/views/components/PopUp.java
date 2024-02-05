@@ -19,6 +19,11 @@ public class PopUp extends JFrame {
 		return popup;
 	}
 
+    public static void deleteInstance() {
+        popup.setVisible(false);
+        popup = null;
+    }
+
     public PopUp() {
         this.setUndecorated(true);
         this.setVisible(true);

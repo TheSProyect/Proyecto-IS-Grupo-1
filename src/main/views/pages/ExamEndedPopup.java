@@ -20,26 +20,26 @@ import main.utils.Size;
 import main.views.components.ResultsBlock;
 
 public class ExamEndedPopup extends PopUpTemplate{
-
+    JButton Button;
     
-    public ExamEndedPopup() {
-    
-    buildFrame();
-    paintBorders();
-    paintContentPanel();
+    public ExamEndedPopup(int correctAnswer,  int amountOfQuestion) {
+        
+        buildFrame();
+        paintBorders();
+        paintContentPanel(correctAnswer, amountOfQuestion);
 
     }
 
-    protected void paintContentPanel(){
+    protected void paintContentPanel(int correctAnswer,  int amountOfQuestion){
         JPanel contentPanel = new JPanel();
         contentPanel.setPreferredSize(Size.instance().getPopupDimension());
         contentPanel.setBackground(Palette.instance().getWhite());
         contentPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 15));
         
-        paintTitlePanel(contentPanel, "QUE VERGA WEY!");
+        paintTitlePanel(contentPanel, "¡Felicidades!");
         
         paintTextLabel(contentPanel);
-        paintScore(contentPanel);
+        paintScore(contentPanel, correctAnswer, amountOfQuestion);
         paintButton(contentPanel);
         
         this.add(contentPanel, FlowLayout.CENTER);    }
@@ -61,15 +61,14 @@ public class ExamEndedPopup extends PopUpTemplate{
         contentPanel.add(text);
     }
 
-    private void paintScore(JPanel contentPanel) {
+    private void paintScore(JPanel contentPanel, int correctAnswer,  int amountOfQuestion) {
         ResultsBlock results = new ResultsBlock();
-        results.paintResults(1, 3);
+        results.paintResults(correctAnswer, amountOfQuestion);
         contentPanel.add(results);
     }
     
     private void paintButton(JPanel contentPanel) {
-
-        JButton Button = new JButton("Presentar Examen");
+        Button = new JButton("Ver Respuestas");
         Button.setFont(new Font("Nunito Sans", Font.BOLD, 15));
         Button.setUI(new MetalButtonUI());
         Button.setForeground(Palette.instance().getWhite());
@@ -84,7 +83,9 @@ public class ExamEndedPopup extends PopUpTemplate{
         contentPanel.add(Button);
     }
 
-    
+    public JButton getButton() {
+        return Button;
+    }
 
 
 }

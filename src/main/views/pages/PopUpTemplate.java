@@ -2,12 +2,10 @@ package main.views.pages;
 
 import java.awt.Dimension;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextPane;
@@ -74,8 +72,4 @@ public class PopUpTemplate extends JPanel {
         line.setBackground(Palette.instance().getYellow());
         titlePanel.add(line);
     }
-
-    
-
-    
 }

@@ -8,12 +8,14 @@ import javax.swing.ImageIcon;
 
 import main.controllers.PresentExamController;
 import main.views.components.ExamMenu;
+import main.views.components.PopUp;
 import main.views.components.QuestionPanel;
 import main.views.components.TimerBlock;
 
 public class ExamView extends ExamTemplateView {
     PresentExamController presentController;
     String[] examID;
+    ExamEndedPopup popup;
 
     public ExamView(PresentExamController presentExamController, String[] examID) {
         questions = new ArrayList<QuestionPanel>();
@@ -100,13 +102,56 @@ public class ExamView extends ExamTemplateView {
             questions.get(index).setVisible(true);
         }
     }  
+
+    private int caculateResult() {
+        int numCorrectQuestions = 0;
+        for (int i = 0; i < questions.size(); i++) {
+            int selectedOption = questions.get(i).getSelectedOption();
+            if (selectedOption == -1) {
+                continue;
+            } else if (presentController.isCorrect(i, selectedOption)) {
+                numCorrectQuestions++;
+            }
+        }
+        return numCorrectQuestions;
+    }
+
     protected void actionEventInBottomLeftButton(ActionEvent e) {
         if(e.getSource() == finishExamButton) {
-            Frame.instance().setView(new ExamEndedView(questions, presentController));
-            Frame.instance().setTitle("ExamEndedView");
+            int numCorrectQuestions = caculateResult();
+            popup = new ExamEndedPopup(numCorrectQuestions, questions.size());
+            PopUp.instance().setView(popup);
+
+            popup.getButton().addActionListener(this);
         } 
     } 
+
+    private void actionEventInPopUp(ActionEvent e) {
+        if (popup == null){
+            return;
+        } else if (e.getSource() == popup.getButton()) {
+            PopUp.deleteInstance();
+            Frame.instance().setView(new ExamEndedView(questions, presentController));
+            Frame.instance().setTitle("ExamEndedView");
+        }
+    }
   
     public void showInstructions(){}
     public void endExam(){}
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        actionEventInBottomLeftButton(e);
+        if (e.getSource() == prevButton) {
+            showPreviousQuestions();
+
+        } else if (e.getSource() == nextButton) {
+            showNextQuestion();
+
+        } else {
+            actionEventInExamMenu(e);
+            actionEventInNavBar(e);
+            actionEventInPopUp(e);
+        }
+    }
 }
