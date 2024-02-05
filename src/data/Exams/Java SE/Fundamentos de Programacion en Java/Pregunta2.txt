@@ -1,8 +1,8 @@
-¿Que es el entorno de ejecución de Java (Java Runtime Environment)?
+¿Que es el entorno de ejecucion de Java (Java Runtime Environment)?
 Dominio2
-Es un conjunto de librerías para desarrollo de aplicaciones Java
+Es un conjunto de librerias para desarrollo de aplicaciones Java
 Justificacion1
-vEs una pieza intermedia entre el código Bytecode y los distintos sistemasoperativos existentes en el mercado. Incluye la máquina virtual de Java
+vEs una pieza intermedia entre el codigo Bytecode y los distintos sistemas operativos existentes en el mercado. Incluye la maquina virtual de Java
 Justificacion2
-Es la máquina virtual de Java
+Es la maquina virtual de Java
 justificacoon3

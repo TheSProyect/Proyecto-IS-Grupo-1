@@ -1,4 +1,4 @@
-¿Qué hace el operador '==' en Java?
+¿Que hace el operador '==' en Java?
 Operadores en Java
 Asignacion de variables
 El operador '=' es el utilizado para asignar valores a variables.
