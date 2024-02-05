@@ -26,11 +26,6 @@ public class RequestCertificateController {
     }
     
     public static void main(String[] args) throws IOException{
-        RequestCertificateController p = new RequestCertificateController();
-        UserData.instance().setUsername("Usuario");
-        UserData.instance().setPassword("Contrasenia");
-        //p.searchFolderStudent();
-        p.showCertificates();   
     }
 
     private String nameCourses(File file){
