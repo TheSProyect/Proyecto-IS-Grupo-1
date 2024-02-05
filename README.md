@@ -48,7 +48,7 @@
 ![Modelado de Análisis : Diagrama de colaboracion](out/docs/logicalView/analysisView/UC-requestCertificate-analysisCommunicationDiagram/UC-requestCertificate-analysisCommunicationDiagram.png)
 
 ### Diagrama de paquetes de análisis
-![Modelado de Análisis : Diagrama de paquetes](out\docs\logicalView\analysisView\Analysis-PackageDiagram\Analysis-PackageDiagram.png)
+![Modelado de Análisis : Diagrama de paquetes](out/docs/logicalView/analysisView/Analysis-PackageDiagram/Analysis-PackageDiagram.png)
 
 ## Modelo de Diseño
 
