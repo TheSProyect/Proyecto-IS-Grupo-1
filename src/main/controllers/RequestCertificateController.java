@@ -27,8 +27,10 @@ public class RequestCertificateController {
     
     public static void main(String[] args) throws IOException{
         RequestCertificateController p = new RequestCertificateController();
+        UserData.instance().setUsername("Usuario");
+        UserData.instance().setPassword("Contrasenia");
         //p.searchFolderStudent();
-        p.createPDF();   
+        p.showCertificates();   
     }
     private String nameCourses(File file){
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -49,7 +51,7 @@ public class RequestCertificateController {
             File[] files = searchedFolder.listFiles();
             if (files != null) {
                 for (File file : files) {
-                    if (file.isDirectory() && !(file.getName().equals("Password")) && !(file.getName().toLowerCase().endsWith(".pdf"))) {
+                    if (file.isDirectory() || !(file.getName().equals("Password")) && !file.getName().endsWith(".pdf")) {
                         namesCourses.add(nameCourses(file));
                     }
                 }
