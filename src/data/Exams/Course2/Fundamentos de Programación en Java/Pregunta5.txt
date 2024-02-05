@@ -1,0 +1,8 @@
+La legibilidad de un programa Java es importante porque:
+dom5
+vFacilita el mantenimiento del software y permite corregir errores omodificar la funcionalidad con menor coste
+just1
+Evita errores del compilador
+Just2 
+Permite corregir errores, aunque no facilita el proceso de mantenimientode una aplicación
+just3

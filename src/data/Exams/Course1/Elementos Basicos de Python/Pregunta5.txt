@@ -1,0 +1,10 @@
+¿Como se realiza la entrada de datos desde el usuario?
+dom5
+vinput()
+just1
+read()
+just2
+get_input()
+just3
+user_input()
+just4

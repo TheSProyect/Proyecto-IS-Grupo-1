@@ -1,0 +1,8 @@
+El proceso clásico de desarrollo de software se compone de las siguientes fases:
+Dominio3
+Codificación, diseño, pruebas y validación
+Justificacion1
+vEspecificación, diseño, codificación, prueba y mantenimiento
+Justificacion2
+Diseño, pruebas, validación y mantenimiento
+just3

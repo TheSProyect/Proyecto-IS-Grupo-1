@@ -117,7 +117,7 @@ public class PresentExamController {
                         currentExam.setIsCorrectExam(false, i, counter);
                         }
                     currentExam.setAnswersExam(answer[i],justification[i], i, counter);
-                    currentExam.setNumberAnswers(counter, i);
+                    currentExam.setNumberAnswers(counter, i+1);
                     }
                     br.close();     
                 } catch (IOException e) {
@@ -245,7 +245,6 @@ public class PresentExamController {
     public List<List<String>> getCode(){
         int j=currentExam.getNumberQuestions();
         List<List<String>> code = new ArrayList<List<String>>();
-        //falta arreglar
         for(int i=0; i<j; i++){ 
             code.add(new ArrayList<String>());
             for(int k=0; k<currentExam.getNumberAnswersExam(i); k++){
@@ -253,6 +252,24 @@ public class PresentExamController {
             }
         }
         return code;
+    }
+
+    public List<List<String>> getJustification(){
+        int j=currentExam.getNumberQuestions();
+        List<List<String>> justification = new ArrayList<List<String>>();
+        for(int i=0; i<j; i++){ 
+            justification.add(new ArrayList<String>());
+            for(int k=0; k<currentExam.getNumberAnswersExam(i); k++){
+                String isCorrect;
+                if(currentExam.getIsCorrectExam(i, k)){
+                    isCorrect= "Correcto";
+                }else{
+                    isCorrect="Incorrecto";
+                }
+                justification.get(i).add("Opcion "+(k+1)+"<br>"+isCorrect+"<br>"+currentExam.getJustificationExam(i,k));
+            }
+        }
+        return justification;
     }
     
     public List<List<String>> getOptions(){
@@ -276,8 +293,5 @@ public class PresentExamController {
     }
     public void setResultExamC(int numCorrectQuestions){
         currentExam.setResultExam(numCorrectQuestions);
-        // esa impresion seria lo que hay que escribir como string en el .txt
-        //System.out.println(currentExam.getResultExam()+ "/"+currentExam.getNumberQuestions());
-        //System.out.println(currentExam.getUsuario());
     }
 }

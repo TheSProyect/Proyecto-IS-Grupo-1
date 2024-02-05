@@ -60,8 +60,10 @@ public class Exam extends Course{
         return results.getScore();
     }
     public String getQuestionsExam(int counter){
-        //return questions2.getQuestions();
         return questions[counter].getQuestions();
+    }
+    public String getJustificationExam(int counter, int i){
+        return questions[counter].getJustificationQuestion(i);
     }
     public String getDomainExam(int counterQ){
         return questions[counterQ].getDomain();

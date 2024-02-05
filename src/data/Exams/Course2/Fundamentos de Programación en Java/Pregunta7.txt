@@ -1,0 +1,8 @@
+La sobrecarga de métodos es útil para:
+dom7
+vQue el mismo método opere con parámetros de distinto tipo o que unmismo método reciba una lista de parámetros diferente
+just1
+Que el mismo método opere con parámetros de distinto tipo
+just2
+Que distintos métodos operen con parámetros de distinto tipo
+just3

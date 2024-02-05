@@ -1,0 +1,10 @@
+¿Cuál es la descripción que crees que define mejor el concepto 'clase' en la programación orientada a objetos?
+Declaracion de variables
+Es un concepto similar al de 'array'
+just1
+Es un tipo particular de variable
+just2
+vEs un modelo o plantilla a partir de la cual creamos objetos
+just3
+Es una categoria de datos ordenada secuencialmente
+just4

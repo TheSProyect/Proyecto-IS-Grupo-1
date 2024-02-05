@@ -1,0 +1,10 @@
+¿Cual es el proposito de la palabra clave 'static' en Java?
+Variable y Metodos estaticos
+Para declarar variables de instancia.
+La palabra clave 'private' tiene como proposito declarar variables de instancia.
+vPara acceder a variables de instancia desde metodos estaticos.
+La palabra clave 'static' tiene como proposito acceder a variables de instancia desde metodos estaticos.
+Para indicar que un metodo es abstracto.
+La palabra clave 'abstract' tiene como proposito indicar que un metodo es abstracto.
+Para permitir la creacion de multiples instancias de una clase.
+La palabra clave 'new' tiene como proposito permitir la creacion de multiples instancias de una clase.

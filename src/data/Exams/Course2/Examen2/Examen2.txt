@@ -1,7 +1,0 @@
-Examen2
-Java
-3
-Profesor
-3
-Descripcion
-Course2

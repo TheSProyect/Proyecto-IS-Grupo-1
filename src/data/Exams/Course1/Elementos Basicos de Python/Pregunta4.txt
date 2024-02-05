@@ -1,0 +1,10 @@
+¿Cual es la funcion utilizada para obtener la longitud de una lista?
+dom4
+vlen()
+just1
+length()
+just2
+size()
+just3
+count()
+just4

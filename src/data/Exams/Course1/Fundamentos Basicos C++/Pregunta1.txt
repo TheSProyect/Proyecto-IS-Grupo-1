@@ -1,0 +1,10 @@
+Para incluir una biblioteca en c++ se utiliza la siguiente sentencia:
+Dominio1
+# include (stdlib)
+just1
+v# include <stdlib>
+just2
+cin >> variable1;
+just3
+cout << "biblioteca";
+just4

@@ -1,0 +1,10 @@
+¿Que símbolo/s se usa/n para definir un puntero que apunta a otro puntero?
+dom6
+*
+just1
+v**
+just2
+&*
+just3
+&
+just4

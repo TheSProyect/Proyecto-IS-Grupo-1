@@ -1,0 +1,10 @@
+¿Cual es la palabra clave para declarar una funcion?
+dom1
+func
+just1
+vdef
+just2
+function
+just3
+define
+just4

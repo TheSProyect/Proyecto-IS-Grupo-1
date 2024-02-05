@@ -1,0 +1,10 @@
+¿Qué significa instanciar una clase?
+voy chicos
+Duplicar una clase
+just
+Eliminar una clase
+just
+vCrear un objeto a partir de la clase
+just
+Conectar dos clases entre sí
+just

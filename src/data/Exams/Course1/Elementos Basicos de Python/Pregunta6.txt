@@ -1,0 +1,10 @@
+¿Cual es la principal diferencia entre una lista y una tupla?
+dom6
+Las listas son inmutables, las tuplas son mutables
+just1
+vLas listas son ordenadas, las tuplas no
+just2
+Las listas son heterogeneas, las tuplas son homogeneas
+just3
+No hay diferencia, ambos son sinonimos
+just4

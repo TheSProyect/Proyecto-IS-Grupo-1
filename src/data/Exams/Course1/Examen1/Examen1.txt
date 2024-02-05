@@ -1,7 +1,0 @@
-Examen1
-Tipo del examen
-3
-Nombre del profesor
-2
-Descripcion
-Course1

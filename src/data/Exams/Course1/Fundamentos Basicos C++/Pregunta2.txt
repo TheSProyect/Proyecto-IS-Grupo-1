@@ -1,0 +1,10 @@
+En el proceso de Compilar, pueden aparecer 2 tipos de errores:
+dom2
+vErrores de compilación y de ejecución
+just1
+Errores de entrada y salida
+just2
+Errores de etrada y ejecución
+just3
+Errores de compilación y salida
+just4

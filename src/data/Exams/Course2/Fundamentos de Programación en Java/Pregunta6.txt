@@ -1,0 +1,8 @@
+Cuando se ejecuta el método constructor de una clase:
+dom6
+Se crea un alias y se inicializan los atributos del objeto
+just1
+vSe asigna un espacio de memoria al objeto instanciado y se inicializan losatributos del objeto
+just2
+Se asigna un espacio de memoria al objeto instanciado, pero no se inicializanlos atributos del objeto
+just3

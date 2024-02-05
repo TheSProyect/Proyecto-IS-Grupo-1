@@ -1,0 +1,10 @@
+¿Qué manipulador se usa para definir la anchura del campo a imprimir?
+dom5
+swidth
+just1
+setwidth
+just2
+vsetw
+just3
+setprecision
+just4

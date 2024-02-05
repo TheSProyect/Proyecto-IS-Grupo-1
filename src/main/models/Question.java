@@ -35,8 +35,10 @@ public class Question {
     }
     
     public String getAnswersQuestions(int counter){
-        //return questions2.getQuestions();
         return answers[counter].getAnswers();
+    }
+    public String getJustificationQuestion(int counter){
+        return answers[counter].getJustification();
     }
     public Boolean getIsCorrectQuestion(int counter){
         return answers[counter].getIsCorrect();

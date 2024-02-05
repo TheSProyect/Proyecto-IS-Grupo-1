@@ -1,0 +1,10 @@
+¿Qué es el bytecode en Java?
+holi
+El formato de intercambio de datos
+just1
+vEl formato que obtenemos tras compilar un fuente .java
+just2
+Un tipo de variable
+just3
+Un depurador de código
+just4

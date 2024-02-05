@@ -1,0 +1,10 @@
+¿Qué significa sobrecargar (overload) un método?
+hey
+Editarlo para modificar su comportamiento
+just1
+Cambiarle el nombre dejándolo con la misma funcionalidad
+just2
+vCrear un método con el mismo nombre pero diferentes argumentos
+just3
+Añadirle funcionalidades a un método
+just4

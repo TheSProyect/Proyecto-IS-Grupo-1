@@ -1,0 +1,8 @@
+El compilador de Java analiza el código fuente y:
+dominio4
+Comprueba que todos sus elementos son palabras válidas en Java y susemántica
+Justificacion1
+Comprueba que todos sus elementos son palabras válidas en Java
+just2 
+vComprueba que todos sus elementos son palabras válidas en Java, verificala estructura sintáctica del programa y su semántica
+just3

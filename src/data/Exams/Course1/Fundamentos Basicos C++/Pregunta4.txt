@@ -1,0 +1,10 @@
+¿Qué clase se usa para escribir a un fichero?
+dom4
+vofstream
+just1
+ifstream
+just2
+write
+just3
+writeline
+just4

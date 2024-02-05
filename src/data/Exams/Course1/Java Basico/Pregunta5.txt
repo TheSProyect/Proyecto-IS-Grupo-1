@@ -1,0 +1,10 @@
+¿Como se crea una instancia de una clase en Java?
+Manejo de clases
+vClass obj = new Class();
+Con esta declaracion podemos crear una instacia de una clase.
+Object obj = create Object();
+La palabra clave 'create' no se utiliza para instanciar objetos.
+Class obj = create Class();
+La palabra clave 'create' no se utiliza para instanciar objetos.
+Class obj = Class.getInstance();
+En Java las clases "Class' no se instancian mediante un metodo como 'getInstance()'

@@ -1,0 +1,10 @@
+¿Qué símbolo se usa para definir un destructor de clase?
+dom7
+-
+just1
+v~
+just2
++
+just3
+ninguna de las anteriores
+just4

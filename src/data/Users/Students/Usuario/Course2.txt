@@ -1,4 +1,4 @@
 Course2
-Examen2
-2/3
-Profesor
+Fundamentos de Programación en Java
+2/7
+Valeria Ciccolella

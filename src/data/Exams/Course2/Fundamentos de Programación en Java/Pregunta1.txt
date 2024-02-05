@@ -1,0 +1,8 @@
+Un programa Java compilado es portable porque:
+Dominio1
+vEl código Bytecode es ejecutable por los principales sistemas operativos del mercado
+Justificacion1
+El entorno de ejecución de Java incluye una máquina virtual que interpreta el código Bytecode
+Justificacion2
+El entorno de ejecución interpreta el código Java, independientemente de la máquina virtual
+just3
