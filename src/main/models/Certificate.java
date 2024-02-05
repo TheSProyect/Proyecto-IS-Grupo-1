@@ -26,9 +26,6 @@ public class Certificate {
     public String getNameCourse(){
         return course.getNameCourse();
     }
-    //public void setSummary(int Summary){
-        //course.setResultExam(Summary);
-    //}
     public void setSummary(String Summary){
         course.setSummary(Summary);
     }

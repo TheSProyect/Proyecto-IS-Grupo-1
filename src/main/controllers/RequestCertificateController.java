@@ -32,6 +32,7 @@ public class RequestCertificateController {
         //p.searchFolderStudent();
         p.showCertificates();   
     }
+
     private String nameCourses(File file){
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String nameCourse = br.readLine();
@@ -64,10 +65,7 @@ public class RequestCertificateController {
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentCertificate.setNameStudentCertificate(currentUser.getUsername());
             currentCertificate.setNameCourse(br.readLine());
-            //int result=Integer.parseInt((br.readLine()));
-            //currentCertificate.setSummary(result);
             currentCertificate.setSummary(br.readLine());
-            //arreglar aqui, pq summary es int y lo necesitamos string
             currentCertificate.setNameTeacherCertificate(br.readLine());
             br.close();     
             } catch (IOException e) {
@@ -86,7 +84,6 @@ public class RequestCertificateController {
                     if (file.isDirectory() && file.getName().equals(nameFolderStudent)) {
                         directory = directory + File.separator + nameFolderStudent + File.separator + nameCourse + ".txt";
                         readStudentData(directory);
-                        return;
                     }
                 }
             }    
@@ -94,8 +91,13 @@ public class RequestCertificateController {
     }
 
     public void createPDF(){
+        List<String> informationToPDF = new ArrayList<String>();
+        informationToPDF.add(currentUser.getUsername());
+        informationToPDF.add(currentCertificate.getSummary());
+        informationToPDF.add(currentCertificate.getNameCourse());
+        informationToPDF.add(currentCertificate.getNameTeacher());
         GeneratePDFFile creatingPDF = new GeneratePDFFile();
-        creatingPDF.crearPlantilla();
+        //creatingPDF.fillPDF(informationToPDF);
     }
     public String getNameStudentController(){
         return currentUser.getUsername();
