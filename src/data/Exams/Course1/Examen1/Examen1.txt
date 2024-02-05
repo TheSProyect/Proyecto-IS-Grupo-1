@@ -1,4 +1,4 @@
-Nombre del examen
+Examen1
 Tipo del examen
 3
 Nombre del profesor
