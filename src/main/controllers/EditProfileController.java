@@ -24,36 +24,15 @@ public class EditProfileController {
         }
 
         String directory;
-        if(currentUser.isAdmin()){
-            directory = searchedDirectory("Teachers", newUsername);
-        } else {
-            directory = searchedDirectory("Users", newUsername);
-        }
 
+        directory = searchedDirectory(currentUser.isAdmin(), currentUser.getUsername());
 
-		
-        File adminfile = new File(directory);
+        File newFile = new File(directory);
         
-        if(adminfile.exists()){
-            return false;
-        } else {
-            adminfile.createNewFile();
-            currentUser.setUsername(newUsername);
-            return true;
-        }
         
-            directory = System.getProperty("user.dir");
-            directory = directory+File.separator+"src"+File.separator;
-            directory = directory+"data"+File.separator+"Users"+File.separator;
-            directory = directory+"Studens"+File.separator+ currentUser.getUsername() +".txt";
-            File userfile = new File(directory);
-            if(userfile.exists()){
-                return false;
-            } else { 
-                userfile.createNewFile();
-                currentUser.setUsername(newUsername);
-                return true;
-            }
+        newFile.createNewFile();
+        currentUser.setUsername(newUsername);
+        return true;
 
     }
 
@@ -62,17 +41,9 @@ public class EditProfileController {
         currentUser.setMail(newMail);
         currentUser.setPassword(newPassword);
 
-        String directory = System.getProperty("user.dir");
-        String folder;
-        if(currentUser.isAdmin()){
-            folder = "Teachers";
-        } else {
-            folder = "Students";
-        }
-        
-        directory = directory+File.separator+"src"+File.separator;
-        directory = directory+"data"+File.separator+"Users"+File.separator;
-        directory = directory+folder+File.separator+ currentUser.getUsername() +".txt";
+        String directory;
+
+        directory = searchedDirectory(currentUser.isAdmin(), currentUser.getUsername());
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(directory, true));
         writer.write(newPassword + "\n" + newMail);
@@ -80,11 +51,16 @@ public class EditProfileController {
 
     }
 
-    public String searchedDirectory(String folder, String Username){
+    public String searchedDirectory(boolean isAdmin, String Username){
 		String directory = System.getProperty("user.dir");
+        if(isAdmin){
 		directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users";
-		directory = directory+File.separator+folder+File.separator+Username+File.separator+"Password.txt";
-		return directory;
+		directory = directory+File.separator+"Teachers"+File.separator+Username+File.separator+"Password.txt";
+        } else {
+            directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users";
+		    directory = directory+File.separator+"Users"+File.separator+Username+File.separator+"Password.txt";
+        }
+        return directory;
 	}
 
     public boolean userAlreadyExists(){
