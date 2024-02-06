@@ -5,7 +5,7 @@ import main.models.Result;
 
 public class Course {
     private  Name name;
-    private String summary;
+    private Result summary;
     private Name teacher;
     private boolean visit = false;
 
@@ -15,7 +15,7 @@ public class Course {
     public void setVisit(boolean visit){
         this.visit=visit;
     }
-    public void setNameTeacherCourse(String name){
+    public void setNameTeacher(String name){
         teacher = new Name();
         teacher.setName(name);
     }
@@ -28,11 +28,5 @@ public class Course {
     }
     public String getNameTeacher(){
         return teacher.getName();
-    }
-    public String getSummary(){
-        return summary;
-    }
-    public void setSummary(String score){
-        summary=score;
     }
 }

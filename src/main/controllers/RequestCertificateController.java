@@ -60,8 +60,12 @@ public class RequestCertificateController {
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentCertificate.setNameStudentCertificate(currentUser.getUsername());
             currentCertificate.setNameCourse(br.readLine());
-            currentCertificate.setSummary(br.readLine());
+            String answersCorrects = br.readLine();
+            currentCertificate.setResultExam(Integer.parseInt(answersCorrects));
+            String questionsExam =  br.readLine();
+            currentCertificate.setQuestionsExam(Integer.parseInt(questionsExam));
             currentCertificate.setNameTeacherCertificate(br.readLine());
+            System.out.println(currentCertificate.getNameTeacher());
             br.close();     
             } catch (IOException e) {
                 e.printStackTrace();
@@ -88,7 +92,8 @@ public class RequestCertificateController {
     public void createPDF(){
         List<String> informationToPDF = new ArrayList<String>();
         informationToPDF.add(currentUser.getUsername());
-        informationToPDF.add(currentCertificate.getSummary());
+        informationToPDF.add(String.valueOf(currentCertificate.getResultExam()));
+        informationToPDF.add(String.valueOf(currentCertificate.getQuestionsExam()));
         informationToPDF.add(currentCertificate.getNameCourse());
         informationToPDF.add(currentCertificate.getNameTeacher());
         GeneratePDFFile creatingPDF = new GeneratePDFFile();
@@ -100,8 +105,11 @@ public class RequestCertificateController {
     public String getNameCourseController(){
         return currentCertificate.getNameCourse();
     }
-    public String getResultExamController(){
-        return currentCertificate.getSummary();
+    public int getResultAnswersController(){
+        return currentCertificate.getResultExam();
+    }
+    public int getQuestionsExamController(){
+        return currentCertificate.getQuestionsExam();
     }
     public String getNameTeacherController(){
         return currentCertificate.getNameTeacher();

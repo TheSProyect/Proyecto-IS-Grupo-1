@@ -1,4 +1,5 @@
 Introduccion a Python para Principiantes
 Elementos Basicos de Python
-1/7
+1
+7
 Valeria Ciccolella

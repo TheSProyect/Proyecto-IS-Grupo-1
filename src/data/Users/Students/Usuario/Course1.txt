@@ -1,4 +1,0 @@
-Course1
-Programacion Orientada a Objeto en Java
-0/6
-Valeria Ciccolella
