@@ -22,10 +22,11 @@ public class RequestCertificateController {
     Certificate currentCertificate = new Certificate();
     UserData currentUser = UserData.instance();
     public RequestCertificateController(){
-       // this.searchFolderStudent();
+        this.createPDF();
     }
     
     public static void main(String[] args) throws IOException{
+        RequestCertificateController r= new RequestCertificateController();
     }
 
     private String nameCourses(File file){
@@ -92,11 +93,16 @@ public class RequestCertificateController {
     public void createPDF(){
         List<String> informationToPDF = new ArrayList<String>();
         informationToPDF.add(currentUser.getUsername());
+        System.out.println(currentUser.getUsername());
         informationToPDF.add(String.valueOf(currentCertificate.getResultExam()));
+        System.out.println(String.valueOf(currentCertificate.getResultExam()));
         informationToPDF.add(String.valueOf(currentCertificate.getQuestionsExam()));
+        System.out.println(String.valueOf(currentCertificate.getQuestionsExam()));
         informationToPDF.add(currentCertificate.getNameCourse());
+        System.out.println(currentCertificate.getNameCourse());
         informationToPDF.add(currentCertificate.getNameTeacher());
-        GeneratePDFFile creatingPDF = new GeneratePDFFile();
+        System.out.println(currentCertificate.getNameTeacher());
+        GeneratePDFFile creatingPDF = new GeneratePDFFile(informationToPDF);
         //creatingPDF.fillPDF(informationToPDF);
     }
     public String getNameStudentController(){
