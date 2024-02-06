@@ -15,7 +15,7 @@ public class Certificate {
         return student.getName();
     }
     public void setNameTeacherCertificate(String name){
-        course.setNameTeacherCourse(name);
+        course.setNameTeacher(name);
     }
     public String getNameTeacher(){
         return course.getNameTeacher();

@@ -113,7 +113,7 @@ public class Exam extends Course{
         return type;
     }
 
-    public void setTeacherName(String name){
+    public void setNameTeacher(String name){
         course.setNameTeacherCourse(name);
     }
     public String getNameTeacher(){
