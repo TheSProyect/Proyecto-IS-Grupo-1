@@ -20,8 +20,6 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
-
-import main.controllers.RequestCertificateController;
 import main.utils.Palette;
 
 public class CertificateView extends HelpBarTemplateView{
@@ -209,10 +207,12 @@ public class CertificateView extends HelpBarTemplateView{
     //  private void show(Certificate)(){}
     private void addActionListener() {
         addActionListenerNavbar();
+        addActionListenerHelpBar();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         actionEventInNavBar(e);
+        actionEventInHelpBar(e);
     }
 }

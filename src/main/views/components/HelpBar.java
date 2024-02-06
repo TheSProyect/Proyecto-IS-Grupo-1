@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 import main.utils.Palette;
 
-public class HelpBar extends JPanel implements ActionListener{
+public class HelpBar extends JPanel{
     NavBarButton helpButton;
 
     public HelpBar() {
@@ -18,15 +18,11 @@ public class HelpBar extends JPanel implements ActionListener{
         this.setLayout(new FlowLayout(FlowLayout.TRAILING));
 
         helpButton = new NavBarButton("Ayuda", "Help_Icon.png", true);
-        helpButton.addActionListener(this);
 
         this.add(helpButton);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() ==    helpButton) {
-            System.out.println ("this should open HelpView");
-        }
+    public NavBarButton getHelpButton() {
+        return helpButton;
     }
 }
