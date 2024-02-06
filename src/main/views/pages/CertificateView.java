@@ -152,7 +152,7 @@ public class CertificateView extends HelpBarTemplateView{
     }
 
     private void paintSignature (JPanel contentPanel) {
-        String imageDirectory = Directory.instance().getDirectoryTeachers() + File.separator +teacher+ File.separator + "Signature.png";
+        String imageDirectory = Directory.instance().getDirectoryTeachers() + File.separator +teacher + File.separator + "Signature.png";
         ImageIcon icon = new ImageIcon(imageDirectory);
 
         JLabel lbl = new JLabel();
