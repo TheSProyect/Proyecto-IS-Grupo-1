@@ -12,6 +12,7 @@ public class Palette {
     Color black;
     Color transparentBlack;
     Color blue;
+    Color red;
     Color yellow;
 
     public static Palette instance() {
@@ -28,6 +29,7 @@ public class Palette {
         gray = new Color(77,77,77);
         black = new Color(31,31,31);
         blue = new Color(25, 66, 140);
+        red = new Color(255, 10, 10);
         yellow = new Color(247, 167, 39);
         transparentBlack = new Color(31, 31, 31, 70);
 	}
@@ -54,6 +56,10 @@ public class Palette {
 
     public Color getBlue() {
         return blue;
+    }
+
+    public Color getRed() {
+        return red;
     }
 
     public Color getYellow() {

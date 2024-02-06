@@ -58,15 +58,15 @@ public class CertificateView extends HelpBarTemplateView{
         paintCertificateHeader(contentPanel);
         paintTitleSeparator(Palette.instance().getLightGray(), contentPanel, 1);
 
-        paintName(username, contentPanel);
+        paintName(contentPanel);
         paintTitleSeparator(Palette.instance().getYellow(), contentPanel, 4);
 
-        paintCourse(course, contentPanel);
+        paintCourse(contentPanel);
         paintSignature (contentPanel);
         paintTitleSeparator(Palette.instance().getLightGray(), contentPanel, 7);
         
         paintScore(contentPanel);
-        paintTeacher(teacher, contentPanel);
+        paintTeacher(contentPanel);
         paintTitleSeparator(Palette.instance().getLightGray(), contentPanel, 10);
 
         paintDownloadButton(contentPanel);
@@ -103,12 +103,12 @@ public class CertificateView extends HelpBarTemplateView{
         contentPanel.add(text, constraints);
     }
 
-    private void paintName(String Username, JPanel contentPanel) {
+    private void paintName( JPanel contentPanel) {
 
         paintText(contentPanel);
 
         JTextPane text = new JTextPane();
-        text.setText(Username);
+        text.setText(username);
         text.setFont(new Font("Nunito Sans", Font.BOLD, 45));
         text.setPreferredSize(new Dimension(500, 60));
         text.setEditable(false);
@@ -134,9 +134,9 @@ public class CertificateView extends HelpBarTemplateView{
         contentPanel.add(line, constraints);
     }
 
-    private void paintCourse(String Course, JPanel contentPanel) {
+    private void paintCourse(JPanel contentPanel) {
         JTextPane text = new JTextPane();
-        text.setText("Por su participación en el examen para aspirar a \n" +  Course);
+        text.setText("Por su participación en el examen para aspirar a \n" +  course);
         text.setPreferredSize(new Dimension(350, 50));
         text.setForeground(Palette.instance().getBlack());
         text.setFont(new Font("Nunito Sans", Font.PLAIN, 15));
@@ -170,7 +170,7 @@ public class CertificateView extends HelpBarTemplateView{
         contentPanel.add(results, constraints);
     }
 
-    private void paintTeacher(String teacherName, JPanel contentPanel) {
+    private void paintTeacher(JPanel contentPanel) {
         JTextPane text = new JTextPane();
         text.setText("Examen realizado por \n Profesor/a: " +  teacher);
         text.setPreferredSize(new Dimension(350, 50));

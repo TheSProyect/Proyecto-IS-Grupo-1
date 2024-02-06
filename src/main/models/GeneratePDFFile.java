@@ -12,43 +12,56 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
+import com.itextpdf.text.pdf.PdfPTable;
 
 //curso tiene teacher y nombre
 
 import java.io.*;
 import java.security.Signature;
+import java.util.ArrayList;
 
 public class GeneratePDFFile {
     Document documento;
     FileOutputStream archivo;
-    Paragraph titulo, text, course, name, teacher;
+    Paragraph titulo, text, course, name, teacher,score;
     String nombre, curso, profesor;
     Font fuenteTitulo= new Font();
     Font fuenteSmall = new Font();
     Font fuenteName = new Font();
-    Image image ;
+    Image imageSignature, imageScore ;
     FileInputStream imageStream;
+    List<String> informationToPDF = new ArrayList<String>();
     RequestCertificateController RCController= new RequestCertificateController();
     //Certificate currenCertificate;
     //Course currentCourse;
 
+    public GeneratePDFFile(List<String> informationList){
+        fuenteTitulo.setSize(36);
+        documento=new Document();
+        titulo = new Paragraph("Certificado de participación",fuenteTitulo);
+        this.informationToPDF=informationList;
+        this.crearPlantilla();
+    }
+    //quitar esto
     public GeneratePDFFile(){
-        
         fuenteTitulo.setSize(36);
         documento=new Document();
         titulo = new Paragraph("Certificado de participación",fuenteTitulo);
         this.crearPlantilla();
-        
-        
     }
 
     public void crearPlantilla(){
+        List<String> informationToPDF = new ArrayList<String>();
         Directory currentDirectory = Directory.instance();
         String directorio = currentDirectory.getDirectoryTeachers();
+        int contador=0;
+        //Table table = new Table();
         //File file=new File(directorio + File.separator+RCController.getNameTeacherController()+File.separator+"Signature.png");
         //File file=new File(directorio+File.separator+"Valeria Ciccolella"+File.separator +"Signature.png");
         try {
-            image = Image.getInstance(directorio+File.separator+"Valeria Ciccolella"+File.separator +"Signature.png");
+            imageSignature = Image.getInstance(directorio+File.separator+"Valeria Ciccolella"+File.separator +"Signature.png");
+            imageScore=Image.getInstance("src\\assets\\BlueFolder_Icon.png");
 
         } catch (Exception e) {
             // TODO: handle exception
@@ -56,6 +69,8 @@ public class GeneratePDFFile {
 
         try{
             String nombre=RCController.getNameStudentController();
+//            String nombre = informationToPDF.get(contador);
+            contador++;
             String directory = currentDirectory.getDirectoryStudents() +File.separator+ nombre + ".pdf";
             //archivo=new FileOutputStream(nombre + ".pdf");
             PdfWriter.getInstance(documento, new FileOutputStream(directory));
@@ -64,24 +79,20 @@ public class GeneratePDFFile {
             fuenteSmall.setSize(16);
             fuenteName.setSize(48);
             documento.open();
-            
 
             titulo.setAlignment(1);
             documento.add(titulo);
             documento.add(Chunk.NEWLINE);
-            documento.add(Chunk.NEWLINE);
-            
 
             text= new Paragraph("Se otorga el presente a:", fuenteSmall);
             text.setAlignment(1);
             documento.add(text);
             documento.add(Chunk.NEWLINE);
-            documento.add(Chunk.NEWLINE);
 
-            name= new Paragraph(nombre,fuenteName);
+            //name= new Paragraph(nombre,fuenteName);
+            name= new Paragraph("Usuario",fuenteName);
             name.setAlignment(1);
             documento.add(name);
-            documento.add(Chunk.NEWLINE);
             documento.add(Chunk.NEWLINE);
             //titulo = new Paragraph("Certificado de participacion",fuenteTitulo);
             text= new Paragraph("Por su participación en el examen para aspirar a", fuenteSmall);
@@ -95,12 +106,27 @@ public class GeneratePDFFile {
             documento.add(course);
             documento.add(Chunk.NEWLINE);
             documento.add(Chunk.NEWLINE);
+            
+            
+            
+            
+            imageSignature.setAlignment(Element.ALIGN_CENTER);
+            
+            //table.setHeaderRows(1);
+            //table.addCell(course);
+            //imageScore.setAlignment(Element.ALIGN_CENTER);
+            imageScore.scaleToFit(40, 40);
+            documento.add(imageSignature);
+            documento.add(Chunk.NEWLINE);
+            Paragraph scoreParagraph = new Paragraph();
+            score= new Paragraph("1/5", fuenteName);
+            scoreParagraph.add(new Chunk(imageScore,0,0,true));
+            scoreParagraph.add(new Chunk("1/5", fuenteTitulo));
+            scoreParagraph.setAlignment(Element.ALIGN_CENTER);
+            documento.add(scoreParagraph);
             documento.add(Chunk.NEWLINE);
             documento.add(Chunk.NEWLINE);
-
-            //
-            image.setAlignment(Element.ALIGN_CENTER);
-            documento.add(image);
+            //documento.add(imageScore);
             text= new Paragraph("Examen realizado por:", fuenteSmall);
             text.setAlignment(1);
             documento.add(text);
@@ -111,8 +137,6 @@ public class GeneratePDFFile {
             teacher.setAlignment(1);
             documento.add(teacher);
             
-            
-
             documento.close();
 
         }catch(FileNotFoundException e){
@@ -124,7 +148,7 @@ public class GeneratePDFFile {
 
     public static void main(String[] args){
         GeneratePDFFile createPDF= new GeneratePDFFile();
-        createPDF.crearPlantilla();
+        //createPDF.crearPlantilla();
         
     }
     
