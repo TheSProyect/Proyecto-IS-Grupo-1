@@ -29,6 +29,7 @@ import main.utils.Palette;
 public class CertificateView extends HelpBarTemplateView{
     GridBagConstraints constraints = new GridBagConstraints();
     RequestCertificateController requestCertificateController;
+    IconButton downloadButton; 
     String username;
     String course;
     String teacher;
@@ -60,7 +61,6 @@ public class CertificateView extends HelpBarTemplateView{
         paintName(username, contentPanel);
         paintTitleSeparator(Palette.instance().getYellow(), contentPanel, 4);
 
-
         paintCourse(course, contentPanel);
         paintSignature (contentPanel);
         paintTitleSeparator(Palette.instance().getLightGray(), contentPanel, 7);
@@ -86,7 +86,6 @@ public class CertificateView extends HelpBarTemplateView{
         setConstraints(0);
         constraints.insets = new Insets(30, 0, 10, 0);
 
-
         contentPanel.add(text, constraints);
     }
     
@@ -100,7 +99,6 @@ public class CertificateView extends HelpBarTemplateView{
         centerText(text);
         setConstraints(2);
         constraints.insets = new Insets(20, 0, 0, 0);
-
 
         contentPanel.add(text, constraints);
     }
@@ -117,12 +115,10 @@ public class CertificateView extends HelpBarTemplateView{
         text.setForeground(Palette.instance().getBlue());
         text.setLayout(new GridBagLayout());
 
-
         centerText(text);
         setConstraints(3);
 
         contentPanel.add(text, constraints);
-
     }
 
     private void paintTitleSeparator(Color color, JPanel contentPanel, int row) {
@@ -172,7 +168,6 @@ public class CertificateView extends HelpBarTemplateView{
 
 
         contentPanel.add(results, constraints);
-        
     }
 
     private void paintTeacher(String teacherName, JPanel contentPanel) {
@@ -186,7 +181,6 @@ public class CertificateView extends HelpBarTemplateView{
         setConstraints(9);
 
         contentPanel.add(text, constraints);
-
     }
 
     private void inicializeCertificate() {
@@ -198,12 +192,12 @@ public class CertificateView extends HelpBarTemplateView{
 
      private void paintDownloadButton(JPanel contentPanel) {
 
-        IconButton downloadButton = new IconButton("Descargar", "Download_Icon.png");
+        downloadButton = new IconButton("Descargar", "Download_Icon.png");
+        downloadButton.addActionListener(this);
 
         setConstraints(11);
         constraints.fill = GridBagConstraints.VERTICAL;
         contentPanel.add(downloadButton, constraints);
-
     }
 
     private void centerText (JTextPane text) {
@@ -227,5 +221,10 @@ public class CertificateView extends HelpBarTemplateView{
     @Override
     public void actionPerformed(ActionEvent e) {
         actionEventInNavBar(e);
+
+        if (e.getSource() == downloadButton) {
+            requestCertificateController.createPDF();
+        }
+
     }
 }
