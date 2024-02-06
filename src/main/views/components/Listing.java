@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
@@ -15,7 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicScrollBarUI;
+import javax.swing.plaf.metal.MetalIconFactory.PaletteCloseIcon;
 
 import main.utils.Palette;
 
@@ -34,6 +37,10 @@ public class Listing extends JScrollPane{
         paintListElements(elements, textButton);
     }
 
+    public Listing(List<String> questionList, List<String> answerList) {
+        paintList();
+        paintListElements(questionList, answerList);
+    }
 
     private void paintListingPanel() {
         listingPanel = new JPanel();
@@ -53,14 +60,16 @@ public class Listing extends JScrollPane{
 
     protected void paintListElements(List<String> elements, String textButton) {
         String singleElement;
+        
+        JSeparator separator;
         for (int i = 0; i < elements.size(); i++) {
             singleElement = elements.get(i);
             createTitlePanel();
             TitleButtonContainer(singleElement, textButton);
-            paintTitleSeparator();
+            separator = paintTitleSeparator();
+            titlePanel.add(separator);
         }       
     }
-
     protected void createTitlePanel() {
         titlePanel = new JPanel();
         titlePanel.setBackground(Palette.instance().getWhite());
@@ -69,11 +78,12 @@ public class Listing extends JScrollPane{
         listingPanel.add(titlePanel, BorderLayout.NORTH);
     }
 
-    protected void paintTitleSeparator() {
+    protected JSeparator paintTitleSeparator() {
         JSeparator line = new JSeparator();
         line.setForeground(Palette.instance().getLightGray());
         line.setBackground(Palette.instance().getLightGray());
-        titlePanel.add(line);
+        
+        return line;
     }
 
     private void TitleButtonContainer(String singleElement, String textButton) {
@@ -115,6 +125,75 @@ public class Listing extends JScrollPane{
     
         titleButtonContainer.add(createExam);
         listingButtons.add(createExam);
+    }
+
+
+
+
+    private void paintListElements(List<String> questionList, List<String> answerList) {
+        for (int i = 0; i < questionList.size(); i++) {
+            createPanel();
+            paintContent(questionList.get(i), answerList.get(i));
+            JSeparator separator = paintTitleSeparator();
+            titlePanel.add(separator);
+        }
+    }
+    protected void createPanel() {
+        titlePanel = new JPanel();
+        titlePanel.setBackground(Palette.instance().getWhite());
+        titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
+        listingPanel.add(titlePanel, BorderLayout.NORTH);
+    }
+    private void paintContent(String question, String answer) {
+        titleButtonContainer = new JPanel();
+        titleButtonContainer.setLayout(new BoxLayout(titleButtonContainer, BoxLayout.Y_AXIS));
+        titleButtonContainer.setBackground(Palette.instance().getWhite());
+
+        titleButtonContainer.setMaximumSize(new Dimension(860, 500));
+        titleButtonContainer.setBorder(new EmptyBorder(10,  30,  20,  0)); 
+
+        paintTitle(question);
+        paintAnswer(answer);
+        
+        titlePanel.add(titleButtonContainer);
+    }
+    protected void paintTitle(String singleElement) {
+        title = new JLabel();
+        title.setText("<html>" + singleElement + "</html>");
+        title.setFont(new Font("Nunito Sans", Font.BOLD, 25));        
+        title.setHorizontalAlignment(JLabel.LEFT);
+        title.setVerticalAlignment(JLabel.CENTER);
+        title.setForeground(Palette.instance().getGray());
+
+        titleButtonContainer.add(title);
+    }
+    private void paintAnswer(String answer){
+        title = new JLabel();
+        title.setText("<html>" + answer + "</html>");
+        title.setFont(new Font("Nunito Sans", Font.PLAIN, 20));        
+        title.setHorizontalAlignment(JLabel.LEFT);
+        title.setVerticalAlignment(JLabel.CENTER);
+        title.setForeground(Palette.instance().getGray());
+
+        titleButtonContainer.add(title);
+    }
+
+    private void paintList() {
+        listingPanel = new JPanel();
+        listingPanel.setLayout(new BoxLayout(listingPanel, BoxLayout.Y_AXIS));
+        
+        listingPanel.setBackground(Palette.instance().getWhite());
+
+        this.setViewportView(listingPanel);
+        this.setPreferredSize(new Dimension(250, 320));
+        this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        this.getVerticalScrollBar().setBackground(Palette.instance().getLightGray());
+        changeScrollPaneLook();
+
+        Border border = BorderFactory.createLineBorder(Palette.instance().getWhite(), 3);
+        this.setBorder(border);
+
     }
     
     private void changeScrollPaneLook() {
