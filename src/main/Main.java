@@ -7,7 +7,10 @@ import main.views.pages.ExamsView;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        
-        Frame.instance().setView(new LogInView());
+        UserData.instance().setUsername("Usuario");
+        UserData.instance().setPassword("Contrasenia");
+
+        Frame.instance().setView(new ExamsView());
+        //Frame.instance().setView(new LogInView());
     }
 }
