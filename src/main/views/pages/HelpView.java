@@ -23,7 +23,7 @@ import javax.swing.JButton;
 import javax.swing.JSeparator;
 
 
-public class HelpView extends JPanel implements ActionListener {
+public class HelpView extends JPanel {
     private static HelpView faqView;
 
     JPanel titlePanel;
@@ -59,7 +59,6 @@ public class HelpView extends JPanel implements ActionListener {
         paintBorders();
         paintContentPanel();
         
-        addActionListener();
     }
 
     protected void buildFrame() {
@@ -154,13 +153,6 @@ public class HelpView extends JPanel implements ActionListener {
     }
 
 
-    private void addActionListener() {
-        navBar.getHomeButton().addActionListener(this);
-        navBar.getLogOutButton().addActionListener(this);
-
-    }
-
-
 
     private void init(){
         questionList.add("¿Para que sirve Technelogic?");
@@ -175,23 +167,4 @@ public class HelpView extends JPanel implements ActionListener {
         answerList.add("Para modificar tu contraseña, debes dirigirte a la esquina inferior izquierda y presionar el botón \"Editar Perfil\", allí podrás modificar la información de tu perfil, tanto tú contraseña como tu nombre de usuario y correo electrónico."); 
     }
 
-
-
-
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // this.setVisible(false);
-        if (e.getSource() == navBar.getHomeButton()) {
-            Frame.instance().setView(ExamsView.instance());
-            Frame.instance().setTitle("ExamsView");
-        } else if (e.getSource() == navBar.getLogOutButton()) {
-            CertificatesView.deleteInstance();
-            ExamsView.deleteInstance();
-            Frame.instance().setView(new LogInView());
-        } else {
-            Frame.instance().setView(new CertificateView());
-        }
-    }
 }

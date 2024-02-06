@@ -31,6 +31,11 @@ public class Listing extends JScrollPane{
     String singleElement;
     String textButton;
 
+    JPanel titlePanel;
+    JLabel title;
+    Button button;
+    JButton createExam;
+    JPanel titleButtonContainer;
 
     public Listing(List<String> elements, String TextButton) {
         listingButtons = new ArrayList<JButton>();
@@ -65,20 +70,20 @@ public class Listing extends JScrollPane{
         for (int i = 0; i < elements.size(); i++) {
             singleElement = elements.get(i);
             
-            JPanel titlePanel = new JPanel();
+            titlePanel = new JPanel();
             titlePanel.setBackground(Palette.instance().getWhite());
             titlePanel.setPreferredSize(new Dimension(860, 60));
             titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
             
             listingPanel.add(titlePanel, BorderLayout.NORTH);
             
-            TitleButtonContainer(titlePanel);
+            TitleButtonContainer();
             separator = paintTitleSeparator();
             titlePanel.add(separator);
         }       
     }
 
-    protected JSeparator paintTitleSeparator(JPanel titlePanel) {
+    protected JSeparator paintTitleSeparator() {
         JSeparator line = new JSeparator();
         line.setForeground(Palette.instance().getLightGray());
         line.setBackground(Palette.instance().getLightGray());
@@ -86,7 +91,7 @@ public class Listing extends JScrollPane{
         return line;
     }
 
-    private void TitleButtonContainer(JPanel titlePanel) {
+    private void TitleButtonContainer() {
         JPanel titleButtonContainer = new JPanel();
         titleButtonContainer.setMaximumSize(new Dimension(1500, 58));
         titleButtonContainer.setLayout(new BoxLayout(titleButtonContainer, BoxLayout.X_AXIS));
