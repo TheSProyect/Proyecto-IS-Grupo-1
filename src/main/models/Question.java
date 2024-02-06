@@ -10,6 +10,7 @@ public class Question {
     private int numberAnswers;
     private Answer[] answers= new Answer[10];
     //private int counter=0;
+
     
     public void setQuestions(String statement, String domain, Question question){
         question.statement=statement;
