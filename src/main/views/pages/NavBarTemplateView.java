@@ -40,30 +40,7 @@ public class NavBarTemplateView extends JPanel implements ActionListener{
         paintSideBorders();
     }
 
-    protected void addActionListenerNavbar() {
-        navBar.getHomeButton().addActionListener(this);
-        navBar.getCertificateButton().addActionListener(this);
-        navBar.getLogOutButton().addActionListener(this);
-    }
-
-    protected void actionEventInNavBar(ActionEvent e) {
-        if (e.getSource() == navBar.getHomeButton()) {
-            Frame.instance().setView(ExamsView.instance());
-            Frame.instance().setTitle("ExamsView");
-
-        } else if (e.getSource() == navBar.getCertificateButton()) {
-            Frame.instance().setView(CertificatesView.instance());
-            Frame.instance().setTitle("CertificatesView");
-
-        } else if (e.getSource() == navBar.getLogOutButton()) {
-            CertificatesView.deleteInstance();
-            ExamsView.deleteInstance();
-            Frame.instance().setView(new LogInView());
-        }
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        actionEventInNavBar(e);
     }
 }

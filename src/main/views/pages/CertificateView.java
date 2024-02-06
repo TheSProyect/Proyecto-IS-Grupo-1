@@ -45,8 +45,6 @@ public class CertificateView extends HelpBarTemplateView{
 
         inicializeCertificate();
         paintContentPanel();
-
-        addActionListener();
     }
 
     private void paintContentPanel() {
@@ -70,7 +68,6 @@ public class CertificateView extends HelpBarTemplateView{
         paintTitleSeparator(Palette.instance().getLightGray(), contentPanel, 10);
 
         paintDownloadButton(contentPanel);
-
 
         this.add(contentPanel);
     }
@@ -213,17 +210,9 @@ public class CertificateView extends HelpBarTemplateView{
         constraints.insets = new Insets(0, 0, 0, 0);
         constraints.fill = GridBagConstraints.RELATIVE;
     }
-  
-    private void addActionListener() {
-        addActionListenerNavbar();
-        addActionListenerHelpBar();
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        actionEventInNavBar(e);
-        actionEventInHelpBar(e);
-
         if (e.getSource() == downloadButton) {
             requestCertificateController.createPDF();
         }

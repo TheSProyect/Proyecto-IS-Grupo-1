@@ -119,9 +119,6 @@ public class CertificatesView extends HelpBarTemplateView {
     }
 
     private void addActionListener() {
-        addActionListenerNavbar();
-        addActionListenerHelpBar();
-
         for (int i = 0; i < requestCertificateButtons.size(); i++) {
             requestCertificateButtons.get(i).addActionListener(this);
         }
@@ -137,8 +134,6 @@ public class CertificatesView extends HelpBarTemplateView {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        actionEventInNavBar(e);
         actionEventInCourseListing(e);
-        actionEventInHelpBar(e);
     }
 }

@@ -14,6 +14,10 @@ import javax.swing.JToolBar;
 import javax.swing.border.Border;
 
 import main.utils.Palette;
+import main.views.pages.CertificatesView;
+import main.views.pages.ExamsView;
+import main.views.pages.Frame;
+import main.views.pages.LogInView;
 
 public class NavBar extends JPanel implements ActionListener {
     JLabel appName;
@@ -62,11 +66,12 @@ public class NavBar extends JPanel implements ActionListener {
     
     protected void paintNavBarButtons() {
         homeButton = new NavBarButton("Mis Examenes", "Home_Icon.png", false);
+        homeButton.addActionListener(this);
         linkNavbar.add(homeButton);
         linkNavbar.addSeparator();
 
         certificateButton = new NavBarButton("Solicitar Certificado", "Paperclip_Icon.png", false);
-        // certifycateButton.addActionListener(this);
+        certificateButton.addActionListener(this);
         linkNavbar.add(certificateButton);
         linkNavbar.addSeparator();
 
@@ -76,22 +81,20 @@ public class NavBar extends JPanel implements ActionListener {
         linkNavbar.addSeparator();
     }
 
-    public NavBarButton getHomeButton() {
-        return homeButton;
-    }
-
-    public NavBarButton getCertificateButton() {
-        return certificateButton;
-    }
-
-    public NavBarButton getLogOutButton() {
-        return logOutButton;
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == homeButton) {
-            System.out.println ("this should open ExamsView");
+            Frame.instance().setView(ExamsView.instance());
+            Frame.instance().setTitle("ExamsView");
+
+        } else if (e.getSource() == certificateButton) {
+            Frame.instance().setView(CertificatesView.instance());
+            Frame.instance().setTitle("CertificatesView");
+
+        } else if (e.getSource() == logOutButton) {
+            CertificatesView.deleteInstance();
+            ExamsView.deleteInstance();
+            Frame.instance().setView(new LogInView());
         }
     }
 }

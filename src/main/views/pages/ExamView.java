@@ -167,7 +167,6 @@ public class ExamView extends ExamTemplateView {
         } else {
             actionEventInBottomLeftButton(e);
             actionEventInExamMenu(e);
-            actionEventInNavBar(e);
             actionEventInPopUp(e);
         }
     }
