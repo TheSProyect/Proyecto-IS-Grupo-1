@@ -12,7 +12,6 @@ public class LoginController {
 	public UserData currentUser = UserData.instance();
 	public LoginController(){
 		
-		
 	}
 	
 	public static void main(String[] args) throws IOException{
