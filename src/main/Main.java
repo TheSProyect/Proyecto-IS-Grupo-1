@@ -10,7 +10,7 @@ public class Main {
         UserData.instance().setUsername("Usuario");
         UserData.instance().setPassword("Contrasenia");
 
-        Frame.instance().setView(new ExamsView());
-        //Frame.instance().setView(new LogInView());
+        // Frame.instance().setView(new ExamsView());
+        Frame.instance().setView(new LogInView());
     }
 }

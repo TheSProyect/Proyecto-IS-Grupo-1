@@ -114,8 +114,6 @@ public class ExamsView extends HelpBarTemplateView {
     }
 
     private void addActionListener() {
-        addActionListenerHelpBar();
-
         presentExamButtons = slider.getButtons();
 
         if (presentExamButtons == null) {
@@ -138,6 +136,5 @@ public class ExamsView extends HelpBarTemplateView {
     @Override
     public void actionPerformed(ActionEvent e) {
         actionEventInCourseCard(e);
-        actionEventInHelpBar(e);
     }
 }
