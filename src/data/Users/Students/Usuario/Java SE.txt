@@ -1,4 +1,5 @@
 Java SE
-Fundamentos de Programacion en Java
-0/7
+Programacion Orientada a Objeto en Java
+0
+6
 Valeria Ciccolella

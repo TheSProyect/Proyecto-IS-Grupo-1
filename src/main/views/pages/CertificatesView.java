@@ -130,7 +130,7 @@ public class CertificatesView extends HelpBarTemplateView {
     private void actionEventInCourseListing(ActionEvent e) {
         for (int i = 0; i < requestCertificateButtons.size(); i++) {
             if (e.getSource() == requestCertificateButtons.get(i)) {
-                Frame.instance().setView(new CertificateView());
+                Frame.instance().setView(new CertificateView(requestCertificateController, certificates.get(i) ));
             }
         }
     }

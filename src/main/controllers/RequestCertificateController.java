@@ -26,12 +26,8 @@ public class RequestCertificateController {
     }
     
     public static void main(String[] args) throws IOException{
-        RequestCertificateController p = new RequestCertificateController();
-        UserData.instance().setUsername("Usuario");
-        UserData.instance().setPassword("Contrasenia");
-        //p.searchFolderStudent();
-        p.showCertificates();   
     }
+
     private String nameCourses(File file){
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String nameCourse = br.readLine();
@@ -64,10 +60,11 @@ public class RequestCertificateController {
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentCertificate.setNameStudentCertificate(currentUser.getUsername());
             currentCertificate.setNameCourse(br.readLine());
-            //int result=Integer.parseInt((br.readLine()));
-            //currentCertificate.setSummary(result);
-            currentCertificate.setSummary(br.readLine());
-            //arreglar aqui, pq summary es int y lo necesitamos string
+            currentCertificate.setNameExam(br.readLine());
+            String answersCorrects = br.readLine();
+            currentCertificate.setResultExam(Integer.parseInt(answersCorrects));
+            String questionsExam =  br.readLine();
+            currentCertificate.setQuestionsExam(Integer.parseInt(questionsExam));
             currentCertificate.setNameTeacherCertificate(br.readLine());
             br.close();     
             } catch (IOException e) {
@@ -86,7 +83,6 @@ public class RequestCertificateController {
                     if (file.isDirectory() && file.getName().equals(nameFolderStudent)) {
                         directory = directory + File.separator + nameFolderStudent + File.separator + nameCourse + ".txt";
                         readStudentData(directory);
-                        return;
                     }
                 }
             }    
@@ -94,8 +90,14 @@ public class RequestCertificateController {
     }
 
     public void createPDF(){
+        List<String> informationToPDF = new ArrayList<String>();
+        informationToPDF.add(currentUser.getUsername());
+        informationToPDF.add(String.valueOf(currentCertificate.getResultExam()));
+        informationToPDF.add(String.valueOf(currentCertificate.getQuestionsExam()));
+        informationToPDF.add(currentCertificate.getNameCourse());
+        informationToPDF.add(currentCertificate.getNameTeacher());
         GeneratePDFFile creatingPDF = new GeneratePDFFile();
-        creatingPDF.crearPlantilla();
+        //creatingPDF.fillPDF(informationToPDF);
     }
     public String getNameStudentController(){
         return currentUser.getUsername();
@@ -103,8 +105,11 @@ public class RequestCertificateController {
     public String getNameCourseController(){
         return currentCertificate.getNameCourse();
     }
-    public String getResultExamController(){
-        return currentCertificate.getSummary();
+    public int getResultAnswersController(){
+        return currentCertificate.getResultExam();
+    }
+    public int getQuestionsExamController(){
+        return currentCertificate.getQuestionsExam();
     }
     public String getNameTeacherController(){
         return currentCertificate.getNameTeacher();
