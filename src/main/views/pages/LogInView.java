@@ -23,6 +23,7 @@ import main.views.components.PlaceholderTextField;
 public class LogInView extends JPanel implements ActionListener {
     JPanel infoContainer;
     JButton loginButton;
+    JLabel errorLabel;
     
     PlaceholderTextField userTextField;
     PlaceholderTextField passwordTextField;
@@ -105,6 +106,7 @@ public class LogInView extends JPanel implements ActionListener {
         paintLoginSeparator(infoContainer);
         paintTextFields(infoContainer);
         paintButtonContainer(infoContainer);
+        paintErrorLabel(infoContainer);
 
         loginPanel.add(infoContainer, BorderLayout.CENTER);
     }
@@ -161,6 +163,17 @@ public class LogInView extends JPanel implements ActionListener {
         infoContainer.add(buttonContainer);
     }
 
+    protected void paintErrorLabel(JPanel infoContainer) {
+        this.errorLabel = new JLabel();
+        errorLabel.setFont(new Font("Nunito Sans", Font.PLAIN, 14));
+        errorLabel.setForeground(Palette.instance().getRed());
+        errorLabel.setHorizontalAlignment(JLabel.CENTER);
+        errorLabel.setVerticalAlignment(JLabel.BOTTOM);
+        errorLabel.setVisible(false);
+        
+        infoContainer.add(errorLabel);
+    }
+
     protected void paintButton(JButton button, Dimension buttonSize) {
         button.setPreferredSize(buttonSize);
         button.setFont(new Font("Nunito Sans", Font.PLAIN, 17));
@@ -170,16 +183,20 @@ public class LogInView extends JPanel implements ActionListener {
         button.setFocusable(false);
     }
 
+    public void setErrorMessage(JLabel errorLabel, String errorType){
+        errorLabel.setText(errorType);
+        errorLabel.setVisible(true);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginButton) {
             LoginController LoginControl = new LoginController();
             
-            //reemplazar los System.out con sus respectivos Popups
 
             if(userTextField.getTextField().equals("") || passwordTextField.getTextField().equals("")){
                 
-                System.out.println("Se deben llenar todos los campos");
+                setErrorMessage(errorLabel, "Se deben llenar todos los campos");
             
             } else if(LoginControl.searchUser(userTextField.getTextField())){
 
@@ -188,18 +205,15 @@ public class LogInView extends JPanel implements ActionListener {
                     Frame.instance().setView(ExamsView.instance());
                 
                 } else {
-                    
-                    System.out.println("Contraseña incorrecta");
+                    setErrorMessage(errorLabel, "Contraseña incorrecta");
                 
                 }
 
             } else {
-                
-                System.out.println("Usuario no existe");
+                setErrorMessage(errorLabel, "Usuario no existe");
 
             }
             
-            //Frame.instance().setView(ExamsView.instance());
         }
     }
 
