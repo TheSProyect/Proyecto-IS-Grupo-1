@@ -66,7 +66,6 @@ public class RequestCertificateController {
             String questionsExam =  br.readLine();
             currentCertificate.setQuestionsExam(Integer.parseInt(questionsExam));
             currentCertificate.setNameTeacherCertificate(br.readLine());
-            System.out.println(currentCertificate.getNameTeacher());
             br.close();     
             } catch (IOException e) {
                 e.printStackTrace();
