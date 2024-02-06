@@ -21,6 +21,7 @@ public class ExamEndedView extends ExamTemplateView {
         buildFrame("ExamEndedView");
         paintBorders();
         paintContentPanel();
+        this.bottomLeftButton.setText("Salir de Examen");
         inicializeQuestions();
 
         addActionListener();
@@ -65,7 +66,7 @@ public class ExamEndedView extends ExamTemplateView {
     }
 
     protected void actionEventInBottomLeftButton(ActionEvent e) {
-        if(e.getSource() == finishExamButton) {
+        if(e.getSource() == bottomLeftButton) {
             Frame.instance().setView(ExamsView.instance());
             Frame.instance().setTitle("ExamsView");
         } 

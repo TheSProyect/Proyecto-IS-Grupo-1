@@ -150,6 +150,12 @@ public class QuestionPanel extends JPanel implements ActionListener {
         if(e.getSource() == explicationButton) {
             optionsPanel.setVisible(!optionsPanel.isVisible());
             explicationPanel.setVisible(!explicationPanel.isVisible());
-        }
+            
+            if (optionsPanel.isVisible()) {
+                explicationButton.setText("Explicación");
+            } else {
+                explicationButton.setText("Pregunta");
+            }
+        } 
     }
 }

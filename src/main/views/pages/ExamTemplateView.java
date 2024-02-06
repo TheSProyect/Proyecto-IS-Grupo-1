@@ -3,27 +3,24 @@ package main.views.pages;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-import javax.swing.plaf.metal.MetalButtonUI;
 
 import main.utils.Palette;
 import main.views.components.ExamMenu;
+import main.views.components.IconButton;
 import main.views.components.QuestionPanel;
 
 public abstract class ExamTemplateView extends NavBarTemplateView {
     JPanel contentPanel;
-    JButton finishExamButton;
-    JButton prevButton;
-    JButton nextButton;
+    IconButton bottomLeftButton;
+    IconButton prevButton;
+    IconButton nextButton;
     List<QuestionPanel> questions;
     int index;
     ExamMenu menuPanel;
@@ -83,19 +80,11 @@ public abstract class ExamTemplateView extends NavBarTemplateView {
         finishExamPanel.setMaximumSize(new Dimension(300, 80));
 
 
-        finishExamButton = new JButton("Terminar Examen");
-        finishExamButton.setFont(new Font("Nunito Sans", Font.BOLD, 15));
-        finishExamButton.setUI(new MetalButtonUI());
-        finishExamButton.setForeground(Palette.instance().getWhite());
-        finishExamButton.setBackground(Palette.instance().getBlue());
-        finishExamButton.setPreferredSize(new Dimension(190, 30));
-        finishExamButton.setFocusable(false);
-        finishExamButton.addActionListener(this);
+        bottomLeftButton = new IconButton("Terminar Examen", "Exit_Exam_Icon.png");
+        bottomLeftButton.setPreferredSize(new Dimension(190, 30));
+        bottomLeftButton.addActionListener(this);
 
-        Border border = BorderFactory.createLineBorder(Palette.instance().getBlue());
-        finishExamButton.setBorder(border);
-
-        finishExamPanel.add(finishExamButton);
+        finishExamPanel.add(bottomLeftButton);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -111,14 +100,14 @@ public abstract class ExamTemplateView extends NavBarTemplateView {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.TRAILING));
         buttonPanel.setBackground(Palette.instance().getWhite());
-        // buttonPanel.setPreferredSize(new Dimension(1024, 80));
 
-        prevButton = new JButton("Anterior");
+        prevButton = new IconButton("Anterior", "Prev_Question_Icon.png");
         paintButton(prevButton);
         buttonPanel.add(prevButton);
 
-        nextButton = new JButton("Siguiente");
+        nextButton = new IconButton("Siguiente", "Next_Question_Icon.png");
         paintButton(nextButton);
+        nextButton.setHorizontalTextPosition(JButton.LEFT);
         buttonPanel.add(nextButton);
 
 
@@ -132,16 +121,8 @@ public abstract class ExamTemplateView extends NavBarTemplateView {
     }
 
     private void paintButton(JButton button) {
-        button.setForeground(Palette.instance().getWhite());
-        button.setBackground(Palette.instance().getBlue());
-        button.setUI(new MetalButtonUI());
-        button.setFont(new Font("Nunito Sans", Font.BOLD, 15));
         button.setPreferredSize(new Dimension(130, 30));
-        button.setFocusable(false);
         button.addActionListener(this);
-
-        Border border = BorderFactory.createLineBorder(Palette.instance().getBlue());
-        button.setBorder(border);
     }
 
     protected abstract void inicializeQuestions();
