@@ -1,6 +1,7 @@
 package main.views.pages;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
 
 import main.views.components.HelpBar;
 
@@ -16,5 +17,21 @@ public class HelpBarTemplateView extends NavBarTemplateView {
         paintNavBar();
         paintSideBorders();
         paintHelpBar();
+    }
+
+    protected void addActionListenerHelpBar() {
+        helpBar.getHelpButton().addActionListener(this);
+    }
+
+    protected void actionEventInHelpBar(ActionEvent e) {
+        if (e.getSource() == helpBar.getHelpButton()) {
+            System.out.println ("this should open HelpView");
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        actionEventInNavBar(e);
+        actionEventInHelpBar(e);
     }
 }
