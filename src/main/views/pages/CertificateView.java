@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
@@ -22,15 +23,26 @@ import javax.swing.text.StyledDocument;
 
 
 import main.controllers.RequestCertificateController;
+import main.utils.Directory;
 import main.utils.Palette;
 
 public class CertificateView extends HelpBarTemplateView{
     GridBagConstraints constraints = new GridBagConstraints();
+    RequestCertificateController requestCertificateController;
+    String username;
+    String course;
+    String teacher;
+
 
     
-    public CertificateView(){
+    public CertificateView(RequestCertificateController requestCertificateController, String Course){
+        this.requestCertificateController = requestCertificateController;
+        this.course = Course;
+
         buildFrame("CertificateView");
         paintBorders();
+
+        inicializeCertificate();
         paintContentPanel();
 
         addActionListener();
@@ -45,16 +57,16 @@ public class CertificateView extends HelpBarTemplateView{
         paintCertificateHeader(contentPanel);
         paintTitleSeparator(Palette.instance().getLightGray(), contentPanel, 1);
 
-        paintName(contentPanel);
+        paintName(username, contentPanel);
         paintTitleSeparator(Palette.instance().getYellow(), contentPanel, 4);
 
 
-        paintCourse("Java SE - Java Associate Programmer", contentPanel);
+        paintCourse(course, contentPanel);
         paintSignature (contentPanel);
         paintTitleSeparator(Palette.instance().getLightGray(), contentPanel, 7);
         
         paintScore(contentPanel);
-        paintTeacher("Paula Herrero", contentPanel);
+        paintTeacher(teacher, contentPanel);
         paintTitleSeparator(Palette.instance().getLightGray(), contentPanel, 10);
 
         paintDownloadButton(contentPanel);
@@ -93,12 +105,12 @@ public class CertificateView extends HelpBarTemplateView{
         contentPanel.add(text, constraints);
     }
 
-    private void paintName(JPanel contentPanel) {
+    private void paintName(String Username, JPanel contentPanel) {
 
         paintText(contentPanel);
 
         JTextPane text = new JTextPane();
-        text.setText("Jesús Cova");
+        text.setText(Username);
         text.setFont(new Font("Nunito Sans", Font.BOLD, 45));
         text.setPreferredSize(new Dimension(500, 60));
         text.setEditable(false);
@@ -126,12 +138,12 @@ public class CertificateView extends HelpBarTemplateView{
         contentPanel.add(line, constraints);
     }
 
-    private void paintCourse(String str, JPanel contentPanel) {
+    private void paintCourse(String Course, JPanel contentPanel) {
         JTextPane text = new JTextPane();
-        text.setText("Por su participación en el examen para aspirar a \n" +  str);
+        text.setText("Por su participación en el examen para aspirar a \n" +  Course);
         text.setPreferredSize(new Dimension(350, 50));
         text.setForeground(Palette.instance().getBlack());
-        text.setFont(new Font("Nunito Sans", Font.BOLD, 15));
+        text.setFont(new Font("Nunito Sans", Font.PLAIN, 15));
 
         centerText(text);
         setConstraints(5);
@@ -140,22 +152,19 @@ public class CertificateView extends HelpBarTemplateView{
     }
 
     private void paintSignature (JPanel contentPanel) {
-        ImageIcon icon = new ImageIcon("src/assets/Signature.png");
-        java.awt.Image img = icon.getImage();
+        String imageDirectory = Directory.instance().getDirectoryTeachers() + File.separator +teacher + File.separator + "Signature.png";
+        ImageIcon icon = new ImageIcon(imageDirectory);
 
         JLabel lbl = new JLabel();
         lbl.setIcon(icon);
         setConstraints(6);
 
-        contentPanel.add(lbl, constraints);
-
-        
-       
+        contentPanel.add(lbl, constraints);       
     }
 
     private void paintScore(JPanel contentPanel) {
         ResultsBlock results = new ResultsBlock();
-        results.paintResults(1, 3);
+        results.paintResults(requestCertificateController.getResultAnswersController(), requestCertificateController.getQuestionsExamController());
         
 
         setConstraints(7);
@@ -168,7 +177,7 @@ public class CertificateView extends HelpBarTemplateView{
 
     private void paintTeacher(String teacherName, JPanel contentPanel) {
         JTextPane text = new JTextPane();
-        text.setText("Examen realizado por \n Profesor/a: " +  teacherName);
+        text.setText("Examen realizado por \n Profesor/a: " +  teacher);
         text.setPreferredSize(new Dimension(350, 50));
         text.setForeground(Palette.instance().getBlack());
         text.setFont(new Font("Nunito Sans", Font.BOLD, 15));
@@ -178,6 +187,13 @@ public class CertificateView extends HelpBarTemplateView{
 
         contentPanel.add(text, constraints);
 
+    }
+
+    private void inicializeCertificate() {
+        requestCertificateController.searchFolderStudent(course);
+        
+        username = requestCertificateController.getNameStudentController();
+        teacher = requestCertificateController.getNameTeacherController();
     }
 
      private void paintDownloadButton(JPanel contentPanel) {
@@ -202,11 +218,8 @@ public class CertificateView extends HelpBarTemplateView{
         constraints.gridy = row;
         constraints.insets = new Insets(0, 0, 0, 0);
         constraints.fill = GridBagConstraints.RELATIVE;
-
     }
   
-
-    //  private void show(Certificate)(){}
     private void addActionListener() {
         addActionListenerNavbar();
     }
