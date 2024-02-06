@@ -69,7 +69,6 @@ public class CertificateView extends HelpBarTemplateView{
 
         paintDownloadButton(contentPanel);
 
-
         this.add(contentPanel);
     }
 

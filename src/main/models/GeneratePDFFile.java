@@ -24,8 +24,8 @@ import java.util.ArrayList;
 public class GeneratePDFFile {
     Document documento;
     FileOutputStream archivo;
-    Paragraph titulo, text, course, name, teacher,score;
-    String nombre, curso, profesor;
+    Paragraph titulo, text, course, name, teacher;
+    String nombre, curso, profesor, scoreAnswers, numQuestions;
     Font fuenteTitulo= new Font();
     Font fuenteSmall = new Font();
     Font fuenteName = new Font();
@@ -52,15 +52,21 @@ public class GeneratePDFFile {
     }
 
     public void crearPlantilla(){
-        List<String> informationToPDF = new ArrayList<String>();
+        //List<String> informationToPDF = new ArrayList<String>();
         Directory currentDirectory = Directory.instance();
         String directorio = currentDirectory.getDirectoryTeachers();
-        int contador=0;
-        //Table table = new Table();
-        //File file=new File(directorio + File.separator+RCController.getNameTeacherController()+File.separator+"Signature.png");
-        //File file=new File(directorio+File.separator+"Valeria Ciccolella"+File.separator +"Signature.png");
+        //int contador=0;
+        name=new Paragraph(informationToPDF.get(0), fuenteName);
+        scoreAnswers=informationToPDF.get(1);
+        numQuestions=informationToPDF.get(2);
+        //score=new Paragraph(scoreAnswers+"/"+numQuestions, fuenteName);
+        course=new Paragraph(informationToPDF.get(3),fuenteSmall);
+        String teacherName=informationToPDF.get(4);
+        teacher= new Paragraph(teacherName, fuenteSmall);
+
+        //teacher= new Paragraph("Profesor/a: Paula Herrero", fuenteSmall);
         try {
-            imageSignature = Image.getInstance(directorio+File.separator+"Valeria Ciccolella"+File.separator +"Signature.png");
+            imageSignature = Image.getInstance(directorio+File.separator+teacherName+File.separator +"Signature.png");
             imageScore=Image.getInstance("src\\assets\\BlueFolder_Icon.png");
 
         } catch (Exception e) {
@@ -69,13 +75,8 @@ public class GeneratePDFFile {
 
         try{
             String nombre=RCController.getNameStudentController();
-//            String nombre = informationToPDF.get(contador);
-            contador++;
             String directory = currentDirectory.getDirectoryStudents() +File.separator+ nombre + ".pdf";
-            //archivo=new FileOutputStream(nombre + ".pdf");
             PdfWriter.getInstance(documento, new FileOutputStream(directory));
-            //PdfWriter.getInstance(documento, archivo);
-            //fuenteTitulo.setSize(28);
             fuenteSmall.setSize(16);
             fuenteName.setSize(48);
             documento.open();
@@ -90,7 +91,7 @@ public class GeneratePDFFile {
             documento.add(Chunk.NEWLINE);
 
             //name= new Paragraph(nombre,fuenteName);
-            name= new Paragraph("Usuario",fuenteName);
+            //name= new Paragraph("Usuario",fuenteName);
             name.setAlignment(1);
             documento.add(name);
             documento.add(Chunk.NEWLINE);
@@ -100,15 +101,12 @@ public class GeneratePDFFile {
             documento.add(text);
             
             //curso=RCController.getCourseController();
-            course= new Paragraph("Java SE - Java Associate Programmer", fuenteSmall);
+            //course= new Paragraph("Java SE - Java Associate Programmer", fuenteSmall);
             //course= new Paragraph(curso, fuenteSmall);
             course.setAlignment(1);
             documento.add(course);
             documento.add(Chunk.NEWLINE);
             documento.add(Chunk.NEWLINE);
-            
-            
-            
             
             imageSignature.setAlignment(Element.ALIGN_CENTER);
             
@@ -118,10 +116,11 @@ public class GeneratePDFFile {
             imageScore.scaleToFit(40, 40);
             documento.add(imageSignature);
             documento.add(Chunk.NEWLINE);
+
             Paragraph scoreParagraph = new Paragraph();
-            score= new Paragraph("1/5", fuenteName);
+            //score= new Paragraph("1/5", fuenteName);
             scoreParagraph.add(new Chunk(imageScore,0,0,true));
-            scoreParagraph.add(new Chunk("1/5", fuenteTitulo));
+            scoreParagraph.add(new Chunk(scoreAnswers+"/"+numQuestions, fuenteTitulo));
             scoreParagraph.setAlignment(Element.ALIGN_CENTER);
             documento.add(scoreParagraph);
             documento.add(Chunk.NEWLINE);
@@ -133,7 +132,7 @@ public class GeneratePDFFile {
             
             //profesor=RCController.getNameTeacherController();
             //teacher= new Paragraph("Profesor/a: "+ profesor, fuenteSmall);
-            teacher= new Paragraph("Profesor/a: Paula Herrero", fuenteSmall);
+            //teacher= new Paragraph("Profesor/a: Paula Herrero", fuenteSmall);
             teacher.setAlignment(1);
             documento.add(teacher);
             

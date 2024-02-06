@@ -22,7 +22,7 @@ public class RequestCertificateController {
     Certificate currentCertificate = new Certificate();
     UserData currentUser = UserData.instance();
     public RequestCertificateController(){
-        this.createPDF();
+        //this.createPDF();
     }
     
     public static void main(String[] args) throws IOException{
@@ -93,15 +93,11 @@ public class RequestCertificateController {
     public void createPDF(){
         List<String> informationToPDF = new ArrayList<String>();
         informationToPDF.add(currentUser.getUsername());
-        System.out.println(currentUser.getUsername());
-        informationToPDF.add(String.valueOf(currentCertificate.getResultExam()));
-        System.out.println(String.valueOf(currentCertificate.getResultExam()));
+        informationToPDF.add(String.valueOf(this.getResultAnswersController()));
+        //informationToPDF.add(String.valueOf(currentCertificate.getResultExam()));
         informationToPDF.add(String.valueOf(currentCertificate.getQuestionsExam()));
-        System.out.println(String.valueOf(currentCertificate.getQuestionsExam()));
         informationToPDF.add(currentCertificate.getNameCourse());
-        System.out.println(currentCertificate.getNameCourse());
         informationToPDF.add(currentCertificate.getNameTeacher());
-        System.out.println(currentCertificate.getNameTeacher());
         GeneratePDFFile creatingPDF = new GeneratePDFFile(informationToPDF);
         //creatingPDF.fillPDF(informationToPDF);
     }
