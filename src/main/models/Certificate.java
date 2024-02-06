@@ -39,4 +39,10 @@ public class Certificate {
     public int getResultExam(){
         return course.getResultExam();
     }
+    public void setNameExam(String nameExam){
+        course.setNameExam(nameExam);
+    }
+    public String getNameExam(){
+        return course.getNameExam();
+    }
 }

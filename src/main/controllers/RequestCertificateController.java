@@ -60,6 +60,7 @@ public class RequestCertificateController {
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentCertificate.setNameStudentCertificate(currentUser.getUsername());
             currentCertificate.setNameCourse(br.readLine());
+            currentCertificate.setNameExam(br.readLine());
             String answersCorrects = br.readLine();
             currentCertificate.setResultExam(Integer.parseInt(answersCorrects));
             String questionsExam =  br.readLine();
