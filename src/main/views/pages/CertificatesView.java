@@ -114,26 +114,13 @@ public class CertificatesView extends HelpBarTemplateView {
         contentPanel.add(certificateListing);
     }
 
-    // private void inicializeCertificates() {
-    //     // este metodo es de prueba. Terrible lo se
-    //     // lo que esté entre comentarios no va btw
-
-    //     certificates = new ArrayList<String>();
-    //     // prueba {
-    //     certificates.add("Curso 1");
-    //     certificates.add("Curso 2");
-    //     certificates.add("Curso 3");
-    //     certificates.add("Curso 4");
-        
-    //     //prueba    
-    // }
-
     private void getRequestCertificateButtons() {
         requestCertificateButtons = certificateListing.getListingButtons();
     }
 
     private void addActionListener() {
         addActionListenerNavbar();
+        addActionListenerHelpBar();
 
         for (int i = 0; i < requestCertificateButtons.size(); i++) {
             requestCertificateButtons.get(i).addActionListener(this);
@@ -143,7 +130,7 @@ public class CertificatesView extends HelpBarTemplateView {
     private void actionEventInCourseListing(ActionEvent e) {
         for (int i = 0; i < requestCertificateButtons.size(); i++) {
             if (e.getSource() == requestCertificateButtons.get(i)) {
-                Frame.instance().setView(new CertificateView());
+                Frame.instance().setView(new CertificateView(requestCertificateController, certificates.get(i) ));
             }
         }
     }
@@ -152,5 +139,6 @@ public class CertificatesView extends HelpBarTemplateView {
     public void actionPerformed(ActionEvent e) {
         actionEventInNavBar(e);
         actionEventInCourseListing(e);
+        actionEventInHelpBar(e);
     }
 }

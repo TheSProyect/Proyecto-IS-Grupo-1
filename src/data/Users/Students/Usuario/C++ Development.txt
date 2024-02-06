@@ -1,4 +1,5 @@
 C++ Development
 Fundamentos Basicos C++
-3/8
-Valeria Ciccolella
+1
+8
+Profesor

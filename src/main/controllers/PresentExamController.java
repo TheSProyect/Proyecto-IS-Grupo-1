@@ -45,7 +45,7 @@ public class PresentExamController {
             if (file.createNewFile()) {
                 FileWriter writer = new FileWriter(file);               
                 writer.write((currentExam.getNameCourse()) +"\n"+ (currentExam.getNameExam()) + "\n");
-                writer.write((String.valueOf(currentExam.getResultExam()))+"/"+ currentExam.getNumberQuestions()+ "\n");
+                writer.write((String.valueOf(currentExam.getResultExam()))+"\n"+ currentExam.getNumberQuestions()+ "\n");
                 writer.write(currentExam.getNameTeacher());
                 writer.close();
                 }
@@ -138,7 +138,7 @@ public class PresentExamController {
             currentExam.setTipo(br.readLine());
             numberQuestions = Integer.parseInt((br.readLine()));
             currentExam.setNumberQuestions(numberQuestions);
-            currentExam.setTeacherName(br.readLine());
+            currentExam.setNameTeacher(br.readLine());
             duration = Integer.parseInt((br.readLine()));
             currentExam.setDuration(duration);
             currentExam.setDescripcion(br.readLine());

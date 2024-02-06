@@ -8,6 +8,7 @@ import java.io.IOException;
 import main.controllers.PresentExamController;
 import main.models.Question;
 import main.models.Result;
+import main.utils.Directory;
 import main.models.Name;
 
 public class Exam extends Course{
@@ -21,8 +22,8 @@ public class Exam extends Course{
     //private UserData usuario;
     
     public Exam(){
-        String directory = System.getProperty("user.dir");
-        directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Exams"+File.separator+"Instructions.txt";
+        Directory currentDirectory = Directory.instance();
+        String directory = currentDirectory.getDirectoryExams()+File.separator+"Instructions.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             instructions = br.readLine();
             } catch (IOException e) {
@@ -113,8 +114,8 @@ public class Exam extends Course{
         return type;
     }
 
-    public void setTeacherName(String name){
-        course.setNameTeacherCourse(name);
+    public void setNameTeacher(String name){
+        course.setNameTeacher(name);
     }
     public String getNameTeacher(){
         return course.getNameTeacher();
