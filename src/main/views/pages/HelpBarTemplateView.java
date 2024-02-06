@@ -31,7 +31,6 @@ public class HelpBarTemplateView extends NavBarTemplateView {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        actionEventInNavBar(e);
         actionEventInHelpBar(e);
     }
 }

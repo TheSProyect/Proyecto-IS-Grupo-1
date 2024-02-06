@@ -171,8 +171,6 @@ public abstract class ExamTemplateView extends NavBarTemplateView {
     }
 
     protected void addActionListener() {
-        addActionListenerNavbar();
-
         for(int i = 0; i < menuPanel.getQuestionListItems().size(); i++) {
             menuPanel.getQuestionListItems().get(i).addActionListener(this);
         }
@@ -201,7 +199,6 @@ public abstract class ExamTemplateView extends NavBarTemplateView {
 
         } else {
             actionEventInExamMenu(e);
-            actionEventInNavBar(e);
         }
     }
 }

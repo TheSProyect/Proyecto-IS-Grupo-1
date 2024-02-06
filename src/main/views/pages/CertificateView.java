@@ -215,13 +215,11 @@ public class CertificateView extends HelpBarTemplateView{
     }
   
     private void addActionListener() {
-        addActionListenerNavbar();
         addActionListenerHelpBar();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        actionEventInNavBar(e);
         actionEventInHelpBar(e);
 
         if (e.getSource() == downloadButton) {
