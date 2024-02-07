@@ -23,7 +23,7 @@ public class NavBarButton extends JButton {
         Border border = BorderFactory.createEmptyBorder();
         this.setBorder(border);
         this.setPreferredSize(new Dimension(150, 40));
-        this.setForeground(Palette.instance().getLightGray());
+        this.setForeground(Palette.instance().getBlue());
         this.setBackground(Palette.instance().getWhite());
         this.setFocusable(false);
     }
