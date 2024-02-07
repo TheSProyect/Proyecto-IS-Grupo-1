@@ -1,7 +1,5 @@
 package main.views.pages;
 
-import static main.views.pages.ExamsView.examView;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
