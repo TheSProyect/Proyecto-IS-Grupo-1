@@ -66,4 +66,6 @@
 ![Modelado de Despliegue](out/docs/logicalView/desingView/architectureDesign/DeployDiagram/deployDiagram.png)
 
 ## Modelo de Implementacion
-#### Utilizamos la libreria externa iTextPDF version 5.5.12, se encuentra en la carpeta lib dentro de src. La llama la entidad GeneratePDFFile
+#### Utilizamos la libreria externa iTextPDF version 5.5.12, se encuentra en la carpeta lib dentro de src. La llama  GeneratePDFFile que se encuentra en la carpeta de controladores
+
+#### Para el Login actualmente solo esta habilitado para user=Usuario y password=Contrasenia

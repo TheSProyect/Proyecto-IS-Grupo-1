@@ -7,22 +7,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.models.GeneratePDFFile;
 import main.utils.Directory;
 import main.utils.UserData;
 import main.models.Certificate;
-import main.models.Course;
+//import main.models.Course;
 
 
 public class RequestCertificateController {
-    /*private void requestCertificate(Course_Name){}
-    private String getSummary(){}
-    private Certificate generateCertificate(Summary){}*/
     Directory currentDirectory = Directory.instance();
     Certificate currentCertificate = new Certificate();
     UserData currentUser = UserData.instance();
     public RequestCertificateController(){
-        //this.createPDF();
+        
     }
     
     public static void main(String[] args) throws IOException{
@@ -94,12 +90,10 @@ public class RequestCertificateController {
         List<String> informationToPDF = new ArrayList<String>();
         informationToPDF.add(currentUser.getUsername());
         informationToPDF.add(String.valueOf(this.getResultAnswersController()));
-        //informationToPDF.add(String.valueOf(currentCertificate.getResultExam()));
         informationToPDF.add(String.valueOf(currentCertificate.getQuestionsExam()));
         informationToPDF.add(currentCertificate.getNameCourse());
         informationToPDF.add(currentCertificate.getNameTeacher());
         GeneratePDFFile creatingPDF = new GeneratePDFFile(informationToPDF);
-        //creatingPDF.fillPDF(informationToPDF);
     }
     public String getNameStudentController(){
         return currentUser.getUsername();
