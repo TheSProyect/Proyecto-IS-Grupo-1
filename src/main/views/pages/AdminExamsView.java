@@ -1,23 +1,31 @@
 package main.views.pages;
 
+import static main.views.pages.ExamsView.examView;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 import main.utils.Palette;
 import main.views.components.AdminNavBar;
+import main.views.components.Button;
 
 public class AdminExamsView extends ExamsView {
-    JButton editExam;
+    Button editExam;
     JPanel titleButtonContainer;
+
+    public static AdminExamsView instance() {
+        if (examView == null){
+			examView = new AdminExamsView();
+		}
+		return (AdminExamsView) examView;
+    }
 
     protected void buildFrame() {
         Frame.instance().setTitle("AdminExamsView");
@@ -66,18 +74,19 @@ public class AdminExamsView extends ExamsView {
     }
 
     private void paintEditExamsButton() {
-        editExam = new JButton("Editar Examenes");
-        editExam.setFont(new Font("Nunito Sans", Font.BOLD, 15));
-        editExam.setForeground(Palette.instance().getWhite());
-        editExam.setBackground(Palette.instance().getBlue());
-        editExam.setFocusable(false);
-
-        Border border = BorderFactory.createLineBorder(Palette.instance().getBlue());
-        editExam.setBorder(border);
-
+        editExam = new Button("Editar Examenes");
         editExam.setPreferredSize(new Dimension(150, 30));
         editExam.setMaximumSize(new Dimension(150, 30));
-    
+        editExam.addActionListener(this);
+
         titleButtonContainer.add(editExam);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == editExam) {
+            Frame.instance().setView(new AdminExamView());
+        }
+        actionEventInCourseCard(e);
     }
 }

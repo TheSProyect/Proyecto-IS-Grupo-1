@@ -18,7 +18,7 @@ import main.controllers.PresentExamController;
 import main.utils.Palette;
 
 public class ExamsView extends HelpBarTemplateView {
-    private static ExamsView examView;
+    protected static ExamsView examView;
     
     Slider slider;
     List<JButton> presentExamButtons;
@@ -125,7 +125,7 @@ public class ExamsView extends HelpBarTemplateView {
         }        
     }
 
-    private void actionEventInCourseCard(ActionEvent e) {
+    protected void actionEventInCourseCard(ActionEvent e) {
         for (int i = 0; i < presentExamButtons.size(); i++) {
             if (e.getSource() == presentExamButtons.get(i)) {
                 Frame.instance().setView(new ExamView(presentExamController, examsIDs.get(i)));

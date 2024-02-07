@@ -2,6 +2,12 @@ package main.views.components;
 
 import java.awt.event.ActionEvent;
 
+import main.views.pages.AdminExamsView;
+import main.views.pages.ExamsView;
+import main.views.pages.Frame;
+import main.views.pages.LogInView;
+import main.views.pages.RegisterUserView;
+
 public class AdminNavBar extends NavBar{
     NavBarButton adminButton;
 
@@ -29,17 +35,15 @@ public class AdminNavBar extends NavBar{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == logOutButton) {
-            System.out.println ("this should open LoginView");
-        }
-        if (e.getSource() == adminButton){
-            System.out.println ("this should open RegisterUserView");
-        }
-        if (e.getSource() == certificateButton) {
-            System.out.println ("this should open CertifycatesView");
-        }
         if (e.getSource() == homeButton) {
-            System.out.println ("this should open ExamsView");
+            Frame.instance().setView(AdminExamsView.instance());
+        }else if (e.getSource() == adminButton){
+            Frame.instance().setView(new RegisterUserView());
+        }else if (e.getSource() == certificateButton) {
+            System.out.println ("this should open CertifycatesView");
+        } else if (e.getSource() == logOutButton) {
+            AdminExamsView.deleteInstance();
+            Frame.instance().setView(new LogInView());
         }
     }
 }
