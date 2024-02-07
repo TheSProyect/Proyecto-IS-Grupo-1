@@ -67,3 +67,5 @@
 
 ## Modelo de Implementacion
 #### Utilizamos la libreria externa iTextPDF version 5.5.12, se encuentra en la carpeta lib dentro de src. La llama la entidad GeneratePDFFile
+
+### Para el Login actualmente solo esta habilitado para user=Usuario y password=Contrasenia
