@@ -89,7 +89,6 @@ public abstract class ExamTemplateView extends NavBarTemplateView {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 1;
-        // constraints.weightx = 1.0;
         constraints.weighty = 0.5;
         constraints.fill = GridBagConstraints.BOTH;
 
