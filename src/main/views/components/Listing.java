@@ -2,6 +2,8 @@ package main.views.components;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.BorderLayout;
@@ -45,8 +47,12 @@ public class Listing extends JScrollPane{
     }
 
     public Listing(List<String> questionList, List<String> answerList) {
-        paintList();
-        paintListElements(questionList, answerList);
+        JPanel listContainer = new JPanel();
+        listContainer.setLayout(new BoxLayout(listContainer, BoxLayout.Y_AXIS));
+        listContainer.setBackground(Palette.instance().getWhite());
+        
+        paintList(listContainer);
+        paintListElements(questionList, answerList, listContainer);
     }
 
     private void paintListingPanel() {
@@ -135,58 +141,48 @@ public class Listing extends JScrollPane{
 
 
 
-    private void paintListElements(List<String> questionList, List<String> answerList) {
+    private void paintListElements(List<String> questionList, List<String> answerList, JPanel listContainer) {
+        JSeparator separator;
         for (int i = 0; i < questionList.size(); i++) {
-            createPanel();
-            paintContent(questionList.get(i), answerList.get(i));
-            JSeparator separator = paintTitleSeparator();
-            titlePanel.add(separator);
+            paintContent(questionList.get(i), answerList.get(i), listContainer);
+            separator = paintTitleSeparator();
+            listContainer.add(separator);
         }
     }
-    protected void createPanel() {
-        titlePanel = new JPanel();
-        titlePanel.setBackground(Palette.instance().getWhite());
-        titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
-        listingPanel.add(titlePanel, BorderLayout.NORTH);
-    }
-    private void paintContent(String question, String answer) {
+    private void paintContent(String question, String answer, JPanel listContainer) {
         JPanel listItem = new JPanel();
-
-        listItem.setLayout(new BoxLayout(listItem, BoxLayout.Y_AXIS));
+        
         listItem.setBackground(Palette.instance().getWhite());
-
-        listItem.setMaximumSize(new Dimension(860, 500));
-        listItem.setBorder(new EmptyBorder(10,  30,  20,  0)); 
+        listItem.setMaximumSize(new Dimension(860, 860));
+        listItem.setLayout(new BoxLayout(listItem, BoxLayout.Y_AXIS));
+        
+        listItem.setBorder(new EmptyBorder(10,  10,  0,  0)); 
 
         paintText(question, true, 19, 10, listItem);
         
-        paintText(answer, false, 17, 0, listItem);
-
-        titlePanel.add(listItem);
+        paintText(answer, false, 17, 20, listItem);
+        
+        
+        listContainer.add(listItem, BorderLayout.CENTER);
         
     }
+
     protected void paintText(String text, boolean isBold, int textSize, int borderBottom, JPanel container) {
         int textWeight = isBold ? Font.BOLD : Font.PLAIN;
 
-        JLabel label = new JLabel();
-        label.setText("<html>" + text + "</html>");
+        JLabel label = new JLabel("<html>" + text + "</html>");
         label.setFont(new Font("Nunito Sans", textWeight, textSize));        
         label.setHorizontalAlignment(JLabel.LEFT);
         label.setVerticalAlignment(JLabel.CENTER);
         label.setForeground(Palette.instance().getBlack());
-        label.setBorder(new EmptyBorder(0,  0,  borderBottom, 0)); 
+        label.setBorder(new EmptyBorder(0,  10,  borderBottom, 0)); 
         
         container.add(label);
     }
 
-    private void paintList() {
-        listingPanel = new JPanel();
-        listingPanel.setLayout(new BoxLayout(listingPanel, BoxLayout.Y_AXIS));
-        
-        listingPanel.setBackground(Palette.instance().getWhite());
+    private void paintList(JPanel elementsList) {
 
-        this.setViewportView(listingPanel);
-        this.setPreferredSize(new Dimension(250, 320));
+        this.setViewportView(elementsList);
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         this.getVerticalScrollBar().setBackground(Palette.instance().getLightGray());
