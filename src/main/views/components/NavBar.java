@@ -88,11 +88,10 @@ public class NavBar extends JPanel implements ActionListener {
             Frame.instance().setTitle("ExamsView");
 
         } else if (e.getSource() == certificateButton) {
-            Frame.instance().setView(CertificatesView.instance());
+            Frame.instance().setView(new CertificatesView());
             Frame.instance().setTitle("CertificatesView");
 
         } else if (e.getSource() == logOutButton) {
-            CertificatesView.deleteInstance();
             ExamsView.deleteInstance();
             Frame.instance().setView(new LogInView());
         }
