@@ -2,13 +2,18 @@ package main.views.components;
 
 import java.awt.event.ActionEvent;
 
-import main.views.pages.AdminExamsView;
 import main.views.pages.Frame;
-import main.views.pages.LogInView;
 import main.views.pages.RegisterUserView;
 
 public class AdminNavBar extends NavBar{
     NavBarButton adminButton;
+
+    public static NavBar instance() {
+		if (navbar == null){
+			navbar = new AdminNavBar();
+		}
+		return navbar;
+	}
 
     protected void paintNavBarButtons() {
         homeButton = new NavBarButton("Mis<br>Examenes", "Home_Icon.png", false);
@@ -34,15 +39,9 @@ public class AdminNavBar extends NavBar{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == homeButton) {
-            Frame.instance().setView(AdminExamsView.instance());
-        }else if (e.getSource() == adminButton){
+        actionEventInDefautButtons(e);
+        if (e.getSource() == adminButton){
             Frame.instance().setView(new RegisterUserView());
-        }else if (e.getSource() == certificateButton) {
-            System.out.println ("this should open CertifycatesView");
-        } else if (e.getSource() == logOutButton) {
-            AdminExamsView.deleteInstance();
-            Frame.instance().setView(new LogInView());
         }
     }
 }

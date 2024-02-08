@@ -66,7 +66,7 @@ public class HelpView extends JPanel {
     }
 
     protected void paintNavBar() {
-        navBar = new NavBar();
+        navBar = NavBar.instance();
         this.add(navBar, BorderLayout.NORTH);
     }
 
