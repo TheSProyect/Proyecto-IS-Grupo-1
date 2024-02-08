@@ -37,11 +37,9 @@ public class QuestionPanel extends JPanel implements ActionListener {
     private void builQuestionContentPane() {
         questionContentPanel = new JPanel();
         questionContentPanel.setBackground(Palette.instance().getWhite());
-        // questionContentPanel.setMaximumWi
         questionContentPanel.setLayout(new GridBagLayout());
 
         JScrollPane questionContentScroll = new JScrollPane();
-        // questionContentPane.setPreferredSize(new Dimension(250, 320));
         paintScroll(questionContentScroll);
         questionContentScroll.setViewportView(questionContentPanel);
     }
@@ -51,13 +49,13 @@ public class QuestionPanel extends JPanel implements ActionListener {
         changeScrollPaneLook(questionContentScroll);
 
         Border border = BorderFactory.createLineBorder(Palette.instance().getWhite(), 3);
-        this.setBorder(border);
+        questionContentScroll.setBorder(border);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 2;
         constraints.weightx = 1.0;
-        constraints.weighty = 0.5;
+        constraints.weighty = 1.0;
         constraints.gridwidth = 4;
         constraints.fill = GridBagConstraints.BOTH;
         this.add(questionContentScroll, constraints);
@@ -111,6 +109,7 @@ public class QuestionPanel extends JPanel implements ActionListener {
         JLabel domainLabel = new JLabel();
         domainLabel.setText("<html> <b> Dominio: </b>" + questionDomain);
         domainLabel.setFont(new Font("Nunito Sans", Font.PLAIN, 15));
+        // domainLabel.setPreferredSize(new Dimension(544, 40));
         domainLabel.setForeground(Palette.instance().getGray());
         domainLabel.setVerticalAlignment(JLabel.BOTTOM);
         domainPanel.add(domainLabel);
@@ -130,7 +129,7 @@ public class QuestionPanel extends JPanel implements ActionListener {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.weighty = 0.1;
+        constraints.weighty = 0.05;
         constraints.gridwidth = 4;
         constraints.fill = GridBagConstraints.BOTH;
         return constraints;
@@ -172,6 +171,7 @@ public class QuestionPanel extends JPanel implements ActionListener {
         optionsPanel = new OptionsPanel(options);
 
         questionContentPanel.add(optionsPanel, createOptionPanelConstraints());
+        questionContentPanel.setPreferredSize(new Dimension(544, questionContentPanel.getHeight()));
     }
 
     private GridBagConstraints createOptionPanelConstraints() {
@@ -204,9 +204,9 @@ public class QuestionPanel extends JPanel implements ActionListener {
 
     public void paintExplicationPanel(List<String> text) {
         explicationPanel = new ExplicationPanel(text);
-        this.add(explicationPanel, createOptionPanelConstraints());
+        questionContentPanel.add(explicationPanel, createOptionPanelConstraints());
         explicationPanel.setVisible(false);
-        this.repaint();
+        questionContentPanel.repaint();
     }
 
     @Override

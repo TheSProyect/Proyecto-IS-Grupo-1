@@ -25,13 +25,11 @@ public class CodeField extends JScrollPane {
         
         buildCodePanel();
         paintLineNumber(codeLines.size());
-        // paintLineNumber(3);
         buildCodeField(codeLines);
     }
 
     private void buildCodePanel() {
         codePanel = new JPanel();
-        codePanel.setPreferredSize(new Dimension(600,200));
         codePanel.setLayout(new BoxLayout(codePanel, BoxLayout.X_AXIS));
 
         this.setViewportView(codePanel);
@@ -39,8 +37,6 @@ public class CodeField extends JScrollPane {
 
     private void paintLineNumber(int numerOfLines) {
         lineNumber = new JTextPane();
-        lineNumber.setPreferredSize(new Dimension(50,150));
-        lineNumber.setMaximumSize(new Dimension(50,400));
         
         lineNumber.setForeground(Palette.instance().getGray());
         lineNumber.setFont(new Font("Cascadia Code", Font.PLAIN, 17));
@@ -53,13 +49,15 @@ public class CodeField extends JScrollPane {
 
         Border border = BorderFactory.createEmptyBorder(0, 20, 0, 0);
         lineNumber.setBorder(border);
+        
+        lineNumber.setPreferredSize(new Dimension(50,lineNumber.getHeight()));
+        lineNumber.setMaximumSize(new Dimension(50,9999));
 
         codePanel.add(lineNumber);
     }
 
     private void buildCodeField(List<String> codelines) {
         codeField = new JTextPane();
-        codeField.setPreferredSize(new Dimension(400, 150));
         
         codeField.setForeground(Palette.instance().getOffWhite());
         codeField.setFont(new Font("Cascadia Code", Font.PLAIN, 17));
