@@ -11,22 +11,22 @@ public class AdminNavBar extends NavBar{
     NavBarButton adminButton;
 
     protected void paintNavBarButtons() {
-        homeButton = new NavBarButton("Mis Examenes", "Home_Icon.png", false);
+        homeButton = new NavBarButton("Mis<br>Examenes", "Home_Icon.png", false);
         homeButton.addActionListener(this);
         linkNavbar.add(homeButton);
         linkNavbar.addSeparator();
 
-        adminButton = new NavBarButton("Registrar Usuario", "User_Icon.png", false);
+        adminButton = new NavBarButton("Registrar<br>Usuario", "User_Icon.png", false);
         adminButton.addActionListener(this);
         linkNavbar.add(adminButton);
         linkNavbar.addSeparator();
 
-        certificateButton = new NavBarButton("Solicitar Certificado", "Paperclip_Icon.png", false);
+        certificateButton = new NavBarButton("Solicitar<br>Certificado", "Paperclip_Icon.png", false);
         certificateButton.addActionListener(this);
         linkNavbar.add(certificateButton);
         linkNavbar.addSeparator();
 
-        logOutButton = new NavBarButton("Cerrar sesión", "LogOut_Icon.png", true);
+        logOutButton = new NavBarButton("Cerrar<br>sesión", "LogOut_Icon.png", true);
         logOutButton.addActionListener(this);
         linkNavbar.add(logOutButton);
         linkNavbar.addSeparator();
