@@ -9,6 +9,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import main.utils.Palette;
+import main.views.pages.ExamsView;
+import main.views.pages.Frame;
+import main.views.pages.HelpView;
 
 public class HelpBar extends JPanel implements ActionListener{
     NavBarButton helpButton;
@@ -55,7 +58,9 @@ public class HelpBar extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == helpButton) {
-            System.out.println ("this should open HelpView");
+
+            Frame.instance().setView(HelpView.instance());
+            Frame.instance().setTitle("HelpView");
         } else if (e.getSource() == editProfileButton) {
             System.out.println ("this should open EditProfileView");
         }
