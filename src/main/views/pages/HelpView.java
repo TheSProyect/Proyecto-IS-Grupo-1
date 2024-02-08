@@ -7,6 +7,7 @@ import main.views.components.HelpBar;
 import main.views.components.Listing;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -106,7 +107,7 @@ public class HelpView extends JPanel {
     protected void paintTitlePanel() {
         createTitlePanel();
         TitleContainer();
-        paintTitleSeparator();        
+        paintTitleSeparator(2);        
     }
 
     protected void createTitlePanel() {
@@ -117,10 +118,11 @@ public class HelpView extends JPanel {
         contentPanel.add(titlePanel, BorderLayout.NORTH);
     }
 
-    protected void paintTitleSeparator() {
+    protected void paintTitleSeparator(int numberColor) {
+        Color color = numberColor == 1 ? Palette.instance().getLightGray() : Palette.instance().getYellow();
         JSeparator line = new JSeparator();
-        line.setForeground(Palette.instance().getLightGray());
-        line.setBackground(Palette.instance().getLightGray());
+        line.setForeground(color);
+        line.setBackground(color);
         titlePanel.add(line);
     }
 

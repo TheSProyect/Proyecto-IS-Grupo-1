@@ -20,7 +20,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import javax.swing.plaf.metal.MetalButtonUI;
-import javax.swing.plaf.metal.MetalIconFactory.PaletteCloseIcon;
 
 
 import main.utils.Palette;
@@ -151,37 +150,33 @@ public class Listing extends JScrollPane{
         listingPanel.add(titlePanel, BorderLayout.NORTH);
     }
     private void paintContent(String question, String answer) {
-        titleButtonContainer = new JPanel();
-        titleButtonContainer.setLayout(new BoxLayout(titleButtonContainer, BoxLayout.Y_AXIS));
-        titleButtonContainer.setBackground(Palette.instance().getWhite());
+        JPanel listItem = new JPanel();
 
-        titleButtonContainer.setMaximumSize(new Dimension(860, 500));
-        titleButtonContainer.setBorder(new EmptyBorder(10,  30,  20,  0)); 
+        listItem.setLayout(new BoxLayout(listItem, BoxLayout.Y_AXIS));
+        listItem.setBackground(Palette.instance().getWhite());
 
-        paintTitle(question);
-        paintAnswer(answer);
+        listItem.setMaximumSize(new Dimension(860, 500));
+        listItem.setBorder(new EmptyBorder(10,  30,  20,  0)); 
+
+        paintText(question, true, 19, 10, listItem);
         
-        titlePanel.add(titleButtonContainer);
-    }
-    protected void paintTitle(String singleElement) {
-        title = new JLabel();
-        title.setText("<html>" + singleElement + "</html>");
-        title.setFont(new Font("Nunito Sans", Font.BOLD, 25));        
-        title.setHorizontalAlignment(JLabel.LEFT);
-        title.setVerticalAlignment(JLabel.CENTER);
-        title.setForeground(Palette.instance().getGray());
+        paintText(answer, false, 17, 0, listItem);
 
-        titleButtonContainer.add(title);
+        titlePanel.add(listItem);
+        
     }
-    private void paintAnswer(String answer){
-        title = new JLabel();
-        title.setText("<html>" + answer + "</html>");
-        title.setFont(new Font("Nunito Sans", Font.PLAIN, 20));        
-        title.setHorizontalAlignment(JLabel.LEFT);
-        title.setVerticalAlignment(JLabel.CENTER);
-        title.setForeground(Palette.instance().getGray());
+    protected void paintText(String text, boolean isBold, int textSize, int borderBottom, JPanel container) {
+        int textWeight = isBold ? Font.BOLD : Font.PLAIN;
 
-        titleButtonContainer.add(title);
+        JLabel label = new JLabel();
+        label.setText("<html>" + text + "</html>");
+        label.setFont(new Font("Nunito Sans", textWeight, textSize));        
+        label.setHorizontalAlignment(JLabel.LEFT);
+        label.setVerticalAlignment(JLabel.CENTER);
+        label.setForeground(Palette.instance().getBlack());
+        label.setBorder(new EmptyBorder(0,  0,  borderBottom, 0)); 
+        
+        container.add(label);
     }
 
     private void paintList() {
