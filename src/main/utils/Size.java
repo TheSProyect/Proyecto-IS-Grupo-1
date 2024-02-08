@@ -2,8 +2,6 @@ package main.utils;
 
 import java.awt.Dimension;
 
-import javax.swing.Popup;
-
 public class Size {
     private static Size size;
 
@@ -25,7 +23,7 @@ public class Size {
     Size()  {
         defaultFrame = new Dimension(1024, 720);
         logInSideBoder = new Dimension(80,135);
-        logInTopBottomBoder = new Dimension(478,135);
+        logInTopBottomBoder = new Dimension(478,110);
         smallLoginButton = new Dimension(148, 42);
         bigLoginButton = new Dimension(314, 42);
         examMenu = new Dimension(300, 560);

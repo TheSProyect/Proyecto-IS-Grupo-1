@@ -8,29 +8,32 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import main.utils.UserData;
+import main.utils.Directory;
 
 public class EditProfileController {
+    UserData currentUser = UserData.instance();
 
-    public EditProfileController(){
+    public EditProfileController() throws IOException{
         
-    
+        
     }
 
     public boolean setNewUsername(String newUsername) throws IOException{
-        UserData currentUser = UserData.instance();
+        
 
         if(newUsername == currentUser.getUsername()){
             return true;
         }
 
-        String directory;
+        if(searchUser(newUsername)){
+            return false;
+        }
 
-        directory = searchedDirectory(currentUser.isAdmin(), currentUser.getUsername());
+        File newFile = new File(Directory.instance().getDirectoryStudents()+File.separator+newUsername);
+        File oldFile = new File(Directory.instance().getDirectoryStudents()+File.separator+currentUser.getUsername());
+        
+        oldFile.renameTo(newFile);
 
-        File newFile = new File(directory);
-        
-        
-        newFile.createNewFile();
         currentUser.setUsername(newUsername);
         return true;
 
@@ -63,9 +66,42 @@ public class EditProfileController {
         return directory;
 	}
 
-    public boolean userAlreadyExists(){
-        return false;
-    }
+    public boolean searchUser(String Username){
+		
+		try(BufferedReader adminR = new BufferedReader(new FileReader(searchedDirectory("Teachers", Username)))){
+			currentUser.setUsername(Username);
+			String currentPassword = adminR.readLine();
+
+			currentUser.setPassword(currentPassword);
+			
+			currentUser.setIsAdmin(true);
+			return true;
+			
+		} catch (IOException e){
+			
+			try(BufferedReader userR = new BufferedReader(new FileReader(searchedDirectory("Students",Username)))){
+			currentUser.setUsername(Username);
+			
+			String currentPassword = userR.readLine();
+			currentUser.setPassword(currentPassword);
+			
+			currentUser.setIsAdmin(false);
+			return true;
+
+			} catch (IOException ee){
+				
+			return false;
+			}
+		}
+		
+        
+		
+	}
     
+    public String searchedDirectory(String Folder, String Username){
+		Directory currentDirectory = Directory.instance();
+		String directory = currentDirectory.getDirectoryUsers()+File.separator+Folder+File.separator+Username+File.separator+"Password.txt";
+		return directory;
+	}
 }
 

@@ -35,7 +35,7 @@ public class ExamView extends ExamTemplateView {
     }
 
     protected void paintMenuPanel() {
-        TimerBlock timer = new TimerBlock(presentController.getDuracion(), finishExamButton);
+        TimerBlock timer = new TimerBlock(presentController.getDuracion(), bottomLeftButton);
         menuPanel = new ExamMenu(timer, questions.size());
         menuPanel.setCurrentQuestion(index);
 
@@ -126,7 +126,7 @@ public class ExamView extends ExamTemplateView {
     }
 
     protected void actionEventInBottomLeftButton(ActionEvent e) {
-        if(e.getSource() == finishExamButton) {
+        if(e.getSource() == bottomLeftButton) {
             disableEvents();
             popup = new ExamEndedPopup(caculateResult(), questions.size());
             

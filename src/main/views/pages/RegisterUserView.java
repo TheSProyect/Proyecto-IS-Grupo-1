@@ -1,23 +1,27 @@
 package main.views.pages;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.utils.Palette;
 import main.utils.Size;
+import main.views.components.Button;
 import main.views.components.PlaceholderTextField;
 
 public class RegisterUserView extends LogInView{
-    JButton cancelButton;
+    Button cancelButton;
     
     PlaceholderTextField emailTextField;
+    PlaceholderTextField userFirstName;
+    PlaceholderTextField usertLastName;
 
     protected void buildFrame() {
         Frame.instance().setTitle("RegisterUserView");
@@ -25,7 +29,28 @@ public class RegisterUserView extends LogInView{
         this.setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
     }
     
-    protected void paintLoginTitleLabel() {
+    protected void paintTitlePanel() {
+        JPanel titlePanel = new JPanel();
+        titlePanel.setBackground(Palette.instance().getYellow());
+        titlePanel.setPreferredSize(new Dimension(546,720));
+
+        titlePanel.setLayout(new BorderLayout());
+
+        paintTitleLabel(titlePanel);
+
+        this.add(titlePanel);
+    }
+
+    protected void paintTitleLabel(JPanel titlePanel) {
+        JLabel titleLabel = new JLabel();
+        ImageIcon icon = new ImageIcon("src/assets/Logo_SingIn.png");
+        titleLabel.setIcon(icon);
+        titleLabel.setHorizontalAlignment(JLabel.CENTER);
+        
+        titlePanel.add(titleLabel, BorderLayout.CENTER);
+    }
+
+    protected void paintLoginTitleLabel(JPanel infoContainer) {
         JLabel loginTitleLabel = new JLabel();
         loginTitleLabel.setText("Registrar Usuario");
         loginTitleLabel.setFont(new Font("Nunito Sans", Font.BOLD, 30));
@@ -36,7 +61,7 @@ public class RegisterUserView extends LogInView{
         infoContainer.add(loginTitleLabel);
     }
 
-    protected void paintLoginText() {
+    protected void paintLoginText(JPanel infoContainer) {
         JLabel loginTextLabel = new JLabel();
         loginTextLabel.setText("<html>Ingrese los datos para registrar a<br/>un nuevo usuario en TéchneLogic</html>");
         loginTextLabel.setFont(new Font("Nunito Sans", Font.PLAIN, 15));
@@ -46,29 +71,33 @@ public class RegisterUserView extends LogInView{
         infoContainer.add(loginTextLabel);
     }
 
-    protected void paintTextFields() {
-        userTextField = new PlaceholderTextField("Usuario", "Home_Icon.png");
-        emailTextField = new PlaceholderTextField("Correo electronico", "Home_Icon.png");
-        passwordTextField = new PlaceholderTextField("Contraseña", "Home_Icon.png");
+    protected void paintTextFields(JPanel infoContainer) {
+        userFirstName = new PlaceholderTextField("Nombre", "User_Login_Icon.png");
+        usertLastName = new PlaceholderTextField("Apellido", "User_Login_Icon.png");
+        userTextField = new PlaceholderTextField("Usuario", "User_Login_Icon.png");
+        emailTextField = new PlaceholderTextField("Correo electronico", "Mail_Login_Icon.png");
+        passwordTextField = new PlaceholderTextField("Contraseña", "Unlock_Login_Icon.png");
 
+        infoContainer.add(userFirstName);
+        infoContainer.add(usertLastName);
         infoContainer.add(userTextField);
         infoContainer.add(emailTextField);
         infoContainer.add(passwordTextField);
     }
 
-    protected void paintButtonContainer() {
+    protected void paintButtonContainer(JPanel infoContainer) {
         JPanel buttonContainer = new JPanel();
         buttonContainer.setPreferredSize(new Dimension(478,44));
         buttonContainer.setBackground(Palette.instance().getWhite());
         buttonContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 0));
 
-        cancelButton = new JButton("Cancelar");
-        paintButton(cancelButton, Size.instance().getSmallLoginButton());
+        cancelButton = new Button("Cancelar");
+        cancelButton.setPreferredSize(Size.instance().getSmallLoginButton());
         buttonContainer.add(cancelButton);
         cancelButton.addActionListener(this);
 
-        loginButton = new JButton("Registrar");
-        paintButton(loginButton, Size.instance().getSmallLoginButton());
+        loginButton = new Button("Registrar");
+        loginButton.setPreferredSize(Size.instance().getSmallLoginButton());
         buttonContainer.add(loginButton);
         loginButton.addActionListener(this);
         
@@ -79,9 +108,9 @@ public class RegisterUserView extends LogInView{
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == cancelButton) {
             System.out.println("This should take you to AdminExamsView");
+        } else if (e.getSource() == loginButton) {
+            System.out.println("This should call controller");
         }
-        if (e.getSource() == loginButton) {
-            System.out.println("This should take you to AdminExamsView");
-        }
+        Frame.instance().setView(AdminExamsView.instance());
     }
 }

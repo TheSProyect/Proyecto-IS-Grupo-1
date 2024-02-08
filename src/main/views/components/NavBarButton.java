@@ -39,19 +39,7 @@ public class NavBarButton extends JButton {
     }
 
     private void setButtonText(String buttonName) {
-        if(isTwoWords(buttonName)) {
-            String[] separated = buttonName.split(" ");
-            this.setText("<html>" + separated[0] + "<br/>" + separated[1] + "</html>");
-        } else {
-            this.setText(buttonName);
-        }
+        this.setText("<html>" + buttonName + "</html>");
         this.setFont(new Font("Nunito Sans", Font.PLAIN, 15));
-    }
-
-    private boolean isTwoWords(String str) {
-        if (str.indexOf(" ") == -1) {
-            return false;
-        }
-        return true;
     }
 }

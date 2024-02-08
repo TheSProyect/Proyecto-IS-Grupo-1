@@ -76,7 +76,7 @@ public class CertificateView extends HelpBarTemplateView{
         JTextPane text = new JTextPane();
         text.setText("Certificado de participación");
         text.setFont(new Font("Nunito Sans", Font.BOLD, 28));
-        text.setPreferredSize(new Dimension(500, 40));
+        text.setPreferredSize(new Dimension(500, 30));
         text.setEditable(false);
 
         centerText(text);
@@ -107,7 +107,7 @@ public class CertificateView extends HelpBarTemplateView{
         JTextPane text = new JTextPane();
         text.setText(username);
         text.setFont(new Font("Nunito Sans", Font.BOLD, 45));
-        text.setPreferredSize(new Dimension(500, 60));
+        text.setPreferredSize(new Dimension(500, 50));
         text.setEditable(false);
         text.setForeground(Palette.instance().getBlue());
         text.setLayout(new GridBagLayout());
@@ -134,7 +134,7 @@ public class CertificateView extends HelpBarTemplateView{
     private void paintCourse(JPanel contentPanel) {
         JTextPane text = new JTextPane();
         text.setText("Por su participación en el examen para aspirar a \n" +  course);
-        text.setPreferredSize(new Dimension(350, 50));
+        text.setPreferredSize(new Dimension(350, 40));
         text.setForeground(Palette.instance().getBlack());
         text.setFont(new Font("Nunito Sans", Font.PLAIN, 15));
 
@@ -170,7 +170,7 @@ public class CertificateView extends HelpBarTemplateView{
     private void paintTeacher(JPanel contentPanel) {
         JTextPane text = new JTextPane();
         text.setText("Examen realizado por \n Profesor/a: " +  teacher);
-        text.setPreferredSize(new Dimension(350, 50));
+        text.setPreferredSize(new Dimension(350, 40));
         text.setForeground(Palette.instance().getBlack());
         text.setFont(new Font("Nunito Sans", Font.BOLD, 15));
 

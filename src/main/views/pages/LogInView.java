@@ -9,20 +9,18 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import javax.swing.plaf.metal.MetalButtonUI;
 
 import main.controllers.LoginController;
 import main.utils.Palette;
 import main.utils.Size;
+import main.views.components.Button;
 import main.views.components.PlaceholderTextField;
 
 public class LogInView extends JPanel implements ActionListener {
-    JPanel infoContainer;
-    JButton loginButton;
+    Button loginButton;
     JLabel errorLabel;
     
     PlaceholderTextField userTextField;
@@ -40,7 +38,7 @@ public class LogInView extends JPanel implements ActionListener {
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
     }
 
-    private void paintTitlePanel() {
+    protected void paintTitlePanel() {
         JPanel titlePanel = new JPanel();
         titlePanel.setBackground(Palette.instance().getBlue());
         titlePanel.setPreferredSize(new Dimension(546,720));
@@ -52,7 +50,7 @@ public class LogInView extends JPanel implements ActionListener {
         this.add(titlePanel);
     }
 
-    private void paintTitleLabel(JPanel titlePanel) {
+    protected void paintTitleLabel(JPanel titlePanel) {
         JLabel titleLabel = new JLabel();
         ImageIcon icon = new ImageIcon("src/assets/Logo_Login.png");
         titleLabel.setIcon(icon);
@@ -155,8 +153,8 @@ public class LogInView extends JPanel implements ActionListener {
         buttonContainer.setBackground(Palette.instance().getWhite());
         buttonContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 0));
 
-        loginButton = new JButton("Entrar");
-        paintButton(loginButton, Size.instance().getBigLoginButton());
+        loginButton = new Button("Entrar");
+        loginButton.setPreferredSize(Size.instance().getBigLoginButton());
         buttonContainer.add(loginButton);
         loginButton.addActionListener(this);
         
@@ -172,15 +170,6 @@ public class LogInView extends JPanel implements ActionListener {
         errorLabel.setVisible(false);
         
         infoContainer.add(errorLabel);
-    }
-
-    protected void paintButton(JButton button, Dimension buttonSize) {
-        button.setPreferredSize(buttonSize);
-        button.setFont(new Font("Nunito Sans", Font.PLAIN, 17));
-        button.setUI(new MetalButtonUI());
-        button.setBackground(Palette.instance().getBlue());
-        button.setForeground(Palette.instance().getWhite());
-        button.setFocusable(false);
     }
 
     public void setErrorMessage(JLabel errorLabel, String errorType){

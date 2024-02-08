@@ -1,7 +1,6 @@
 package main.views.components;
 
 import javax.swing.ImageIcon;
-import javax.swing.plaf.metal.MetalButtonUI;
 
 public class IconButton extends Button {
 
@@ -12,6 +11,7 @@ public class IconButton extends Button {
     
     private void paintIcon(String pathIcon){
         ImageIcon icon = new ImageIcon("src/assets/"+pathIcon);
+        this.setIconTextGap(15);
 
         this.setIcon(icon);
     }

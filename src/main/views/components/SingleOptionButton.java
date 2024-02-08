@@ -18,7 +18,7 @@ public class SingleOptionButton extends JRadioButton {
         selected = new ImageIcon("src/assets/Selected_Option_Icon.png");
 
         paintRadialButton();
-        this.setText(option);
+        this.setText("<html>" + option + "</html>");
         group.add(this);
     }
 
