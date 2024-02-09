@@ -23,8 +23,16 @@ public class ExplicationPanel extends JScrollPane {
 
     ExplicationPanel(List<String> text) {
         paintScroll();
-        paintTextPane();
+        paintTextPane(determineNumLines(text) == 0);
         writeText(text);
+    }
+
+    private int determineNumLines(List<String> text) {
+        if (text == null) {
+            return 0;
+        } else {
+            return text.size();
+        }
     }
 
     private HTMLDocument createHTMLDocument() {
@@ -46,7 +54,7 @@ public class ExplicationPanel extends JScrollPane {
         explicationText.setEditorKit(kit);
         explicationText.setDocument(doc);
 
-        for(int i = 0; i < text.size(); i ++) {
+        for(int i = 0; i < determineNumLines(text); i ++) {
             try {
                 kit.insertHTML(doc, doc.getLength(), text.get(i), 0, 0, null);
                 kit.insertHTML(doc, doc.getLength(), "<br>", 0, 0, null);
@@ -58,10 +66,10 @@ public class ExplicationPanel extends JScrollPane {
         }
     }
 
-    private void paintTextPane() {
+    private void paintTextPane(boolean isEmpty) {
         explicationText = new JTextPane();
         explicationText.setBackground(Palette.instance().getWhite());
-        explicationText.setEditable(false);
+        explicationText.setEditable(isEmpty);
 
         this.setViewportView(explicationText);
     }

@@ -1,5 +1,4 @@
 package main.views.pages;
-import main.views.components.NavBar;
 import main.views.components.Slider;
 
 import java.awt.BorderLayout;

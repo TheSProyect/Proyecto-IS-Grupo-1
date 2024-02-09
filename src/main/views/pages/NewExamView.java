@@ -43,11 +43,6 @@ public class NewExamView extends ExamTemplateView {
         addActionListener();
     }
 
-    protected void paintNavBar() {
-        navBar = new AdminNavBar();
-        this.add(navBar, BorderLayout.NORTH);
-    }
-
     @Override
     protected void paintMenuPanel() {
         publishButton = new IconButton("Publicar Examen", "Exit_Exam_Icon.png");

@@ -143,6 +143,10 @@ public class QuestionPanel extends JPanel implements ActionListener {
         questionText.setForeground(Palette.instance().getBlack());
         questionText.setPreferredSize(new Dimension(1024,30));
 
+        this.add(questionText, createQuestionConstraints());
+    }
+
+    protected GridBagConstraints createQuestionConstraints() {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 1;
@@ -150,21 +154,25 @@ public class QuestionPanel extends JPanel implements ActionListener {
         constraints.gridwidth = 4;
         constraints.fill = GridBagConstraints.BOTH;
 
-        this.add(questionText, constraints);
+        return constraints;
     }
 
     public void paintCodeField(List<String> code) {
         CodeField codeField = new CodeField(code);
 
+        questionContentPanel.add(codeField, createCodeFieldConstraints());
+    }
+
+    protected GridBagConstraints createCodeFieldConstraints() {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
-        constraints.gridy = 2;
+        constraints.gridy = 1;
         constraints.weightx = 1.0;
         constraints.weighty = 0.5;
         constraints.gridwidth = 4;
         constraints.fill = GridBagConstraints.BOTH;
 
-        questionContentPanel.add(codeField, constraints);
+        return constraints;
     }
 
     public void paintOptionsPanel(List<String> options) {
@@ -174,7 +182,7 @@ public class QuestionPanel extends JPanel implements ActionListener {
         questionContentPanel.setPreferredSize(new Dimension(544, questionContentPanel.getHeight()));
     }
 
-    private GridBagConstraints createOptionPanelConstraints() {
+    protected GridBagConstraints createOptionPanelConstraints() {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 3;
