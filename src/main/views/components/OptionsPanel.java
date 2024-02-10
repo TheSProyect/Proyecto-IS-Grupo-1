@@ -27,6 +27,14 @@ public class OptionsPanel extends JPanel implements ActionListener{
         paintOption();
     }
 
+    private int determineNumLines(List<String> optionsString) {
+        if (optionsString == null) {
+            return 0;
+        } else {
+            return optionsString.size();
+        }
+    }
+
     private void paintOption() {
         for(int i = 0; i < options.size(); i++) {
             this.add(options.get(i));
@@ -34,7 +42,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
     }
 
     private void createOptionsButtons(List<String> optionsString) {
-        for (int i = 0; i < optionsString.size(); i++) {
+        for (int i = 0; i < determineNumLines(optionsString); i++) {
             options.add(new SingleOptionButton(optionsString.get(i), group));
             options.get(i).addActionListener(this);
         }

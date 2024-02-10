@@ -19,7 +19,9 @@ public class SingleOptionButton extends JRadioButton {
 
         paintRadialButton();
         this.setText("<html>" + option + "</html>");
-        group.add(this);
+        if (group != null) {
+            group.add(this);
+        }
     }
 
     private void paintRadialButton() {

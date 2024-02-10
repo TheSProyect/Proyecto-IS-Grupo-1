@@ -67,6 +67,7 @@ public class ExamEndedView extends ExamTemplateView {
 
     protected void actionEventInBottomLeftButton(ActionEvent e) {
         if(e.getSource() == bottomLeftButton) {
+            ExamsView.instance().paintNavBar();
             Frame.instance().setView(ExamsView.instance());
             Frame.instance().setTitle("ExamsView");
         } 

@@ -43,9 +43,9 @@ public class QuestionsList extends JScrollPane{
 
     private void paintQuestionList() {
         questionsListPanel = new JPanel();
-        questionsListPanel.setPreferredSize(new Dimension(200, 600));
         questionsListPanel.setBackground(Palette.instance().getWhite());
         questionsListPanel.setLayout(new BoxLayout(questionsListPanel, BoxLayout.Y_AXIS));
+        questionsListPanel.setPreferredSize(new Dimension(200, questionsListPanel.getHeight()));
         
         this.setViewportView(questionsListPanel);
     }
