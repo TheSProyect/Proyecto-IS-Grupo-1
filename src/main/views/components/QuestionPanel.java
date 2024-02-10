@@ -166,7 +166,7 @@ public class QuestionPanel extends JPanel implements ActionListener {
     protected GridBagConstraints createCodeFieldConstraints() {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
-        constraints.gridy = 1;
+        constraints.gridy = 3;
         constraints.weightx = 1.0;
         // constraints.weighty = 1.0;
         constraints.gridwidth = 4;
@@ -185,7 +185,7 @@ public class QuestionPanel extends JPanel implements ActionListener {
     protected GridBagConstraints createOptionPanelConstraints() {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
-        constraints.gridy = 3;
+        constraints.gridy = 5;
         constraints.weighty = 1.0;
         constraints.gridwidth = 4;
         constraints.fill = GridBagConstraints.BOTH;

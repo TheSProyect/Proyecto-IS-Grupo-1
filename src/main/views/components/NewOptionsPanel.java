@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
@@ -25,14 +26,14 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
     NewOptionsPanel() {
         options = new ArrayList<NewOptionItem>();
         buildPanel(this);
-        this.setBackground(Palette.instance().getGray());
         paintOptionsPanel();
         paintOptionsList();
-        paintAddButton();
+        paintAddButtonPanel();
     }
 
     private void buildPanel(JPanel panel) {
         panel.setLayout(new GridBagLayout());
+        panel.setBackground(Palette.instance().getWhite());
     }
 
     private void paintOptionsPanel() {
@@ -50,30 +51,48 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
         this.add(optionsPanel, constraints);
     }
 
-    private void paintAddButton() {
+    private void paintAddButtonPanel() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.TRAILING));
+        buttonPanel.setBackground(Palette.instance().getWhite());
 
+        paintAddButton();
+        paintAddButtonIcon();
+
+        buttonPanel.add(addButton);
+
+        this.add(buttonPanel, createAddButtonConstraints());
+        
+        buttonPanel.setMaximumSize(new Dimension(buttonPanel.getWidth(), 50));
+    }
+
+    private void paintAddButton() {
         addButton = new JButton();
         addButton.setBackground(Palette.instance().getYellow());
         addButton.setPreferredSize(new Dimension(40,40));
         addButton.setMinimumSize(new Dimension(40,40));
         addButton.addActionListener(this);
+        addButton.setFocusable(false);
         
         Border border = BorderFactory.createLineBorder(Palette.instance().getYellow());
         addButton.setBorder(border);
+    }
 
-        buttonPanel.add(addButton);
+    private void paintAddButtonIcon() {
+        ImageIcon icon = new ImageIcon("src/assets/Plus_Icon.png");
+        addButton.setIconTextGap(15);
 
+        addButton.setIcon(icon);
+    }
+
+    private GridBagConstraints createAddButtonConstraints() {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridy = 1;
         constraints.weightx = 1.0;
         constraints.weighty = 1.0;
         constraints.fill = GridBagConstraints.HORIZONTAL;
-        
-        this.add(buttonPanel, constraints);
-        
-        buttonPanel.setMaximumSize(new Dimension(buttonPanel.getWidth(), 50));
+
+        return constraints;
     }
 
     private GridBagConstraints createNewOptionsConstraints(int gridy) {
@@ -87,7 +106,6 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
     }
 
     private void paintOptionsList() {
-        System.out.println(options.size());
         for (int i = 0; i < options.size(); i++) {
             optionsPanel.add(options.get(i), createNewOptionsConstraints(i));
         }
@@ -99,7 +117,6 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(this.getHeight());
         options.add(new NewOptionItem());
         paintOptionsList();
         this.validate();

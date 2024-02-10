@@ -5,11 +5,10 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.border.Border;
 
@@ -17,14 +16,18 @@ import main.utils.Palette;
 
 public class NewQuestionPanel extends QuestionPanel {
     NewOptionsPanel newOptionsPanel;
+    IconButton addImageButton;
 
     public NewQuestionPanel() {
         paintQuestionField();
-        paintCodeFieldLabel();
+        paintFieldLabel("Dominio", 0);
+        paintDomainField();
+        paintFieldLabel("Inserta el código", 2);
         paintCodeField(null);
-        paintOptionsLabel();
+        paintAddImageButton();
+        paintFieldLabel("Opciones", 5);
         paintNewOptionsPanel();
-        paintExplicationLabel();
+        paintFieldLabel("Explicación", 7);
         paintExplicationPanel();
     }   
 
@@ -34,46 +37,63 @@ public class NewQuestionPanel extends QuestionPanel {
         questionField.setFont(new Font("Nunito Sans", Font.BOLD, 20));
         questionField.setBorder(createQuestionFieldBorder());
 
-
         this.add(questionField, createQuestionConstraints());
     }
 
     private Border createQuestionFieldBorder() {
         Border outside = BorderFactory.createLineBorder(Palette.instance().getLightGray());
-        Border inside = BorderFactory.createEmptyBorder(10, 10, 10, 10);
+        Border inside = BorderFactory.createEmptyBorder(5, 10, 5, 10);
         Border border = BorderFactory.createCompoundBorder(outside, inside);
 
         return border;
     }
 
-    private void paintCodeFieldLabel() {
-        JLabel codeFieldLabel = new JLabel("Inserta el código");
-        codeFieldLabel.setForeground(Palette.instance().getGray());
-        codeFieldLabel.setFont(new Font("Nunito Sans", Font.BOLD, 17));
+    private void paintFieldLabel(String label, int gridy) {
+        JLabel domainLabel =  new JLabel(label);
+        domainLabel.setForeground(Palette.instance().getGray());
+        domainLabel.setFont(new Font("Nunito Sans", Font.BOLD, 17));
 
-        questionContentPanel.add(codeFieldLabel, createLabelsConstraints(0));
-    }
-
-    private void paintOptionsLabel() {
-        JLabel codeFieldLabel = new JLabel("Opciones");
-        codeFieldLabel.setForeground(Palette.instance().getGray());
-        codeFieldLabel.setFont(new Font("Nunito Sans", Font.BOLD, 17));
-
-        questionContentPanel.add(codeFieldLabel, createLabelsConstraints(2));
-    }
-
-    private void paintExplicationLabel() {
-        JLabel codeFieldLabel = new JLabel("Explicación");
-        codeFieldLabel.setForeground(Palette.instance().getGray());
-        codeFieldLabel.setFont(new Font("Nunito Sans", Font.BOLD, 17));
-
-        questionContentPanel.add(codeFieldLabel, createLabelsConstraints(4));
+        
+        questionContentPanel.add(domainLabel, createLabelsConstraints(gridy));
     }
 
     private GridBagConstraints createLabelsConstraints(int gridy) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridy = gridy;
+        constraints.gridwidth = 4;
         constraints.insets = new Insets(5, 5, 5, 5);
+        constraints.fill = GridBagConstraints.BOTH;
+
+        return constraints;
+    }
+
+    private void paintDomainField() {
+        JTextField domainField = new JTextField();
+        domainField.setForeground(Palette.instance().getGray());
+        domainField.setBackground(Palette.instance().getOffWhite());
+        domainField.setFont(new Font("Nunito Sans", Font.PLAIN, 20));
+        domainField.setBorder(createQuestionFieldBorder());
+
+        questionContentPanel.add(domainField, createLabelsConstraints(1));
+    }
+
+    private void paintAddImageButton() {
+        addImageButton = new IconButton("Insertar imagen", "Plus_Icon.png");
+        addImageButton.setBackground(Palette.instance().getYellow());
+        addImageButton.setPreferredSize(new Dimension(250, 50));
+        addImageButton.setMinimumSize(new Dimension(190, 30));
+        addImageButton.addActionListener(this);
+
+        Border border = BorderFactory.createLineBorder(Palette.instance().getYellow());
+        addImageButton.setBorder(border);
+
+        questionContentPanel.add(addImageButton, createAddImageButtonConstraints());
+    }
+
+    private GridBagConstraints createAddImageButtonConstraints() {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridy = 4;
+        constraints.insets = new Insets(5, 0, 5, 0);
         constraints.fill = GridBagConstraints.BOTH;
 
         return constraints;
@@ -95,33 +115,43 @@ public class NewQuestionPanel extends QuestionPanel {
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
-        constraints.gridy = 5;
+        constraints.gridy = 8;
         constraints.weighty = 1.0;
         constraints.gridwidth = 4;
-        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.fill = GridBagConstraints.BOTH;
 
         questionContentPanel.add(explicationPanel, constraints);
-        questionContentPanel.setPreferredSize(new Dimension(544, questionContentPanel.getHeight()));
+        questionContentPanel.setPreferredSize(new Dimension(544, 700));
     }
 
     protected GridBagConstraints createOptionPanelConstraints() {
         GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridy = 3;
-        // constraints.weightx = 1.0;
+        constraints.gridy = 6;
         constraints.gridwidth = 4;
         constraints.fill = GridBagConstraints.BOTH;
 
         return constraints;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    private void actionEventInNewOptionsPanel(ActionEvent e) {
         if (e.getSource() == newOptionsPanel.getAddButton()) {
             int contentPanelHeight = questionContentPanel.getHeight() + 50;
             questionContentPanel.setPreferredSize(new Dimension(544, contentPanelHeight));
             questionContentPanel.validate();
             questionContentPanel.repaint();
         }
+    }
+
+    private void actionEventInAddImageButton(ActionEvent e) {
+        if (e.getSource() == addImageButton) {
+            System.out.println("This should ask to add Image");
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        actionEventInNewOptionsPanel(e);
+        actionEventInAddImageButton(e);
     }
 
 }

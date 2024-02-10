@@ -39,6 +39,7 @@ public class NewExamView extends ExamTemplateView {
         paintBorders();
         paintContentPanel();
         bottomLeftButton.setText("Añadir Pregunta");
+        bottomLeftButton.paintIcon("Plus_Icon.png");
 
         addActionListener();
     }
