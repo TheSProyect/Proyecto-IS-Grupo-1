@@ -1,28 +1,15 @@
 package main.views.pages;
 
-import main.views.components.TextField;
-
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
 
-import com.itextpdf.awt.geom.Dimension;
-
-import main.views.components.AdminNavBar;
-import main.views.components.CodeField;
 import main.views.components.ExamMenu;
-import main.views.components.QuestionsList;
 import main.views.components.IconButton;
 import main.views.components.NewQuestionPanel;
 import main.views.components.QuestionPanel;
-import main.views.pages.AdminExamView;
-import main.views.pages.ExamPublishedView;
-import main.controllers.CreateExamController;
 import main.utils.Palette;
 
 
@@ -68,19 +55,13 @@ public class NewExamView extends ExamTemplateView {
 
     @Override
     protected void actionEventInBottomLeftButton(ActionEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionEventInBottomLeftButton'");
+        if (e.getSource() == bottomLeftButton) {  
+            questions.add(new NewQuestionPanel());
+            menuPanel.repaintQuestionsList(questions.size());
+            menuPanel.setCurrentQuestion(index);
+            paintQuestionPanel(index);
+            addActionListener();
+            this.validate();
+        }
     }
-    // private JLabel labels;
-    // private TextField textField;
-    // private CodeField codeField;
-    // private QuestionsList questionNumber;
-    // private JList questionsList;
-    // private IconButton nexButton;
-    // private IconButton prevButton;
-    // private IconButton addQuestionButton;
-
-    // private void setName(String Name){}
-    // private void setInstructions(String Instructions){}
-    
 }

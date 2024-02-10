@@ -45,7 +45,6 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridy = 0;
-        // constraints.weightx = 1.0;
         constraints.fill = GridBagConstraints.BOTH;
 
         this.add(optionsPanel, constraints);
@@ -108,6 +107,7 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
     private void paintOptionsList() {
         for (int i = 0; i < options.size(); i++) {
             optionsPanel.add(options.get(i), createNewOptionsConstraints(i));
+            options.get(i).getDeleteButton().addActionListener(this);
         }
     }
 
@@ -115,12 +115,22 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
         return addButton;
     }
 
+    private void actionEventInAddButton(ActionEvent e) {
+        if (e.getSource() == addButton) {
+            options.add(new NewOptionItem());
+            paintOptionsList();
+            this.validate();
+            this.repaint();
+        }
+    }
+
+    private void actionEventInDeleteButton(ActionEvent e) {
+        
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        options.add(new NewOptionItem());
-        paintOptionsList();
-        this.validate();
-        this.repaint();
+        actionEventInAddButton(e);
     }
     
 }

@@ -41,7 +41,7 @@ public abstract class ExamTemplateView extends NavBarTemplateView {
         this.add(contentPanel, BorderLayout.CENTER);
     }
 
-    private void paintQuestionPanel(int questionIndex) {
+    protected void paintQuestionPanel(int questionIndex) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 1;
         constraints.gridy = 0;
