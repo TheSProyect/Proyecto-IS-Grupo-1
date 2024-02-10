@@ -70,41 +70,71 @@ public class Listing extends JScrollPane{
     }
     
     private void paintListElements(List<String> questionList, List<String> answerList, JPanel listContainer) {
-        JSeparator separator;
+
         for (int i = 0; i < questionList.size(); i++) {
             paintContent(questionList.get(i), answerList.get(i), listContainer);
-            separator = paintTitleSeparator();
-            listContainer.add(separator);
+            
         }
     }
     
     protected void paintListElements(List<String> elementList, String textButton,JPanel listContainer) {
-        JSeparator separator;
+        
         String singleElement;
         for (int i = 0; i < elementList.size(); i++) {
-            singleElement = elementList.get(i);
+            singleElement = elementList.get(0);
             
             TitleButtonContainer(singleElement, textButton, listContainer);
-            separator = paintTitleSeparator();
-            listContainer.add(separator);
+            
         }       
     }
     private void paintContent(String question, String answer, JPanel listContainer) {
         JPanel listItem = new JPanel();
-        
+        JPanel itemContainer = new JPanel();
+        JSeparator separator = paintTitleSeparator();
+
         listItem.setBackground(Palette.instance().getWhite());
         listItem.setMaximumSize(new Dimension(860, 860));
         listItem.setLayout(new BoxLayout(listItem, BoxLayout.Y_AXIS));
+        listItem.setBorder(new EmptyBorder(0,  30,  0, 0));
         
-        listItem.setBorder(new EmptyBorder(10,  10,  0,  0)); 
 
-        paintText(question, true, 19, 10, listItem);
         
-        paintText(answer, false, 17, 20, listItem);
+        itemContainer.setLayout(new BoxLayout(itemContainer, BoxLayout.Y_AXIS));
+        itemContainer.setBackground(Palette.instance().getWhite());
+        itemContainer.setBorder(new EmptyBorder(10,  10,  0, 5)); 
+
+        paintText(question, true, 19, 10, itemContainer);
         
+        paintText(answer, false, 17, 15, itemContainer);
+        
+        
+        listItem.add(itemContainer);
+        listItem.add(separator);
         
         listContainer.add(listItem, BorderLayout.CENTER);
         
+    }
+    private void TitleButtonContainer(String text, String textButton, JPanel listContainer) {
+        JSeparator separator = paintTitleSeparator();
+        
+        JPanel titleButtonContainer = new JPanel();
+        titleButtonContainer.setLayout(new BoxLayout(titleButtonContainer, BoxLayout.Y_AXIS));
+        titleButtonContainer.setBackground(Palette.instance().getWhite());
+
+
+        JPanel itemContainer = new JPanel();
+        itemContainer.setLayout(new BoxLayout(itemContainer, BoxLayout.X_AXIS));
+        itemContainer.setBackground(Palette.instance().getWhite());
+        itemContainer.setBorder(new EmptyBorder(10,  0,  10, 0)); 
+        paintText(textButton, false, 20, 0, itemContainer);
+
+        paintCreateButton(textButton, itemContainer);
+        
+        titleButtonContainer.add(itemContainer);
+
+        titleButtonContainer.add(separator);
+        titleButtonContainer.setBorder(new EmptyBorder(0,  40,  0, 40)); 
+        listContainer.add(titleButtonContainer);
     }
 
     protected JSeparator paintTitleSeparator() {
@@ -115,18 +145,7 @@ public class Listing extends JScrollPane{
         return line;
     }
 
-    private void TitleButtonContainer(String text, String textButton, JPanel listContainer) {
-        JPanel titleButtonContainer = new JPanel();
-        titleButtonContainer.setMaximumSize(new Dimension(1500, 58));
-        titleButtonContainer.setLayout(new BoxLayout(titleButtonContainer, BoxLayout.X_AXIS));
-        titleButtonContainer.setBackground(Palette.instance().getWhite());
-
-        paintText(textButton, false, 20, 0, titleButtonContainer);
-
-        paintCreateButton(textButton, titleButtonContainer);
-        
-        listContainer.add(titleButtonContainer);
-    }
+    
 
     private void paintCreateButton(String textButton,JPanel titleButtonContainer) {
         JButton button = new JButton(textButton);
