@@ -105,7 +105,7 @@ public class Listing extends JScrollPane{
 
     protected void paintTitleLabel(JPanel titleButtonContainer) {
         JLabel title = new JLabel();
-        title.setText(singleElement);
+        title.setText("<html>"+ singleElement + "<html>");
         title.setFont(new Font("Nunito Sans", Font.ROMAN_BASELINE, 20));
         title.setPreferredSize(new Dimension(944, 58));
         title.setMaximumSize(new Dimension(2048, 58));

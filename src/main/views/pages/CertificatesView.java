@@ -21,7 +21,6 @@ import main.controllers.RequestCertificateController;
 
 
 public class CertificatesView extends HelpBarTemplateView {
-    private static CertificatesView certificatesView;
     Listing certificateListing;
     List<String> certificates;
     List<JButton> requestCertificateButtons;
