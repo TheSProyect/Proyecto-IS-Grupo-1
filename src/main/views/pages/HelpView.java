@@ -1,11 +1,7 @@
 package main.views.pages;
 
-import main.views.components.NavBar;
 import main.utils.Palette;
-import main.views.components.Button;
-import main.views.components.HelpBar;
 import main.views.components.Listing;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,29 +9,14 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.FlowLayout;
-
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-    import javax.swing.BoxLayout;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 
-
-public class HelpView extends JPanel {
+public class HelpView extends HelpBarTemplateView {
     private static HelpView faqView;
-
-    JPanel titlePanel;
-    JPanel contentPanel;
-    JLabel title;
-    NavBar navBar;
-    Button button;
-    HelpBar helpBar;
-    JButton createExam;
-    JPanel titleButtonContainer;
-    Listing certificateListing;
-    List<String> certificates;
-    List<JButton> requestCertificateButtons;
 
     List<String> questionList = new ArrayList<String>();
     List<String> answerList = new ArrayList<String>();
@@ -53,70 +34,44 @@ public class HelpView extends JPanel {
 
     public HelpView() {
         init();
-
-        buildFrame();
+        buildFrame("HelpView");
         paintBorders();
         paintContentPanel();
         
     }
 
-    protected void buildFrame() {
-        Frame.instance().setTitle("FaqView");
-        this.setLayout(new BorderLayout());
-    }
-
-    protected void paintNavBar() {
-        navBar = NavBar.instance();
-        this.add(navBar, BorderLayout.NORTH);
-    }
-
-    protected void paintBorders() {
-        paintNavBar();
-        
-        helpBar = new HelpBar();
-        this.add(helpBar, BorderLayout.SOUTH);
-
-        JPanel borderPanel = new JPanel();
-        borderPanel.setPreferredSize(new Dimension(40, 560));
-        borderPanel.setBackground(Palette.instance().getWhite());
-        this.add(borderPanel, BorderLayout.WEST);
-
-        borderPanel = new JPanel();
-        borderPanel.setPreferredSize(new Dimension(40, 560));
-        borderPanel.setBackground(Palette.instance().getWhite());
-        this.add(borderPanel, BorderLayout.EAST);
-
-    }
-
     protected void paintContentPanel(){
-        contentPanel = new JPanel();
+        JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BorderLayout());
         contentPanel.setPreferredSize(new Dimension(944, 560));
         contentPanel.setBackground(Palette.instance().getWhite());
 
-        paintTitlePanel();
+        paintTitlePanel(contentPanel);
         
-        paintCertificatesListing(); 
+        paintCertificatesListing(contentPanel); 
 
     
         this.add(contentPanel, BorderLayout.CENTER);
     }
 
-    protected void paintTitlePanel() {
-        createTitlePanel();
-        TitleContainer();
-        paintTitleSeparator(2);        
+    protected void paintTitlePanel(JPanel contentPanel) {
+        JPanel titlePanel;
+        titlePanel = createTitlePanel(contentPanel);
+        TitleContainer(titlePanel);
+        paintTitleSeparator(2, titlePanel);        
     }
 
-    protected void createTitlePanel() {
-        titlePanel = new JPanel();
+    protected JPanel createTitlePanel(JPanel contentPanel) {
+        JPanel titlePanel = new JPanel();
         titlePanel.setBackground(Palette.instance().getWhite());
         titlePanel.setPreferredSize(new Dimension(944, 60));
         titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
+
         contentPanel.add(titlePanel, BorderLayout.NORTH);
+        return titlePanel;
     }
 
-    protected void paintTitleSeparator(int numberColor) {
+    protected void paintTitleSeparator(int numberColor, JPanel titlePanel) {
         Color color = numberColor == 1 ? Palette.instance().getLightGray() : Palette.instance().getYellow();
         JSeparator line = new JSeparator();
         line.setForeground(color);
@@ -124,20 +79,20 @@ public class HelpView extends JPanel {
         titlePanel.add(line);
     }
 
-    private void TitleContainer() {
-        titleButtonContainer = new JPanel();
+    private void TitleContainer(JPanel titlePanel) {
+        JPanel titleButtonContainer = new JPanel();
         titleButtonContainer.setMaximumSize(new Dimension(1500, 58));
         titleButtonContainer.setLayout(new BoxLayout(titleButtonContainer, BoxLayout.X_AXIS));
         titleButtonContainer.setBackground(Palette.instance().getWhite());
 
-        paintTitleLabel();
+        paintTitleLabel(titleButtonContainer);
 
         
         titlePanel.add(titleButtonContainer);
     }
 
-    protected void paintTitleLabel() {
-        title = new JLabel();
+    protected void paintTitleLabel(JPanel titleButtonContainer) {
+        JLabel title = new JLabel();
         title.setText("Preguntas Frecuentes");
         title.setFont(new Font("Nunito Sans", Font.BOLD, 25));
         title.setPreferredSize(new Dimension(944, 58));
@@ -147,8 +102,8 @@ public class HelpView extends JPanel {
         titleButtonContainer.add(title, FlowLayout.LEFT);
     }
 
-    private void paintCertificatesListing() {
-        certificateListing = new Listing(questionList, answerList);
+    private void paintCertificatesListing(JPanel contentPanel) {
+        Listing certificateListing = new Listing(questionList, answerList);
         contentPanel.add(certificateListing);
     }
 
