@@ -111,6 +111,7 @@ public class RegisterUserView extends LogInView{
         } else if (e.getSource() == loginButton) {
             System.out.println("This should call controller");
         }
+        AdminExamsView.instance().paintNavBar();
         Frame.instance().setView(AdminExamsView.instance());
     }
 }
