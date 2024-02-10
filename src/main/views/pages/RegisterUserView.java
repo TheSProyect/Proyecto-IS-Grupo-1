@@ -72,8 +72,8 @@ public class RegisterUserView extends LogInView{
     }
 
     protected void paintTextFields(JPanel infoContainer) {
-        userFirstName = new PlaceholderTextField("Nombre", "User_Login_Icon.png");
-        usertLastName = new PlaceholderTextField("Apellido", "User_Login_Icon.png");
+        userFirstName = new PlaceholderTextField("Nombre", "Document_Icon.png");
+        usertLastName = new PlaceholderTextField("Apellido", "Document_Icon.png");
         userTextField = new PlaceholderTextField("Usuario", "User_Login_Icon.png");
         emailTextField = new PlaceholderTextField("Correo electronico", "Mail_Login_Icon.png");
         passwordTextField = new PlaceholderTextField("Contraseña", "Unlock_Login_Icon.png");

@@ -13,6 +13,6 @@ public class Main {
         UserData.instance().setPassword("Contrasenia");
 
         // Frame.instance().setView(new LogInView());
-        Frame.instance().setView(new CertificatesView());
+        Frame.instance().setView(AdminExamsView.instance());
     }
 }
