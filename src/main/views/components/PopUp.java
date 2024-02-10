@@ -27,7 +27,6 @@ public class PopUp extends JFrame {
     public PopUp() {
         this.setUndecorated(true);
         this.setVisible(true);
-        this.setMinimumSize(Size.instance().getPopupDimension());
         this.setSize(Size.instance().getPopupDimension());
     }
 

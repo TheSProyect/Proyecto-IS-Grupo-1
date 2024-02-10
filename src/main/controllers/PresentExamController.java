@@ -13,10 +13,9 @@ import main.models.Question;
 import main.models.Result;
 import main.utils.UserData;
 import main.models.Exam;
-import javax.swing.*;
 import main.utils.Directory;;
 
-public class PresentExamController {
+public class PresentExamController extends TemplateExam{
     Exam currentExam = new Exam();
     Directory currentDirectory = Directory.instance();
 
@@ -62,7 +61,6 @@ public class PresentExamController {
             File[] files = searchedFolder.listFiles();
             if (files != null) {
                 for (File file : files) {
-                    //System.out.println("ola"+ file.getName());
                     if((file.getName()).equals("Instructions.txt")){
                         } else {
                         String directorySub = directory + File.separator + file.getName();
@@ -118,15 +116,15 @@ public class PresentExamController {
                     currentExam.setAnswersExam(answer[i],justification[i], i, counter);
                     currentExam.setNumberAnswers(counter, i+1);
                     }
-                    br.close();     
+                br.close();     
                 } catch (IOException e) {
                     e.printStackTrace();
             }
             if(readings==stop) {
                 return;
                 } else {
-                    counter++;
-                    readQuestion(changeDirectory(directory),readings+1, counter, stop);
+            counter++;
+            readQuestion(changeDirectory(directory),readings+1, counter, stop);
         }   
     }
     
@@ -147,47 +145,6 @@ public class PresentExamController {
                 e.printStackTrace();
         }
     }
-
-    private int getNumberQuestion(String directory, String nameFolder){
-        int lineNumberQuestion = 2;
-        int numberQuestion = 0;
-        directory = directory +File.separator+nameFolder+File.separator+nameFolder+".txt";
-        try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
-            for(int i=0; i<=lineNumberQuestion; i++){
-                br.readLine();
-                if(i==lineNumberQuestion-1){
-                    numberQuestion = Integer.parseInt((br.readLine()));
-                    }
-                }
-            return numberQuestion;
-            } catch (IOException e) {
-                    e.printStackTrace();
-        }
-        return numberQuestion;
-    }
-    
-    private String changeDirectory(String directory){
-        int removeQuestionFromDirectory = 13;
-        int removeFyleType = 4;
-        String question = (directory.substring(directory.length() - removeQuestionFromDirectory));
-        question = question.substring(0, question.length() - removeFyleType);
-        directory = directory.substring(0, directory.length() - removeQuestionFromDirectory);
-        return (directory +File.separator+changeNumberQuestion(question)+".txt");
-    }
-    
-    private String changeNumberQuestion(String question){
-        int removeNumberOfQuestion = 1;
-        if (question != null && question.length() > 0) {
-            char lastCharacter = question.charAt(question.length() - removeNumberOfQuestion);
-            if (Character.isDigit(lastCharacter)) {
-                int number = Character.getNumericValue(lastCharacter);
-                number++;
-                char newCharacter = Character.forDigit(number, 10);
-                return question.substring(0, question.length() - removeNumberOfQuestion) + newCharacter; 
-            }
-        }
-        return question;
-    }  
 
     public void searchFolder(String [] informationsExam) {
         int indexForNameFolder = 0;
@@ -210,10 +167,10 @@ public class PresentExamController {
                         return;
                     }
                 }
-           }    
+            }    
         }
     }
-
+    
     public List<String> getQuestionsStrings(){
         int j=currentExam.getNumberQuestions();
         List<String> questionsString = new ArrayList<String>();
@@ -290,6 +247,7 @@ public class PresentExamController {
     public Boolean isCorrect(int indexQuestion, int indexSelectedAnswer){
         return currentExam.getIsCorrectExam(indexQuestion, indexSelectedAnswer);
     }
+
     public void setResultExamC(int numCorrectQuestions){
         currentExam.setResultExam(numCorrectQuestions);
     }

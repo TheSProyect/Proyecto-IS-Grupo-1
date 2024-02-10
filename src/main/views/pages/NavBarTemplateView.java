@@ -18,9 +18,8 @@ public class NavBarTemplateView extends JPanel implements ActionListener{
         this.setLayout(new BorderLayout());
     }
 
-    protected void paintNavBar() {
-        navBar = new NavBar();
-        this.add(navBar, BorderLayout.NORTH);
+    public void paintNavBar() {
+        this.add(NavBar.instance(), BorderLayout.NORTH);
     }
 
     protected void paintSideBorders() {

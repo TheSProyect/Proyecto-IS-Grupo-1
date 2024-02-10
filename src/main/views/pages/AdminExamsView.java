@@ -30,9 +30,8 @@ public class AdminExamsView extends ExamsView {
         this.setLayout(new BorderLayout());
     }
 
-    protected void paintNavBar() {
-        navBar = new AdminNavBar();
-        this.add(navBar, BorderLayout.NORTH);
+    public void paintNavBar() {
+        this.add(AdminNavBar.instance(), BorderLayout.NORTH);
     }
 
     protected void paintTitlePanel(JPanel contentPanel) {

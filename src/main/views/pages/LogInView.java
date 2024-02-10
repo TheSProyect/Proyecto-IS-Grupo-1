@@ -95,7 +95,7 @@ public class LogInView extends JPanel implements ActionListener {
 
     private void buildInfoContainer(JPanel loginPanel) {
         JPanel infoContainer = new JPanel();
-        infoContainer.setPreferredSize(new Dimension(478,478));
+        infoContainer.setPreferredSize(new Dimension(478,878));
         infoContainer.setBackground(Palette.instance().getWhite());
         infoContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 1024, 15));
 

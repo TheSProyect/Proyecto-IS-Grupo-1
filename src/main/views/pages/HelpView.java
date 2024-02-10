@@ -10,8 +10,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.FlowLayout;
@@ -68,7 +66,7 @@ public class HelpView extends JPanel {
     }
 
     protected void paintNavBar() {
-        navBar = new NavBar();
+        navBar = NavBar.instance();
         this.add(navBar, BorderLayout.NORTH);
     }
 

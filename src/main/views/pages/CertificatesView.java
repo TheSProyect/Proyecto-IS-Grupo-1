@@ -21,22 +21,11 @@ import main.controllers.RequestCertificateController;
 
 
 public class CertificatesView extends HelpBarTemplateView {
-    private static CertificatesView certificatesView;
     Listing certificateListing;
     List<String> certificates;
     List<JButton> requestCertificateButtons;
     RequestCertificateController requestCertificateController;
 
-    public static CertificatesView instance() {
-		if (certificatesView == null){
-			certificatesView = new CertificatesView();
-		}
-		return certificatesView;
-	}
-
-    public static void deleteInstance() {
-        certificatesView = null;
-    }
 
     public CertificatesView() {
         // inicializeCertificates();
@@ -47,6 +36,7 @@ public class CertificatesView extends HelpBarTemplateView {
         
         getRequestCertificateButtons();
         addActionListener();
+        
     }
 
     protected void paintContentPanel(){

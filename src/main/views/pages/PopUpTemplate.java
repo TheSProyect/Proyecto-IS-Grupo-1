@@ -28,12 +28,12 @@ public class PopUpTemplate extends JPanel {
 
     protected void paintBorders() {
         JPanel borderPanel = new JPanel();
-        borderPanel.setPreferredSize(new Dimension(40, 300));
+        borderPanel.setPreferredSize(new Dimension(40, 200));
         borderPanel.setBackground(Palette.instance().getWhite());
         this.add(borderPanel, BorderLayout.WEST);
 
         borderPanel = new JPanel();
-        borderPanel.setPreferredSize(new Dimension(40, 300));
+        borderPanel.setPreferredSize(new Dimension(40, 200));
         borderPanel.setBackground(Palette.instance().getWhite());
         this.add(borderPanel, BorderLayout.EAST);
     }

@@ -6,7 +6,9 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,13 +17,18 @@ import main.utils.Palette;
 import main.utils.Size;
 import main.views.components.Button;
 import main.views.components.PlaceholderTextField;
+import main.views.components.PopUp;
+import main.views.components.SingleOptionButton;
 
 public class RegisterUserView extends LogInView{
     Button cancelButton;
-    
+    Button SignatureButton;
     PlaceholderTextField emailTextField;
     PlaceholderTextField userFirstName;
     PlaceholderTextField usertLastName;
+    UserCreatedPopUp popup;
+    SingleOptionButton Admin;
+    ButtonGroup group;
 
     protected void buildFrame() {
         Frame.instance().setTitle("RegisterUserView");
@@ -72,18 +79,40 @@ public class RegisterUserView extends LogInView{
     }
 
     protected void paintTextFields(JPanel infoContainer) {
-        userFirstName = new PlaceholderTextField("Nombre", "User_Login_Icon.png");
-        usertLastName = new PlaceholderTextField("Apellido", "User_Login_Icon.png");
+        userFirstName = new PlaceholderTextField("Nombre", "Document_Icon.png");
+        usertLastName = new PlaceholderTextField("Apellido", "Document_Icon.png");
         userTextField = new PlaceholderTextField("Usuario", "User_Login_Icon.png");
         emailTextField = new PlaceholderTextField("Correo electronico", "Mail_Login_Icon.png");
         passwordTextField = new PlaceholderTextField("Contraseña", "Unlock_Login_Icon.png");
+
 
         infoContainer.add(userFirstName);
         infoContainer.add(usertLastName);
         infoContainer.add(userTextField);
         infoContainer.add(emailTextField);
         infoContainer.add(passwordTextField);
+        paintAdminContainer(infoContainer);
     }
+
+    protected void paintAdminContainer(JPanel infoContainer) {
+        JPanel adminContainer = new JPanel();
+        adminContainer.setPreferredSize(new Dimension(478,55));
+        adminContainer.setBackground(Palette.instance().getWhite());
+        adminContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 0));
+
+        Admin = new SingleOptionButton("Profesor", group);
+        Admin.addActionListener(this);
+        adminContainer.add(Admin);
+
+        SignatureButton = new Button("Firma");
+        SignatureButton.setBackground(Palette.instance().getYellow());
+        SignatureButton.setBorder(BorderFactory.createLineBorder(Palette.instance().getYellow()));
+        SignatureButton.setPreferredSize(Size.instance().getSmallLoginButton());
+        adminContainer.add(SignatureButton);
+        SignatureButton.addActionListener(this);
+        
+        infoContainer.add(adminContainer);
+    } 
 
     protected void paintButtonContainer(JPanel infoContainer) {
         JPanel buttonContainer = new JPanel();
@@ -95,7 +124,7 @@ public class RegisterUserView extends LogInView{
         cancelButton.setPreferredSize(Size.instance().getSmallLoginButton());
         buttonContainer.add(cancelButton);
         cancelButton.addActionListener(this);
-
+        
         loginButton = new Button("Registrar");
         loginButton.setPreferredSize(Size.instance().getSmallLoginButton());
         buttonContainer.add(loginButton);
@@ -104,13 +133,40 @@ public class RegisterUserView extends LogInView{
         infoContainer.add(buttonContainer);
     }
 
+    protected void ActionEventInLoginButton(ActionEvent e) {
+        if(e.getSource() == loginButton) {
+        AdminExamsView.instance().paintNavBar();
+        Frame.instance().setView(AdminExamsView.instance());
+
+            popup = new UserCreatedPopUp("Usuario");
+            PopUp.instance().setView(popup);
+
+            popup.getButton().addActionListener(this);
+        } 
+    } 
+
+    private void actionEventInPopUp(ActionEvent e) {
+        if (popup == null){
+            return;
+        } else if (e.getSource() == popup.getButton()) {
+            PopUp.deleteInstance();
+        }
+    }
+    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == cancelButton) {
-            System.out.println("This should take you to AdminExamsView");
+            AdminExamsView.instance().paintNavBar();
+            Frame.instance().setView(AdminExamsView.instance());
         } else if (e.getSource() == loginButton) {
             System.out.println("This should call controller");
+            ActionEventInLoginButton(e);
+        }else if (e.getSource() == Admin.getButton()) {
+            Admin.paintIcon();
+            System.out.println("This should call controller");
         }
-        Frame.instance().setView(AdminExamsView.instance());
+        actionEventInPopUp(e);
     }
 }
+

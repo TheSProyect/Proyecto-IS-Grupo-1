@@ -7,7 +7,6 @@ import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;

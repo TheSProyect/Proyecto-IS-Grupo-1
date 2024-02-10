@@ -21,7 +21,7 @@ import javax.swing.border.Border;
 
 public class AdminExamView extends CertificatesView {
 
-    protected void paintNavBar() {
+    public void paintNavBar() {
         buildFrame("AdminExamView");
 
         navBar = new AdminNavBar();

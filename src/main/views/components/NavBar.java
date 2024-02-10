@@ -20,12 +20,21 @@ import main.views.pages.Frame;
 import main.views.pages.LogInView;
 
 public class NavBar extends JPanel implements ActionListener {
+    protected static NavBar navbar;
+
     JLabel appName;
     JLabel linkText;
     JToolBar linkNavbar;
     NavBarButton homeButton;
     NavBarButton certificateButton;
     NavBarButton logOutButton;
+
+    public static NavBar instance() {
+		if (navbar == null){
+			navbar = new NavBar();
+		}
+		return navbar;
+	}
     
     public NavBar() {
         this.setPreferredSize(new Dimension(1024, 80));
@@ -38,6 +47,7 @@ public class NavBar extends JPanel implements ActionListener {
 
         this.add(appName);
         this.add(linkNavbar);
+        this.validate();
     }
 
     private void paintAppName() {
@@ -81,20 +91,25 @@ public class NavBar extends JPanel implements ActionListener {
         linkNavbar.addSeparator();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    protected void actionEventInDefautButtons(ActionEvent e) {
         if (e.getSource() == homeButton) {
+            ExamsView.instance().paintNavBar();
             Frame.instance().setView(ExamsView.instance());
             Frame.instance().setTitle("ExamsView");
 
         } else if (e.getSource() == certificateButton) {
-            Frame.instance().setView(CertificatesView.instance());
+            Frame.instance().setView(new CertificatesView());
             Frame.instance().setTitle("CertificatesView");
 
         } else if (e.getSource() == logOutButton) {
-            CertificatesView.deleteInstance();
             ExamsView.deleteInstance();
+            navbar = null;
             Frame.instance().setView(new LogInView());
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        actionEventInDefautButtons(e);
     }
 }

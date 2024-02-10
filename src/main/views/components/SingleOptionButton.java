@@ -13,18 +13,19 @@ public class SingleOptionButton extends JRadioButton {
     ImageIcon notSelected;
     ImageIcon selected;
 
-    SingleOptionButton(String option, ButtonGroup group) {
+    public SingleOptionButton(String option, ButtonGroup group) {
         notSelected = new ImageIcon("src/assets/Unselected_Option_Icon.png");
         selected = new ImageIcon("src/assets/Selected_Option_Icon.png");
 
         paintRadialButton();
         this.setText("<html>" + option + "</html>");
-        group.add(this);
+        if (group != null) {
+            group.add(this);
+        }
     }
 
     private void paintRadialButton() {
-        this.setPreferredSize(new Dimension(1024, 50));
-        this.setMaximumSize(new Dimension(1024,50));
+        this.setPreferredSize(new Dimension(150, 60));
         this.setForeground(Palette.instance().getGray());
         this.setBackground(Palette.instance().getWhite());
         this.setIcon(notSelected);
@@ -38,5 +39,9 @@ public class SingleOptionButton extends JRadioButton {
         } else if (!this.isSelected() && this.getIcon() == selected) {
             this.setIcon(notSelected);
         }
+    }
+
+    public JRadioButton getButton() {
+        return this;
     }
 }
