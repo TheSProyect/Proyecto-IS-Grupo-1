@@ -22,7 +22,7 @@ import javax.swing.JButton;
 import javax.swing.JSeparator;
 
 
-public class HelpView extends JPanel {
+public class HelpView extends HelpBarTemplateView {
     private static HelpView faqView;
 
     JPanel titlePanel;

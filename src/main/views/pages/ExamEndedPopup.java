@@ -42,7 +42,8 @@ public class ExamEndedPopup extends PopUpTemplate{
         paintScore(contentPanel, correctAnswer, amountOfQuestion);
         paintButton(contentPanel);
         
-        this.add(contentPanel, FlowLayout.CENTER);    }
+        this.add(contentPanel, FlowLayout.CENTER);    
+    }
     
 
     protected void paintTextLabel(JPanel contentPanel) {

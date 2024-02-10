@@ -162,6 +162,7 @@ public class RegisterUserView extends LogInView{
         } else if (e.getSource() == loginButton) {
             System.out.println("This should call controller");
             ActionEventInLoginButton(e);
+
         }else if (e.getSource() == Admin.getButton()) {
             Admin.paintIcon();
             System.out.println("This should call controller");
