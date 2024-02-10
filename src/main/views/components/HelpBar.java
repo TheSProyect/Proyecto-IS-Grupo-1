@@ -9,7 +9,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import main.utils.Palette;
-import main.views.pages.ExamsView;
 import main.views.pages.Frame;
 import main.views.pages.HelpView;
 
