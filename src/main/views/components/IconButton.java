@@ -9,7 +9,7 @@ public class IconButton extends Button {
         paintIcon(pathIcon);
     }
     
-    private void paintIcon(String pathIcon){
+    public void paintIcon(String pathIcon){
         ImageIcon icon = new ImageIcon("src/assets/"+pathIcon);
         this.setIconTextGap(15);
 

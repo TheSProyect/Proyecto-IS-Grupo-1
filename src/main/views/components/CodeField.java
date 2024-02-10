@@ -2,6 +2,8 @@ package main.views.components;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -15,7 +17,7 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import main.utils.Palette;
 
-public class CodeField extends JScrollPane {
+public class CodeField extends JScrollPane implements KeyListener {
     JTextPane lineNumber;
     JTextPane codeField;
     JPanel codePanel;
@@ -24,14 +26,20 @@ public class CodeField extends JScrollPane {
         buildScrollPane();
         
         buildCodePanel();
-        paintLineNumber(codeLines.size());
-        // paintLineNumber(3);
-        buildCodeField(codeLines);
+        paintLineNumber(determineNumLines(codeLines));
+        paintCodeField(codeLines);
+    }
+
+    private int determineNumLines(List<String> codeLines) {
+        if (codeLines == null) {
+            return 0;
+        } else {
+            return codeLines.size();
+        }
     }
 
     private void buildCodePanel() {
         codePanel = new JPanel();
-        codePanel.setPreferredSize(new Dimension(600,200));
         codePanel.setLayout(new BoxLayout(codePanel, BoxLayout.X_AXIS));
 
         this.setViewportView(codePanel);
@@ -39,46 +47,60 @@ public class CodeField extends JScrollPane {
 
     private void paintLineNumber(int numerOfLines) {
         lineNumber = new JTextPane();
-        lineNumber.setPreferredSize(new Dimension(50,150));
-        lineNumber.setMaximumSize(new Dimension(50,400));
         
         lineNumber.setForeground(Palette.instance().getGray());
         lineNumber.setFont(new Font("Cascadia Code", Font.PLAIN, 17));
         lineNumber.setBackground(Palette.instance().getBlack());
 
-        for (int i = 1; i <= numerOfLines; i++) {
-            lineNumber.setText(lineNumber.getText() + i + "\n");
-        }
-        lineNumber.setEditable(false);
+        writeLineNumber(numerOfLines);
 
         Border border = BorderFactory.createEmptyBorder(0, 20, 0, 0);
         lineNumber.setBorder(border);
+        
+        lineNumber.setPreferredSize(new Dimension(50,lineNumber.getHeight()));
+        lineNumber.setMaximumSize(new Dimension(50,9999));
 
         codePanel.add(lineNumber);
     }
 
-    private void buildCodeField(List<String> codelines) {
+    private void writeLineNumber (int numerOfLines) {
+        lineNumber.setText("");
+        for (int i = 1; i <= numerOfLines; i++) {
+            lineNumber.setText(lineNumber.getText() + i + "\n");;
+        }
+        lineNumber.setEditable(false);
+    }
+
+    private void buildCodeField() {
         codeField = new JTextPane();
-        codeField.setPreferredSize(new Dimension(400, 150));
         
         codeField.setForeground(Palette.instance().getOffWhite());
         codeField.setFont(new Font("Cascadia Code", Font.PLAIN, 17));
         codeField.setBackground(Palette.instance().getBlack());
 
-        for (int i = 0; i < codelines.size(); i++) {
-            codeField.setText(codeField.getText() + codelines.get(i) + "\n");
-        }
-        codeField.setEditable(false);
-
         Border border = BorderFactory.createEmptyBorder(0, 15, 0, 0);
         codeField.setBorder(border);
+    }
+
+    private void paintCodeField(List<String> codelines) {
+        buildCodeField();
+
+        for (int i = 0; i < determineNumLines(codelines); i++) {
+            codeField.setText(codeField.getText() + codelines.get(i) + "\n");;
+        }
+
+        if (determineNumLines(codelines) > 0) {
+            codeField.setEditable(false);
+        } else {
+            codeField.addKeyListener(this);
+        }
 
         codePanel.add(codeField);
-        
     }
 
     private void buildScrollPane(){
-        this.setPreferredSize(new Dimension(645, 200));
+        this.setPreferredSize(new Dimension(635, 200));
+        this.setMinimumSize(new Dimension(544, 150));
 
         this.getVerticalScrollBar().setBackground(Palette.instance().getGray());
         this.getVerticalScrollBar().setPreferredSize(new Dimension(8, 0));
@@ -144,6 +166,32 @@ public class CodeField extends JScrollPane {
                 this.thumbColor = Palette.instance().getLightGray();
             }
         });
+    }
+
+    private int countNumberOfLines() {
+        char newLine = '\n';
+        int numerOfLines = 1;
+
+        for(int i = 0; i < codeField.getText().length(); i++) {
+            if (codeField.getText().charAt(i) == newLine) {
+                numerOfLines++;
+            }
+        }
+
+        return numerOfLines;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        writeLineNumber(countNumberOfLines());
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
     }
 
 }
