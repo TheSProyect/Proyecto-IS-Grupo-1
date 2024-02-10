@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -13,7 +15,9 @@ import javax.swing.border.Border;
 
 import main.utils.Palette;
 
-public class NewQuestionPanel extends QuestionPanel{
+public class NewQuestionPanel extends QuestionPanel {
+    NewOptionsPanel newOptionsPanel;
+
     public NewQuestionPanel() {
         paintQuestionField();
         paintCodeFieldLabel();
@@ -22,7 +26,6 @@ public class NewQuestionPanel extends QuestionPanel{
         paintNewOptionsPanel();
         paintExplicationLabel();
         paintExplicationPanel();
-
     }   
 
     private void paintQuestionField() {
@@ -77,22 +80,48 @@ public class NewQuestionPanel extends QuestionPanel{
     }
 
     private void paintNewOptionsPanel() {
-        NewOptionsPanel newOptionsPanel = new NewOptionsPanel();
+        newOptionsPanel = new NewOptionsPanel();
+        newOptionsPanel.getAddButton().addActionListener(this);
 
         questionContentPanel.add(newOptionsPanel, createOptionPanelConstraints());
     }
 
     private void paintExplicationPanel() {
         explicationPanel = new ExplicationPanel(null);
+        explicationPanel.setBackground(Palette.instance().getOffWhite());
+
+        Border border = BorderFactory.createLineBorder(Palette.instance().getLightGray());
+        explicationPanel.setBorder(border);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 5;
-        constraints.weighty = 0.7;
+        constraints.weighty = 1.0;
         constraints.gridwidth = 4;
-        constraints.fill = GridBagConstraints.BOTH;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
 
         questionContentPanel.add(explicationPanel, constraints);
         questionContentPanel.setPreferredSize(new Dimension(544, questionContentPanel.getHeight()));
     }
+
+    protected GridBagConstraints createOptionPanelConstraints() {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridy = 3;
+        // constraints.weightx = 1.0;
+        constraints.gridwidth = 4;
+        constraints.fill = GridBagConstraints.BOTH;
+
+        return constraints;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == newOptionsPanel.getAddButton()) {
+            int contentPanelHeight = questionContentPanel.getHeight() + 50;
+            questionContentPanel.setPreferredSize(new Dimension(544, contentPanelHeight));
+            questionContentPanel.validate();
+            questionContentPanel.repaint();
+        }
+    }
+
 }

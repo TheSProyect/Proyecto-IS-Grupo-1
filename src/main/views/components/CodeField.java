@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -101,6 +100,7 @@ public class CodeField extends JScrollPane implements KeyListener {
 
     private void buildScrollPane(){
         this.setPreferredSize(new Dimension(635, 200));
+        this.setMinimumSize(new Dimension(544, 150));
 
         this.getVerticalScrollBar().setBackground(Palette.instance().getGray());
         this.getVerticalScrollBar().setPreferredSize(new Dimension(8, 0));
