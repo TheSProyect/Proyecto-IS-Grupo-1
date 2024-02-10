@@ -23,8 +23,7 @@ public class SingleOptionButton extends JRadioButton {
     }
 
     private void paintRadialButton() {
-        this.setPreferredSize(new Dimension(1024, 50));
-        this.setMaximumSize(new Dimension(1024,50));
+        this.setPreferredSize(new Dimension(1024, 60));
         this.setForeground(Palette.instance().getGray());
         this.setBackground(Palette.instance().getWhite());
         this.setIcon(notSelected);
