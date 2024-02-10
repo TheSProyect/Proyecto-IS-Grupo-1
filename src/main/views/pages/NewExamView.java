@@ -1,28 +1,15 @@
 package main.views.pages;
 
-import main.views.components.TextField;
-
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
 
-import com.itextpdf.awt.geom.Dimension;
-
-import main.views.components.AdminNavBar;
-import main.views.components.CodeField;
 import main.views.components.ExamMenu;
-import main.views.components.QuestionsList;
 import main.views.components.IconButton;
 import main.views.components.NewQuestionPanel;
 import main.views.components.QuestionPanel;
-import main.views.pages.AdminExamView;
-import main.views.pages.ExamPublishedView;
-import main.controllers.CreateExamController;
 import main.utils.Palette;
 
 
@@ -61,26 +48,67 @@ public class NewExamView extends ExamTemplateView {
 
     @Override
     protected void inicializeQuestions() {
-        NewQuestionPanel question = new NewQuestionPanel();
+        NewQuestionPanel question = new NewQuestionPanel(this);
 
         questions.add(question);
     }
 
     @Override
     protected void actionEventInBottomLeftButton(ActionEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionEventInBottomLeftButton'");
+        if (e.getSource() == bottomLeftButton) {  
+            questions.add(new NewQuestionPanel(this));
+            menuPanel.repaintQuestionsList(questions.size());
+            menuPanel.setCurrentQuestion(index);
+            paintQuestionPanel(index);
+            addActionListener();
+            this.validate();
+        }
     }
-    // private JLabel labels;
-    // private TextField textField;
-    // private CodeField codeField;
-    // private QuestionsList questionNumber;
-    // private JList questionsList;
-    // private IconButton nexButton;
-    // private IconButton prevButton;
-    // private IconButton addQuestionButton;
 
-    // private void setName(String Name){}
-    // private void setInstructions(String Instructions){}
-    
+    private void actionEventInDeleteButton(ActionEvent e) {
+        NewQuestionPanel currentQuestionPanel = (NewQuestionPanel)questions.get(index);
+        final int MINIMUM_NUM_QUESTIONS = 1;
+
+        if (e.getSource() == currentQuestionPanel.getDeleteButton()) {
+            boolean onlyQuestion = questions.size() <= MINIMUM_NUM_QUESTIONS;
+
+            currentQuestionPanel.setVisible(false);
+            this.remove(currentQuestionPanel);
+            this.revalidate();
+
+            questions.remove(index);
+
+            if (onlyQuestion) {
+                questions.add(new NewQuestionPanel(this));
+            } else {
+                menuPanel.repaintQuestionsList(questions.size());
+
+                if (index > 0) {
+                    index = index - 1;
+                }
+
+                menuPanel.setCurrentQuestion(index);
+                addActionListener();
+            }
+
+            paintQuestionPanel(index);
+            this.validate();
+            this.repaint();
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        actionEventInBottomLeftButton(e);
+        actionEventInDeleteButton(e);
+        if (e.getSource() == prevButton) {
+            showPreviousQuestions();
+
+        } else if (e.getSource() == nextButton) {
+            showNextQuestion();
+
+        } else {
+            actionEventInExamMenu(e);
+        }
+    }
 }

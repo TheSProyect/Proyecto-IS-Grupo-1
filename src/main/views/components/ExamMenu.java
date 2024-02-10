@@ -65,6 +65,12 @@ public class ExamMenu extends JPanel{
         this.add(questionsList, constraints);
     }
 
+    public void repaintQuestionsList(int questionAmount) {
+        this.remove(questionsList);
+        paintQuestionsList(questionAmount);
+        this.repaint();
+    }
+
     public List<QuestionListItem> getQuestionListItems() {
         return questionsList.getQuestionListItems();
     }

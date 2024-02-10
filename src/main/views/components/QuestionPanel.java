@@ -16,6 +16,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -131,6 +132,7 @@ public class QuestionPanel extends JPanel implements ActionListener {
         constraints.gridy = 0;
         constraints.weighty = 0.05;
         constraints.gridwidth = 4;
+        constraints.insets = new Insets(10, 10, 0, 10);
         constraints.fill = GridBagConstraints.BOTH;
         return constraints;
     }
@@ -152,6 +154,7 @@ public class QuestionPanel extends JPanel implements ActionListener {
         constraints.gridy = 1;
         constraints.weightx = 1.0;
         constraints.gridwidth = 4;
+        constraints.insets = new Insets(0, 5, 0, 10);
         constraints.fill = GridBagConstraints.BOTH;
 
         return constraints;
@@ -170,6 +173,7 @@ public class QuestionPanel extends JPanel implements ActionListener {
         constraints.weightx = 1.0;
         // constraints.weighty = 1.0;
         constraints.gridwidth = 4;
+        constraints.insets = new Insets(0, 0, 0, 10);
         constraints.fill = GridBagConstraints.BOTH;
 
         return constraints;
@@ -188,6 +192,7 @@ public class QuestionPanel extends JPanel implements ActionListener {
         constraints.gridy = 5;
         constraints.weighty = 1.0;
         constraints.gridwidth = 4;
+        constraints.insets = new Insets(0, 0, 0, 10);
         constraints.fill = GridBagConstraints.BOTH;
 
         return constraints;
