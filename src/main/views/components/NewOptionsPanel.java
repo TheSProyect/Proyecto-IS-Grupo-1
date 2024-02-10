@@ -105,17 +105,46 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
     }
 
     private void paintOptionsList() {
+        optionsPanel.removeAll();
         for (int i = 0; i < options.size(); i++) {
             optionsPanel.add(options.get(i), createNewOptionsConstraints(i));
-            options.get(i).getDeleteButton().addActionListener(this);
+        }
+        addActionListenerDeleteButtons(this);
+    }
+
+    public void addActionListenerDeleteButtons(ActionListener listener) {
+        for(NewOptionItem option : options) {
+            if(!containsActionListener(listener, option)) {
+                option.getDeleteButton().addActionListener(listener);
+            }
         }
     }
+
+    private boolean containsActionListener(ActionListener listener, NewOptionItem option) {
+        for (ActionListener actionListener : option.getDeleteButton().getActionListeners()) {
+            // System.out.println(listener);
+            if (actionListener == listener) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public JButton getAddButton() {
         return addButton;
     }
 
-    private void actionEventInAddButton(ActionEvent e) {
+    public List<JButton> getDeleteButtons() {
+        List<JButton> deleteButtons = new ArrayList<JButton>();
+        for(int i = 0; i < options.size(); i++) {
+            deleteButtons.add(options.get(i).getDeleteButton());
+        }
+
+        return deleteButtons;
+    }
+
+    public void actionEventInAddButton(ActionEvent e) {
         if (e.getSource() == addButton) {
             options.add(new NewOptionItem());
             paintOptionsList();
@@ -124,13 +153,26 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
         }
     }
 
-    private void actionEventInDeleteButton(ActionEvent e) {
-        
+    public void actionEventInDeleteButton(ActionEvent e) {
+        if (options.size() <= 2) {
+            return;
+        }
+        for(int i = 0; i < options.size(); i++){
+            if(e.getSource() == options.get(i).getDeleteButton()) {
+                optionsPanel.remove(options.get(i));
+                this.revalidate();
+
+                options.remove(i);
+
+                paintOptionsList();
+                this.validate();
+                this.repaint();
+            }
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        actionEventInAddButton(e);
     }
     
 }

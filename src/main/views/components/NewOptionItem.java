@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.Border;
@@ -18,9 +20,11 @@ import main.utils.Palette;
 public class NewOptionItem extends JPanel implements ActionListener{
     JTextPane optionText;
     SingleOptionButton correctAnswer;
+    JButton deleteButton;
 
     NewOptionItem() {
         buildPanel();
+        paintDeleteButton();
         paintTextPane();
         paintMarkCorrectAnswerRadialButton();
     }
@@ -32,6 +36,25 @@ public class NewOptionItem extends JPanel implements ActionListener{
         this.setBorder(border);
     }
 
+    private void paintDeleteButton() {
+        Border border = BorderFactory.createLineBorder(Palette.instance().getOffWhite());
+
+        deleteButton = new JButton();
+        deleteButton.setBackground(Palette.instance().getOffWhite());
+        deleteButton.setFocusable(false);
+        deleteButton.setBorder(border);
+
+        ImageIcon icon = new ImageIcon("src/assets/Delete_Red_Icon.png");
+
+        deleteButton.setIcon(icon);
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.insets = new Insets(0, 5, 0, 5);
+
+        this.add(deleteButton, constraints);
+    }
+
     private void paintTextPane() {
         optionText = new JTextPane();
         optionText.setForeground(Palette.instance().getGray());
@@ -39,7 +62,7 @@ public class NewOptionItem extends JPanel implements ActionListener{
         optionText.setFont(new Font("Nunito Sans", Font.PLAIN, 20));
 
         GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = 0;
+        constraints.gridx = 1;
         constraints.weightx = 1.0;
         constraints.insets = new Insets(0, 5, 0, 0);
         constraints.fill = GridBagConstraints.BOTH;
@@ -54,10 +77,14 @@ public class NewOptionItem extends JPanel implements ActionListener{
         correctAnswer.addActionListener(this);
 
         GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = 1;
+        constraints.gridx = 2;
         constraints.fill = GridBagConstraints.BOTH;
 
         this.add(correctAnswer, constraints);
+    }
+
+    public JButton getDeleteButton() {
+        return deleteButton;
     }
 
     @Override

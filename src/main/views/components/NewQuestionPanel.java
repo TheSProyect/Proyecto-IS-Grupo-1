@@ -53,7 +53,6 @@ public class NewQuestionPanel extends QuestionPanel {
         domainLabel.setForeground(Palette.instance().getGray());
         domainLabel.setFont(new Font("Nunito Sans", Font.BOLD, 17));
 
-        
         questionContentPanel.add(domainLabel, createLabelsConstraints(gridy));
     }
 
@@ -101,6 +100,8 @@ public class NewQuestionPanel extends QuestionPanel {
 
     private void paintNewOptionsPanel() {
         newOptionsPanel = new NewOptionsPanel();
+
+        newOptionsPanel.addActionListenerDeleteButtons(this);
         newOptionsPanel.getAddButton().addActionListener(this);
 
         questionContentPanel.add(newOptionsPanel, createOptionPanelConstraints());
@@ -121,7 +122,10 @@ public class NewQuestionPanel extends QuestionPanel {
         constraints.fill = GridBagConstraints.BOTH;
 
         questionContentPanel.add(explicationPanel, constraints);
-        questionContentPanel.setPreferredSize(new Dimension(544, 700));
+
+        final int DEFAULT_HEIGHT = 700;
+        final int WIDTH = 544;
+        questionContentPanel.setPreferredSize(new Dimension(WIDTH, DEFAULT_HEIGHT));
     }
 
     protected GridBagConstraints createOptionPanelConstraints() {
@@ -134,12 +138,27 @@ public class NewQuestionPanel extends QuestionPanel {
     }
 
     private void actionEventInNewOptionsPanel(ActionEvent e) {
+        final int DEFAULT_HEIGHT = 700;
+        final int WIDTH = 544;
+        int contentPanelHeight = DEFAULT_HEIGHT;
+
         if (e.getSource() == newOptionsPanel.getAddButton()) {
-            int contentPanelHeight = questionContentPanel.getHeight() + 50;
-            questionContentPanel.setPreferredSize(new Dimension(544, contentPanelHeight));
-            questionContentPanel.validate();
-            questionContentPanel.repaint();
+            newOptionsPanel.actionEventInAddButton(e);
+            contentPanelHeight = questionContentPanel.getHeight() + 50;
+
+        } else if (e.getSource() != addImageButton) {
+            newOptionsPanel.actionEventInDeleteButton(e);
+            contentPanelHeight = questionContentPanel.getHeight() - 50;
+            
+            if (contentPanelHeight < DEFAULT_HEIGHT) {
+                return;
+            } 
         }
+        
+        newOptionsPanel.addActionListenerDeleteButtons(this);
+        questionContentPanel.setPreferredSize(new Dimension(WIDTH, contentPanelHeight));
+        questionContentPanel.validate();
+        questionContentPanel.repaint();
     }
 
     private void actionEventInAddImageButton(ActionEvent e) {
