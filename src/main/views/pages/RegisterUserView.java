@@ -15,6 +15,7 @@ import main.utils.Palette;
 import main.utils.Size;
 import main.views.components.Button;
 import main.views.components.PlaceholderTextField;
+import main.views.components.PopUp;
 
 public class RegisterUserView extends LogInView{
     Button cancelButton;
@@ -22,6 +23,7 @@ public class RegisterUserView extends LogInView{
     PlaceholderTextField emailTextField;
     PlaceholderTextField userFirstName;
     PlaceholderTextField usertLastName;
+    UserCreatedPopUp popup;
 
     protected void buildFrame() {
         Frame.instance().setTitle("RegisterUserView");
@@ -104,13 +106,36 @@ public class RegisterUserView extends LogInView{
         infoContainer.add(buttonContainer);
     }
 
+    protected void ActionEventInLoginButton(ActionEvent e) {
+        if(e.getSource() == loginButton) {
+        AdminExamsView.instance().paintNavBar();
+        Frame.instance().setView(AdminExamsView.instance());
+
+            popup = new UserCreatedPopUp("Usuario");
+            PopUp.instance().setView(popup);
+
+            popup.getButton().addActionListener(this);
+        } 
+    } 
+
+    private void actionEventInPopUp(ActionEvent e) {
+        if (popup == null){
+            return;
+        } else if (e.getSource() == popup.getButton()) {
+            PopUp.deleteInstance();
+        }
+    }
+    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == cancelButton) {
             System.out.println("This should take you to AdminExamsView");
         } else if (e.getSource() == loginButton) {
             System.out.println("This should call controller");
-        }
-        Frame.instance().setView(AdminExamsView.instance());
+            ActionEventInLoginButton(e);
+        } 
+        actionEventInPopUp(e);
     }
 }
+

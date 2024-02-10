@@ -27,7 +27,7 @@ public class Size {
         smallLoginButton = new Dimension(148, 42);
         bigLoginButton = new Dimension(314, 42);
         examMenu = new Dimension(300, 560);
-        popup = new Dimension(500, 300);
+        popup = new Dimension(500, 280);
     }
 
     public Dimension getDefaultFrame() {
