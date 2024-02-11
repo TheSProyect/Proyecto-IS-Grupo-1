@@ -181,6 +181,10 @@ public class CodeField extends JScrollPane implements KeyListener {
         return numerOfLines;
     }
 
+    public String getCode() {
+        return codeField.getText();
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
         writeLineNumber(countNumberOfLines());

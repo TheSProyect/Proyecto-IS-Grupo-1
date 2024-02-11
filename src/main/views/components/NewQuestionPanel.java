@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -19,6 +20,8 @@ public class NewQuestionPanel extends QuestionPanel {
     NewOptionsPanel newOptionsPanel;
     IconButton addImageButton;
     IconButton deleteQuestionButton;
+    JTextPane questionField;
+    JTextField domainField;
 
     public NewQuestionPanel(ActionListener listener) {
         paintQuestionField();
@@ -35,7 +38,7 @@ public class NewQuestionPanel extends QuestionPanel {
     }   
 
     private void paintQuestionField() {
-        JTextPane questionField = new JTextPane();
+        questionField = new JTextPane();
         questionField.setForeground(Palette.instance().getBlack());
         questionField.setFont(new Font("Nunito Sans", Font.BOLD, 20));
         questionField.setBorder(createQuestionFieldBorder());
@@ -82,7 +85,7 @@ public class NewQuestionPanel extends QuestionPanel {
     }
 
     private void paintDomainField() {
-        JTextField domainField = new JTextField();
+        domainField = new JTextField();
         domainField.setForeground(Palette.instance().getGray());
         domainField.setBackground(Palette.instance().getOffWhite());
         domainField.setFont(new Font("Nunito Sans", Font.PLAIN, 20));
@@ -210,6 +213,38 @@ public class NewQuestionPanel extends QuestionPanel {
 
     public IconButton getDeleteButton() {
         return deleteQuestionButton;
+    }
+
+    public List<String> getOptionsText() {
+        return newOptionsPanel.getOptionsText();
+    }
+
+    public String getQuestionText() {
+        return questionField.getText();
+    }
+
+    public String getDomainText() {
+        return domainField.getText();
+    }
+
+    public String getCode() {
+        return codeField.getCode();
+    }
+
+    public String getExplication() {
+        return explicationPanel.getExplicationText();
+    }
+
+    public boolean checkQuestionIsComplete() {
+        if (questionField.getText() == "") {
+            return false;
+        } else if (domainField.getText() == "") {
+            return false;
+        } else if(!newOptionsPanel.checkOptionsAreComplete()) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     @Override

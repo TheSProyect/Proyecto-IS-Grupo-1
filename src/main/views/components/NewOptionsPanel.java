@@ -171,6 +171,25 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
         }
     }
 
+    public List<String> getOptionsText() {
+        List<String> optionsText = new ArrayList<String>();
+
+        for(NewOptionItem option : options) {
+            optionsText.add(option.getOptionText());
+        }
+
+        return optionsText;
+    }
+
+    public boolean checkOptionsAreComplete() {
+        for(NewOptionItem option : options) {
+            if (option.getOptionText() == "") {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
     }

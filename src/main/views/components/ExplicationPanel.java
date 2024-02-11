@@ -110,4 +110,7 @@ public class ExplicationPanel extends JScrollPane {
         });
     }
 
+    public String getExplicationText() {
+        return explicationText.getText();
+    }
 }

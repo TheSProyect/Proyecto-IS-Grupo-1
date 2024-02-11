@@ -87,6 +87,10 @@ public class NewOptionItem extends JPanel implements ActionListener{
         return deleteButton;
     }
 
+    public String getOptionText() {
+        return optionText.getText();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         correctAnswer.paintIcon();

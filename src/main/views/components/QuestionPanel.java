@@ -26,6 +26,7 @@ public class QuestionPanel extends JPanel implements ActionListener {
     OptionsPanel optionsPanel;
     Button explicationButton;
     ExplicationPanel explicationPanel;
+    CodeField codeField;
 
     public QuestionPanel() {
         this.setPreferredSize(new Dimension(544, 560));
@@ -161,7 +162,7 @@ public class QuestionPanel extends JPanel implements ActionListener {
     }
 
     public void paintCodeField(List<String> code) {
-        CodeField codeField = new CodeField(code);
+        codeField = new CodeField(code);
 
         questionContentPanel.add(codeField, createCodeFieldConstraints());
     }
@@ -221,7 +222,7 @@ public class QuestionPanel extends JPanel implements ActionListener {
         explicationPanel.setVisible(false);
         questionContentPanel.repaint();
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == explicationButton) {
