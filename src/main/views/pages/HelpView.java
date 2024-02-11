@@ -1,6 +1,7 @@
 package main.views.pages;
 
 import main.utils.Palette;
+import main.views.components.Faq;
 import main.views.components.Listing;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -48,7 +49,7 @@ public class HelpView extends HelpBarTemplateView {
 
         paintTitlePanel(contentPanel);
         
-        paintCertificatesListing(contentPanel); 
+        paintFaqList(contentPanel); 
 
     
         this.add(contentPanel, BorderLayout.CENTER);
@@ -102,9 +103,9 @@ public class HelpView extends HelpBarTemplateView {
         titleButtonContainer.add(title, FlowLayout.LEFT);
     }
 
-    private void paintCertificatesListing(JPanel contentPanel) {
-        Listing certificateListing = new Listing(questionList, answerList);
-        contentPanel.add(certificateListing);
+    private void paintFaqList(JPanel contentPanel) {
+        Faq FaqList = new Faq(questionList, answerList);
+        contentPanel.add(FaqList);
     }
 
 

@@ -15,11 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicScrollBarUI;
-
-import javax.swing.plaf.metal.MetalButtonUI;
-
 
 import main.utils.Palette;
 
@@ -29,11 +25,6 @@ public class Listing extends JScrollPane{
     String singleElement;
     String textButton;
 
-    JPanel titlePanel;
-    JLabel title;
-    Button button;
-    JButton createExam;
-    JPanel titleButtonContainer;
 
     public Listing(List<String> elements, String TextButton) {
         listingButtons = new ArrayList<JButton>();
@@ -43,14 +34,9 @@ public class Listing extends JScrollPane{
         paintListElements(elements);
     }
 
-    public Listing(List<String> questionList, List<String> answerList) {
-        paintList();
-        paintListElements(questionList, answerList);
-    }
-
     private void paintListingPanel() {
         listingPanel = new JPanel();
-        listingPanel.setPreferredSize(new Dimension(860, 1500));
+        listingPanel.setPreferredSize(new Dimension(860, 500));
         listingPanel.setBackground(Palette.instance().getWhite());
 
         this.setViewportView(listingPanel);
@@ -64,32 +50,28 @@ public class Listing extends JScrollPane{
     }
 
     protected void paintListElements(List<String> elements) {
-        JSeparator separator;
         for (int i = 0; i < elements.size(); i++) {
             singleElement = elements.get(i);
             
-            titlePanel = new JPanel();
+            JPanel titlePanel = new JPanel();
             titlePanel.setBackground(Palette.instance().getWhite());
             titlePanel.setPreferredSize(new Dimension(860, 60));
             titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
-            
             listingPanel.add(titlePanel, BorderLayout.NORTH);
             
-            TitleButtonContainer();
-            separator = paintTitleSeparator();
-            titlePanel.add(separator);
+            TitleButtonContainer(titlePanel);
+            paintTitleSeparator(titlePanel);
         }       
     }
 
-    protected JSeparator paintTitleSeparator() {
+    protected void paintTitleSeparator(JPanel titlePanel) {
         JSeparator line = new JSeparator();
         line.setForeground(Palette.instance().getLightGray());
         line.setBackground(Palette.instance().getLightGray());
-        
-        return line;
+        titlePanel.add(line);
     }
 
-    private void TitleButtonContainer() {
+    private void TitleButtonContainer(JPanel titlePanel) {
         JPanel titleButtonContainer = new JPanel();
         titleButtonContainer.setMaximumSize(new Dimension(1500, 58));
         titleButtonContainer.setLayout(new BoxLayout(titleButtonContainer, BoxLayout.X_AXIS));
@@ -104,7 +86,7 @@ public class Listing extends JScrollPane{
 
     protected void paintTitleLabel(JPanel titleButtonContainer) {
         JLabel title = new JLabel();
-        title.setText(singleElement);
+        title.setText("<html>"+ singleElement + "</html>");
         title.setFont(new Font("Nunito Sans", Font.ROMAN_BASELINE, 20));
         title.setPreferredSize(new Dimension(944, 58));
         title.setMaximumSize(new Dimension(2048, 58));
@@ -118,7 +100,6 @@ public class Listing extends JScrollPane{
         button.setFont(new Font("Nunito Sans", Font.BOLD, 15));
         button.setForeground(Palette.instance().getWhite());
         button.setBackground(Palette.instance().getBlue());
-        button.setUI(new MetalButtonUI());
         button.setFocusable(false);
 
         Border border = BorderFactory.createLineBorder(Palette.instance().getBlue());
@@ -129,71 +110,6 @@ public class Listing extends JScrollPane{
     
         titleButtonContainer.add(button);
         listingButtons.add(button);
-    }
-
-
-
-
-    private void paintListElements(List<String> questionList, List<String> answerList) {
-        for (int i = 0; i < questionList.size(); i++) {
-            createPanel();
-            paintContent(questionList.get(i), answerList.get(i));
-            JSeparator separator = paintTitleSeparator();
-            titlePanel.add(separator);
-        }
-    }
-    protected void createPanel() {
-        titlePanel = new JPanel();
-        titlePanel.setBackground(Palette.instance().getWhite());
-        titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
-        listingPanel.add(titlePanel, BorderLayout.NORTH);
-    }
-    private void paintContent(String question, String answer) {
-        JPanel listItem = new JPanel();
-
-        listItem.setLayout(new BoxLayout(listItem, BoxLayout.Y_AXIS));
-        listItem.setBackground(Palette.instance().getWhite());
-
-        listItem.setMaximumSize(new Dimension(860, 500));
-        listItem.setBorder(new EmptyBorder(10,  30,  20,  0)); 
-
-        paintText(question, true, 19, 10, listItem);
-        
-        paintText(answer, false, 17, 0, listItem);
-
-        titlePanel.add(listItem);
-        
-    }
-    protected void paintText(String text, boolean isBold, int textSize, int borderBottom, JPanel container) {
-        int textWeight = isBold ? Font.BOLD : Font.PLAIN;
-
-        JLabel label = new JLabel();
-        label.setText("<html>" + text + "</html>");
-        label.setFont(new Font("Nunito Sans", textWeight, textSize));        
-        label.setHorizontalAlignment(JLabel.LEFT);
-        label.setVerticalAlignment(JLabel.CENTER);
-        label.setForeground(Palette.instance().getBlack());
-        label.setBorder(new EmptyBorder(0,  0,  borderBottom, 0)); 
-        
-        container.add(label);
-    }
-
-    private void paintList() {
-        listingPanel = new JPanel();
-        listingPanel.setLayout(new BoxLayout(listingPanel, BoxLayout.Y_AXIS));
-        
-        listingPanel.setBackground(Palette.instance().getWhite());
-
-        this.setViewportView(listingPanel);
-        this.setPreferredSize(new Dimension(250, 320));
-        this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        this.getVerticalScrollBar().setBackground(Palette.instance().getLightGray());
-        changeScrollPaneLook();
-
-        Border border = BorderFactory.createLineBorder(Palette.instance().getWhite(), 3);
-        this.setBorder(border);
-
     }
     
     private void changeScrollPaneLook() {
