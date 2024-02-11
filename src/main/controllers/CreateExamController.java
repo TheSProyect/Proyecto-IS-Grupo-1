@@ -7,6 +7,7 @@ import main.models.Question;
 import main.utils.Directory;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -18,7 +19,7 @@ public class CreateExamController extends TemplateExam{
     int questionsCount = 0;
     File folder;
 
-    public void createExam(){
+    public void saveExam(){
         String nameExam = " ", examType = " ", nameTeacher = " ", description = " ", nameCourse = " ";
         int duration=0;
         String directory = currentDirectory.getDirectoryExams();
@@ -46,11 +47,30 @@ public class CreateExamController extends TemplateExam{
         currentExam.setNameCourse(nameCourse);
         currentExam.setNameExam(nameExam);
     }
+    public void replaceQuestionCount(){
+        String directory = currentDirectory.getDirectoryExams()+ File.separator + currentExam.getNameCourse() + File.separator + currentExam.getNameExam()+ File.separator + currentExam.getNameExam() + ".txt";
+        try {
+            File file = new File(directory);
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String content = "", line;
+            int count = 0;
+            while ((line = br.readLine()) != null) {
+                count++;
+                if (count == 3) {
+                    content += String.valueOf(questionsCount)+ "\n";
+                } else {
+                    content += line + "\n";
+                }
+            }
+            br.close();
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+            bw.write(content);
+            bw.close();
+        } catch (IOException e) {
+        }
+    }
    
-    public void createQuestion(){
-        String enunciado = " ", domain = " ";
-        String[] answers = new String[1];
-        String[] justification = new String[1];
+    public void saveQuestion(String questionText, String domain, String code, List<String> answers){
         questionsCount++;
         File file = new File(folder, "Pregunta"+ questionsCount + ".txt");
         try {
@@ -58,14 +78,22 @@ public class CreateExamController extends TemplateExam{
                 file.createNewFile();
             }
             FileWriter writer = new FileWriter(file);
-            writer.write(enunciado + "\n" + domain + "\n");
-            
-            for(int i = 0; i< answers.length; i++) writer.write(answers[i] + "\n" + justification[i] + "\n");
-                writer.close();
+            writer.write(questionText + "\n" + domain + "\n");
+
+            if(!code.equals("")){
+                writer.write(code + "\n");
+                } else {
+                    writer.write("No" + "\n");
+            }
+            for (String text : answers) {
+                writer.write(text + "\n");
+            }
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    
     private void showQuestion(String directory, int readings, int counter, int stop){
         String line;
         String[] answer = new String[10];

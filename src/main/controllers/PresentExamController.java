@@ -100,11 +100,11 @@ public class PresentExamController extends TemplateExam{
         String line;
         String[] answer = new String[10];
         String[] justification = new String[10];
-        boolean answerCorrect = true; 
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentExam.setQuestionsExam((br.readLine()),(br.readLine()),counter);
+            //currentExam.setCode(br.readLine());
             for (int i =0; ((line = br.readLine()) != null); i++) {
-                if (line != null && line.length() > 0 && answerCorrect && line.substring(0, 1).equalsIgnoreCase("v")) {
+                if (line != null && line.length() > 0 && line.substring(0, 1).equalsIgnoreCase("v")) {
                     answer[i]= line.substring(1);
                     justification[i]= br.readLine();
                     currentExam.setIsCorrectExam(true, i, counter);
@@ -134,6 +134,7 @@ public class PresentExamController extends TemplateExam{
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentExam.setNameExam(br.readLine());
             currentExam.setTipo(br.readLine());
+            //currentExam.setCode(br.readLine());
             numberQuestions = Integer.parseInt((br.readLine()));
             currentExam.setNumberQuestions(numberQuestions);
             currentExam.setNameTeacher(br.readLine());
@@ -147,11 +148,11 @@ public class PresentExamController extends TemplateExam{
     }
 
     public void searchFolder(String [] informationsExam) {
-        int indexForNameFolder = 0;
-        int indexForNameCourse = 1;
+        int INDEX_FOR_NAME_EXAM = 0;
+        int INDEX_FOR_NAME_COURSE = 1;
         int questionsRead = 1;
-        String nameFolder = informationsExam[indexForNameFolder];
-        String directory = (currentDirectory.getDirectoryExams())+File.separator+informationsExam[indexForNameCourse];
+        String nameFolder = informationsExam[INDEX_FOR_NAME_EXAM];
+        String directory = (currentDirectory.getDirectoryExams())+File.separator+informationsExam[INDEX_FOR_NAME_COURSE];
         File searchedFolder = new File(directory);
         if (searchedFolder.exists() && searchedFolder.isDirectory()) {
             File[] files = searchedFolder.listFiles();

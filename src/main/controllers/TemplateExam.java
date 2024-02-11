@@ -15,13 +15,13 @@ public class TemplateExam {
     Exam currentExam = new Exam();
 
     public int getNumberQuestion(String directory, String nameFolder){
-        int lineNumberQuestion = 2;
+        int LINE_NUMBER_QUESTION = 2;
         int numberQuestion = 0;
         directory = directory +File.separator+nameFolder+File.separator+nameFolder+".txt";
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
-            for(int i=0; i<=lineNumberQuestion; i++){
+            for(int i=0; i<=LINE_NUMBER_QUESTION; i++){
                 br.readLine();
-                if(i==lineNumberQuestion-1){
+                if(i==LINE_NUMBER_QUESTION-1){
                     numberQuestion = Integer.parseInt((br.readLine()));
                     }
                 }
@@ -33,23 +33,23 @@ public class TemplateExam {
     }
     
     public String changeDirectory(String directory){
-        int removeQuestionFromDirectory = 13;
-        int removeFyleType = 4;
-        String question = (directory.substring(directory.length() - removeQuestionFromDirectory));
-        question = question.substring(0, question.length() - removeFyleType);
-        directory = directory.substring(0, directory.length() - removeQuestionFromDirectory);
+        int REMOVE_QUESTION_FROM_DIRECTORY = 13;
+        int REMOVE_FILE_TYPE = 4;
+        String question = (directory.substring(directory.length() - REMOVE_QUESTION_FROM_DIRECTORY));
+        question = question.substring(0, question.length() - REMOVE_FILE_TYPE);
+        directory = directory.substring(0, directory.length() - REMOVE_QUESTION_FROM_DIRECTORY);
         return (directory +File.separator+changeNumberQuestion(question)+".txt");
     }
     
     public String changeNumberQuestion(String question){
-        int removeNumberOfQuestion = 1;
+        int REMOVE_NUMBER_QUESTION = 1;
         if (question != null && question.length() > 0) {
-            char lastCharacter = question.charAt(question.length() - removeNumberOfQuestion);
+            char lastCharacter = question.charAt(question.length() - REMOVE_NUMBER_QUESTION);
             if (Character.isDigit(lastCharacter)) {
                 int number = Character.getNumericValue(lastCharacter);
                 number++;
                 char newCharacter = Character.forDigit(number, 10);
-                return question.substring(0, question.length() - removeNumberOfQuestion) + newCharacter; 
+                return question.substring(0, question.length() - REMOVE_NUMBER_QUESTION) + newCharacter; 
             }
         }
         return question;
