@@ -55,7 +55,7 @@ public class RequestCertificateController {
 
     private void readStudentData(String directory){
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
-            currentCertificate.setNameStudentCertificate(currentUser.getUsername());
+            //falta leer nombre y apellido
             currentCertificate.setNameCourse(br.readLine());
             currentCertificate.setNameExam(br.readLine());
             String answersCorrects = br.readLine();

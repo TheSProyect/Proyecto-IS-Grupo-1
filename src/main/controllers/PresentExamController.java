@@ -13,7 +13,7 @@ import main.models.Question;
 import main.models.Result;
 import main.utils.UserData;
 import main.models.Exam;
-import main.utils.Directory;;
+import main.utils.Directory;
 
 public class PresentExamController extends TemplateExam{
     Exam currentExam = new Exam();
@@ -29,6 +29,44 @@ public class PresentExamController extends TemplateExam{
     }
     public static void main(String[] args) throws IOException{
         PresentExamController p = new PresentExamController();
+    }
+    private String nameExam(File file){
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String nameExam = br.readLine();
+            br.close();
+            return nameExam;
+            } catch (IOException e) {
+                e.printStackTrace();
+        }
+        return "-";
+    }
+    public List<String> showExams(){
+        List<String> namesExams = new ArrayList<String>();
+        String directory = currentDirectory.getDirectoryExams();
+        File searchedFolder = new File(directory);
+        if (searchedFolder.exists() && searchedFolder.isDirectory()) {
+            File[] files = searchedFolder.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if((file.getName()).equals("Instructions.txt")){
+                    } else {
+                        String directorySub = directory + File.separator + file.getName();
+                        File searchedFolderExam = new File(directorySub);
+                        if (searchedFolderExam.exists() && searchedFolderExam.isDirectory()) {
+                            File[] filesExams = searchedFolderExam.listFiles();
+                                if (filesExams != null) {
+                                    for (File fileExam : filesExams) {
+                                        if (file.isDirectory() || !(file.getName().startsWith("Pregunta"))) {
+                                            namesExams.add(nameExam(fileExam));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }    
+        }
+        return namesExams;
     }
 
     public void examFinished(){
