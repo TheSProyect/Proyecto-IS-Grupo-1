@@ -140,7 +140,7 @@ public class NewQuestionPanel extends QuestionPanel {
 
         questionContentPanel.add(explicationPanel, constraints);
 
-        final int DEFAULT_HEIGHT = 750;
+        final int DEFAULT_HEIGHT = 850;
         final int WIDTH = 544;
         questionContentPanel.setPreferredSize(new Dimension(WIDTH, DEFAULT_HEIGHT));
     }
@@ -179,7 +179,7 @@ public class NewQuestionPanel extends QuestionPanel {
     }
 
     private void actionEventInNewOptionsPanel(ActionEvent e) {
-        final int DEFAULT_HEIGHT = 750;
+        final int DEFAULT_HEIGHT = 850;
         final int WIDTH = 544;
         int contentPanelHeight = DEFAULT_HEIGHT;
 

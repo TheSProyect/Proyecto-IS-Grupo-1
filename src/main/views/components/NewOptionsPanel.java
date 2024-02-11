@@ -42,6 +42,8 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
 
         options.add(new NewOptionItem());
         options.add(new NewOptionItem());
+        options.add(new NewOptionItem());
+        options.add(new NewOptionItem());
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridy = 0;
@@ -122,14 +124,12 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
 
     private boolean containsActionListener(ActionListener listener, NewOptionItem option) {
         for (ActionListener actionListener : option.getDeleteButton().getActionListeners()) {
-            // System.out.println(listener);
             if (actionListener == listener) {
                 return true;
             }
         }
         return false;
     }
-
 
     public JButton getAddButton() {
         return addButton;
@@ -154,7 +154,7 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
     }
 
     public void actionEventInDeleteButton(ActionEvent e) {
-        if (options.size() <= 2) {
+        if (options.size() <= 4) {
             return;
         }
         for(int i = 0; i < options.size(); i++){
