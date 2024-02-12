@@ -15,12 +15,12 @@ public class Name {
         this.firstName=firstName;
     }
     public String getFirstName(){
-        return name;
+        return firstName;
     }
     public void setLastName(String lastName){
         this.lastName=lastName;
     }
     public String getLastName(){
-        return name;
+        return lastName;
     }    
 }

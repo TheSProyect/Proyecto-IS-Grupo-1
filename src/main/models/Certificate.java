@@ -4,8 +4,7 @@ import main.models.Name;
 import main.models.Exam;
 
 public class Certificate {
-    private Name firstNameStudent;
-    private Name lastNameStudent;
+    private Name name;
     private Exam course = new Exam();
     private int questionsExam;
 
@@ -15,19 +14,18 @@ public class Certificate {
     public int getQuestionsExam(){
         return questionsExam;
     }
-    public void setFirstNameStudent(String name){
-        firstNameStudent = new Name();
-        firstNameStudent.setFirstName(name);
+    public void setFirstNameStudent(String first){
+        name = new Name();
+        name.setFirstName(first);
     }
     public String getFirstNameStudent(){
-        return firstNameStudent.getFirstName();
+        return name.getFirstName();
     }
-    public void setLastNameStudent(String name){
-        lastNameStudent = new Name();
-        lastNameStudent.setLastName(name);
+    public void setLastNameStudent(String last){
+        name.setLastName(last);
     }
     public String getLastNameStudent(){
-        return lastNameStudent.getLastName();
+        return name.getLastName();
     }
     public void setNameTeacherCertificate(String name){
         course.setNameTeacher(name);

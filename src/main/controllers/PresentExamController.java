@@ -8,24 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.models.Answer;
-import main.models.Question;
-import main.models.Result;
-import main.utils.UserData;
-import main.models.Exam;
-import main.utils.Directory;
 
 public class PresentExamController extends TemplateExam{
-    Exam currentExam = new Exam();
-    Directory currentDirectory = Directory.instance();
 
     public PresentExamController(){
-    }
-    private Answer getAnswers(){
-        return this.getAnswers();
-    }
-    private Question getQuestions(){
-        return this.getQuestions();
     }
     public static void main(String[] args) throws IOException{
         PresentExamController p = new PresentExamController();
@@ -48,12 +34,10 @@ public class PresentExamController extends TemplateExam{
     }
 
     public void examFinished(){
-        UserData currentUser = UserData.instance();
-        String directory = (currentDirectory.getDirectoryStudents())+File.separator+ currentUser.getUsername();
-        File verifyFile = new File(directory+File.separator + (currentExam.getNameCourse())+".txt");
+        String directory = verifyAdmin(); 
+        File verifyFile = new File(directory+ File.separator + (currentExam.getNameCourse())+".txt");
         if (verifyFile.exists()) {
-            if (verifyFile.delete()) {                
-            } 
+            verifyFile.delete();                
         }
         try {
             File file = new File(directory, (currentExam.getNameCourse())+ ".txt");

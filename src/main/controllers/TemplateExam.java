@@ -9,10 +9,20 @@ import java.util.List;
 
 import main.models.Exam;
 import main.utils.Directory;
+import main.utils.UserData;
 
 public class TemplateExam {
-    Directory currentDirectory = Directory.instance();
-    Exam currentExam = new Exam();
+    public Directory currentDirectory = Directory.instance();
+    public Exam currentExam = new Exam();
+    public UserData currentUser = UserData.instance();
+
+    public String verifyAdmin(){
+        if(currentUser.isAdmin()){
+            return (currentDirectory.getDirectoryTeachers())+ File.separator + currentUser.getUsername();
+            } else {
+                return (currentDirectory.getDirectoryStudents())+ File.separator + currentUser.getUsername();
+        }   
+    }
 
     public int getNumberQuestion(String directory, String nameFolder){
         int LINE_NUMBER_QUESTION = 2;
