@@ -21,7 +21,7 @@ public class NewExamView extends ExamTemplateView {
 
         inicializeQuestions();
 
-        buildFrame("ExamView");
+        buildFrame("NewExamView");
         paintBorders();
         paintContentPanel();
         bottomLeftButton.setText("Añadir Pregunta");
