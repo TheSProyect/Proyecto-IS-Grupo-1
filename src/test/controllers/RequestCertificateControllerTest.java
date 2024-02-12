@@ -44,8 +44,8 @@ public class RequestCertificateControllerTest {
             // nombre del curso
             Assert.assertEquals(br.readLine(), controller.getNameCourseController());
             //nombre del examen
-            Assert.assertEquals(br.readLine(), course);
-            //Assert.assertEquals(br.readLine(), controller.getNameExamController());
+            //Assert.assertEquals(br.readLine(), course);
+            Assert.assertEquals(br.readLine(), controller.getNameExamController());
             //resultado de examen
             Assert.assertEquals(Integer.parseInt(br.readLine()), controller.getResultAnswersController());
             //numero de preguntas
