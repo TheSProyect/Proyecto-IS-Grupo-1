@@ -32,8 +32,6 @@ public class NewQuestionPanel extends QuestionPanel {
         paintAddImageButton();
         paintFieldLabel("Opciones", 5);
         paintNewOptionsPanel();
-        paintFieldLabel("Explicación", 7);
-        paintExplicationPanel();
         paintDeleteButton(listener);
     }   
 
@@ -97,7 +95,7 @@ public class NewQuestionPanel extends QuestionPanel {
     private void paintAddImageButton() {
         addImageButton = new IconButton("Insertar imagen", "Plus_Icon.png");
         addImageButton.setBackground(Palette.instance().getYellow());
-        addImageButton.setPreferredSize(new Dimension(250, 50));
+        addImageButton.setPreferredSize(new Dimension(190, 30));
         addImageButton.setMinimumSize(new Dimension(190, 30));
         addImageButton.addActionListener(this);
 
@@ -112,7 +110,6 @@ public class NewQuestionPanel extends QuestionPanel {
         constraints.gridx = 0;
         constraints.gridy = 4;
         constraints.insets = new Insets(5, 0, 5, 0);
-        constraints.fill = GridBagConstraints.BOTH;
 
         return constraints;
     }
@@ -124,28 +121,6 @@ public class NewQuestionPanel extends QuestionPanel {
         newOptionsPanel.getAddButton().addActionListener(this);
 
         questionContentPanel.add(newOptionsPanel, createOptionPanelConstraints());
-    }
-
-    private void paintExplicationPanel() {
-        explicationPanel = new ExplicationPanel(null);
-        explicationPanel.setBackground(Palette.instance().getOffWhite());
-
-        Border border = BorderFactory.createLineBorder(Palette.instance().getLightGray());
-        explicationPanel.setBorder(border);
-
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = 0;
-        constraints.gridy = 8;
-        constraints.weighty = 1.0;
-        constraints.gridwidth = 4;
-        constraints.insets = new Insets(0, 0, 0, 10);
-        constraints.fill = GridBagConstraints.BOTH;
-
-        questionContentPanel.add(explicationPanel, constraints);
-
-        final int DEFAULT_HEIGHT = 850;
-        final int WIDTH = 544;
-        questionContentPanel.setPreferredSize(new Dimension(WIDTH, DEFAULT_HEIGHT));
     }
 
     protected GridBagConstraints createOptionPanelConstraints() {
@@ -161,7 +136,7 @@ public class NewQuestionPanel extends QuestionPanel {
     private void paintDeleteButton(ActionListener listener) {
         deleteQuestionButton = new IconButton("Eliminar", "Delete_White_Icon.png");
         deleteQuestionButton.setBackground(Palette.instance().getRed());
-        deleteQuestionButton.setPreferredSize(new Dimension(250, 50));
+        deleteQuestionButton.setPreferredSize(new Dimension(190, 30));
         deleteQuestionButton.setMinimumSize(new Dimension(190, 30));
         deleteQuestionButton.addActionListener(listener);
 
@@ -182,25 +157,25 @@ public class NewQuestionPanel extends QuestionPanel {
     }
 
     private void actionEventInNewOptionsPanel(ActionEvent e) {
-        final int DEFAULT_HEIGHT = 850;
-        final int WIDTH = 544;
-        int contentPanelHeight = DEFAULT_HEIGHT;
+        // final int DEFAULT_HEIGHT = 850;
+        // final int WIDTH = 544;
+        // int contentPanelHeight = DEFAULT_HEIGHT;
 
         if (e.getSource() == newOptionsPanel.getAddButton()) {
             newOptionsPanel.actionEventInAddButton(e);
-            contentPanelHeight = questionContentPanel.getHeight() + 50;
+            // contentPanelHeight = questionContentPanel.getHeight() + 50;
 
         } else if (e.getSource() != addImageButton) {
             newOptionsPanel.actionEventInDeleteButton(e);
-            contentPanelHeight = questionContentPanel.getHeight() - 50;
+            // contentPanelHeight = questionContentPanel.getHeight() - 50;
             
-            if (contentPanelHeight < DEFAULT_HEIGHT) {
-                return;
-            } 
+            // if (contentPanelHeight < DEFAULT_HEIGHT) {
+            //     return;
+            // } 
         }
         
         newOptionsPanel.addActionListenerDeleteButtons(this);
-        questionContentPanel.setPreferredSize(new Dimension(WIDTH, contentPanelHeight));
+        // questionContentPanel.setPreferredSize(new Dimension(WIDTH, contentPanelHeight));
         questionContentPanel.validate();
         questionContentPanel.repaint();
     }

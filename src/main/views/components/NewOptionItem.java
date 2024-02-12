@@ -21,12 +21,14 @@ public class NewOptionItem extends JPanel implements ActionListener{
     JTextPane optionText;
     SingleOptionButton correctAnswer;
     JButton deleteButton;
+    ExplicationPanel explicationPanel;
 
     NewOptionItem() {
         buildPanel();
         paintDeleteButton();
         paintTextPane();
         paintMarkCorrectAnswerRadialButton();
+        paintExplicationPanel();
     }
 
     private void buildPanel() {
@@ -81,6 +83,23 @@ public class NewOptionItem extends JPanel implements ActionListener{
         constraints.fill = GridBagConstraints.BOTH;
 
         this.add(correctAnswer, constraints);
+    }
+
+    private void paintExplicationPanel() {
+        explicationPanel = new ExplicationPanel(null);
+        explicationPanel.setBackground(Palette.instance().getOffWhite());
+        explicationPanel.setPreferredSize(new Dimension(500, 70));
+
+        Border border = BorderFactory.createLineBorder(Palette.instance().getLightGray());
+        explicationPanel.setBorder(border);
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 1;
+        constraints.gridy = 1;
+        constraints.gridwidth = 2;
+        constraints.fill = GridBagConstraints.BOTH;
+
+        this.add(explicationPanel, constraints);
     }
 
     public JButton getDeleteButton() {
