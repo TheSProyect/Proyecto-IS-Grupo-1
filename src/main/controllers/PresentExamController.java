@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.models.Answer;
+
 
 public class PresentExamController extends TemplateExam{
 
@@ -98,22 +100,22 @@ public class PresentExamController extends TemplateExam{
     
     private void readQuestion(String directory, int readings, int counter, int stop){
         String line;
-        String[] answer = new String[10];
-        String[] justification = new String[10];
+        List<String> answer = new ArrayList<String>();
+        List<String> justification = new ArrayList<String>();
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentExam.setQuestionsExam((br.readLine()),(br.readLine()),counter);
             //currentExam.setCode(br.readLine());
             for (int i =0; ((line = br.readLine()) != null); i++) {
                 if (line != null && line.length() > 0 && line.substring(0, 1).equalsIgnoreCase("v")) {
-                    answer[i]= line.substring(1);
-                    justification[i]= br.readLine();
+                    answer.add(line.substring(1));
+                    justification.add(br.readLine());
                     currentExam.setIsCorrectExam(true, i, counter);
                     } else {
-                        answer[i]= line;
-                        justification[i]= br.readLine();
+                        answer.add(line);
+                        justification.add(br.readLine());
                         currentExam.setIsCorrectExam(false, i, counter);
                         }
-                    currentExam.setAnswersExam(answer[i],justification[i], i, counter);
+                    currentExam.setAnswersExam(answer.get(i),justification.get(i), i, counter);
                     currentExam.setNumberAnswers(counter, i+1);
                     }
                 br.close();     
