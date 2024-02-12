@@ -111,6 +111,11 @@ public class ExplicationPanel extends JScrollPane {
     }
 
     public String getExplicationText() {
-        return explicationText.getText();
+        try {
+            return explicationText.getDocument().getText(0, explicationText.getDocument().getLength());
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+            return "#ERROR!";
+        }
     }
 }

@@ -181,13 +181,40 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
         return optionsText;
     }
 
-    public boolean checkOptionsAreComplete() {
+    public List<String> getExplicationsText() {
+        List<String> explicationsText = new ArrayList<String>();
+
         for(NewOptionItem option : options) {
-            if (option.getOptionText() == "") {
+            explicationsText.add(option.getExplicationText());
+        }
+
+        return explicationsText;
+    }
+
+    public boolean checkOptionsAreComplete() {
+        boolean atLeastOneCorrectAnswer = false;
+        boolean allCorrectAnswer = true;
+
+        for(NewOptionItem option : options) {
+
+            if (option.isCorrectAnswer()) {
+                atLeastOneCorrectAnswer = true;
+            } else {
+                allCorrectAnswer = false;
+            }
+
+            if (option.getOptionText().length() == 0) {
+                return false;
+            } else if (option.getExplicationText().length() == 0) {
                 return false;
             }
         }
-        return true;
+
+        if (atLeastOneCorrectAnswer && !allCorrectAnswer) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

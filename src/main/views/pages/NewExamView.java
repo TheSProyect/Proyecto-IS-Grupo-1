@@ -117,8 +117,8 @@ public class NewExamView extends ExamTemplateView {
                 newQuestion.getQuestionText();
                 newQuestion.getDomainText();
                 newQuestion.getCode();
-                newQuestion.getOptionsText();
-                newQuestion.getExplication();
+                System.out.println(newQuestion.getOptionsText());
+                newQuestion.getExplications();
             }
         }
     }

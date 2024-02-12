@@ -107,7 +107,21 @@ public class NewOptionItem extends JPanel implements ActionListener{
     }
 
     public String getOptionText() {
-        return optionText.getText();
+        String text = optionText.getText();
+
+        if (correctAnswer.isSelected()) {
+            text = "v" + text;
+        }
+
+        return text;
+    }
+
+    public String getExplicationText() {
+        return explicationPanel.getExplicationText();
+    }
+
+    public boolean isCorrectAnswer() {
+        return correctAnswer.isSelected();
     }
 
     @Override

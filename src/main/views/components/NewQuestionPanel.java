@@ -157,25 +157,14 @@ public class NewQuestionPanel extends QuestionPanel {
     }
 
     private void actionEventInNewOptionsPanel(ActionEvent e) {
-        // final int DEFAULT_HEIGHT = 850;
-        // final int WIDTH = 544;
-        // int contentPanelHeight = DEFAULT_HEIGHT;
-
         if (e.getSource() == newOptionsPanel.getAddButton()) {
             newOptionsPanel.actionEventInAddButton(e);
-            // contentPanelHeight = questionContentPanel.getHeight() + 50;
 
         } else if (e.getSource() != addImageButton) {
             newOptionsPanel.actionEventInDeleteButton(e);
-            // contentPanelHeight = questionContentPanel.getHeight() - 50;
-            
-            // if (contentPanelHeight < DEFAULT_HEIGHT) {
-            //     return;
-            // } 
         }
         
         newOptionsPanel.addActionListenerDeleteButtons(this);
-        // questionContentPanel.setPreferredSize(new Dimension(WIDTH, contentPanelHeight));
         questionContentPanel.validate();
         questionContentPanel.repaint();
     }
@@ -206,8 +195,8 @@ public class NewQuestionPanel extends QuestionPanel {
         return codeField.getCode();
     }
 
-    public String getExplication() {
-        return explicationPanel.getExplicationText();
+    public List<String> getExplications() {
+        return newOptionsPanel.getExplicationsText();
     }
 
     public boolean checkQuestionIsComplete() {
