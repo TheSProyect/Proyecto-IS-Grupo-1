@@ -1,5 +1,6 @@
 package main.views.pages;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 
 import main.controllers.PresentExamController;
+import main.utils.Size;
 import main.views.components.ExamMenu;
 import main.views.components.PopUp;
 import main.views.components.QuestionPanel;
@@ -134,7 +136,7 @@ public class ExamView extends ExamTemplateView {
 
             int numCorrectQuestions = caculateResult();
             popup = new ExamEndedPopup(numCorrectQuestions, questions.size());
-            PopUp.instance().setView(popup);
+            PopUp.instance(Size.instance().getExamEndedPopUpDimension()).setView(popup);
 
             popup.getButton().addActionListener(this);
         } 

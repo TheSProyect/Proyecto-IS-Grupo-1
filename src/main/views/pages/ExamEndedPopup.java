@@ -24,7 +24,7 @@ public class ExamEndedPopup extends PopUpTemplate{
     
     public ExamEndedPopup(int correctAnswer,  int amountOfQuestion) {
         
-        buildFrame();
+        buildFrame(Size.instance().getExamEndedPopUpDimension());
         paintBorders();
         paintContentPanel(correctAnswer, amountOfQuestion);
 
@@ -32,7 +32,7 @@ public class ExamEndedPopup extends PopUpTemplate{
 
     protected void paintContentPanel(int correctAnswer,  int amountOfQuestion){
         JPanel contentPanel = new JPanel();
-        contentPanel.setPreferredSize(Size.instance().getPopupDimension());
+        contentPanel.setPreferredSize(Size.instance().getExamEndedPopUpDimension());
         contentPanel.setBackground(Palette.instance().getWhite());
         contentPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 15));
         

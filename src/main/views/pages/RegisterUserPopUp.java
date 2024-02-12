@@ -18,11 +18,11 @@ import main.utils.Palette;
 import main.utils.Size;
 import main.views.components.PopUp;
 
-public class UserCreatedPopUp extends PopUpTemplate{
+public class RegisterUserPopUp extends PopUpTemplate{
     JButton Button;
 
-    public UserCreatedPopUp (String User) {
-        buildFrame();
+    public RegisterUserPopUp (String User) {
+        buildFrame(Size.instance().getRegisterUserPopUpDimension());
         paintBorders();
         paintContentPanel(User);
     }
