@@ -162,7 +162,6 @@ public class PresentExamController extends TemplateExam{
                 readExam(directory,nameFolder);
                 for (File file : files) {
                     if (file.isDirectory() && file.getName().equals(nameFolder)) {
-                        stop = getNumberQuestion(directory, nameFolder);
                         directory = directory + File.separator + nameFolder + File.separator+ "Pregunta1.txt";
                         readQuestion(directory,questionsRead,counter, stop);
                         return;
