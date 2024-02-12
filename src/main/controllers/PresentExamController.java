@@ -30,6 +30,22 @@ public class PresentExamController extends TemplateExam{
     public static void main(String[] args) throws IOException{
         PresentExamController p = new PresentExamController();
     }
+    public List<String> getInstructions(){
+        List<String> instrucionsInformation = new ArrayList<String>();
+        String line, duration, directory = currentDirectory.getDirectoryExams() + File.separator + "Instructions.txt";
+        try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
+            instrucionsInformation.add(currentExam.getNameExam());
+            duration = Integer.toString(currentExam.getDuration());
+            instrucionsInformation.add(duration);
+            while ((line = br.readLine()) != null) {
+                instrucionsInformation.add(line);
+            }
+            br.close();     
+            } catch (IOException e) {
+               e.printStackTrace();
+        }
+        return instrucionsInformation;
+    }
 
     public void examFinished(){
         UserData currentUser = UserData.instance();
