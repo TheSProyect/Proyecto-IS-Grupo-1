@@ -53,7 +53,7 @@ public class RequestCertificateController {
         return namesCourses;
     }
 
-    private void readStudentData(String directory){
+    public void readStudentData(String directory){
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             //falta leer nombre y apellido
             currentCertificate.setNameCourse(br.readLine());
@@ -97,6 +97,9 @@ public class RequestCertificateController {
     }
     public String getNameStudentController(){
         return currentUser.getUsername();
+    }
+    public String getNameExamController(){
+        return currentCertificate.getNameExam();
     }
     public String getNameCourseController(){
         return currentCertificate.getNameCourse();
