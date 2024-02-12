@@ -3,12 +3,15 @@ package main.views.pages;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import main.controllers.CreateExamController;
 import main.utils.Palette;
 import main.utils.Size;
 import main.views.components.ExamInfoPanel;
@@ -16,9 +19,11 @@ import main.views.components.IconButton;
 import main.views.components.PopUp;
 
 public class NewExamPopup extends PopUpTemplate implements ActionListener{
+    CreateExamController createExamController;
     IconButton returnButton;
     IconButton finishButton;
     ExamInfoPanel examInfoPanel;
+
 
     public NewExamPopup() {
         
@@ -76,12 +81,21 @@ public class NewExamPopup extends PopUpTemplate implements ActionListener{
                 System.out.println("Nop");
                 return;
             }
-                //pass these to the controller 
-                examInfoPanel.getExamName();
-                examInfoPanel.getType();
-                examInfoPanel.getCourse();
-                ExamInfoPanel.getDuration();
-                examInfoPanel.getDescription();
+           //pass these to the controller 
+                ArrayList<String> examInfo = new ArrayList<String>(); 
+                examInfo.add(examInfoPanel.getExamName());
+                examInfo.add(examInfoPanel.getType());
+                examInfo.add(examInfoPanel.getCourse());
+                examInfo.add(examInfoPanel.getDescription());
+
+                createExamController = new CreateExamController();
+                createExamController.saveExam(examInfo, ExamInfoPanel.getDuration());
+                
+                System.out.println(examInfo);
+                System.out.println(ExamInfoPanel.getDuration());
+                    
+
+
             }
         }
 

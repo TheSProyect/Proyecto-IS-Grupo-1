@@ -8,8 +8,10 @@ import javax.swing.plaf.DimensionUIResource;
 import main.views.components.ExamMenu;
 import main.views.components.IconButton;
 import main.views.components.NewQuestionPanel;
+import main.views.components.PopUp;
 import main.views.components.QuestionPanel;
 import main.utils.Palette;
+import main.utils.Size;
 
 
 public class NewExamView extends ExamTemplateView {
@@ -120,6 +122,8 @@ public class NewExamView extends ExamTemplateView {
                 System.out.println(newQuestion.getOptionsText());
                 newQuestion.getExplications();
             }
+
+        PopUp.instance(Size.instance().getNewExamPopUpDimension()).setView(new NewExamPopup());
         }
     }
 

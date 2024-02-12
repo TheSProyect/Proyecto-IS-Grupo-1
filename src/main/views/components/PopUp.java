@@ -5,9 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import main.utils.Size;
 import main.views.pages.Frame;
-import main.views.pages.NewExamPopup;
 
 
 public class PopUp extends JFrame {
