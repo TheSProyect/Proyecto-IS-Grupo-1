@@ -10,6 +10,4 @@ public class Result {
     public int getScore(){
         return score;
     }
-    //private float checkAnswers(Elections, correctOptions){}
-    
 }

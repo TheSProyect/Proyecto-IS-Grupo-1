@@ -1,8 +1,5 @@
 package main.models;
 
-import main.models.Name;
-import main.models.Exam;
-
 public class Certificate {
     private Name name;
     private Exam course = new Exam();
