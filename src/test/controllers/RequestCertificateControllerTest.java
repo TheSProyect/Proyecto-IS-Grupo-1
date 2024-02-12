@@ -64,8 +64,8 @@ public class RequestCertificateControllerTest {
 
     }
 
-    public static void test(){
-        RequestCertificateControllerTest pru = new RequestCertificateControllerTest();
-        pru.readStudentDataTest();
-    }
+    //public static void test(){
+        //RequestCertificateControllerTest pru = new RequestCertificateControllerTest();
+       // pru.readStudentDataTest();
+    //}
 }
