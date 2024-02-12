@@ -10,6 +10,8 @@ import main.models.Question;
 import main.models.Result;
 import main.utils.Directory;
 import main.models.Name;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Exam extends Course{
     private Course course = new Course();
@@ -17,8 +19,8 @@ public class Exam extends Course{
     private String type, instructions, description;
     private int numberQuestions, duration;
     private Result results;
-    private int[] correctOptions;
-    private Question[] questions = new Question[10];
+    private List<Question> questions = new ArrayList<>();
+    //private Question[] questions = new Question[10];
     //private UserData usuario;
     
     public Exam(){
@@ -30,29 +32,25 @@ public class Exam extends Course{
                 e.printStackTrace();
         }
     }
-    private Question getQuestion(){
-        return this.questions[0];
-    }
     
     public String getInstructions(){
         return instructions;
     }
    
     public void setQuestionsExam(String statement, String domain, int counter){
-        questions[counter]=new Question();
-        questions[counter].setQuestions(statement,domain,questions[counter]);
+        questions.add(new Question());
+        questions.get(counter).setQuestions(statement,domain,questions.get(counter));
     }
-
     public void setAnswersExam(String answer, String justification, int i, int counter){
-        questions[counter].setAnswersQuestions(answer, justification,i);
+        questions.get(counter).setAnswersQuestions(answer, justification, i);
     }
     
     public void setIsCorrectExam(Boolean isCorrect, int i, int counter){
-        questions[counter].setIsCorrectQuestions(isCorrect, i);
+        questions.get(counter).setIsCorrectQuestions(isCorrect, i);
     }
 
     public void setNumberAnswers(int counter, int number){
-        questions[counter].setNumberAnswers(number);
+        questions.get(counter).setNumberAnswers(number);
     }
     
     public void setResultExam(int numCorrectQuestions){
@@ -65,31 +63,30 @@ public class Exam extends Course{
     }
     
     public String getQuestionsExam(int counter){
-        return questions[counter].getQuestions();
+        return questions.get(counter).getQuestions();
     }
     
     public String getJustificationExam(int counter, int i){
-        return questions[counter].getJustificationQuestion(i);
+        return questions.get(counter).getJustificationQuestion(i);
     }
-    
-    public String getDomainExam(int counterQ){
-        return questions[counterQ].getDomain();
+    public String getDomainExam(int counterQuestion){
+        return questions.get(counterQuestion).getDomain();
     }
     
     public String getOptionsExam(int counterQuestion, int counterAnswer){
-        return questions[counterQuestion].getOptionsQuestion(counterAnswer);
+        return questions.get(counterQuestion).getOptionsQuestion(counterAnswer);
     }
     
     public int getNumberAnswersExam(int counter){
-        return questions[counter].getNumberAnswers();
+        return questions.get(counter).getNumberAnswers();
     }
 
     public String getAnswersQuestionExam(int counter, int i){
-        return questions[counter].getAnswersQuestions(i);
+        return questions.get(counter).getAnswersQuestions(i);
     }
 
     public Boolean getIsCorrectExam(int counter, int i){
-        return questions[counter].getIsCorrectQuestion(i);
+        return questions.get(counter).getIsCorrectQuestion(i);
     }
     
     public void setNumberQuestions(int number){
