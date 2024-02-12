@@ -20,7 +20,7 @@ import main.views.components.Button;
 import main.views.components.PlaceholderTextField;
 
 public class LogInView extends JPanel implements ActionListener {
-    Button loginButton;
+    Button registerButton;
     JLabel errorLabel;
     
     PlaceholderTextField userTextField;
@@ -153,10 +153,10 @@ public class LogInView extends JPanel implements ActionListener {
         buttonContainer.setBackground(Palette.instance().getWhite());
         buttonContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 0));
 
-        loginButton = new Button("Entrar");
-        loginButton.setPreferredSize(Size.instance().getBigLoginButton());
-        buttonContainer.add(loginButton);
-        loginButton.addActionListener(this);
+        registerButton = new Button("Entrar");
+        registerButton.setPreferredSize(Size.instance().getBigLoginButton());
+        buttonContainer.add(registerButton);
+        registerButton.addActionListener(this);
         
         infoContainer.add(buttonContainer);
     }
@@ -179,7 +179,7 @@ public class LogInView extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == loginButton) {
+        if (e.getSource() == registerButton) {
             LoginController LoginControl = new LoginController();
             
             if(userTextField.getTextField().equals("") || passwordTextField.getTextField().equals("")){

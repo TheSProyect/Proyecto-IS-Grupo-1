@@ -13,6 +13,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.hamcrest.core.SubstringMatcher;
+
 import main.utils.Palette;
 import main.utils.Size;
 import main.views.components.Button;
@@ -105,9 +107,9 @@ public class RegisterUserView extends LogInView{
         adminContainer.add(Admin);
 
         SignatureButton = new Button("Firma");
-        SignatureButton.setBackground(Palette.instance().getYellow());
-        SignatureButton.setBorder(BorderFactory.createLineBorder(Palette.instance().getYellow()));
         SignatureButton.setPreferredSize(Size.instance().getSmallLoginButton());
+        paintSignatureButton();
+
         adminContainer.add(SignatureButton);
         SignatureButton.addActionListener(this);
         
@@ -125,24 +127,30 @@ public class RegisterUserView extends LogInView{
         buttonContainer.add(cancelButton);
         cancelButton.addActionListener(this);
         
-        loginButton = new Button("Registrar");
-        loginButton.setPreferredSize(Size.instance().getSmallLoginButton());
-        buttonContainer.add(loginButton);
-        loginButton.addActionListener(this);
+        registerButton = new Button("Registrar");
+        registerButton.setPreferredSize(Size.instance().getSmallLoginButton());
+        buttonContainer.add(registerButton);
+        registerButton.addActionListener(this);
         
         infoContainer.add(buttonContainer);
     }
 
-    protected void ActionEventInLoginButton(ActionEvent e) {
-        if(e.getSource() == loginButton) {
+    protected void ActionEventInRegisterButton(ActionEvent e) {
+        if(e.getSource() == registerButton) {
         AdminExamsView.instance().paintNavBar();
         Frame.instance().setView(AdminExamsView.instance());
 
             popup = new RegisterUserPopUp("Usuario");
             PopUp.instance(Size.instance().getRegisterUserPopUpDimension()).setView(popup);
-
             popup.getButton().addActionListener(this);
-        } 
+        }         
+
+        //this should pass controller
+        if (e.getSource() == registerButton && Admin.getButton().isSelected()) {
+            System.out.println("Registraste un Profesor");
+        } else if (e.getSource() == registerButton && !Admin.getButton().isSelected()) {
+            System.out.println("Registraste un usuario");
+        }
     } 
 
     private void actionEventInPopUp(ActionEvent e) {
@@ -152,22 +160,45 @@ public class RegisterUserView extends LogInView{
             PopUp.deleteInstance();
         }
     }
+
+    private void paintSignatureButton () {
+        if (Admin.getButton().isSelected()) {
+            SignatureButton.setBackground(Palette.instance().getYellow());
+            SignatureButton.setBorder(BorderFactory.createLineBorder(Palette.instance().getYellow()));
+            SignatureButton.setEnabled(true);
+        } else if (!Admin.getButton().isSelected()) {
+            SignatureButton.setBackground(Palette.instance().getLightGray());
+            SignatureButton.setBorder(BorderFactory.createLineBorder(Palette.instance().getLightGray()));
+            SignatureButton.setEnabled(false);
+        }
+
+    }
+
+    private void actionEventInAdminButton(ActionEvent e) {
+        if (e.getSource() == Admin.getButton()) {
+            Admin.paintIcon();
+            paintSignatureButton();
+        }
+    }
     
+    private void actionEventInSignatureButton(ActionEvent e) {
+        if(e.getSource() == SignatureButton) {
+            System.out.println("Add image");
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == cancelButton) {
             AdminExamsView.instance().paintNavBar();
             Frame.instance().setView(AdminExamsView.instance());
-        } else if (e.getSource() == loginButton) {
-            System.out.println("This should call controller");
-            ActionEventInLoginButton(e);
-
-        }else if (e.getSource() == Admin.getButton()) {
-            Admin.paintIcon();
-            System.out.println("This should call controller");
+        } else if (e.getSource() == registerButton) {
+           ActionEventInRegisterButton(e);
         }
+
+        actionEventInAdminButton(e);
         actionEventInPopUp(e);
+        actionEventInSignatureButton(e);
     }
 }
 
