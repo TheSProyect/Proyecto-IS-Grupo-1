@@ -97,25 +97,25 @@ public class ExamInfoPanel extends JPanel{
     }
 
      private void paintDurationField () {
-            timeSpinner= new JSpinner(inicializeDuration());
-            timeSpinner.setForeground(Palette.instance().getBlack());
-            timeSpinner.setBackground(Palette.instance().getWhite());
-            timeSpinner.setFont(new Font("Nunito Sans", Font.BOLD, 20));
-            timeSpinner.setBorder(createBorder());
+        timeSpinner= new JSpinner(inicializeDuration());
+        timeSpinner.setForeground(Palette.instance().getBlack());
+        timeSpinner.setBackground(Palette.instance().getWhite());
+        timeSpinner.setFont(new Font("Nunito Sans", Font.BOLD, 20));
+        timeSpinner.setBorder(createBorder());
 
-            JSpinner.DateEditor editor = new JSpinner.DateEditor(timeSpinner, "HH:mm:00");
-            timeSpinner.setEditor(editor);
+        JSpinner.DateEditor editor = new JSpinner.DateEditor(timeSpinner, "HH:mm:00");
+        timeSpinner.setEditor(editor);
 
-            examInfoPanel.add(timeSpinner, createDurationConstraints());
+        examInfoPanel.add(timeSpinner, createDurationConstraints());
         }
 
     private void paintDescriptionField() {
-            descriptionField = new TextArea(null);
-            descriptionField.setForeground(Palette.instance().getBlack());
-            descriptionField.setFont(new Font("Nunito Sans", Font.PLAIN, 15));
-            descriptionField.setBorder(createBorder());
+        descriptionField = new TextArea(null);
+        descriptionField.setForeground(Palette.instance().getBlack());
+        descriptionField.setFont(new Font("Nunito Sans", Font.PLAIN, 15));
+        descriptionField.setBorder(createBorder());
     
-            examInfoPanel.add(descriptionField, createDescriptionConstraints());
+        examInfoPanel.add(descriptionField, createDescriptionConstraints());
         }
 
     private Border createBorder() {
