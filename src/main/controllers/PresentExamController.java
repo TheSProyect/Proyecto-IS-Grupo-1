@@ -8,9 +8,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.models.Answer;
-
-
 public class PresentExamController extends TemplateExam{
 
     public PresentExamController(){
@@ -136,7 +133,6 @@ public class PresentExamController extends TemplateExam{
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentExam.setNameExam(br.readLine());
             currentExam.setTipo(br.readLine());
-            //currentExam.setCode(br.readLine());
             numberQuestions = Integer.parseInt((br.readLine()));
             currentExam.setNumberQuestions(numberQuestions);
             currentExam.setNameTeacher(br.readLine());
@@ -148,6 +144,7 @@ public class PresentExamController extends TemplateExam{
                 e.printStackTrace();
         }
     }
+    //currentExam.setCode(br.readLine());
 
     public void searchFolder(String [] informationsExam) {
         int INDEX_FOR_NAME_EXAM = 0;

@@ -20,8 +20,6 @@ public class Exam extends Course{
     private int numberQuestions, duration;
     private Result results;
     private List<Question> questions = new ArrayList<>();
-    //private Question[] questions = new Question[10];
-    //private UserData usuario;
     
     public Exam(){
         Directory currentDirectory = Directory.instance();
@@ -131,11 +129,5 @@ public class Exam extends Course{
     }
     public String getDescription(){
         return description;
-    }
-    public boolean isVisit(){
-        return course.isVisit();
-    }
-    public void setVisit(boolean visit){
-        course.setVisit(visit);
     }
 }
