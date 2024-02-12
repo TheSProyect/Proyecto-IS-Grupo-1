@@ -16,7 +16,6 @@ import javax.swing.text.StyledDocument;
 
 import main.utils.Palette;
 import main.utils.Size;
-import main.views.components.PopUp;
 
 public class RegisterUserPopUp extends PopUpTemplate{
     JButton Button;

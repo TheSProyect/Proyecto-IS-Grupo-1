@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.Popup;
 
 import main.utils.Palette;
 import main.utils.Size;

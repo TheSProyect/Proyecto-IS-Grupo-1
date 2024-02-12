@@ -1,6 +1,5 @@
 package main.views.pages;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
