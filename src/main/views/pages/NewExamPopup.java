@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import main.utils.Palette;
+import main.utils.Size;
 import main.views.components.ExamInfoPanel;
 import main.views.components.IconButton;
 import main.views.components.PopUp;
@@ -21,7 +22,7 @@ public class NewExamPopup extends PopUpTemplate implements ActionListener{
 
     public NewExamPopup() {
         
-        buildFrame();
+        buildFrame(Size.instance().getNewExamPopUpDimension());
         paintBorders();
         paintContentPanel();
 
@@ -34,7 +35,7 @@ public class NewExamPopup extends PopUpTemplate implements ActionListener{
         
         paintTitlePanel(contentPanel, "Configuración del examen");
         paintExamInfoPanel(contentPanel);
-        paintQuestionButtonPanel(contentPanel);
+        paintButtonPanel(contentPanel);
         
         this.add(contentPanel);    
     }
@@ -51,7 +52,7 @@ public class NewExamPopup extends PopUpTemplate implements ActionListener{
     }
 
     
-    private void paintQuestionButtonPanel(JPanel contentPanel) {
+    private void paintButtonPanel(JPanel contentPanel) {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.TRAILING));
         buttonPanel.setBackground(Palette.instance().getWhite());
@@ -69,7 +70,7 @@ public class NewExamPopup extends PopUpTemplate implements ActionListener{
     }
 
 
-     private void actionEventInPublishButton(ActionEvent e) {
+     private void actionEventInFinishButton(ActionEvent e) {
         if (e.getSource() == finishButton) {
             if (!examInfoPanel.checkFieldsAreComplete()) {
                 System.out.println("Nop");
@@ -89,7 +90,7 @@ public class NewExamPopup extends PopUpTemplate implements ActionListener{
         if (e.getSource() == returnButton ) {
             PopUp.deleteInstance();
         }
-        actionEventInPublishButton(e);
+        actionEventInFinishButton(e);
 
     }
 }

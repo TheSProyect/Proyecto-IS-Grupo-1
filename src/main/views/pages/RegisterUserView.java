@@ -26,7 +26,7 @@ public class RegisterUserView extends LogInView{
     PlaceholderTextField emailTextField;
     PlaceholderTextField userFirstName;
     PlaceholderTextField usertLastName;
-    UserCreatedPopUp popup;
+    RegisterUserPopUp popup;
     SingleOptionButton Admin;
     ButtonGroup group;
 
@@ -138,8 +138,8 @@ public class RegisterUserView extends LogInView{
         AdminExamsView.instance().paintNavBar();
         Frame.instance().setView(AdminExamsView.instance());
 
-            popup = new UserCreatedPopUp("Usuario");
-            PopUp.instance().setView(popup);
+            popup = new RegisterUserPopUp("Usuario");
+            PopUp.instance(Size.instance().getRegisterUserPopUpDimension()).setView(popup);
 
             popup.getButton().addActionListener(this);
         } 

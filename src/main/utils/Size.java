@@ -11,7 +11,9 @@ public class Size {
     Dimension smallLoginButton;
     Dimension bigLoginButton;
     Dimension examMenu;
-    Dimension popup;
+    Dimension examEndedPopUp;
+    Dimension registerUserPopUp;
+    Dimension newExamPopUp;
     
     public static Size instance() {
 		if (size == null){
@@ -27,7 +29,10 @@ public class Size {
         smallLoginButton = new Dimension(148, 42);
         bigLoginButton = new Dimension(314, 42);
         examMenu = new Dimension(300, 560);
-        popup = new Dimension(500, 280);
+        examEndedPopUp = new Dimension(500, 280);
+        registerUserPopUp = new Dimension(550, 220);
+        newExamPopUp = new Dimension(600, 550);
+
     }
 
     public Dimension getDefaultFrame() {
@@ -54,7 +59,15 @@ public class Size {
         return examMenu;
     }
 
-    public Dimension getPopupDimension() {
-        return popup;
+    public Dimension getExamEndedPopUpDimension() {
+        return examEndedPopUp;
+    }
+
+    public Dimension getRegisterUserPopUpDimension(){
+        return registerUserPopUp;
+    }
+
+    public Dimension getNewExamPopUpDimension() {
+        return newExamPopUp;
     }
 }

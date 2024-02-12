@@ -1,7 +1,10 @@
 package main;
 
+import java.awt.Dimension;
+
 import javax.swing.Popup;
 
+import main.utils.Size;
 import main.utils.UserData;
 import main.views.components.PopUp;
 import main.views.pages.Frame;
@@ -16,6 +19,6 @@ public class Main {
 
         // Frame.instance().setView(new LogInView());
         Frame.instance().setView(new NewExamView());
-        PopUp.instance().setView(new NewExamPopup());
+        PopUp.instance(Size.instance().getNewExamPopUpDimension()).setView(new NewExamPopup());
     }
 }
