@@ -54,25 +54,32 @@ public class Exam extends Course{
     public void setNumberAnswers(int counter, int number){
         questions[counter].setNumberAnswers(number);
     }
+    
     public void setResultExam(int numCorrectQuestions){
         results = new Result();
         results.setScore(numCorrectQuestions);
     }
+    
     public int getResultExam(){
         return results.getScore();
     }
+    
     public String getQuestionsExam(int counter){
         return questions[counter].getQuestions();
     }
+    
     public String getJustificationExam(int counter, int i){
         return questions[counter].getJustificationQuestion(i);
     }
+    
     public String getDomainExam(int counterQ){
         return questions[counterQ].getDomain();
     }
+    
     public String getOptionsExam(int counterQuestion, int counterAnswer){
         return questions[counterQuestion].getOptionsQuestion(counterAnswer);
     }
+    
     public int getNumberAnswersExam(int counter){
         return questions[counter].getNumberAnswers();
     }
@@ -84,6 +91,7 @@ public class Exam extends Course{
     public Boolean getIsCorrectExam(int counter, int i){
         return questions[counter].getIsCorrectQuestion(i);
     }
+    
     public void setNumberQuestions(int number){
         numberQuestions=number;
     }
@@ -128,6 +136,7 @@ public class Exam extends Course{
     public void setDuration(int duration){
         this.duration=duration;
     }
+    
     public int getDuration(){
         return duration;
     }
@@ -135,9 +144,11 @@ public class Exam extends Course{
     public void setDescripcion(String description){
         this.description=description;
     }
+    
     public String getDescription(){
         return description;
     }
+    
     public boolean isVisit(){
         return course.isVisit();
     }

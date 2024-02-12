@@ -1,9 +1,9 @@
 package test.models;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import main.models.Exam;
 
@@ -11,9 +11,17 @@ public class ExamTest {
     private Exam exam;
 
     @Test (expected = NullPointerException.class)
+    public void testEmptyExam() {
+        exam = new Exam();
+        exam.getNameExam();
+        exam.getNameCourse();
+        exam.getTypeExam();
+        exam.getNameTeacher();
+    }
+
+    @Test
     public void testExam() {
         exam = new Exam();
-        assertEquals(null, exam.getNameTeacher());
-        // assertThrows(Throwable.class, exam.getNameExam());
+        Assertions.assertNotEquals(null, exam.getInstructions());
     }
 }
