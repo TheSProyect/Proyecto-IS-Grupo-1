@@ -46,6 +46,7 @@ public class Exam extends Course{
     public void setAnswersExam(String answer, String justification, int i, int counter){
         questions[counter].setAnswersQuestions(answer, justification,i);
     }
+    
     public void setIsCorrectExam(Boolean isCorrect, int i, int counter){
         questions[counter].setIsCorrectQuestions(isCorrect, i);
     }
@@ -98,10 +99,12 @@ public class Exam extends Course{
     public String getNameCourse(){
         return course.getNameCourse();
     }
+
     public void setNameExam(String nameExam){
         name = new Name();
         name.setName(nameExam);
     }
+
     public String getNameExam(){
         return name.getName();
     }
@@ -117,6 +120,7 @@ public class Exam extends Course{
     public void setNameTeacher(String name){
         course.setNameTeacher(name);
     }
+    
     public String getNameTeacher(){
         return course.getNameTeacher();
     }
@@ -137,6 +141,7 @@ public class Exam extends Course{
     public boolean isVisit(){
         return course.isVisit();
     }
+    
     public void setVisit(boolean visit){
         course.setVisit(visit);
     }
