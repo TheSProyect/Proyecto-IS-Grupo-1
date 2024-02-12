@@ -12,7 +12,6 @@ public class Question {
     private Line[] lines;
     private int numberAnswers;
     private List<Answer> answers = new ArrayList<>(); 
-    //private int counter=0;
 
     
     public void setQuestions(String statement, String domain, Question question){
