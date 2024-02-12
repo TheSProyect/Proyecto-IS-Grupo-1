@@ -2,14 +2,11 @@ package main.views.pages;
 
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
 
 import main.views.components.ExamMenu;
 import main.views.components.IconButton;
-import main.views.components.NewOptionsPanel;
 import main.views.components.NewQuestionPanel;
 import main.views.components.QuestionPanel;
 import main.utils.Palette;
@@ -24,7 +21,7 @@ public class NewExamView extends ExamTemplateView {
 
         inicializeQuestions();
 
-        buildFrame("ExamView");
+        buildFrame("NewExamView");
         paintBorders();
         paintContentPanel();
         bottomLeftButton.setText("Añadir Pregunta");
@@ -120,8 +117,8 @@ public class NewExamView extends ExamTemplateView {
                 newQuestion.getQuestionText();
                 newQuestion.getDomainText();
                 newQuestion.getCode();
-                newQuestion.getOptionsText();
-                newQuestion.getExplication();
+                System.out.println(newQuestion.getOptionsText());
+                newQuestion.getExplications();
             }
         }
     }

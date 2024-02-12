@@ -99,7 +99,7 @@ public class CodeField extends JScrollPane implements KeyListener {
     }
 
     private void buildScrollPane(){
-        this.setPreferredSize(new Dimension(635, 200));
+        this.setPreferredSize(new Dimension(620, 200));
         this.setMinimumSize(new Dimension(544, 150));
 
         this.getVerticalScrollBar().setBackground(Palette.instance().getGray());

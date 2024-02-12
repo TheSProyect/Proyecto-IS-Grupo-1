@@ -11,7 +11,6 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.border.Border;
 
 import main.utils.Palette;
@@ -20,27 +19,21 @@ public class NewQuestionPanel extends QuestionPanel {
     NewOptionsPanel newOptionsPanel;
     IconButton addImageButton;
     IconButton deleteQuestionButton;
-    JTextPane questionField;
+    TextArea questionField;
     JTextField domainField;
 
     public NewQuestionPanel(ActionListener listener) {
+        paintLabels();
         paintQuestionField();
-        paintFieldLabel("Dominio", 0);
         paintDomainField();
-        paintFieldLabel("Inserta el código", 2);
         paintCodeField(null);
         paintAddImageButton();
-        paintFieldLabel("Opciones", 5);
         paintNewOptionsPanel();
-        paintFieldLabel("Explicación", 7);
-        paintExplicationPanel();
         paintDeleteButton(listener);
     }   
 
     private void paintQuestionField() {
-        questionField = new JTextPane();
-        questionField.setForeground(Palette.instance().getBlack());
-        questionField.setFont(new Font("Nunito Sans", Font.BOLD, 20));
+        questionField = new TextArea("Ingrese pregunta");
         questionField.setBorder(createQuestionFieldBorder());
 
         this.add(questionField, createQuestionConstraints());
@@ -66,12 +59,30 @@ public class NewQuestionPanel extends QuestionPanel {
         return border;
     }
 
+    private void paintLabels() {
+        paintFieldLabel("Dominio", 0);
+        paintFieldLabel("Inserta el código", 2);
+        paintFieldLabel("Opciones", 5);
+        paintCorrectLabel();
+    }
+
     private void paintFieldLabel(String label, int gridy) {
         JLabel domainLabel =  new JLabel(label);
         domainLabel.setForeground(Palette.instance().getGray());
         domainLabel.setFont(new Font("Nunito Sans", Font.BOLD, 17));
 
         questionContentPanel.add(domainLabel, createLabelsConstraints(gridy));
+    }
+
+    private void paintCorrectLabel() {
+        JLabel domainLabel =  new JLabel("Correcta");
+        domainLabel.setForeground(Palette.instance().getGray());
+        domainLabel.setFont(new Font("Nunito Sans", Font.BOLD, 13));
+        domainLabel.setHorizontalAlignment(JLabel.RIGHT);
+
+        GridBagConstraints constraints = createLabelsConstraints(5);
+        constraints.gridx = 3;
+        questionContentPanel.add(domainLabel, constraints);
     }
 
     private GridBagConstraints createLabelsConstraints(int gridy) {
@@ -97,7 +108,7 @@ public class NewQuestionPanel extends QuestionPanel {
     private void paintAddImageButton() {
         addImageButton = new IconButton("Insertar imagen", "Plus_Icon.png");
         addImageButton.setBackground(Palette.instance().getYellow());
-        addImageButton.setPreferredSize(new Dimension(250, 50));
+        addImageButton.setPreferredSize(new Dimension(190, 30));
         addImageButton.setMinimumSize(new Dimension(190, 30));
         addImageButton.addActionListener(this);
 
@@ -112,7 +123,6 @@ public class NewQuestionPanel extends QuestionPanel {
         constraints.gridx = 0;
         constraints.gridy = 4;
         constraints.insets = new Insets(5, 0, 5, 0);
-        constraints.fill = GridBagConstraints.BOTH;
 
         return constraints;
     }
@@ -124,28 +134,6 @@ public class NewQuestionPanel extends QuestionPanel {
         newOptionsPanel.getAddButton().addActionListener(this);
 
         questionContentPanel.add(newOptionsPanel, createOptionPanelConstraints());
-    }
-
-    private void paintExplicationPanel() {
-        explicationPanel = new ExplicationPanel(null);
-        explicationPanel.setBackground(Palette.instance().getOffWhite());
-
-        Border border = BorderFactory.createLineBorder(Palette.instance().getLightGray());
-        explicationPanel.setBorder(border);
-
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = 0;
-        constraints.gridy = 8;
-        constraints.weighty = 1.0;
-        constraints.gridwidth = 4;
-        constraints.insets = new Insets(0, 0, 0, 10);
-        constraints.fill = GridBagConstraints.BOTH;
-
-        questionContentPanel.add(explicationPanel, constraints);
-
-        final int DEFAULT_HEIGHT = 850;
-        final int WIDTH = 544;
-        questionContentPanel.setPreferredSize(new Dimension(WIDTH, DEFAULT_HEIGHT));
     }
 
     protected GridBagConstraints createOptionPanelConstraints() {
@@ -161,7 +149,7 @@ public class NewQuestionPanel extends QuestionPanel {
     private void paintDeleteButton(ActionListener listener) {
         deleteQuestionButton = new IconButton("Eliminar", "Delete_White_Icon.png");
         deleteQuestionButton.setBackground(Palette.instance().getRed());
-        deleteQuestionButton.setPreferredSize(new Dimension(250, 50));
+        deleteQuestionButton.setPreferredSize(new Dimension(190, 30));
         deleteQuestionButton.setMinimumSize(new Dimension(190, 30));
         deleteQuestionButton.addActionListener(listener);
 
@@ -182,25 +170,14 @@ public class NewQuestionPanel extends QuestionPanel {
     }
 
     private void actionEventInNewOptionsPanel(ActionEvent e) {
-        final int DEFAULT_HEIGHT = 850;
-        final int WIDTH = 544;
-        int contentPanelHeight = DEFAULT_HEIGHT;
-
         if (e.getSource() == newOptionsPanel.getAddButton()) {
             newOptionsPanel.actionEventInAddButton(e);
-            contentPanelHeight = questionContentPanel.getHeight() + 50;
 
         } else if (e.getSource() != addImageButton) {
             newOptionsPanel.actionEventInDeleteButton(e);
-            contentPanelHeight = questionContentPanel.getHeight() - 50;
-            
-            if (contentPanelHeight < DEFAULT_HEIGHT) {
-                return;
-            } 
         }
         
         newOptionsPanel.addActionListenerDeleteButtons(this);
-        questionContentPanel.setPreferredSize(new Dimension(WIDTH, contentPanelHeight));
         questionContentPanel.validate();
         questionContentPanel.repaint();
     }
@@ -231,14 +208,14 @@ public class NewQuestionPanel extends QuestionPanel {
         return codeField.getCode();
     }
 
-    public String getExplication() {
-        return explicationPanel.getExplicationText();
+    public List<String> getExplications() {
+        return newOptionsPanel.getExplicationsText();
     }
 
     public boolean checkQuestionIsComplete() {
-        if (questionField.getText() == "") {
+        if (questionField.isEmpty()) {
             return false;
-        } else if (domainField.getText() == "") {
+        } else if (domainField.getText().isBlank()) {
             return false;
         } else if(!newOptionsPanel.checkOptionsAreComplete()) {
             return false;
