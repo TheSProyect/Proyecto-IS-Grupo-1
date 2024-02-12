@@ -9,10 +9,20 @@ import java.util.List;
 
 import main.models.Exam;
 import main.utils.Directory;
+import main.utils.UserData;
 
 public class TemplateExam {
-    Directory currentDirectory = Directory.instance();
-    Exam currentExam = new Exam();
+    public Directory currentDirectory = Directory.instance();
+    public Exam currentExam = new Exam();
+    public UserData currentUser = UserData.instance();
+
+    public String verifyAdmin(){
+        if(currentUser.isAdmin()){
+            return (currentDirectory.getDirectoryTeachers())+ File.separator + currentUser.getUsername();
+            } else {
+                return (currentDirectory.getDirectoryStudents())+ File.separator + currentUser.getUsername();
+        }   
+    }
 
     public int getNumberQuestion(String directory, String nameFolder){
         int LINE_NUMBER_QUESTION = 2;
@@ -54,77 +64,4 @@ public class TemplateExam {
         }
         return question;
     }  
-
-    public List<String> getQuestionsStrings(){
-        int j=currentExam.getNumberQuestions();
-        List<String> questionsString = new ArrayList<String>();
-        for(int i=0; i<j; i++){ 
-            questionsString.add(currentExam.getQuestionsExam(i));
-        }
-        return questionsString;
-    }
-
-    public List<String> getDomain(){
-        int j=currentExam.getNumberQuestions();
-        List<String> domain = new ArrayList<String>();
-        for(int i=0; i<j; i++){ 
-            domain.add(currentExam.getDomainExam(i));
-        }
-        return domain;
-    }
-
-    public List<Boolean> getHasCode(){
-        int j=currentExam.getNumberQuestions();
-        List<Boolean> hasCode = new ArrayList<Boolean>();
-        //falta arreglar
-        for(int i=0; i<j; i++){ 
-            hasCode.add(true);
-        }
-        return hasCode;
-    }
-    public List<List<String>> getCode(){
-        int j=currentExam.getNumberQuestions();
-        List<List<String>> code = new ArrayList<List<String>>();
-        for(int i=0; i<j; i++){ 
-            code.add(new ArrayList<String>());
-            for(int k=0; k<currentExam.getNumberAnswersExam(i); k++){
-                code.get(i).add(currentExam.getOptionsExam(i,k));
-            }
-        }
-        return code;
-    }
-
-    public List<List<String>> getJustification(){
-        int j=currentExam.getNumberQuestions();
-        List<List<String>> justification = new ArrayList<List<String>>();
-        for(int i=0; i<j; i++){ 
-            justification.add(new ArrayList<String>());
-            for(int k=0; k<currentExam.getNumberAnswersExam(i); k++){
-                String isCorrect;
-                if(currentExam.getIsCorrectExam(i, k)){
-                    isCorrect= "Correcto";
-                }else{
-                    isCorrect="Incorrecto";
-                }
-                justification.get(i).add("Opcion "+(k+1)+"<br>"+isCorrect+"<br>"+currentExam.getJustificationExam(i,k));
-            }
-        }
-        return justification;
-    }
-    
-    public List<List<String>> getOptions(){
-        int j=currentExam.getNumberQuestions();
-        List<List<String>> options = new ArrayList<List<String>>();
-        for(int i=0; i<j; i++){ 
-            options.add(new ArrayList<String>());
-            for(int k=0; k<currentExam.getNumberAnswersExam(i); k++){
-                options.get(i).add(currentExam.getOptionsExam(i,k));
-            }
-        }
-        return options;
-    }
-
-    public int getDuracion(){
-        return currentExam.getDuration();
-    }
 }

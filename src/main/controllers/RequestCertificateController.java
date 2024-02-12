@@ -7,16 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.utils.Directory;
-import main.utils.UserData;
 import main.models.Certificate;
-//import main.models.Course;
 
 
-public class RequestCertificateController {
-    Directory currentDirectory = Directory.instance();
+public class RequestCertificateController extends TemplateExam{
     Certificate currentCertificate = new Certificate();
-    UserData currentUser = UserData.instance();
+
     public RequestCertificateController(){
         
     }
@@ -38,14 +34,17 @@ public class RequestCertificateController {
 
     public List<String> showCertificates(){
         List<String> namesCourses = new ArrayList<String>();
-        String directory = currentDirectory.getDirectoryStudents()+File.separator+(currentUser.getUsername());
+        String directory = verifyAdmin();
         File searchedFolder = new File(directory);
         if (searchedFolder.exists() && searchedFolder.isDirectory()) {
             File[] files = searchedFolder.listFiles();
             if (files != null) {
                 for (File file : files) {
                     if (file.isDirectory() || (!(file.getName().equals("Password.txt")) && file.getName().endsWith(".txt"))) {
-                        namesCourses.add(nameCourses(file));
+                        if((file.getName().equals("Name.txt"))){
+                            } else {
+                                namesCourses.add(nameCourses(file));
+                        }
                     }
                 }
             }    
@@ -55,7 +54,6 @@ public class RequestCertificateController {
 
     private void readStudentData(String directory){
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
-            //falta leer nombre y apellido
             currentCertificate.setNameCourse(br.readLine());
             currentCertificate.setNameExam(br.readLine());
             String answersCorrects = br.readLine();
@@ -68,27 +66,25 @@ public class RequestCertificateController {
                 e.printStackTrace();
         }
     }
-
-    public void searchFolderStudent(String nameCourse) {
-        String directory = currentDirectory.getDirectoryStudents();
-        String nameFolderStudent = currentUser.getUsername();
-        File searchedFolder = new File(directory);
-        if (searchedFolder.exists() && searchedFolder.isDirectory()) {
-            File[] files = searchedFolder.listFiles();
-            if (files != null) {
-                for (File file : files) {
-                    if (file.isDirectory() && file.getName().equals(nameFolderStudent)) {
-                        directory = directory + File.separator + nameFolderStudent + File.separator + nameCourse + ".txt";
-                        readStudentData(directory);
-                    }
-                }
-            }    
+    private void readNameStudent(String directory){
+        try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
+            currentCertificate.setFirstNameStudent(br.readLine());
+            currentCertificate.setLastNameStudent(br.readLine());
+            br.close();     
+            } catch (IOException e) {
+                e.printStackTrace();
         }
     }
 
+    public void searchFolderStudent(String nameCourse) {
+        String directory = verifyAdmin();
+        readNameStudent(directory+ File.separator + "Name.txt");
+        readStudentData(directory+ File.separator + nameCourse + ".txt");
+    }
+                
     public void createPDF(){
         List<String> informationToPDF = new ArrayList<String>();
-        informationToPDF.add(currentUser.getUsername());
+        informationToPDF.add(currentCertificate.getFirstNameStudent()+" "+currentCertificate.getLastNameStudent());
         informationToPDF.add(String.valueOf(this.getResultAnswersController()));
         informationToPDF.add(String.valueOf(currentCertificate.getQuestionsExam()));
         informationToPDF.add(currentCertificate.getNameCourse());
@@ -96,7 +92,7 @@ public class RequestCertificateController {
         GeneratePDFFile creatingPDF = new GeneratePDFFile(informationToPDF);
     }
     public String getNameStudentController(){
-        return currentUser.getUsername();
+        return currentCertificate.getFirstNameStudent()+" "+currentCertificate.getLastNameStudent();
     }
     public String getNameCourseController(){
         return currentCertificate.getNameCourse();
