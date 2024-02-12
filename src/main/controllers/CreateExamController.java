@@ -44,7 +44,7 @@ public class CreateExamController extends TemplateExam{
 
     private String readNameTeacher(){
         String nameTeacher = null;
-        try (BufferedReader br = new BufferedReader(new FileReader(currentDirectory.getDirectoryTeachers()+ File.separator + currentUser.getUsername()))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(currentDirectory.getDirectoryTeachers()+ File.separator + currentUser.getUsername()+ File.separator + "Name.txt"))) {
             nameTeacher = br.readLine() + " " + br.readLine();
             br.close();     
             } catch (IOException e) {
