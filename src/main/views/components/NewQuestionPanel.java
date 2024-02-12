@@ -11,7 +11,6 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.border.Border;
 
 import main.utils.Palette;
@@ -20,25 +19,21 @@ public class NewQuestionPanel extends QuestionPanel {
     NewOptionsPanel newOptionsPanel;
     IconButton addImageButton;
     IconButton deleteQuestionButton;
-    JTextPane questionField;
+    TextArea questionField;
     JTextField domainField;
 
     public NewQuestionPanel(ActionListener listener) {
+        paintLabels();
         paintQuestionField();
-        paintFieldLabel("Dominio", 0);
         paintDomainField();
-        paintFieldLabel("Inserta el código", 2);
         paintCodeField(null);
         paintAddImageButton();
-        paintFieldLabel("Opciones", 5);
         paintNewOptionsPanel();
         paintDeleteButton(listener);
     }   
 
     private void paintQuestionField() {
-        questionField = new JTextPane();
-        questionField.setForeground(Palette.instance().getBlack());
-        questionField.setFont(new Font("Nunito Sans", Font.BOLD, 20));
+        questionField = new TextArea("Ingrese pregunta");
         questionField.setBorder(createQuestionFieldBorder());
 
         this.add(questionField, createQuestionConstraints());
@@ -64,12 +59,30 @@ public class NewQuestionPanel extends QuestionPanel {
         return border;
     }
 
+    private void paintLabels() {
+        paintFieldLabel("Dominio", 0);
+        paintFieldLabel("Inserta el código", 2);
+        paintFieldLabel("Opciones", 5);
+        paintCorrectLabel();
+    }
+
     private void paintFieldLabel(String label, int gridy) {
         JLabel domainLabel =  new JLabel(label);
         domainLabel.setForeground(Palette.instance().getGray());
         domainLabel.setFont(new Font("Nunito Sans", Font.BOLD, 17));
 
         questionContentPanel.add(domainLabel, createLabelsConstraints(gridy));
+    }
+
+    private void paintCorrectLabel() {
+        JLabel domainLabel =  new JLabel("Correcta");
+        domainLabel.setForeground(Palette.instance().getGray());
+        domainLabel.setFont(new Font("Nunito Sans", Font.BOLD, 13));
+        domainLabel.setHorizontalAlignment(JLabel.RIGHT);
+
+        GridBagConstraints constraints = createLabelsConstraints(5);
+        constraints.gridx = 3;
+        questionContentPanel.add(domainLabel, constraints);
     }
 
     private GridBagConstraints createLabelsConstraints(int gridy) {
@@ -200,9 +213,9 @@ public class NewQuestionPanel extends QuestionPanel {
     }
 
     public boolean checkQuestionIsComplete() {
-        if (questionField.getText() == "") {
+        if (questionField.isEmpty()) {
             return false;
-        } else if (domainField.getText() == "") {
+        } else if (domainField.getText().isBlank()) {
             return false;
         } else if(!newOptionsPanel.checkOptionsAreComplete()) {
             return false;

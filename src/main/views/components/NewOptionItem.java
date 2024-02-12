@@ -25,20 +25,41 @@ public class NewOptionItem extends JPanel implements ActionListener{
 
     NewOptionItem() {
         buildPanel();
-        paintDeleteButton();
-        paintTextPane();
-        paintMarkCorrectAnswerRadialButton();
+        paintAnswerPanel();
         paintExplicationPanel();
     }
 
     private void buildPanel() {
-        this.setBackground(Palette.instance().getOffWhite());
+        this.setBackground(Palette.instance().getWhite());
         this.setLayout(new GridBagLayout());
-        Border border = BorderFactory.createLineBorder(Palette.instance().getLightGray());
-        this.setBorder(border);
     }
 
-    private void paintDeleteButton() {
+    private void paintAnswerPanel() {
+        JPanel answerPanel = new JPanel();
+        builAnswerPanel(answerPanel);
+        paintDeleteButton(answerPanel);
+        paintTextPane(answerPanel);
+        paintMarkCorrectAnswerRadialButton(answerPanel);
+
+        
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.weightx = 1.0;
+        constraints.gridwidth = 3;
+        constraints.insets = new Insets(0, 0, 10, 0);
+        constraints.fill =GridBagConstraints.BOTH;
+        this.add(answerPanel, constraints);
+    }
+
+    private void builAnswerPanel(JPanel answerPanel) {
+        answerPanel.setBackground(Palette.instance().getOffWhite());
+        answerPanel.setLayout(new GridBagLayout());
+        Border border = BorderFactory.createLineBorder(Palette.instance().getLightGray());
+        answerPanel.setBorder(border);
+    }
+
+
+    private void paintDeleteButton(JPanel answerPanel) {
         Border border = BorderFactory.createLineBorder(Palette.instance().getOffWhite());
 
         deleteButton = new JButton();
@@ -54,10 +75,10 @@ public class NewOptionItem extends JPanel implements ActionListener{
         constraints.gridx = 0;
         constraints.insets = new Insets(0, 5, 0, 5);
 
-        this.add(deleteButton, constraints);
+        answerPanel.add(deleteButton, constraints);
     }
 
-    private void paintTextPane() {
+    private void paintTextPane(JPanel answerPanel) {
         optionText = new JTextPane();
         optionText.setForeground(Palette.instance().getGray());
         optionText.setBackground(Palette.instance().getOffWhite());
@@ -69,10 +90,10 @@ public class NewOptionItem extends JPanel implements ActionListener{
         constraints.insets = new Insets(0, 5, 0, 0);
         constraints.fill = GridBagConstraints.BOTH;
 
-        this.add(optionText, constraints);
+        answerPanel.add(optionText, constraints);
     }
 
-    private void paintMarkCorrectAnswerRadialButton() {
+    private void paintMarkCorrectAnswerRadialButton(JPanel answerPanel) {
         correctAnswer = new SingleOptionButton("", null);
         correctAnswer.setBackground(Palette.instance().getOffWhite());
         correctAnswer.setPreferredSize(new Dimension(40, 40));
@@ -82,7 +103,7 @@ public class NewOptionItem extends JPanel implements ActionListener{
         constraints.gridx = 2;
         constraints.fill = GridBagConstraints.BOTH;
 
-        this.add(correctAnswer, constraints);
+        answerPanel.add(correctAnswer, constraints);
     }
 
     private void paintExplicationPanel() {
@@ -97,6 +118,7 @@ public class NewOptionItem extends JPanel implements ActionListener{
         constraints.gridx = 1;
         constraints.gridy = 1;
         constraints.gridwidth = 2;
+        constraints.insets = new Insets(0, 50, 10, 0);
         constraints.fill = GridBagConstraints.BOTH;
 
         this.add(explicationPanel, constraints);

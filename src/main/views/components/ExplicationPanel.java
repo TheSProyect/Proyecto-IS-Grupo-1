@@ -67,7 +67,11 @@ public class ExplicationPanel extends JScrollPane {
 
     private void paintTextPane(boolean isEmpty) {
         explicationText = new JTextPane();
-        explicationText.setBackground(Palette.instance().getWhite());
+        if (isEmpty) {
+            explicationText.setBackground(Palette.instance().getOffWhite());
+        } else {
+            explicationText.setBackground(Palette.instance().getWhite());
+        }
         explicationText.setEditable(isEmpty);
 
         this.setViewportView(explicationText);
