@@ -3,20 +3,16 @@ package main.views.pages;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.Popup;
 
 import main.utils.Palette;
 import main.views.components.ExamInfoPanel;
 import main.views.components.IconButton;
-import main.views.components.NewQuestionPanel;
 import main.views.components.PopUp;
-import main.views.components.QuestionPanel;
 
 public class NewExamPopup extends PopUpTemplate implements ActionListener{
     IconButton returnButton;
