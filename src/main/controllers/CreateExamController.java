@@ -15,6 +15,10 @@ public class CreateExamController extends TemplateExam{
 
     public void saveExam(List<String> examData, int duration){
         int INDEX_FOR_NAME_EXAM=0, INDEX_FOR_TYPE=1,INDEX_FOR_NAME_COURSE=2, INDEX_FOR_DESCRIPTION=3;
+        File courseFolder = new File(currentDirectory.getDirectoryExams()+ File.separator+ examData.get(INDEX_FOR_NAME_COURSE));
+        if (!courseFolder.exists()) {
+            courseFolder.mkdir();
+        }
         folder = new File(currentDirectory.getDirectoryExams() + File.separator+ examData.get(INDEX_FOR_NAME_COURSE)+ File.separator + examData.get(INDEX_FOR_NAME_EXAM));
         if (!folder.exists()) {
             folder.mkdir();
