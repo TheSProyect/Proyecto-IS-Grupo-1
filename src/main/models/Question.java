@@ -3,8 +3,6 @@ package main.models;
 import java.util.List;
 
 import java.util.ArrayList;
-import main.models.Answer;
-import main.models.Line;
 
 public class Question {
     private String statement;

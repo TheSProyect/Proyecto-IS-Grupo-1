@@ -1,11 +1,7 @@
 package main.models;
 
-import main.models.Name;
-import main.models.Result;
-
 public class Course {
     private  Name name;
-    private Result summary;
     private Name teacher;
 
     public void setNameTeacher(String name){

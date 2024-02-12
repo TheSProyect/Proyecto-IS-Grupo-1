@@ -1,17 +1,12 @@
 package main.controllers;
 
-//import main.models.Course;
 import main.utils.Directory;
 import main.utils.UserData;
-
-//import main.utils.UserData;
-//import main.models.Certificate;
 import com.itextpdf.*;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.util.List;
 import java.io.*;
-//import java.security.Signature;
 import java.util.ArrayList;
 
 public class GeneratePDFFile {

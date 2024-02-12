@@ -5,11 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import main.controllers.PresentExamController;
-import main.models.Question;
-import main.models.Result;
 import main.utils.Directory;
-import main.models.Name;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,7 +98,7 @@ public class Exam extends Course{
         return name.getName();
     }
 
-    public void setTipo(String type){
+    public void setType(String type){
         this.type=type;
     }
 

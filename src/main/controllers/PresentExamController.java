@@ -83,7 +83,7 @@ public class PresentExamController extends TemplateExam{
       return examsInformation;
     }    
     
-    private List<String> readInformation(String nameCourse){
+    public List<String> readInformation(String nameCourse){
         List<String> examInformation = new ArrayList<String>();
         examInformation.add(currentExam.getNameExam());
         examInformation.add((currentExam.getDescription()));
@@ -132,7 +132,7 @@ public class PresentExamController extends TemplateExam{
         directory = directory +File.separator+ nameFolder+File.separator+nameFolder+".txt";
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentExam.setNameExam(br.readLine());
-            currentExam.setTipo(br.readLine());
+            currentExam.setType(br.readLine());  
             numberQuestions = Integer.parseInt((br.readLine()));
             currentExam.setNumberQuestions(numberQuestions);
             currentExam.setNameTeacher(br.readLine());
@@ -144,7 +144,6 @@ public class PresentExamController extends TemplateExam{
                 e.printStackTrace();
         }
     }
-    //currentExam.setCode(br.readLine());
 
     public void searchFolder(String [] informationsExam) {
         int INDEX_FOR_NAME_EXAM = 0;

@@ -1,11 +1,5 @@
 package main.controllers;
 
-import main.models.Answer;
-import main.models.Exam;
-import main.models.Line;
-import main.models.Question;
-import main.utils.Directory;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
