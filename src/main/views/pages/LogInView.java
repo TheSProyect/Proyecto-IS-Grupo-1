@@ -71,14 +71,14 @@ public class LogInView extends JPanel implements ActionListener {
         this.add(loginPanel);
     }
 
-    private void buildLoginPanelBorders(JPanel loginPanel) {
+    protected void buildLoginPanelBorders(JPanel loginPanel) {
         JPanel border = new JPanel();
-        border.setPreferredSize(Size.instance().getLogInTopBottomBoder());
+        border.setPreferredSize(Size.instance().getLoginTopBottomBoder());
         border.setBackground(Palette.instance().getWhite());
         loginPanel.add(border, BorderLayout.NORTH);
 
         border = new JPanel();
-        border.setPreferredSize(Size.instance().getLogInTopBottomBoder());
+        border.setPreferredSize(Size.instance().getLoginTopBottomBoder());
         border.setBackground(Palette.instance().getWhite());
         loginPanel.add(border, BorderLayout.SOUTH);
 

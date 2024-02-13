@@ -9,6 +9,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import main.utils.Palette;
+import main.views.pages.EditProfileView;
 import main.views.pages.Frame;
 import main.views.pages.HelpView;
 
@@ -60,7 +61,9 @@ public class HelpBar extends JPanel implements ActionListener{
             Frame.instance().setView(HelpView.instance());
             Frame.instance().setTitle("HelpView");
         } else if (e.getSource() == editProfileButton) {
-            System.out.println ("this should open EditProfileView");
+            Frame.instance().setView(new EditProfileView());
+            Frame.instance().setTitle("EditProfileView");
+
         }
     }
 }
