@@ -11,8 +11,6 @@ import main.utils.Palette;
 import main.views.components.NavBar;
 
 public class NavBarTemplateView extends JPanel implements ActionListener{
-    NavBar navBar;
-
     protected void buildFrame(String viewName) {
         Frame.instance().setTitle(viewName);
         this.setLayout(new BorderLayout());

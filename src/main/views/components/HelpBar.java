@@ -58,6 +58,7 @@ public class HelpBar extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == helpButton) {
+            HelpView.instance().paintNavBar();
             Frame.instance().setView(HelpView.instance());
             Frame.instance().setTitle("HelpView");
         } else if (e.getSource() == editProfileButton) {

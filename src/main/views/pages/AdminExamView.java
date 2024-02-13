@@ -21,13 +21,6 @@ import javax.swing.border.Border;
 
 public class AdminExamView extends CertificatesView {
 
-    public void paintNavBar() {
-        buildFrame("AdminExamView");
-
-        navBar = new AdminNavBar();
-        this.add(navBar, BorderLayout.NORTH);
-    }
-
     protected void paintTitleLabel(JPanel titleButtonContainer) {
         JLabel title = new JLabel();
         title.setText("Administrador de Examenes");
