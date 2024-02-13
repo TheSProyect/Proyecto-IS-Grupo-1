@@ -37,6 +37,28 @@ public class LogInView extends UserTemplateView {
         paintUserDataPanel();
     }
 
+    protected void buildUserDataPanelBorders(JPanel UserDataPanel){
+        JPanel border = new JPanel();
+        border.setPreferredSize(Size.instance().getLoginTopBottomBoder());
+        border.setBackground(Palette.instance().getWhite());
+        UserDataPanel.add(border, BorderLayout.NORTH);
+
+        border = new JPanel();
+        border.setPreferredSize(Size.instance().getLoginTopBottomBoder());
+        border.setBackground(Palette.instance().getWhite());
+        UserDataPanel.add(border, BorderLayout.SOUTH);
+
+        border = new JPanel();
+        border.setPreferredSize(Size.instance().getLogInSideBoder());
+        border.setBackground(Palette.instance().getWhite());
+        UserDataPanel.add(border, BorderLayout.WEST);
+
+        border = new JPanel();
+        border.setPreferredSize(Size.instance().getLogInSideBoder());
+        border.setBackground(Palette.instance().getWhite());
+        UserDataPanel.add(border, BorderLayout.EAST);
+    }
+
     protected void paintTextFields(JPanel infoContainer) {
         userTextField = new PlaceholderTextField("Usuario", "User_Login_Icon.png");
         passwordTextField = new PlaceholderTextField("Contraseña", "Unlock_Login_Icon.png");

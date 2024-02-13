@@ -135,7 +135,7 @@ public abstract class UserTemplateView extends JPanel implements ActionListener 
 
     protected void paintCurrentText(JPanel infoContainer) {
         JLabel loginTextLabel = new JLabel();
-        loginTextLabel.setText(CurrentText);
+        loginTextLabel.setText("<html>"+CurrentText+"<html/>");
         loginTextLabel.setFont(new Font("Nunito Sans", Font.PLAIN, 15));
         loginTextLabel.setForeground(Palette.instance().getGray());
         loginTextLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -176,11 +176,14 @@ public abstract class UserTemplateView extends JPanel implements ActionListener 
     
     protected void paintErrorLabel(JPanel infoContainer) {
         this.errorLabel = new JLabel();
-        errorLabel.setFont(new Font("Nunito Sans", Font.PLAIN, 14));
-        errorLabel.setForeground(Palette.instance().getRed());
-        errorLabel.setHorizontalAlignment(JLabel.CENTER);
-        errorLabel.setVerticalAlignment(JLabel.BOTTOM);
-        errorLabel.setVisible(false);
+        this.errorLabel.setFont(new Font("Nunito Sans", Font.PLAIN, 14));
+        this.errorLabel.setForeground(Palette.instance().getRed());
+        this.errorLabel.setHorizontalAlignment(JLabel.CENTER);
+        this.errorLabel.setVerticalAlignment(JLabel.BOTTOM);
+        this.errorLabel.setVisible(false);
+        this.errorLabel.setText("aaa");
+        this.errorLabel.setVisible(true);
+        
         
         infoContainer.add(errorLabel);
     }

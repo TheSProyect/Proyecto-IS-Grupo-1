@@ -33,6 +33,28 @@ public class EditProfileView extends UserTemplateView{
 
     }
 
+    protected void buildUserDataPanelBorders(JPanel UserDataPanel){
+        JPanel border = new JPanel();
+        border.setPreferredSize(Size.instance().getEditProfileTopBottomBoder());
+        border.setBackground(Palette.instance().getWhite());
+        UserDataPanel.add(border, BorderLayout.NORTH);
+
+        border = new JPanel();
+        border.setPreferredSize(Size.instance().getEditProfileTopBottomBoder());
+        border.setBackground(Palette.instance().getWhite());
+        UserDataPanel.add(border, BorderLayout.SOUTH);
+
+        border = new JPanel();
+        border.setPreferredSize(Size.instance().getLogInSideBoder());
+        border.setBackground(Palette.instance().getWhite());
+        UserDataPanel.add(border, BorderLayout.WEST);
+
+        border = new JPanel();
+        border.setPreferredSize(Size.instance().getLogInSideBoder());
+        border.setBackground(Palette.instance().getWhite());
+        UserDataPanel.add(border, BorderLayout.EAST);
+    }
+
     protected void paintTextFields(JPanel infoContainer) {
         userTextField = new PlaceholderTextField(UserData.instance().getUsername(), "User_Login_Icon.png");
         emailTextField = new PlaceholderTextField(UserData.instance().getMail(), "Mail_Login_Icon.png");
@@ -59,7 +81,6 @@ public class EditProfileView extends UserTemplateView{
                 Frame.instance().setTitle("ExamsView");
             } else {
                 setErrorMessage(errorLabel, "Nombre de Usuario no disponible");
-                
             }
             
            
