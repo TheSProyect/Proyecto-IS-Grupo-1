@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import main.models.Exam;
 
 public class PresentExamController extends TemplateExam{
 
@@ -79,7 +80,7 @@ public class PresentExamController extends TemplateExam{
                                         if((fileExam.getName().startsWith("Pregunta"))){
                                             } else {
                                                 readExam(directorySub, fileExam.getName());
-                                                examsInformation.add(readInformation(file.getName()));  
+                                                examsInformation.add(readInformation(file.getName(), currentExam));
                                     }
                                 }
                             }
@@ -91,11 +92,11 @@ public class PresentExamController extends TemplateExam{
       return examsInformation;
     }    
     
-    public List<String> readInformation(String nameCourse){
+    public List<String> readInformation(String nameCourse, Exam currentExam){
         List<String> examInformation = new ArrayList<String>();
         examInformation.add(currentExam.getNameExam());
         examInformation.add((currentExam.getDescription()));
-        examInformation.add((currentExam.getTypeExam()));
+        examInformation.add((currentExam.getType()));
         String duration = Integer.toString(currentExam.getDuration());
         examInformation.add(duration);
         examInformation.add((currentExam.getNameTeacher()));
@@ -117,7 +118,7 @@ public class PresentExamController extends TemplateExam{
                     currentExam.setIsCorrectExam(true, i, counter);
                     currentExam.setNumCorrectAsnwers(counter);
                     } else {
-                        answer.add(line);
+                        answer.add(line.substring(1));
                         justification.add(br.readLine());
                         currentExam.setIsCorrectExam(false, i, counter);
                         }
@@ -136,7 +137,7 @@ public class PresentExamController extends TemplateExam{
         }   
     }
     
-    private void readExam(String directory, String nameFolder){
+    public void readExam(String directory, String nameFolder){
         int numberQuestions, duration;
         directory = directory +File.separator+ nameFolder+File.separator+nameFolder+".txt";
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {

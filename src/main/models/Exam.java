@@ -19,9 +19,12 @@ public class Exam extends Course{
     
     public Exam(){
         Directory currentDirectory = Directory.instance();
-        String directory = currentDirectory.getDirectoryExams()+File.separator+"Instructions.txt";
+        String directory = currentDirectory.getDirectoryExams()+File.separator+"Instructions.txt", line="";
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
-            instructions = br.readLine();
+            while ((line = br.readLine()) != null) {
+                instructions += line;
+            }
+            br.close(); 
             } catch (IOException e) {
                 e.printStackTrace();
         }
@@ -117,7 +120,7 @@ public class Exam extends Course{
         this.type=type;
     }
 
-    public String getTypeExam(){
+    public String getType(){
         return type;
     }
 

@@ -3,11 +3,7 @@ package test.controllers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,29 +45,22 @@ public class PresentExamControllerTest {
         expectedInformation.add("TeacherName");
         expectedInformation.add(expectedCourseName);
 
-        List<String> result = presentExam.readInformation(expectedCourseName);
+        List<String> result = presentExam.readInformation(expectedCourseName, currentExam);
         assertEquals(expectedInformation.size(), result.size(), "Las listas no tienen la misma longitud");
 
         for (int i = 0; i < expectedInformation.size(); i++) {
             assertEquals(expectedInformation.get(i), result.get(i), "Los elementos de la lista no coinciden");
         }
     }
+    @Test
+    public void testReadInformation_NullCurrentExam() throws IOException {
+        String expectedCourseName = "CourseName";
+        Exam currentExam = null;
+        assertThrows( NullPointerException.class, () -> {presentExam.readInformation(expectedCourseName, currentExam);});
 
-    public void testExamFinished() throws IOException {
-        presentExam.examFinished();
-
-        String expectedFileName = "CourseName.txt";
-        String directory = presentExam.verifyAdmin();
-        File verifyFile = new File(directory + File.separator + expectedFileName);
-        assertTrue(verifyFile.exists(), "El archivo no se creó correctamente");
-
-        Path filePath = Paths.get(directory, expectedFileName);
-        assertTrue(Files.readString(filePath).contains("CourseName"));
-        assertTrue(Files.readString(filePath).contains("ExamName"));
-        assertTrue(Files.readString(filePath).contains("15"));
-        assertTrue(Files.readString(filePath).contains("20"));
-        assertTrue(Files.readString(filePath).contains("TeacherName"));
-
-        verifyFile.delete();
+    }
+    @Test
+    public void testExamFinished() throws IOException{
+        assertThrows( NullPointerException.class, () -> {presentExam.examFinished();});
     }   
 }

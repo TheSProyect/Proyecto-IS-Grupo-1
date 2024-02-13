@@ -89,7 +89,7 @@ public class CreateExamController extends TemplateExam{
             for (String text : domain) {
                 writer.write(text + ", ");
             }
-
+                        
             if(!code.equals("")){
                 writer.write(code + "\n");
                 } else {

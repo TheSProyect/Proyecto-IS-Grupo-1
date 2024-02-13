@@ -49,7 +49,7 @@ public class ExamTest {
         exam = new Exam();
         assertThrows(NullPointerException.class, () -> {exam.getNameExam();});
         assertThrows(NullPointerException.class, () -> {exam.getNameCourse();});
-        assertNull(exam.getTypeExam());
+        assertNull(exam.getType());
         assertThrows(NullPointerException.class, () -> {exam.getNameTeacher();});
         Assertions.assertEquals(instructions, exam.getInstructions());
     }
