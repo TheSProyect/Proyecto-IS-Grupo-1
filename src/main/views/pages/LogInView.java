@@ -71,14 +71,14 @@ public class LogInView extends JPanel implements ActionListener {
         this.add(loginPanel);
     }
 
-    private void buildLoginPanelBorders(JPanel loginPanel) {
+    protected void buildLoginPanelBorders(JPanel loginPanel) {
         JPanel border = new JPanel();
-        border.setPreferredSize(Size.instance().getLogInTopBottomBoder());
+        border.setPreferredSize(Size.instance().getLoginTopBottomBoder());
         border.setBackground(Palette.instance().getWhite());
         loginPanel.add(border, BorderLayout.NORTH);
 
         border = new JPanel();
-        border.setPreferredSize(Size.instance().getLogInTopBottomBoder());
+        border.setPreferredSize(Size.instance().getLoginTopBottomBoder());
         border.setBackground(Palette.instance().getWhite());
         loginPanel.add(border, BorderLayout.SOUTH);
 
@@ -182,7 +182,6 @@ public class LogInView extends JPanel implements ActionListener {
         if (e.getSource() == loginButton) {
             LoginController LoginControl = new LoginController();
             
-
             if(userTextField.getTextField().equals("") || passwordTextField.getTextField().equals("")){
                 
                 setErrorMessage(errorLabel, "Se deben llenar todos los campos");
@@ -190,9 +189,13 @@ public class LogInView extends JPanel implements ActionListener {
             } else if(LoginControl.searchUser(userTextField.getTextField())){
 
                 if(LoginControl.verifyPassWord(passwordTextField.getTextField())){
-                    
-                    Frame.instance().setView(ExamsView.instance());
-                
+
+                    if (LoginControl.isAdmin()) {
+                        Frame.instance().setView(AdminExamsView.instance());
+                    } else {
+                        Frame.instance().setView(ExamsView.instance());
+                    }
+
                 } else {
                     setErrorMessage(errorLabel, "Contraseña incorrecta");
                 

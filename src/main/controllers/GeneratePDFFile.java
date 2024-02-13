@@ -1,15 +1,12 @@
 package main.controllers;
 
-//import main.models.Course;
 import main.utils.Directory;
-//import main.utils.UserData;
-//import main.models.Certificate;
+import main.utils.UserData;
 import com.itextpdf.*;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.util.List;
 import java.io.*;
-//import java.security.Signature;
 import java.util.ArrayList;
 
 public class GeneratePDFFile {
@@ -50,8 +47,13 @@ public class GeneratePDFFile {
         }
 
         try{
-            String nombre=RCController.getNameStudentController();
-            String directory = currentDirectory.getDirectoryStudents() +File.separator+ nombre + ".pdf";
+            UserData currentUser = UserData.instance();
+            String directory;
+            if(currentUser.isAdmin()){
+                directory = (currentDirectory.getDirectoryTeachers())+ File.separator + currentUser.getUsername() + File.separator +  currentUser.getUsername() + ".pdf";
+                } else {
+                    directory = (currentDirectory.getDirectoryStudents())+ File.separator + currentUser.getUsername() + File.separator +  currentUser.getUsername() + ".pdf";
+            }   
             PdfWriter.getInstance(documento, new FileOutputStream(directory));
             fuenteSmall.setSize(16);
             fuenteName.setSize(48);

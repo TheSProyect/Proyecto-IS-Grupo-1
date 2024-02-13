@@ -19,8 +19,8 @@ import main.views.components.PopUp;
 
 public class PopUpTemplate extends JPanel {
     
-    protected void buildFrame() {
-        PopUp.instance();
+    protected void buildFrame(Dimension Size) {
+        PopUp.instance(Size);
         Border border = BorderFactory.createLineBorder(Palette.instance().getLightGray(), 2);
         this.setBorder(border);
         this.setLayout(new BorderLayout());

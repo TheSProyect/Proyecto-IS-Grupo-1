@@ -1,11 +1,5 @@
 package main.controllers;
 
-import main.models.Answer;
-import main.models.Exam;
-import main.models.Line;
-import main.models.Question;
-import main.utils.Directory;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,16 +13,18 @@ public class CreateExamController extends TemplateExam{
     int questionsCount = 0;
     File folder;
 
-    public void saveExam(){
-        String nameExam = " ", examType = " ", nameTeacher = " ", description = " ", nameCourse = " ";
-        int duration=0;
-        String directory = currentDirectory.getDirectoryExams();
-        folder = new File(directory+ File.separator+ nameCourse+ File.separator + nameExam);
+    public void saveExam(List<String> examData, int duration){
+        int INDEX_FOR_NAME_EXAM=0, INDEX_FOR_TYPE=1,INDEX_FOR_NAME_COURSE=2, INDEX_FOR_DESCRIPTION=3;
+        File courseFolder = new File(currentDirectory.getDirectoryExams()+ File.separator+ examData.get(INDEX_FOR_NAME_COURSE));
+        if (!courseFolder.exists()) {
+            courseFolder.mkdir();
+        }
+        folder = new File(currentDirectory.getDirectoryExams() + File.separator+ examData.get(INDEX_FOR_NAME_COURSE)+ File.separator + examData.get(INDEX_FOR_NAME_EXAM));
         if (!folder.exists()) {
             folder.mkdir();
         }
-        fillExamInformation(nameCourse, nameExam);   
-        File file = new File(folder, nameExam + ".txt");
+        fillExamInformation(examData.get(INDEX_FOR_NAME_COURSE), examData.get(INDEX_FOR_NAME_EXAM));   
+        File file = new File(folder, examData.get(INDEX_FOR_NAME_EXAM) + ".txt");
 
         try {
             if (!file.exists()) {
@@ -36,12 +32,23 @@ public class CreateExamController extends TemplateExam{
             }
             FileWriter writer = new FileWriter(file);
 
-            writer.write(nameExam + "\n" + examType + "\n" + questionsCount + "\n" + nameTeacher + "\n" + duration + "\n" + description + "\n"+ nameCourse);
+            writer.write(examData.get(INDEX_FOR_NAME_EXAM) + "\n" + examData.get(INDEX_FOR_TYPE) + "\n" + questionsCount + "\n" + readNameTeacher() + "\n" + duration + "\n" + examData.get(INDEX_FOR_DESCRIPTION) + "\n"+ examData.get(INDEX_FOR_NAME_COURSE));
             writer.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private String readNameTeacher(){
+        String nameTeacher = null;
+        try (BufferedReader br = new BufferedReader(new FileReader(currentDirectory.getDirectoryTeachers()+ File.separator + currentUser.getUsername()+ File.separator + "Name.txt"))) {
+            nameTeacher = br.readLine() + " " + br.readLine();
+            br.close();     
+            } catch (IOException e) {
+                e.printStackTrace();
+        }
+            return nameTeacher;
     }
     private void fillExamInformation(String nameCourse, String nameExam){
         currentExam.setNameCourse(nameCourse);
@@ -56,21 +63,21 @@ public class CreateExamController extends TemplateExam{
             int count = 0;
             while ((line = br.readLine()) != null) {
                 count++;
-                if (count == 3) {
+                if (count == 2) {
                     content += String.valueOf(questionsCount)+ "\n";
-                } else {
-                    content += line + "\n";
+                    } else {
+                        content += line + "\n";
+                    }
                 }
-            }
             br.close();
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
             bw.write(content);
             bw.close();
-        } catch (IOException e) {
+            } catch (IOException e) {
         }
     }
    
-    public void saveQuestion(String questionText, String domain, String code, List<String> answers){
+    public void saveQuestion(String questionText, List<String> domain, String code, List<String> answers){
         questionsCount++;
         File file = new File(folder, "Pregunta"+ questionsCount + ".txt");
         try {
@@ -78,7 +85,10 @@ public class CreateExamController extends TemplateExam{
                 file.createNewFile();
             }
             FileWriter writer = new FileWriter(file);
-            writer.write(questionText + "\n" + domain + "\n");
+            writer.write(questionText + "\n");
+            for (String text : domain) {
+                writer.write(text + ", ");
+            }
 
             if(!code.equals("")){
                 writer.write(code + "\n");
@@ -96,19 +106,19 @@ public class CreateExamController extends TemplateExam{
     
     private void showQuestion(String directory, int readings, int counter, int stop){
         String line;
-        String[] answer = new String[10];
-        String[] justification = new String[10];
+        List<String> answer = new ArrayList<String>();
+        List<String> justification = new ArrayList<String>();
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentExam.setQuestionsExam((br.readLine()),(br.readLine()),counter);
             for (int i =0; ((line = br.readLine()) != null); i++) {
                 if (line != null && line.length() > 0 && line.substring(0, 1).equalsIgnoreCase("v")) {
-                    answer[i]= line.substring(1);
-                    justification[i]= br.readLine();
+                    answer.add(line.substring(1));
+                    justification.add(br.readLine());
                     } else {
-                        answer[i]= line;
-                        justification[i]= br.readLine();
+                        answer.add(line);
+                        justification.add(br.readLine());
                         }
-                    currentExam.setAnswersExam(answer[i],justification[i], i, counter);
+                    currentExam.setAnswersExam(answer.get(i),justification.get(i), i, counter);
                     currentExam.setNumberAnswers(counter, i+1);
                     }
                     br.close();     

@@ -8,24 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.models.Answer;
-import main.models.Question;
-import main.models.Result;
-import main.utils.UserData;
-import main.models.Exam;
-import main.utils.Directory;
-
 public class PresentExamController extends TemplateExam{
-    Exam currentExam = new Exam();
-    Directory currentDirectory = Directory.instance();
 
     public PresentExamController(){
-    }
-    private Answer getAnswers(){
-        return this.getAnswers();
-    }
-    private Question getQuestions(){
-        return this.getQuestions();
     }
     public static void main(String[] args) throws IOException{
         PresentExamController p = new PresentExamController();
@@ -48,12 +33,10 @@ public class PresentExamController extends TemplateExam{
     }
 
     public void examFinished(){
-        UserData currentUser = UserData.instance();
-        String directory = (currentDirectory.getDirectoryStudents())+File.separator+ currentUser.getUsername();
-        File verifyFile = new File(directory+File.separator + (currentExam.getNameCourse())+".txt");
+        String directory = verifyAdmin(); 
+        File verifyFile = new File(directory+ File.separator + (currentExam.getNameCourse())+".txt");
         if (verifyFile.exists()) {
-            if (verifyFile.delete()) {                
-            } 
+            verifyFile.delete();                
         }
         try {
             File file = new File(directory, (currentExam.getNameCourse())+ ".txt");
@@ -100,7 +83,7 @@ public class PresentExamController extends TemplateExam{
       return examsInformation;
     }    
     
-    private List<String> readInformation(String nameCourse){
+    public List<String> readInformation(String nameCourse){
         List<String> examInformation = new ArrayList<String>();
         examInformation.add(currentExam.getNameExam());
         examInformation.add((currentExam.getDescription()));
@@ -114,22 +97,22 @@ public class PresentExamController extends TemplateExam{
     
     private void readQuestion(String directory, int readings, int counter, int stop){
         String line;
-        String[] answer = new String[10];
-        String[] justification = new String[10];
+        List<String> answer = new ArrayList<String>();
+        List<String> justification = new ArrayList<String>();
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentExam.setQuestionsExam((br.readLine()),(br.readLine()),counter);
             //currentExam.setCode(br.readLine());
             for (int i =0; ((line = br.readLine()) != null); i++) {
                 if (line != null && line.length() > 0 && line.substring(0, 1).equalsIgnoreCase("v")) {
-                    answer[i]= line.substring(1);
-                    justification[i]= br.readLine();
+                    answer.add(line.substring(1));
+                    justification.add(br.readLine());
                     currentExam.setIsCorrectExam(true, i, counter);
                     } else {
-                        answer[i]= line;
-                        justification[i]= br.readLine();
+                        answer.add(line);
+                        justification.add(br.readLine());
                         currentExam.setIsCorrectExam(false, i, counter);
                         }
-                    currentExam.setAnswersExam(answer[i],justification[i], i, counter);
+                    currentExam.setAnswersExam(answer.get(i),justification.get(i), i, counter);
                     currentExam.setNumberAnswers(counter, i+1);
                     }
                 br.close();     
@@ -149,8 +132,7 @@ public class PresentExamController extends TemplateExam{
         directory = directory +File.separator+ nameFolder+File.separator+nameFolder+".txt";
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentExam.setNameExam(br.readLine());
-            currentExam.setTipo(br.readLine());
-            //currentExam.setCode(br.readLine());
+            currentExam.setType(br.readLine());  
             numberQuestions = Integer.parseInt((br.readLine()));
             currentExam.setNumberQuestions(numberQuestions);
             currentExam.setNameTeacher(br.readLine());
@@ -178,7 +160,6 @@ public class PresentExamController extends TemplateExam{
                 readExam(directory,nameFolder);
                 for (File file : files) {
                     if (file.isDirectory() && file.getName().equals(nameFolder)) {
-                        stop = getNumberQuestion(directory, nameFolder);
                         directory = directory + File.separator + nameFolder + File.separator+ "Pregunta1.txt";
                         readQuestion(directory,questionsRead,counter, stop);
                         return;

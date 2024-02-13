@@ -2,7 +2,6 @@ package main.views.pages;
 
 import main.utils.Palette;
 import main.views.components.Faq;
-import main.views.components.Listing;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,7 +12,6 @@ import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JSeparator;
 
 public class HelpView extends HelpBarTemplateView {

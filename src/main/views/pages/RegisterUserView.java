@@ -26,15 +26,37 @@ public class RegisterUserView extends LogInView{
     PlaceholderTextField emailTextField;
     PlaceholderTextField userFirstName;
     PlaceholderTextField usertLastName;
-    UserCreatedPopUp popup;
+    RegisterUserPopUp popup;
     SingleOptionButton Admin;
     ButtonGroup group;
 
     protected void buildFrame() {
         Frame.instance().setTitle("RegisterUserView");
-        
         this.setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
     }
+
+    protected void buildLoginPanelBorders(JPanel loginPanel) {
+        JPanel border = new JPanel();
+        border.setPreferredSize(Size.instance().getRegisterTopBottomBoder());
+        border.setBackground(Palette.instance().getWhite());
+        loginPanel.add(border, BorderLayout.NORTH);
+
+        border = new JPanel();
+        border.setPreferredSize(Size.instance().getRegisterTopBottomBoder());
+        border.setBackground(Palette.instance().getWhite());
+        loginPanel.add(border, BorderLayout.SOUTH);
+
+        border = new JPanel();
+        border.setPreferredSize(Size.instance().getLogInSideBoder());
+        border.setBackground(Palette.instance().getWhite());
+        loginPanel.add(border, BorderLayout.WEST);
+
+        border = new JPanel();
+        border.setPreferredSize(Size.instance().getLogInSideBoder());
+        border.setBackground(Palette.instance().getWhite());
+        loginPanel.add(border, BorderLayout.EAST);
+    }
+
     
     protected void paintTitlePanel() {
         JPanel titlePanel = new JPanel();
@@ -105,9 +127,9 @@ public class RegisterUserView extends LogInView{
         adminContainer.add(Admin);
 
         SignatureButton = new Button("Firma");
-        SignatureButton.setBackground(Palette.instance().getYellow());
-        SignatureButton.setBorder(BorderFactory.createLineBorder(Palette.instance().getYellow()));
         SignatureButton.setPreferredSize(Size.instance().getSmallLoginButton());
+        paintSignatureButton();
+
         adminContainer.add(SignatureButton);
         SignatureButton.addActionListener(this);
         
@@ -133,16 +155,22 @@ public class RegisterUserView extends LogInView{
         infoContainer.add(buttonContainer);
     }
 
-    protected void ActionEventInLoginButton(ActionEvent e) {
+    private void ActionEventInRegisterButton(ActionEvent e) {
         if(e.getSource() == loginButton) {
         AdminExamsView.instance().paintNavBar();
         Frame.instance().setView(AdminExamsView.instance());
 
-            popup = new UserCreatedPopUp("Usuario");
-            PopUp.instance().setView(popup);
-
+            popup = new RegisterUserPopUp("Usuario");
+            PopUp.instance(Size.instance().getRegisterUserPopUpDimension()).setView(popup);
             popup.getButton().addActionListener(this);
-        } 
+        }         
+
+        //this should pass controller
+        if (e.getSource() == loginButton && Admin.getButton().isSelected()) {
+            System.out.println("Registraste un Profesor");
+        } else if (e.getSource() == loginButton && !Admin.getButton().isSelected()) {
+            System.out.println("Registraste un usuario");
+        }
     } 
 
     private void actionEventInPopUp(ActionEvent e) {
@@ -152,7 +180,32 @@ public class RegisterUserView extends LogInView{
             PopUp.deleteInstance();
         }
     }
+
+    private void paintSignatureButton () {
+        if (Admin.getButton().isSelected()) {
+            SignatureButton.setBackground(Palette.instance().getYellow());
+            SignatureButton.setBorder(BorderFactory.createLineBorder(Palette.instance().getYellow()));
+            SignatureButton.setEnabled(true);
+        } else if (!Admin.getButton().isSelected()) {
+            SignatureButton.setBackground(Palette.instance().getLightGray());
+            SignatureButton.setBorder(BorderFactory.createLineBorder(Palette.instance().getLightGray()));
+            SignatureButton.setEnabled(false);
+        }
+
+    }
+
+    private void actionEventInAdminButton(ActionEvent e) {
+        if (e.getSource() == Admin.getButton()) {
+            Admin.paintIcon();
+            paintSignatureButton();
+        }
+    }
     
+    private void actionEventInSignatureButton(ActionEvent e) {
+        if(e.getSource() == SignatureButton) {
+            System.out.println("Add image");
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -160,14 +213,12 @@ public class RegisterUserView extends LogInView{
             AdminExamsView.instance().paintNavBar();
             Frame.instance().setView(AdminExamsView.instance());
         } else if (e.getSource() == loginButton) {
-            System.out.println("This should call controller");
-            ActionEventInLoginButton(e);
-
-        }else if (e.getSource() == Admin.getButton()) {
-            Admin.paintIcon();
-            System.out.println("This should call controller");
+           ActionEventInRegisterButton(e);
         }
+
+        actionEventInAdminButton(e);
         actionEventInPopUp(e);
+        actionEventInSignatureButton(e);
     }
 }
 
