@@ -2,10 +2,8 @@ package main.views.pages;
 
 
 import main.utils.Palette;
-import main.views.components.AdminNavBar;
 import main.views.components.Listing;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 
