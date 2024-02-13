@@ -112,7 +112,7 @@ public class Exam extends Course{
         this.type=type;
     }
 
-    public String getTypeExam(){
+    public String getType(){
         return type;
     }
 
