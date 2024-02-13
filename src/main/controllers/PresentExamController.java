@@ -118,7 +118,7 @@ public class PresentExamController extends TemplateExam{
                     currentExam.setIsCorrectExam(true, i, counter);
                     currentExam.setNumCorrectAsnwers(counter);
                     } else {
-                        answer.add(line);
+                        answer.add(line.substring(1));
                         justification.add(br.readLine());
                         currentExam.setIsCorrectExam(false, i, counter);
                         }
