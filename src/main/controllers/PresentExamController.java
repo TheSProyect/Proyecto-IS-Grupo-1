@@ -116,6 +116,7 @@ public class PresentExamController extends TemplateExam{
                     answer.add(line.substring(1));
                     justification.add(br.readLine());
                     currentExam.setIsCorrectExam(true, i, counter);
+                    currentExam.setNumCorrectAsnwers(counter);
                     } else {
                         answer.add(line);
                         justification.add(br.readLine());
@@ -257,5 +258,11 @@ public class PresentExamController extends TemplateExam{
 
     public void setResultExamC(int numCorrectQuestions){
         currentExam.setResultExam(numCorrectQuestions);
+    }
+
+    public void computeResultQuestion(int numCorrectQuestions){
+        //hay que cambiarlo a float
+        int result=currentExam.getNumberAnswersExam(numCorrectQuestions)/currentExam.getNumCorrectAnswersExam(numCorrectQuestions);
+        currentExam.setResultExam(result);
     }
 }

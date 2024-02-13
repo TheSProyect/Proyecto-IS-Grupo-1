@@ -1,1 +1,6 @@
-Instrucciones
+Sea bienvenido al examen. para realizarlo con exito siga estas instrucciones:
+
+1. Hay contador en la parte superior izquierda de la pantalla que indica el tiempo maximo para responder el examen.
+2. El examen constara de preguntas simples y multiples.
+3. Puede cambiar de pregunta usando los botones 'Siguiente' y 'Anterior', o seleccionando la pregunta en el panel izquierdo.
+4. Al final del examen, recibiras un informe con tu puntuacion y la justificacion de las respuestas incorrectas.

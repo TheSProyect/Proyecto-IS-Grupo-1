@@ -13,15 +13,15 @@ import main.utils.Directory;
 public class EditProfileController {
     UserData currentUser = UserData.instance();
 
-    public EditProfileController() throws IOException{
+    public EditProfileController(){
         
         
     }
 
-    public boolean setNewUsername(String newUsername) throws IOException{
+    public boolean setNewUsername(String newUsername){
         
 
-        if(newUsername == currentUser.getUsername()){
+        if(newUsername == currentUser.getUsername() || newUsername.equals("")){
             return true;
         }
 
@@ -39,18 +39,34 @@ public class EditProfileController {
 
     }
 
-    public void setNewUserInfo(String newMail, String newPassword) throws IOException{
+    public void setNewUserInfo(String newMail, String newPassword){
         UserData currentUser = UserData.instance();
+
+        if(!newMail.equals("")){
         currentUser.setMail(newMail);
+        } else {
+            newMail = currentUser.getMail();
+        }
+
+        if(!newPassword.equals("")){
         currentUser.setPassword(newPassword);
+        } else {
+            newPassword = currentUser.getPassword();
+        }
 
         String directory;
 
         directory = searchedDirectory(currentUser.isAdmin(), currentUser.getUsername());
-
-        BufferedWriter writer = new BufferedWriter(new FileWriter(directory, true));
-        writer.write(newPassword + "\n" + newMail);
-        writer.close();
+        BufferedWriter writer;
+        try {
+            writer = new BufferedWriter(new FileWriter(directory, false));
+            writer.write(newPassword + "\n" + newMail);
+            writer.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
 
     }
 
@@ -61,7 +77,7 @@ public class EditProfileController {
 		directory = directory+File.separator+"Teachers"+File.separator+Username+File.separator+"Password.txt";
         } else {
             directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users";
-		    directory = directory+File.separator+"Users"+File.separator+Username+File.separator+"Password.txt";
+		    directory = directory+File.separator+"Students"+File.separator+Username+File.separator+"Password.txt";
         }
         return directory;
 	}

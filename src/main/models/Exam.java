@@ -46,12 +46,14 @@ public class Exam extends Course{
     public void setNumberAnswers(int counter, int number){
         questions.get(counter).setNumberAnswers(number);
     }
-    
+    public void setNumCorrectAsnwers(int counter){
+        questions.get(counter).setNumCorrectAsnwers();
+    }
     public void setResultExam(int numCorrectQuestions){
         results = new Result();
         results.setScore(numCorrectQuestions);
     }
-    
+   
     public int getResultExam(){
         return results.getScore();
     }
@@ -71,6 +73,9 @@ public class Exam extends Course{
         return questions.get(counterQuestion).getOptionsQuestion(counterAnswer);
     }
     
+    public int getNumCorrectAnswersExam(int counter){
+        return questions.get(counter).getNumCorrectAnswers();
+    }
     public int getNumberAnswersExam(int counter){
         return questions.get(counter).getNumberAnswers();
     }

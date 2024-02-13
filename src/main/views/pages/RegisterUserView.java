@@ -12,6 +12,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import main.controllers.RegisterUserController;
 import main.utils.Palette;
 import main.utils.Size;
 import main.views.components.Button;
@@ -19,60 +20,27 @@ import main.views.components.PlaceholderTextField;
 import main.views.components.PopUp;
 import main.views.components.SingleOptionButton;
 
-public class RegisterUserView extends EditProfileView{
+public class RegisterUserView extends UserTemplateView{
+    PlaceholderTextField emailTextField;
+    PlaceholderTextField userFirstName;
+    PlaceholderTextField usertLastName;
     Button cancelButton;
     Button SignatureButton;
     RegisterUserPopUp popup;
     SingleOptionButton Admin;
     ButtonGroup group;
 
-    protected void buildFrame() {
-        Frame.instance().setTitle("RegisterUserView");
-        this.setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
-    }
-
-    protected void buildLoginPanelBorders(JPanel loginPanel) {
-        JPanel border = new JPanel();
-        border.setPreferredSize(Size.instance().getRegisterTopBottomBoder());
-        border.setBackground(Palette.instance().getWhite());
-        loginPanel.add(border, BorderLayout.NORTH);
-
-        border = new JPanel();
-        border.setPreferredSize(Size.instance().getRegisterTopBottomBoder());
-        border.setBackground(Palette.instance().getWhite());
-        loginPanel.add(border, BorderLayout.SOUTH);
-
-        border = new JPanel();
-        border.setPreferredSize(Size.instance().getLogInSideBoder());
-        border.setBackground(Palette.instance().getWhite());
-        loginPanel.add(border, BorderLayout.WEST);
-
-        border = new JPanel();
-        border.setPreferredSize(Size.instance().getLogInSideBoder());
-        border.setBackground(Palette.instance().getWhite());
-        loginPanel.add(border, BorderLayout.EAST);
-    }
-
     
-    protected void paintLoginTitleLabel(JPanel infoContainer) {
-        JLabel loginTitleLabel = new JLabel();
-        loginTitleLabel.setText("Registrar Usuario");
-        loginTitleLabel.setFont(new Font("Nunito Sans", Font.BOLD, 30));
-        loginTitleLabel.setForeground(Palette.instance().getBlack());
-        loginTitleLabel.setHorizontalAlignment(JLabel.CENTER);
-        loginTitleLabel.setVerticalAlignment(JLabel.BOTTOM);
-        
-        infoContainer.add(loginTitleLabel);
-    }
 
-    protected void paintLoginText(JPanel infoContainer) {
-        JLabel loginTextLabel = new JLabel();
-        loginTextLabel.setText("<html>Ingrese los datos para registrar a<br/>un nuevo usuario en TéchneLogic</html>");
-        loginTextLabel.setFont(new Font("Nunito Sans", Font.PLAIN, 15));
-        loginTextLabel.setForeground(Palette.instance().getGray());
-        loginTextLabel.setHorizontalAlignment(JLabel.CENTER);
+    public RegisterUserView(){
+        Title = "Registrar Usuario";
+        CurrentText = "Ingrese los datos para registrar a<br/>un nuevo usuario en TéchneLogic";
+        ButtonText = "Registrar";
 
-        infoContainer.add(loginTextLabel);
+        buildFrame("RegisterUserView");
+        paintTitlePanel('y', "SingIn");
+        paintUserDataPanel();
+
     }
 
     protected void paintTextFields(JPanel infoContainer) {
@@ -89,6 +57,28 @@ public class RegisterUserView extends EditProfileView{
         infoContainer.add(emailTextField);
         infoContainer.add(passwordTextField);
         paintAdminContainer(infoContainer);
+    }
+
+    protected void buildUserDataPanelBorders(JPanel UserDataPanel){
+        JPanel border = new JPanel();
+        border.setPreferredSize(Size.instance().getRegisterTopBottomBoder());
+        border.setBackground(Palette.instance().getWhite());
+        UserDataPanel.add(border, BorderLayout.NORTH);
+
+        border = new JPanel();
+        border.setPreferredSize(Size.instance().getRegisterTopBottomBoder());
+        border.setBackground(Palette.instance().getWhite());
+        UserDataPanel.add(border, BorderLayout.SOUTH);
+
+        border = new JPanel();
+        border.setPreferredSize(Size.instance().getLogInSideBoder());
+        border.setBackground(Palette.instance().getWhite());
+        UserDataPanel.add(border, BorderLayout.WEST);
+
+        border = new JPanel();
+        border.setPreferredSize(Size.instance().getLogInSideBoder());
+        border.setBackground(Palette.instance().getWhite());
+        UserDataPanel.add(border, BorderLayout.EAST);
     }
 
     protected void paintAdminContainer(JPanel infoContainer) {
@@ -122,30 +112,38 @@ public class RegisterUserView extends EditProfileView{
         buttonContainer.add(cancelButton);
         cancelButton.addActionListener(this);
         
-        loginButton = new Button("Registrar");
-        loginButton.setPreferredSize(Size.instance().getSmallLoginButton());
-        buttonContainer.add(loginButton);
-        loginButton.addActionListener(this);
+        ContinueButton = new Button("Registrar");
+        ContinueButton.setPreferredSize(Size.instance().getSmallLoginButton());
+        buttonContainer.add(ContinueButton);
+        ContinueButton.addActionListener(this);
         
         infoContainer.add(buttonContainer);
     }
 
     private void ActionEventInRegisterButton(ActionEvent e) {
-        if(e.getSource() == loginButton) {
-        AdminExamsView.instance().paintNavBar();
-        Frame.instance().setView(AdminExamsView.instance());
+        if(e.getSource() == ContinueButton) {
+            /* */
+            if(userTextField.getTextField().equals("") || emailTextField.getTextField().equals("") || passwordTextField.getTextField().equals("") || userFirstName.getTextField().equals("") || usertLastName.getTextField().equals("")){
+                setErrorMessage(errorLabel, "Se deben llenar todos los campos");
+            } else {
+            RegisterUserController RegisterControl = new RegisterUserController();
+
+            if(RegisterControl.RegisterNewUser(userTextField.getTextField(), Admin.getButton().isSelected())){
+                RegisterControl.setNewUserName(userFirstName.getTextField(), usertLastName.getTextField());
+                RegisterControl.setNewUserPassword(passwordTextField.getTextField());
+                AdminExamsView.instance().paintNavBar();
+                Frame.instance().setView(AdminExamsView.instance());
 
             popup = new RegisterUserPopUp("Usuario");
             PopUp.instance(Size.instance().getRegisterUserPopUpDimension()).setView(popup);
             popup.getButton().addActionListener(this);
+            } else {
+                setErrorMessage(errorLabel, "Nombre de usuario no disponible");
+            }
+        }
+        
         }         
 
-        //this should pass controller
-        if (e.getSource() == loginButton && Admin.getButton().isSelected()) {
-            System.out.println("Registraste un Profesor");
-        } else if (e.getSource() == loginButton && !Admin.getButton().isSelected()) {
-            System.out.println("Registraste un usuario");
-        }
     } 
 
     private void ActionEventInPopUp(ActionEvent e) {

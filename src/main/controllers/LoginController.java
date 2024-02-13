@@ -37,6 +37,9 @@ public class LoginController {
 			
 			String currentPassword = userR.readLine();
 			currentUser.setPassword(currentPassword);
+
+			String currentMail = userR.readLine();
+			currentUser.setMail(currentMail);
 			
 			currentUser.setIsAdmin(false);
 			return true;

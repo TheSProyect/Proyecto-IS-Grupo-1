@@ -1,4 +1,6 @@
 package main.views.pages;
+import main.views.components.PopUp;
+import main.views.components.QuestionPanel;
 import main.views.components.Slider;
 
 import java.awt.BorderLayout;
@@ -19,7 +21,9 @@ import main.utils.Palette;
 
 public class ExamsView extends HelpBarTemplateView {
     protected static ExamsView examView;
-    
+    boolean actionEnable;
+    ExamsViewPopUp popup;
+
     Slider slider;
     List<JButton> presentExamButtons;
     List<String[]> examsIDs;
@@ -125,13 +129,24 @@ public class ExamsView extends HelpBarTemplateView {
         }        
     }
 
+    protected void actionEventInBottomLeftButton(ActionEvent e, String[] examId, PresentExamController presentExamController) {
+            popup = new ExamsViewPopUp(examId, presentExamController );
+            PopUp.instance(new Dimension(500, 400)).setView(popup);
+
+            popup.getButton(0).addActionListener(this);
+            popup.getButton(1).addActionListener(this);
+    }
+    
     protected void actionEventInCourseCard(ActionEvent e) {
         for (int i = 0; i < presentExamButtons.size(); i++) {
             if (e.getSource() == presentExamButtons.get(i)) {
-                Frame.instance().setView(new ExamView(presentExamController, examsIDs.get(i)));
+                actionEventInBottomLeftButton(e, examsIDs.get(i), presentExamController);
+                
+                //Frame.instance().setView(new ExamView(presentExamController, examsIDs.get(i)));
             }
         }
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -16,12 +16,17 @@ public class RegisterUserController {
     boolean isAdmin;
     String newUsername;
     
-    public RegisterUserController() throws IOException{
+    public RegisterUserController(){
         
         
     }
 
-    public boolean RegisterNewUser(String Username, boolean isAdmin) throws IOException{
+    public boolean RegisterNewUser(String Username, boolean isAdmin){
+
+        if(searchUser(Username)){
+            return false;
+        }
+
         String FileName;
         
         if(isAdmin){
@@ -37,10 +42,20 @@ public class RegisterUserController {
         
         if(newUserFile.mkdir()){
             newUserFile = new File(FileName+File.separator+"Password.txt");
-            newUserFile.createNewFile();
+            try {
+                newUserFile.createNewFile();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
 
             newUserFile = new File(FileName+File.separator+"Name.txt");
-            newUserFile.createNewFile();
+            try {
+                newUserFile.createNewFile();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
 
             return true;
         } else {
@@ -61,6 +76,7 @@ public class RegisterUserController {
             FileName = Directory.instance().getDirectoryStudents()+File.separator+newUsername;
             this.isAdmin = false;
         }
+        FileName = FileName+File.separator+"Password.txt";
         writeFile(FileName, newUserPassword);
 
     }
@@ -74,6 +90,7 @@ public class RegisterUserController {
             FileName = Directory.instance().getDirectoryStudents()+File.separator+newUsername;
             this.isAdmin = false;
         }
+        FileName = FileName+File.separator+"Name.txt";
         writeFile(FileName, newUserFirstname+"\n"+newUserLastname);
 
     }
