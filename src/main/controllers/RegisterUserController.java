@@ -76,6 +76,7 @@ public class RegisterUserController {
             FileName = Directory.instance().getDirectoryStudents()+File.separator+newUsername;
             this.isAdmin = false;
         }
+        FileName = FileName+File.separator+"Password.txt";
         writeFile(FileName, newUserPassword);
 
     }
@@ -89,6 +90,7 @@ public class RegisterUserController {
             FileName = Directory.instance().getDirectoryStudents()+File.separator+newUsername;
             this.isAdmin = false;
         }
+        FileName = FileName+File.separator+"Name.txt";
         writeFile(FileName, newUserFirstname+"\n"+newUserLastname);
 
     }

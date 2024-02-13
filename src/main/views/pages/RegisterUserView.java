@@ -133,28 +133,28 @@ public class RegisterUserView extends EditProfileView{
 
     private void ActionEventInRegisterButton(ActionEvent e) {
         if(e.getSource() == loginButton) {
+            /* */
+            if(userTextField.getTextField().equals("") || emailTextField.getTextField().equals("") || passwordTextField.getTextField().equals("") || userFirstName.getTextField().equals("") || usertLastName.getTextField().equals("")){
+                setErrorMessage(errorLabel, "Se deben llenar todos los campos");
+            } else {
             RegisterUserController RegisterControl = new RegisterUserController();
 
-            if(!RegisterControl.RegisterNewUser(userTextField.getTextField(), Admin.getButton().isSelected())){
-
-            } else {
+            if(RegisterControl.RegisterNewUser(userTextField.getTextField(), Admin.getButton().isSelected())){
                 RegisterControl.setNewUserName(userFirstName.getTextField(), usertLastName.getTextField());
                 RegisterControl.setNewUserPassword(passwordTextField.getTextField());
-            AdminExamsView.instance().paintNavBar();
-            Frame.instance().setView(AdminExamsView.instance());
+                AdminExamsView.instance().paintNavBar();
+                Frame.instance().setView(AdminExamsView.instance());
 
             popup = new RegisterUserPopUp("Usuario");
             PopUp.instance(Size.instance().getRegisterUserPopUpDimension()).setView(popup);
             popup.getButton().addActionListener(this);
+            } else {
+                setErrorMessage(errorLabel, "Nombre de usuario no disponible");
             }
+        }
+        
         }         
 
-        //this should pass controller
-        if (e.getSource() == loginButton && Admin.getButton().isSelected()) {
-            System.out.println("Registraste un Profesor");
-        } else if (e.getSource() == loginButton && !Admin.getButton().isSelected()) {
-            System.out.println("Registraste un usuario");
-        }
     } 
 
     private void ActionEventInPopUp(ActionEvent e) {
