@@ -181,8 +181,6 @@ public abstract class UserTemplateView extends JPanel implements ActionListener 
         this.errorLabel.setHorizontalAlignment(JLabel.CENTER);
         this.errorLabel.setVerticalAlignment(JLabel.BOTTOM);
         this.errorLabel.setVisible(false);
-        this.errorLabel.setText("aaa");
-        this.errorLabel.setVisible(true);
         
         
         infoContainer.add(errorLabel);
