@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -20,12 +19,9 @@ import main.views.components.PlaceholderTextField;
 import main.views.components.PopUp;
 import main.views.components.SingleOptionButton;
 
-public class RegisterUserView extends LogInView{
+public class RegisterUserView extends EditProfileView{
     Button cancelButton;
     Button SignatureButton;
-    PlaceholderTextField emailTextField;
-    PlaceholderTextField userFirstName;
-    PlaceholderTextField usertLastName;
     RegisterUserPopUp popup;
     SingleOptionButton Admin;
     ButtonGroup group;
@@ -58,27 +54,6 @@ public class RegisterUserView extends LogInView{
     }
 
     
-    protected void paintTitlePanel() {
-        JPanel titlePanel = new JPanel();
-        titlePanel.setBackground(Palette.instance().getYellow());
-        titlePanel.setPreferredSize(new Dimension(546,720));
-
-        titlePanel.setLayout(new BorderLayout());
-
-        paintTitleLabel(titlePanel);
-
-        this.add(titlePanel);
-    }
-
-    protected void paintTitleLabel(JPanel titlePanel) {
-        JLabel titleLabel = new JLabel();
-        ImageIcon icon = new ImageIcon("src/assets/Logo_SingIn.png");
-        titleLabel.setIcon(icon);
-        titleLabel.setHorizontalAlignment(JLabel.CENTER);
-        
-        titlePanel.add(titleLabel, BorderLayout.CENTER);
-    }
-
     protected void paintLoginTitleLabel(JPanel infoContainer) {
         JLabel loginTitleLabel = new JLabel();
         loginTitleLabel.setText("Registrar Usuario");
@@ -173,7 +148,7 @@ public class RegisterUserView extends LogInView{
         }
     } 
 
-    private void actionEventInPopUp(ActionEvent e) {
+    private void ActionEventInPopUp(ActionEvent e) {
         if (popup == null){
             return;
         } else if (e.getSource() == popup.getButton()) {
@@ -194,14 +169,14 @@ public class RegisterUserView extends LogInView{
 
     }
 
-    private void actionEventInAdminButton(ActionEvent e) {
+    private void ActionEventInAdminButton(ActionEvent e) {
         if (e.getSource() == Admin.getButton()) {
             Admin.paintIcon();
             paintSignatureButton();
         }
     }
     
-    private void actionEventInSignatureButton(ActionEvent e) {
+    private void ActionEventInSignatureButton(ActionEvent e) {
         if(e.getSource() == SignatureButton) {
             System.out.println("Add image");
         }
@@ -212,13 +187,11 @@ public class RegisterUserView extends LogInView{
         if (e.getSource() == cancelButton) {
             AdminExamsView.instance().paintNavBar();
             Frame.instance().setView(AdminExamsView.instance());
-        } else if (e.getSource() == loginButton) {
-           ActionEventInRegisterButton(e);
         }
-
-        actionEventInAdminButton(e);
-        actionEventInPopUp(e);
-        actionEventInSignatureButton(e);
+        ActionEventInRegisterButton(e);
+        ActionEventInAdminButton(e);
+        ActionEventInPopUp(e);
+        ActionEventInSignatureButton(e);
     }
 }
 

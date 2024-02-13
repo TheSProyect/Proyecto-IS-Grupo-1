@@ -1,5 +1,6 @@
 package main.views.pages;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -14,8 +15,32 @@ import main.utils.Size;
 import main.views.components.Button;
 import main.views.components.PlaceholderTextField;
 
-public class EditProfileView extends RegisterUserView{
-   
+public class EditProfileView extends LogInView{
+    PlaceholderTextField emailTextField;
+    PlaceholderTextField userFirstName;
+    PlaceholderTextField usertLastName;
+
+    protected void paintTitlePanel() {
+        JPanel titlePanel = new JPanel();
+        titlePanel.setBackground(Palette.instance().getYellow());
+        titlePanel.setPreferredSize(new Dimension(546,720));
+
+        titlePanel.setLayout(new BorderLayout());
+
+        paintTitleLabel(titlePanel);
+
+        this.add(titlePanel);
+    }
+
+    protected void paintTitleLabel(JPanel titlePanel) {
+        JLabel titleLabel = new JLabel();
+        ImageIcon icon = new ImageIcon("src/assets/Logo_SingIn.png");
+        titleLabel.setIcon(icon);
+        titleLabel.setHorizontalAlignment(JLabel.CENTER);
+        
+        titlePanel.add(titleLabel, BorderLayout.CENTER);
+    }
+
     protected void buildLoginPanelBorders(JPanel loginPanel) {
         JPanel border = new JPanel();
         border.setPreferredSize(Size.instance().getEditProfileTopBottomBoder());
