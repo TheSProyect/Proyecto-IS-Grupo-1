@@ -62,6 +62,8 @@ public class HelpBar extends JPanel implements ActionListener{
             Frame.instance().setTitle("HelpView");
         } else if (e.getSource() == editProfileButton) {
             Frame.instance().setView(new EditProfileView());
+            Frame.instance().setTitle("EditProfileView");
+
         }
     }
 }

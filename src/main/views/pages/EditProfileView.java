@@ -90,6 +90,7 @@ public class EditProfileView extends RegisterUserView{
      public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginButton) {
             System.out.println("This should Edit Profile info");
+            Frame.instance().setTitle("ExamsView");
             Frame.instance().setView(ExamsView.instance());
         }
     }
