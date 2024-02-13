@@ -1,19 +1,32 @@
 package test.controllers;
 import org.junit.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import main.controllers.RequestCertificateController;
 import main.utils.UserData;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.*;
+
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.Answers.*;
+import org.mockito.exceptions.base.MockitoException;
 //import java.nio.file.Files;
 //import java.nio.file.Paths;
+//@ExtendWith(MockitoExtension.class);
 
 public class RequestCertificateControllerTest {
-    RequestCertificateController controller = new RequestCertificateController();
+    //@Mock
+    //private UserData currentUser;
+
+    //@InjectMocks
+    
     String course;
     String directory = System.getProperty("user.dir");
     String nameFolderStudent = "Usuario";
+    RequestCertificateController controller = new RequestCertificateController(nameFolderStudent);
     
 
     @Test
@@ -24,7 +37,7 @@ public class RequestCertificateControllerTest {
             File[] files = searchedFolder.listFiles();
             if (files != null) {
             for (File fileExam : files) {
-                if(!(fileExam.getName().equals("Password.txt")) && !(fileExam.getName().startsWith(nameFolderStudent))){
+                if(!(fileExam.getName().equals("Password.txt")) && !(fileExam.getName().startsWith(nameFolderStudent)) && !(fileExam.getName().startsWith("Name"))){
                     course=fileExam.getName();
                 } 
                 
@@ -65,7 +78,7 @@ public class RequestCertificateControllerTest {
             if (files != null) {
                 int i=0;
                 for (File fileCertificate : files) {
-                    if(!(fileCertificate.getName().equals("Password.txt")) && !(fileCertificate.getName().startsWith(nameFolderStudent))){
+                    if(!(fileCertificate.getName().equals("Password.txt")) && !(fileCertificate.getName().startsWith(nameFolderStudent))&& !(fileCertificate.getName().startsWith("Name"))){
                         courseName=fileCertificate.getName();
                         courseName = courseName.substring(0, courseName.length()-4);
                         Assert.assertEquals(courseName, certificate.get(i));

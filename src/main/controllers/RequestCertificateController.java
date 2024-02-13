@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.models.Certificate;
+import main.utils.UserData;
 
 
 public class RequestCertificateController extends TemplateExam{
@@ -15,6 +16,9 @@ public class RequestCertificateController extends TemplateExam{
 
     public RequestCertificateController(){
         
+    }
+    public RequestCertificateController(String user){
+        UserData.instance().setUsername(user);
     }
     
     public static void main(String[] args) throws IOException{
