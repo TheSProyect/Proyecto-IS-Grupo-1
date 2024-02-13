@@ -20,7 +20,7 @@ import main.views.components.Button;
 import main.views.components.PlaceholderTextField;
 
 public class LogInView extends JPanel implements ActionListener {
-    Button registerButton;
+    Button loginButton;
     JLabel errorLabel;
     
     PlaceholderTextField userTextField;
@@ -71,14 +71,14 @@ public class LogInView extends JPanel implements ActionListener {
         this.add(loginPanel);
     }
 
-    private void buildLoginPanelBorders(JPanel loginPanel) {
+    protected void buildLoginPanelBorders(JPanel loginPanel) {
         JPanel border = new JPanel();
-        border.setPreferredSize(Size.instance().getLogInTopBottomBoder());
+        border.setPreferredSize(Size.instance().getLoginTopBottomBoder());
         border.setBackground(Palette.instance().getWhite());
         loginPanel.add(border, BorderLayout.NORTH);
 
         border = new JPanel();
-        border.setPreferredSize(Size.instance().getLogInTopBottomBoder());
+        border.setPreferredSize(Size.instance().getLoginTopBottomBoder());
         border.setBackground(Palette.instance().getWhite());
         loginPanel.add(border, BorderLayout.SOUTH);
 
@@ -153,10 +153,10 @@ public class LogInView extends JPanel implements ActionListener {
         buttonContainer.setBackground(Palette.instance().getWhite());
         buttonContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 0));
 
-        registerButton = new Button("Entrar");
-        registerButton.setPreferredSize(Size.instance().getBigLoginButton());
-        buttonContainer.add(registerButton);
-        registerButton.addActionListener(this);
+        loginButton = new Button("Entrar");
+        loginButton.setPreferredSize(Size.instance().getBigLoginButton());
+        buttonContainer.add(loginButton);
+        loginButton.addActionListener(this);
         
         infoContainer.add(buttonContainer);
     }
@@ -179,7 +179,7 @@ public class LogInView extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == registerButton) {
+        if (e.getSource() == loginButton) {
             LoginController LoginControl = new LoginController();
             
             if(userTextField.getTextField().equals("") || passwordTextField.getTextField().equals("")){

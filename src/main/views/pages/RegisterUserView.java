@@ -13,8 +13,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.hamcrest.core.SubstringMatcher;
-
 import main.utils.Palette;
 import main.utils.Size;
 import main.views.components.Button;
@@ -34,9 +32,31 @@ public class RegisterUserView extends LogInView{
 
     protected void buildFrame() {
         Frame.instance().setTitle("RegisterUserView");
-        
         this.setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
     }
+
+    protected void buildLoginPanelBorders(JPanel loginPanel) {
+        JPanel border = new JPanel();
+        border.setPreferredSize(Size.instance().getRegisterTopBottomBoder());
+        border.setBackground(Palette.instance().getWhite());
+        loginPanel.add(border, BorderLayout.NORTH);
+
+        border = new JPanel();
+        border.setPreferredSize(Size.instance().getRegisterTopBottomBoder());
+        border.setBackground(Palette.instance().getWhite());
+        loginPanel.add(border, BorderLayout.SOUTH);
+
+        border = new JPanel();
+        border.setPreferredSize(Size.instance().getLogInSideBoder());
+        border.setBackground(Palette.instance().getWhite());
+        loginPanel.add(border, BorderLayout.WEST);
+
+        border = new JPanel();
+        border.setPreferredSize(Size.instance().getLogInSideBoder());
+        border.setBackground(Palette.instance().getWhite());
+        loginPanel.add(border, BorderLayout.EAST);
+    }
+
     
     protected void paintTitlePanel() {
         JPanel titlePanel = new JPanel();
@@ -127,16 +147,16 @@ public class RegisterUserView extends LogInView{
         buttonContainer.add(cancelButton);
         cancelButton.addActionListener(this);
         
-        registerButton = new Button("Registrar");
-        registerButton.setPreferredSize(Size.instance().getSmallLoginButton());
-        buttonContainer.add(registerButton);
-        registerButton.addActionListener(this);
+        loginButton = new Button("Registrar");
+        loginButton.setPreferredSize(Size.instance().getSmallLoginButton());
+        buttonContainer.add(loginButton);
+        loginButton.addActionListener(this);
         
         infoContainer.add(buttonContainer);
     }
 
-    protected void ActionEventInRegisterButton(ActionEvent e) {
-        if(e.getSource() == registerButton) {
+    private void ActionEventInRegisterButton(ActionEvent e) {
+        if(e.getSource() == loginButton) {
         AdminExamsView.instance().paintNavBar();
         Frame.instance().setView(AdminExamsView.instance());
 
@@ -146,9 +166,9 @@ public class RegisterUserView extends LogInView{
         }         
 
         //this should pass controller
-        if (e.getSource() == registerButton && Admin.getButton().isSelected()) {
+        if (e.getSource() == loginButton && Admin.getButton().isSelected()) {
             System.out.println("Registraste un Profesor");
-        } else if (e.getSource() == registerButton && !Admin.getButton().isSelected()) {
+        } else if (e.getSource() == loginButton && !Admin.getButton().isSelected()) {
             System.out.println("Registraste un usuario");
         }
     } 
@@ -192,7 +212,7 @@ public class RegisterUserView extends LogInView{
         if (e.getSource() == cancelButton) {
             AdminExamsView.instance().paintNavBar();
             Frame.instance().setView(AdminExamsView.instance());
-        } else if (e.getSource() == registerButton) {
+        } else if (e.getSource() == loginButton) {
            ActionEventInRegisterButton(e);
         }
 
