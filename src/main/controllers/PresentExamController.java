@@ -15,12 +15,20 @@ public class PresentExamController extends TemplateExam{
     public static void main(String[] args) throws IOException{
         PresentExamController p = new PresentExamController();
     }
-    public List<String> getInstructions(){
+    public List<String> getInstructions(String [] informationsExam) {
+        int INDEX_FOR_NAME_EXAM = 0, INDEX_FOR_NAME_COURSE = 1, INDEX_FOR_DURATION = 4;
         List<String> instrucionsInformation = new ArrayList<String>();
-        String line, duration, directory = currentDirectory.getDirectoryExams() + File.separator + "Instructions.txt";
+        String line, duration = "0", directory = currentDirectory.getDirectoryExams() + File.separator + "Instructions.txt";
+        try (BufferedReader bl = new BufferedReader(new FileReader(currentDirectory.getDirectoryExams() + File.separator + informationsExam[INDEX_FOR_NAME_COURSE]+ File.separator + informationsExam[INDEX_FOR_NAME_EXAM]+ File.separator + informationsExam[INDEX_FOR_NAME_EXAM]+ ".txt"))){
+            for(int i = 0; i<=INDEX_FOR_DURATION; i++){
+                duration = bl.readLine();
+                }
+            bl.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
-            instrucionsInformation.add(currentExam.getNameExam());
-            duration = Integer.toString(currentExam.getDuration());
+            instrucionsInformation.add(informationsExam[INDEX_FOR_NAME_EXAM]);
             instrucionsInformation.add(duration);
             while ((line = br.readLine()) != null) {
                 instrucionsInformation.add(line);
