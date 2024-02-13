@@ -9,9 +9,12 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
+import main.controllers.EditProfileController;
 import main.utils.Palette;
 import main.utils.Size;
+import main.utils.UserData;
 import main.views.components.Button;
 import main.views.components.PlaceholderTextField;
 
@@ -85,13 +88,11 @@ public class EditProfileView extends LogInView{
     }
 
     protected void paintTextFields(JPanel infoContainer) {
-        userFirstName = new PlaceholderTextField("Nombre", "Document_Icon.png");
-        usertLastName = new PlaceholderTextField("Apellido", "Document_Icon.png");
-        emailTextField = new PlaceholderTextField("Correo electronico", "Mail_Login_Icon.png");
-        passwordTextField = new PlaceholderTextField("Contraseña", "Unlock_Login_Icon.png");
+        userTextField = new PlaceholderTextField(UserData.instance().getUsername(), "User_Login_Icon.png");
+        emailTextField = new PlaceholderTextField(UserData.instance().getMail(), "Mail_Login_Icon.png");
+        passwordTextField = new PlaceholderTextField(UserData.instance().getPassword(), "Unlock_Login_Icon.png");
     
-        infoContainer.add(userFirstName);
-        infoContainer.add(usertLastName);
+        infoContainer.add(userTextField);
         infoContainer.add(emailTextField);
         infoContainer.add(passwordTextField);
         } 
@@ -114,7 +115,17 @@ public class EditProfileView extends LogInView{
     @Override
      public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginButton) {
-            System.out.println("This should Edit Profile info");
+            try {
+                EditProfileController EditController = new EditProfileController();
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            //System.out.println("This should Edit Profile info");
+
+            EditProfileController.
+
+
             Frame.instance().setView(ExamsView.instance());
             Frame.instance().setTitle("ExamsView");
 
