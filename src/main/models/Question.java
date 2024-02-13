@@ -9,6 +9,7 @@ public class Question {
     private String domain;
     private Line[] lines;
     private int numberAnswers;
+    private int numCorrectAnswers=0;
     private List<Answer> answers = new ArrayList<>(); 
 
     
@@ -32,6 +33,9 @@ public class Question {
 
     public int getNumberAnswers(){
         return numberAnswers;
+    }
+    public int getNumCorrectAnswers(){
+        return numCorrectAnswers;
     }
     
     public String getAnswersQuestions(int counter){
@@ -57,5 +61,9 @@ public class Question {
 
     public void setNumberAnswers(int number){
         numberAnswers=number;
+    }
+
+    public void setNumCorrectAsnwers(){
+        numCorrectAnswers++;
     }
 }
