@@ -1,20 +1,14 @@
 package main.views.pages;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 
 import main.controllers.EditProfileController;
 import main.utils.Palette;
 import main.utils.Size;
 import main.utils.UserData;
-import main.views.components.Button;
 import main.views.components.PlaceholderTextField;
 
 public class EditProfileView extends UserTemplateView{

@@ -12,22 +12,17 @@ import java.awt.FlowLayout;
 
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.plaf.metal.MetalButtonUI;
-import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-import javax.swing.text.StyledEditorKit;
 
 import main.controllers.PresentExamController;
 import main.utils.Palette;
@@ -65,7 +60,6 @@ public class ExamsViewPopUp extends PopUpTemplate{
             instructionString += instructions.get(i) + "\n";
         }
         scrollContent(instructionString, contentPanel);
-        // paintContent(, contentPanel);
         
         paintButtons(contentPanel);
         this.add(contentPanel, FlowLayout.CENTER);    

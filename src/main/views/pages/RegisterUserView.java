@@ -3,13 +3,10 @@ package main.views.pages;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.controllers.RegisterUserController;
@@ -29,8 +26,6 @@ public class RegisterUserView extends UserTemplateView{
     RegisterUserPopUp popup;
     SingleOptionButton Admin;
     ButtonGroup group;
-
-    
 
     public RegisterUserView(){
         Title = "Registrar Usuario";
