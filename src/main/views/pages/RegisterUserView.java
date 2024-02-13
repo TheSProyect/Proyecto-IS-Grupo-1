@@ -12,6 +12,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import main.controllers.RegisterUserController;
 import main.utils.Palette;
 import main.utils.Size;
 import main.views.components.Button;
@@ -132,12 +133,20 @@ public class RegisterUserView extends EditProfileView{
 
     private void ActionEventInRegisterButton(ActionEvent e) {
         if(e.getSource() == loginButton) {
-        AdminExamsView.instance().paintNavBar();
-        Frame.instance().setView(AdminExamsView.instance());
+            RegisterUserController RegisterControl = new RegisterUserController();
+
+            if(!RegisterControl.RegisterNewUser(userTextField.getTextField(), Admin.getButton().isSelected())){
+
+            } else {
+                RegisterControl.setNewUserName(userFirstName.getTextField(), usertLastName.getTextField());
+                RegisterControl.setNewUserPassword(passwordTextField.getTextField());
+            AdminExamsView.instance().paintNavBar();
+            Frame.instance().setView(AdminExamsView.instance());
 
             popup = new RegisterUserPopUp("Usuario");
             PopUp.instance(Size.instance().getRegisterUserPopUpDimension()).setView(popup);
             popup.getButton().addActionListener(this);
+            }
         }         
 
         //this should pass controller

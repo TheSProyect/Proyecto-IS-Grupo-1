@@ -9,7 +9,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 
 import main.controllers.EditProfileController;
 import main.utils.Palette;
@@ -112,22 +111,40 @@ public class EditProfileView extends LogInView{
         infoContainer.add(buttonContainer);
     }
 
+    protected void paintErrorLabel(JPanel infoContainer) {
+        this.errorLabel = new JLabel();
+        errorLabel.setFont(new Font("Nunito Sans", Font.PLAIN, 14));
+        errorLabel.setForeground(Palette.instance().getRed());
+        errorLabel.setHorizontalAlignment(JLabel.CENTER);
+        errorLabel.setVerticalAlignment(JLabel.BOTTOM);
+        errorLabel.setVisible(false);
+        
+        infoContainer.add(errorLabel);
+    }
+
+    public void setErrorMessage(JLabel errorLabel, String errorType){
+        errorLabel.setText(errorType);
+        errorLabel.setVisible(true);
+    }
+
     @Override
      public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginButton) {
-            try {
-                EditProfileController EditController = new EditProfileController();
-            } catch (IOException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
+            EditProfileController EditController = new EditProfileController();
+            
+
+            if(EditController.setNewUsername(userTextField.getTextField())){
+                EditController.setNewUserInfo(emailTextField.getTextField(), passwordTextField.getTextField());
+                
+                Frame.instance().setView(ExamsView.instance());
+                Frame.instance().setTitle("ExamsView");
+            } else {
+                setErrorMessage(errorLabel, "Nombre de Usuario no disponible");
+                
             }
-            //System.out.println("This should Edit Profile info");
+            
+           
 
-            EditProfileController.
-
-
-            Frame.instance().setView(ExamsView.instance());
-            Frame.instance().setTitle("ExamsView");
 
         }
     }
