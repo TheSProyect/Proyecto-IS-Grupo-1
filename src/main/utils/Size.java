@@ -7,7 +7,9 @@ public class Size {
 
     Dimension defaultFrame;
     Dimension logInSideBoder;
-    Dimension logInTopBottomBoder;
+    Dimension loginTopBottomBoder;
+    Dimension RegisterTopBottomBoder;
+    Dimension editProfileTopBottomBoder;
     Dimension smallLoginButton;
     Dimension bigLoginButton;
     Dimension examMenu;
@@ -25,7 +27,9 @@ public class Size {
     Size()  {
         defaultFrame = new Dimension(1024, 720);
         logInSideBoder = new Dimension(80,135);
-        logInTopBottomBoder = new Dimension(478,60);
+        RegisterTopBottomBoder = new Dimension(478,60);
+        loginTopBottomBoder = new Dimension(478,180);
+        editProfileTopBottomBoder = new Dimension(478, 120);
         smallLoginButton = new Dimension(148, 42);
         bigLoginButton = new Dimension(314, 42);
         examMenu = new Dimension(300, 560);
@@ -43,8 +47,16 @@ public class Size {
         return logInSideBoder;
     }
     
-    public Dimension getLogInTopBottomBoder() {
-        return logInTopBottomBoder;
+    public Dimension getLoginTopBottomBoder() {
+        return loginTopBottomBoder;
+    }
+
+    public Dimension getRegisterTopBottomBoder() {
+        return RegisterTopBottomBoder;
+    }
+
+    public Dimension getEditProfileTopBottomBoder() {
+        return editProfileTopBottomBoder;
     }
 
     public Dimension getSmallLoginButton() {

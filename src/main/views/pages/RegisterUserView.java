@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -20,43 +19,41 @@ import main.views.components.PlaceholderTextField;
 import main.views.components.PopUp;
 import main.views.components.SingleOptionButton;
 
-public class RegisterUserView extends LogInView{
+public class RegisterUserView extends EditProfileView{
     Button cancelButton;
     Button SignatureButton;
-    PlaceholderTextField emailTextField;
-    PlaceholderTextField userFirstName;
-    PlaceholderTextField usertLastName;
     RegisterUserPopUp popup;
     SingleOptionButton Admin;
     ButtonGroup group;
 
     protected void buildFrame() {
         Frame.instance().setTitle("RegisterUserView");
-        
         this.setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
     }
+
+    protected void buildLoginPanelBorders(JPanel loginPanel) {
+        JPanel border = new JPanel();
+        border.setPreferredSize(Size.instance().getRegisterTopBottomBoder());
+        border.setBackground(Palette.instance().getWhite());
+        loginPanel.add(border, BorderLayout.NORTH);
+
+        border = new JPanel();
+        border.setPreferredSize(Size.instance().getRegisterTopBottomBoder());
+        border.setBackground(Palette.instance().getWhite());
+        loginPanel.add(border, BorderLayout.SOUTH);
+
+        border = new JPanel();
+        border.setPreferredSize(Size.instance().getLogInSideBoder());
+        border.setBackground(Palette.instance().getWhite());
+        loginPanel.add(border, BorderLayout.WEST);
+
+        border = new JPanel();
+        border.setPreferredSize(Size.instance().getLogInSideBoder());
+        border.setBackground(Palette.instance().getWhite());
+        loginPanel.add(border, BorderLayout.EAST);
+    }
+
     
-    protected void paintTitlePanel() {
-        JPanel titlePanel = new JPanel();
-        titlePanel.setBackground(Palette.instance().getYellow());
-        titlePanel.setPreferredSize(new Dimension(546,720));
-
-        titlePanel.setLayout(new BorderLayout());
-
-        paintTitleLabel(titlePanel);
-
-        this.add(titlePanel);
-    }
-
-    protected void paintTitleLabel(JPanel titlePanel) {
-        JLabel titleLabel = new JLabel();
-        ImageIcon icon = new ImageIcon("src/assets/Logo_SingIn.png");
-        titleLabel.setIcon(icon);
-        titleLabel.setHorizontalAlignment(JLabel.CENTER);
-        
-        titlePanel.add(titleLabel, BorderLayout.CENTER);
-    }
-
     protected void paintLoginTitleLabel(JPanel infoContainer) {
         JLabel loginTitleLabel = new JLabel();
         loginTitleLabel.setText("Registrar Usuario");
@@ -105,9 +102,9 @@ public class RegisterUserView extends LogInView{
         adminContainer.add(Admin);
 
         SignatureButton = new Button("Firma");
-        SignatureButton.setBackground(Palette.instance().getYellow());
-        SignatureButton.setBorder(BorderFactory.createLineBorder(Palette.instance().getYellow()));
         SignatureButton.setPreferredSize(Size.instance().getSmallLoginButton());
+        paintSignatureButton();
+
         adminContainer.add(SignatureButton);
         SignatureButton.addActionListener(this);
         
@@ -133,41 +130,68 @@ public class RegisterUserView extends LogInView{
         infoContainer.add(buttonContainer);
     }
 
-    protected void ActionEventInLoginButton(ActionEvent e) {
+    private void ActionEventInRegisterButton(ActionEvent e) {
         if(e.getSource() == loginButton) {
         AdminExamsView.instance().paintNavBar();
         Frame.instance().setView(AdminExamsView.instance());
 
             popup = new RegisterUserPopUp("Usuario");
             PopUp.instance(Size.instance().getRegisterUserPopUpDimension()).setView(popup);
-
             popup.getButton().addActionListener(this);
-        } 
+        }         
+
+        //this should pass controller
+        if (e.getSource() == loginButton && Admin.getButton().isSelected()) {
+            System.out.println("Registraste un Profesor");
+        } else if (e.getSource() == loginButton && !Admin.getButton().isSelected()) {
+            System.out.println("Registraste un usuario");
+        }
     } 
 
-    private void actionEventInPopUp(ActionEvent e) {
+    private void ActionEventInPopUp(ActionEvent e) {
         if (popup == null){
             return;
         } else if (e.getSource() == popup.getButton()) {
             PopUp.deleteInstance();
         }
     }
+
+    private void paintSignatureButton () {
+        if (Admin.getButton().isSelected()) {
+            SignatureButton.setBackground(Palette.instance().getYellow());
+            SignatureButton.setBorder(BorderFactory.createLineBorder(Palette.instance().getYellow()));
+            SignatureButton.setEnabled(true);
+        } else if (!Admin.getButton().isSelected()) {
+            SignatureButton.setBackground(Palette.instance().getLightGray());
+            SignatureButton.setBorder(BorderFactory.createLineBorder(Palette.instance().getLightGray()));
+            SignatureButton.setEnabled(false);
+        }
+
+    }
+
+    private void ActionEventInAdminButton(ActionEvent e) {
+        if (e.getSource() == Admin.getButton()) {
+            Admin.paintIcon();
+            paintSignatureButton();
+        }
+    }
     
+    private void ActionEventInSignatureButton(ActionEvent e) {
+        if(e.getSource() == SignatureButton) {
+            System.out.println("Add image");
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == cancelButton) {
             AdminExamsView.instance().paintNavBar();
             Frame.instance().setView(AdminExamsView.instance());
-        } else if (e.getSource() == loginButton) {
-            System.out.println("This should call controller");
-            ActionEventInLoginButton(e);
-
-        }else if (e.getSource() == Admin.getButton()) {
-            Admin.paintIcon();
-            System.out.println("This should call controller");
         }
-        actionEventInPopUp(e);
+        ActionEventInRegisterButton(e);
+        ActionEventInAdminButton(e);
+        ActionEventInPopUp(e);
+        ActionEventInSignatureButton(e);
     }
 }
 

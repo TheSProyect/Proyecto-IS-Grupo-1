@@ -71,7 +71,7 @@ public class AdminExamsView extends ExamsView {
     }
 
     private void paintEditExamsButton() {
-        editExam = new Button("Editar Examenes");
+        editExam = new Button("Crear Examen");
         editExam.setPreferredSize(new Dimension(150, 30));
         editExam.setMaximumSize(new Dimension(150, 30));
         editExam.addActionListener(this);
@@ -82,7 +82,7 @@ public class AdminExamsView extends ExamsView {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == editExam) {
-            Frame.instance().setView(new AdminExamView());
+            Frame.instance().setView(new NewExamView());
         }
         actionEventInCourseCard(e);
     }

@@ -38,6 +38,7 @@ public class Exam extends Course{
     public void setAnswersExam(String answer, String justification, int i, int counter){
         questions.get(counter).setAnswersQuestions(answer, justification, i);
     }
+    
     public void setIsCorrectExam(Boolean isCorrect, int i, int counter){
         questions.get(counter).setIsCorrectQuestions(isCorrect, i);
     }
@@ -45,25 +46,31 @@ public class Exam extends Course{
     public void setNumberAnswers(int counter, int number){
         questions.get(counter).setNumberAnswers(number);
     }
+    
     public void setResultExam(int numCorrectQuestions){
         results = new Result();
         results.setScore(numCorrectQuestions);
     }
+    
     public int getResultExam(){
         return results.getScore();
     }
+    
     public String getQuestionsExam(int counter){
         return questions.get(counter).getQuestions();
     }
+    
     public String getJustificationExam(int counter, int i){
         return questions.get(counter).getJustificationQuestion(i);
     }
     public String getDomainExam(int counterQuestion){
         return questions.get(counterQuestion).getDomain();
     }
+    
     public String getOptionsExam(int counterQuestion, int counterAnswer){
         return questions.get(counterQuestion).getOptionsQuestion(counterAnswer);
     }
+    
     public int getNumberAnswersExam(int counter){
         return questions.get(counter).getNumberAnswers();
     }
@@ -75,6 +82,7 @@ public class Exam extends Course{
     public Boolean getIsCorrectExam(int counter, int i){
         return questions.get(counter).getIsCorrectQuestion(i);
     }
+    
     public void setNumberQuestions(int number){
         numberQuestions=number;
     }
@@ -90,10 +98,12 @@ public class Exam extends Course{
     public String getNameCourse(){
         return course.getNameCourse();
     }
+
     public void setNameExam(String nameExam){
         name = new Name();
         name.setName(nameExam);
     }
+
     public String getNameExam(){
         return name.getName();
     }
@@ -109,6 +119,7 @@ public class Exam extends Course{
     public void setNameTeacher(String name){
         course.setNameTeacher(name);
     }
+    
     public String getNameTeacher(){
         return course.getNameTeacher();
     }
@@ -116,6 +127,7 @@ public class Exam extends Course{
     public void setDuration(int duration){
         this.duration=duration;
     }
+    
     public int getDuration(){
         return duration;
     }
@@ -123,6 +135,7 @@ public class Exam extends Course{
     public void setDescripcion(String description){
         this.description=description;
     }
+    
     public String getDescription(){
         return description;
     }

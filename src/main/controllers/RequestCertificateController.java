@@ -52,7 +52,7 @@ public class RequestCertificateController extends TemplateExam{
         return namesCourses;
     }
 
-    private void readStudentData(String directory){
+    public void readStudentData(String directory){
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentCertificate.setNameCourse(br.readLine());
             currentCertificate.setNameExam(br.readLine());
@@ -93,6 +93,9 @@ public class RequestCertificateController extends TemplateExam{
     }
     public String getNameStudentController(){
         return currentCertificate.getFirstNameStudent()+" "+currentCertificate.getLastNameStudent();
+    }
+    public String getNameExamController(){
+        return currentCertificate.getNameExam();
     }
     public String getNameCourseController(){
         return currentCertificate.getNameCourse();
