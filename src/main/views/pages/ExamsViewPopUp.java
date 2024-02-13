@@ -60,7 +60,7 @@ public class ExamsViewPopUp extends PopUpTemplate{
         
         paintTitlePanel(contentPanel, "Instrucciones");
         paintTextLabel(instructions.get(0), contentPanel, 25);
-        paintTextLabel("Duracion: " + instructions.get(1)+ " horas", contentPanel, 25);
+        paintTextLabel("Duracion: " + instructions.get(1)+ " minutos", contentPanel, 25);
         for(int i = 2 ; i< instructions.size(); i++){
             instructionString += instructions.get(i) + "\n";
         }
