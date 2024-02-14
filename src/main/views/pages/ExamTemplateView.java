@@ -168,9 +168,7 @@ public abstract class ExamTemplateView extends NavBarTemplateView {
 
     protected abstract void actionEventInBottomLeftButton(ActionEvent e);
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        actionEventInBottomLeftButton(e);
+    protected void defaultActionEvents(ActionEvent e) {
         if (e.getSource() == prevButton) {
             showPreviousQuestions();
 
@@ -178,7 +176,13 @@ public abstract class ExamTemplateView extends NavBarTemplateView {
             showNextQuestion();
 
         } else {
+            actionEventInBottomLeftButton(e);
             actionEventInExamMenu(e);
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        defaultActionEvents(e);
     }
 }

@@ -159,16 +159,8 @@ public class ExamView extends ExamTemplateView {
         if (!actionEnable) {
             actionEventInPopUp(e);
 
-        } else if (e.getSource() == prevButton) {
-            showPreviousQuestions();
-
-        } else if (e.getSource() == nextButton) {
-            showNextQuestion();
-
         } else {
-            actionEventInBottomLeftButton(e);
-            actionEventInExamMenu(e);
-            actionEventInPopUp(e);
+            defaultActionEvents(e);
         }
     }
 }
