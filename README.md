@@ -69,3 +69,12 @@
 #### Utilizamos la libreria externa iTextPDF version 5.5.12, se encuentra en la carpeta lib dentro de src. La llama  GeneratePDFFile que se encuentra en la carpeta de controladores
 
 #### Para el Login actualmente solo esta habilitado para user=Usuario y password=Contrasenia
+
+
+## Historias de Usuario
+### Cambios de requisitos
+#### Requisito: Añadir imagen a una pregunta
+![Insertar imagen](out/docs/Historias_de_Usuario/Historia_de_Usuario_Insertar_Imagen.png)
+
+#### Requisito: Crear preguntas de seleccion multiple
+![Seleccion multiple](out/docs/Historias_de_Usuario/Historia_de_Usuario_Selección_Multiple.png)
