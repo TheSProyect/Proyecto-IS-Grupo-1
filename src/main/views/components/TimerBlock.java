@@ -3,7 +3,6 @@ package main.views.components;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
-import java.sql.Time;
 
 import main.utils.Palette;
 
@@ -11,7 +10,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 
 public class TimerBlock extends JPanel{
-	private JLabel TimeLabel, TimeRemainingLabel, imgLabel;
+	private JLabel TimeRemainingLabel, imgLabel;
 	private Timer T;
 	private ImageIcon ClockImg;
 

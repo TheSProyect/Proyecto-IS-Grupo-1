@@ -2,8 +2,6 @@ package main.views.components;
 
 import java.awt.event.ActionEvent;
 
-import main.views.pages.AdminExamsView;
-import main.views.pages.CertificatesView;
 import main.views.pages.Frame;
 import main.views.pages.RegisterUserView;
 

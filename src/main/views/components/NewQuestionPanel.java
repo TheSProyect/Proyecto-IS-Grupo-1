@@ -6,12 +6,16 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import main.utils.Palette;
 
@@ -184,6 +188,17 @@ public class NewQuestionPanel extends QuestionPanel {
 
     private void actionEventInAddImageButton(ActionEvent e) {
         if (e.getSource() == addImageButton) {
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "jpg", "png", "gif", "jpeg");
+            JFileChooser imageChooser = new JFileChooser();
+            imageChooser.setFileFilter(filter);
+
+            int response = imageChooser.showOpenDialog(null);
+
+            if (response == JFileChooser.APPROVE_OPTION) {
+                File file = new File(imageChooser.getSelectedFile().getAbsolutePath());
+                System.out.println(file);
+            }
+
             System.out.println("This should ask to add Image");
         }
     }
@@ -196,15 +211,19 @@ public class NewQuestionPanel extends QuestionPanel {
         return newOptionsPanel.getOptionsText();
     }
 
-    public String getQuestionText() {
-        return questionField.getText();
+    public List<String> getQuestionText() {
+        List<String> questionText = new ArrayList<String>();
+        questionText.add(questionField.getText());
+        return questionText;
     }
 
-    public String getDomainText() {
-        return domainField.getText();
+    public List<String> getDomainText() {
+        List<String> domainList = new ArrayList<String>();
+        domainList.add(domainField.getText());
+        return domainList;
     }
 
-    public String getCode() {
+    public List<String> getCode() {
         return codeField.getCode();
     }
 

@@ -2,6 +2,8 @@ package main.views.pages;
 
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
 
@@ -10,12 +12,15 @@ import main.views.components.IconButton;
 import main.views.components.NewQuestionPanel;
 import main.views.components.PopUp;
 import main.views.components.QuestionPanel;
+import main.controllers.CreateExamController;
 import main.utils.Palette;
 import main.utils.Size;
 
 
 public class NewExamView extends ExamTemplateView {
     private IconButton publishButton;
+    CreateExamController createExamController;
+    NewExamPopup popup;
 
     public NewExamView() {
         questions = new ArrayList<QuestionPanel>();
@@ -113,33 +118,39 @@ public class NewExamView extends ExamTemplateView {
                 System.out.println("Nop");
                 return;
             }
+            createExamController = new CreateExamController();
+            popup = new NewExamPopup(createExamController);
+            popup.getFinishButton().addActionListener(this);
+            PopUp.instance(Size.instance().getNewExamPopUpDimension()).setView(popup);            
+        }
+    }
+
+    private void actionEventInPublishPopUpButton(ActionEvent e) {
+        if (popup == null) {
+            return;
+        } else if (popup.actionEventInFinishButton(e)) {
             for(QuestionPanel question : questions) {
                 NewQuestionPanel newQuestion = (NewQuestionPanel)question;
                 //pass these to the controller 
-                newQuestion.getQuestionText();
-                newQuestion.getDomainText();
-                newQuestion.getCode();
-                System.out.println(newQuestion.getOptionsText());
-                newQuestion.getExplications();
+                List<List<String>> questionInfo = new ArrayList<List<String>>();
+                questionInfo.add(newQuestion.getQuestionText());
+                questionInfo.add(newQuestion.getDomainText());
+                questionInfo.add(newQuestion.getCode());
+                questionInfo.add(newQuestion.getOptionsText());
+                questionInfo.add(newQuestion.getExplications());
+
+                createExamController.saveQuestion(TOOL_TIP_TEXT_KEY, null, TOOL_TIP_TEXT_KEY, null);
             }
 
-        PopUp.instance(Size.instance().getNewExamPopUpDimension()).setView(new NewExamPopup());
+            Frame.instance().setView(new ExamPublishedView(createExamController));
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        actionEventInBottomLeftButton(e);
+        defaultActionEvents(e);
         actionEventInDeleteButton(e);
-        if (e.getSource() == prevButton) {
-            showPreviousQuestions();
-
-        } else if (e.getSource() == nextButton) {
-            showNextQuestion();
-
-        } else {
-            actionEventInExamMenu(e);
-            actionEventInPublishButton(e);
-        }
+        actionEventInPublishButton(e);
+        actionEventInPublishPopUpButton(e);
     }
 }

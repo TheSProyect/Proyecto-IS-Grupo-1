@@ -47,8 +47,8 @@ public class QuestionPanel extends JPanel implements ActionListener {
     }
 
     private void paintScroll(JScrollPane questionContentScroll) {
-        questionContentScroll.getVerticalScrollBar().setBackground(Palette.instance().getLightGray());
-        changeScrollPaneLook(questionContentScroll);
+        changeVerticalScrollBarLook(questionContentScroll);
+        changeHorizontalScrollBarLook(questionContentScroll);
 
         Border border = BorderFactory.createLineBorder(Palette.instance().getWhite(), 3);
         questionContentScroll.setBorder(border);
@@ -63,9 +63,39 @@ public class QuestionPanel extends JPanel implements ActionListener {
         this.add(questionContentScroll, constraints);
     }
 
-    private void changeScrollPaneLook(JScrollPane questionContentScroll) {
+    private void changeVerticalScrollBarLook(JScrollPane questionContentScroll) {
+        questionContentScroll.getVerticalScrollBar().setBackground(Palette.instance().getLightGray());
         questionContentScroll.getVerticalScrollBar().setPreferredSize(new Dimension(8, 0));
         questionContentScroll.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+            @Override
+            protected JButton createDecreaseButton(int orientation) {
+                return createZeroButton();
+            }
+
+            @Override    
+            protected JButton createIncreaseButton(int orientation) {
+                return createZeroButton();
+            }
+
+            private JButton createZeroButton() {
+                JButton jbutton = new JButton();
+                jbutton.setPreferredSize(new Dimension(0, 0));
+                jbutton.setMinimumSize(new Dimension(0, 0));
+                jbutton.setMaximumSize(new Dimension(0, 0));
+                return jbutton;
+            }
+
+            @Override
+            protected void configureScrollBarColors() {
+                this.thumbColor = Palette.instance().getYellow();
+            }
+        });
+    }
+
+    private void changeHorizontalScrollBarLook(JScrollPane questionContentScroll) {
+        questionContentScroll.getHorizontalScrollBar().setBackground(Palette.instance().getLightGray());
+        questionContentScroll.getHorizontalScrollBar().setPreferredSize(new Dimension(0, 8));
+        questionContentScroll.getHorizontalScrollBar().setUI(new BasicScrollBarUI() {
             @Override
             protected JButton createDecreaseButton(int orientation) {
                 return createZeroButton();

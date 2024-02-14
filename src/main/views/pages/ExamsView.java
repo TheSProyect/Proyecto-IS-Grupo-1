@@ -1,6 +1,5 @@
 package main.views.pages;
 import main.views.components.PopUp;
-import main.views.components.QuestionPanel;
 import main.views.components.Slider;
 
 import java.awt.BorderLayout;
