@@ -2,6 +2,8 @@ package main.views.pages;
 
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
 
@@ -124,16 +126,23 @@ public class NewExamView extends ExamTemplateView {
     }
 
     private void actionEventInPublishPopUpButton(ActionEvent e) {
-        if (popup.actionEventInFinishButton(e)) {
+        if (popup == null) {
+            return;
+        } else if (popup.actionEventInFinishButton(e)) {
             for(QuestionPanel question : questions) {
                 NewQuestionPanel newQuestion = (NewQuestionPanel)question;
                 //pass these to the controller 
-                newQuestion.getQuestionText();
-                newQuestion.getDomainText();
-                newQuestion.getCode();
-                System.out.println(newQuestion.getOptionsText());
-                System.out.println(newQuestion.getExplications());
+                List<List<String>> questionInfo = new ArrayList<List<String>>();
+                questionInfo.add(newQuestion.getQuestionText());
+                questionInfo.add(newQuestion.getDomainText());
+                questionInfo.add(newQuestion.getCode());
+                questionInfo.add(newQuestion.getOptionsText());
+                questionInfo.add(newQuestion.getExplications());
+
+                createExamController.saveQuestion(TOOL_TIP_TEXT_KEY, null, TOOL_TIP_TEXT_KEY, null);
             }
+
+            Frame.instance().setView(new ExamPublishedView(createExamController));
         }
     }
 

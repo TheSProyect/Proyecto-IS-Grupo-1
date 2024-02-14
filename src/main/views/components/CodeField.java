@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -181,8 +182,13 @@ public class CodeField extends JScrollPane implements KeyListener {
         return numerOfLines;
     }
 
-    public String getCode() {
-        return codeField.getText();
+    public List<String> getCode() {
+        List<String> code = new ArrayList<String>();
+        String[] separatedCode = codeField.getText().split("\n");
+        for(String codeLine : separatedCode) {
+            code.add(codeLine);
+        }
+        return code;
     }
 
     @Override

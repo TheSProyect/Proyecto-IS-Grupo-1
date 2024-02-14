@@ -133,8 +133,10 @@ public class NewOptionItem extends JPanel implements ActionListener{
 
         if (correctAnswer.isSelected()) {
             text = "v" + text;
+        } else {
+            text = "f" + text;
         }
-
+        
         return text;
     }
 
