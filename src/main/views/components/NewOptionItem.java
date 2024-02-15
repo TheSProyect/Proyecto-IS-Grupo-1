@@ -129,19 +129,25 @@ public class NewOptionItem extends JPanel implements ActionListener{
     }
 
     public String getOptionText() {
-        String text = optionText.getText();
+        String text;
 
         if (correctAnswer.isSelected()) {
-            text = "v" + text;
+            text = "v";
         } else {
-            text = "f" + text;
+            text = "f";
         }
-        
+
+        text = text + optionText.getText() + "\n" + explicationPanel.getExplicationText();
+        System.out.println(text);
         return text;
     }
 
-    public String getExplicationText() {
-        return explicationPanel.getExplicationText();
+    public boolean isOptionFieldBlank() {
+        return optionText.getText().isBlank();
+    }
+
+    public boolean isExplicationFieldBlank() {
+        return explicationPanel.getExplicationText().isBlank();
     }
 
     public boolean isCorrectAnswer() {
