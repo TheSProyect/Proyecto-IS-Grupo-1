@@ -15,6 +15,7 @@ public class Exam extends Course{
     private String type, instructions, description;
     private int numberQuestions, duration;
     private Result results;
+    private List<String> code;
     private List<Question> questions = new ArrayList<>();
     
     public Exam(){
@@ -29,7 +30,9 @@ public class Exam extends Course{
                 e.printStackTrace();
         }
     }
-    
+    public void setCode(List<String> code){
+        this.code=code;
+    }
     public String getInstructions(){
         return instructions;
     }

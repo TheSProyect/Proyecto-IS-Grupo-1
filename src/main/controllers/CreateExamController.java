@@ -101,14 +101,17 @@ public class CreateExamController extends TemplateExam{
             FileWriter writer = new FileWriter(file);
             writer.write(questionText + "\n");
             for (String text : domain) {
-                writer.write(text + ", ");
+                if(domain.size() > 0){
+                    writer.write(text + ", ");
+                    }else {
+                        writer.write(text);
+                }
             }
             writer.write("\n" + codeSize + "\n");
             for (String text : code) {            
                 if(!text.equals("")){
                     writer.write(text + "\n");
                     } else {
-                        writer.write("No" + "\n");
                 }
             }
             if(directoryImage.equals("")){
