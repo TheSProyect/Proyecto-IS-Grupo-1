@@ -207,22 +207,38 @@ public class NewQuestionPanel extends QuestionPanel {
         return deleteQuestionButton;
     }
 
-    public List<String> getOptionsText() {
-        return newOptionsPanel.getOptionsText();
+    public List<List<List<String>>> getAnswersContent() {
+        List<List<List<String>>> answerContent = new ArrayList<List<List<String>>>();
+        answerContent.add(newOptionsPanel.getAnswersText());
+        answerContent.add(newOptionsPanel.getExplicationText());
+        return answerContent;
     }
 
-    public String getQuestionText() {
-        return questionField.getText();
+    private List<String> getQuestionText() {
+        List<String> question = new ArrayList<String>();
+        String[] separatedQuestion = questionField.getText().split("\n");
+        for(String questionLine : separatedQuestion) {
+            question.add(questionLine);
+        }
+        return question;
     }
 
-    public List<String> getDomainText() {
+    private List<String> getDomainText() {
         List<String> domainList = new ArrayList<String>();
         domainList.add(domainField.getText());
         return domainList;
     }
 
-    public List<String> getCode() {
+    private List<String> getCode() {
         return codeField.getCode();
+    }
+
+    public List<List<String>> getQuestionInfo() {
+        List<List<String>> questionInfo = new ArrayList<List<String>>();
+        questionInfo.add(getQuestionText());
+        questionInfo.add(getDomainText());
+        questionInfo.add(getCode());
+        return questionInfo;
     }
 
     public boolean checkQuestionIsComplete() {

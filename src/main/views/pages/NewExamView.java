@@ -132,13 +132,10 @@ public class NewExamView extends ExamTemplateView {
             for(QuestionPanel question : questions) {
                 NewQuestionPanel newQuestion = (NewQuestionPanel)question;
 
-                List<List<String>> questionInfo = new ArrayList<List<String>>();
-                questionInfo.add(newQuestion.getDomainText());
-                questionInfo.add(newQuestion.getCode());
-                System.out.println(newQuestion.getOptionsText());
-                questionInfo.add(newQuestion.getOptionsText());
+                List<List<String>> questionInfo = newQuestion.getQuestionInfo();
+                List<List<List<String>>> answersInfo = newQuestion.getAnswersContent();
 
-                createExamController.saveQuestion(questionInfo, newQuestion.getQuestionText(), "");
+                createExamController.saveQuestion(questionInfo, answersInfo, "");
             }
             createExamController.replaceQuestionCount();
             // Frame.instance().setView(new ExamPublishedView(createExamController));

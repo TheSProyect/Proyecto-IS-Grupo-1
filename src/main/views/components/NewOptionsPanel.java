@@ -19,12 +19,12 @@ import javax.swing.border.Border;
 import main.utils.Palette;
 
 public class NewOptionsPanel extends JPanel implements ActionListener{
-    List<NewOptionItem> options;
+    List<NewOptionItem> answers;
     JPanel optionsPanel;
     JButton addButton;
     
     NewOptionsPanel() {
-        options = new ArrayList<NewOptionItem>();
+        answers = new ArrayList<NewOptionItem>();
         buildPanel(this);
         paintOptionsPanel();
         paintOptionsList();
@@ -40,10 +40,10 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
         optionsPanel = new JPanel();
         buildPanel(optionsPanel);
 
-        options.add(new NewOptionItem());
-        options.add(new NewOptionItem());
-        options.add(new NewOptionItem());
-        options.add(new NewOptionItem());
+        answers.add(new NewOptionItem());
+        answers.add(new NewOptionItem());
+        answers.add(new NewOptionItem());
+        answers.add(new NewOptionItem());
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridy = 0;
@@ -108,14 +108,14 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
 
     private void paintOptionsList() {
         optionsPanel.removeAll();
-        for (int i = 0; i < options.size(); i++) {
-            optionsPanel.add(options.get(i), createNewOptionsConstraints(i));
+        for (int i = 0; i < answers.size(); i++) {
+            optionsPanel.add(answers.get(i), createNewOptionsConstraints(i));
         }
         addActionListenerDeleteButtons(this);
     }
 
     public void addActionListenerDeleteButtons(ActionListener listener) {
-        for(NewOptionItem option : options) {
+        for(NewOptionItem option : answers) {
             if(!containsActionListener(listener, option)) {
                 option.getDeleteButton().addActionListener(listener);
             }
@@ -137,8 +137,8 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
 
     public List<JButton> getDeleteButtons() {
         List<JButton> deleteButtons = new ArrayList<JButton>();
-        for(int i = 0; i < options.size(); i++) {
-            deleteButtons.add(options.get(i).getDeleteButton());
+        for(int i = 0; i < answers.size(); i++) {
+            deleteButtons.add(answers.get(i).getDeleteButton());
         }
 
         return deleteButtons;
@@ -146,7 +146,7 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
 
     public void actionEventInAddButton(ActionEvent e) {
         if (e.getSource() == addButton) {
-            options.add(new NewOptionItem());
+            answers.add(new NewOptionItem());
             paintOptionsList();
             this.validate();
             this.repaint();
@@ -154,15 +154,15 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
     }
 
     public void actionEventInDeleteButton(ActionEvent e) {
-        if (options.size() <= 4) {
+        if (answers.size() <= 4) {
             return;
         }
-        for(int i = 0; i < options.size(); i++){
-            if(e.getSource() == options.get(i).getDeleteButton()) {
-                optionsPanel.remove(options.get(i));
+        for(int i = 0; i < answers.size(); i++){
+            if(e.getSource() == answers.get(i).getDeleteButton()) {
+                optionsPanel.remove(answers.get(i));
                 this.revalidate();
 
-                options.remove(i);
+                answers.remove(i);
 
                 paintOptionsList();
                 this.validate();
@@ -171,21 +171,31 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
         }
     }
 
-    public List<String> getOptionsText() {
-        List<String> optionsText = new ArrayList<String>();
+    public List<List<String>> getAnswersText() {
+        List<List<String>> answersText = new ArrayList<List<String>>();
 
-        for(NewOptionItem option : options) {
-            optionsText.add(option.getOptionText());
+        for(NewOptionItem answer : answers) {
+            answersText.add(answer.getAnswerText());
         }
 
-        return optionsText;
+        return answersText;
+    }
+
+    public List<List<String>> getExplicationText() {
+        List<List<String>> explicationsText = new ArrayList<List<String>>();
+
+        for(NewOptionItem answer : answers) {
+            explicationsText.add(answer.getExplicationText());
+        }
+
+        return explicationsText;
     }
 
     public boolean checkOptionsAreComplete() {
         boolean atLeastOneCorrectAnswer = false;
         boolean allCorrectAnswer = true;
 
-        for(NewOptionItem option : options) {
+        for(NewOptionItem option : answers) {
 
             if (option.isCorrectAnswer()) {
                 atLeastOneCorrectAnswer = true;

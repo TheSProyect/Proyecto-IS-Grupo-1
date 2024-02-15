@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -18,7 +20,7 @@ import javax.swing.border.Border;
 import main.utils.Palette;
 
 public class NewOptionItem extends JPanel implements ActionListener{
-    JTextPane optionText;
+    JTextPane answerText;
     SingleOptionButton correctAnswer;
     JButton deleteButton;
     ExplicationPanel explicationPanel;
@@ -79,10 +81,10 @@ public class NewOptionItem extends JPanel implements ActionListener{
     }
 
     private void paintTextPane(JPanel answerPanel) {
-        optionText = new JTextPane();
-        optionText.setForeground(Palette.instance().getGray());
-        optionText.setBackground(Palette.instance().getOffWhite());
-        optionText.setFont(new Font("Nunito Sans", Font.PLAIN, 20));
+        answerText = new JTextPane();
+        answerText.setForeground(Palette.instance().getGray());
+        answerText.setBackground(Palette.instance().getOffWhite());
+        answerText.setFont(new Font("Nunito Sans", Font.PLAIN, 20));
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 1;
@@ -90,7 +92,7 @@ public class NewOptionItem extends JPanel implements ActionListener{
         constraints.insets = new Insets(0, 5, 0, 0);
         constraints.fill = GridBagConstraints.BOTH;
 
-        answerPanel.add(optionText, constraints);
+        answerPanel.add(answerText, constraints);
     }
 
     private void paintMarkCorrectAnswerRadialButton(JPanel answerPanel) {
@@ -128,22 +130,36 @@ public class NewOptionItem extends JPanel implements ActionListener{
         return deleteButton;
     }
 
-    public String getOptionText() {
-        String text;
+    public List<String> getAnswerText() {
+        List<String> answer = new ArrayList<String>();
+        String completeAnswer = answerText.getText();
 
-        if (correctAnswer.isSelected()) {
-            text = "v";
+        if (isCorrectAnswer()) {
+            completeAnswer = "v" + completeAnswer;
         } else {
-            text = "f";
+            completeAnswer = "f" + completeAnswer;
         }
 
-        text = text + optionText.getText() + "\n" + explicationPanel.getExplicationText();
-        System.out.println(text);
-        return text;
+        String[] separatedAnswer = completeAnswer.split("\n");
+
+        for(String text : separatedAnswer) {
+           answer.add(text);
+        }
+
+        return answer;
+    }
+
+    public List<String> getExplicationText() {
+        List<String> explication = new ArrayList<String>();
+        String[] separatedExplication = explicationPanel.getExplicationText().split("\n");
+        for(String explicationLine : separatedExplication) {
+            explication.add(explicationLine);
+        }
+        return explication;
     }
 
     public boolean isOptionFieldBlank() {
-        return optionText.getText().isBlank();
+        return answerText.getText().isBlank();
     }
 
     public boolean isExplicationFieldBlank() {
