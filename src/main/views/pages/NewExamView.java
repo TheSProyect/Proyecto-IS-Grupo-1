@@ -137,10 +137,13 @@ public class NewExamView extends ExamTemplateView {
                 questionInfo.add(newQuestion.getCode());
                 System.out.println(newQuestion.getOptionsText());
                 questionInfo.add(newQuestion.getOptionsText());
+
                 createExamController.saveQuestion(questionInfo, newQuestion.getQuestionText(), "");
             }
             createExamController.replaceQuestionCount();
-            Frame.instance().setView(new ExamPublishedView(createExamController));
+            // Frame.instance().setView(new ExamPublishedView(createExamController));
+            AdminExamsView.instance().paintNavBar();
+            Frame.instance().setView(AdminExamsView.instance());
         }
     }
 
