@@ -6,8 +6,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.nio.file.Paths;
+import java.nio.file.Path;
 
 public class CreateExamController extends TemplateExam{
     int questionsCount = 0;
@@ -76,25 +79,45 @@ public class CreateExamController extends TemplateExam{
             } catch (IOException e) {
         }
     }
-   
-    public void saveQuestion(String questionText, List<String> domain, String code, List<String> answers){
+    private void copyImage(String directoryImage){
+        String destinationFolderDirectory = currentDirectory.getDirectoryExams() + File.separator+ currentExam.getNameCourse() + File.separator + currentExam.getNameExam() + File.separator;
+        try {
+            Path origin = Paths.get(directoryImage);
+            Path destination = Paths.get(destinationFolderDirectory + "Pregunta" + questionsCount + ".jpg"); 
+            Files.copy(origin, destination);
+        } catch (IOException e) {
+            System.err.println("Ocurrió un error al copiar la imagen: " + e.getMessage());
+        }
+    }
+    
+    public void saveQuestion(List<List<String>> informationExam, String questionText, String directoryImage){
         questionsCount++;
+        int INDEX_DOMAIN=0, INDEX_CODE=1, INDEX_ANSWERS=2;
+        List<String> domain = informationExam.get(INDEX_DOMAIN), code = informationExam.get(INDEX_CODE), answers = informationExam.get(INDEX_ANSWERS);
+        int codeSize = code.size();
         File file = new File(folder, "Pregunta"+ questionsCount + ".txt");
         try {
-            if (!file.exists()) {
-                file.createNewFile();
-            }
+            file.createNewFile();
             FileWriter writer = new FileWriter(file);
             writer.write(questionText + "\n");
             for (String text : domain) {
                 writer.write(text + ", ");
             }
-                        
-            if(!code.equals("")){
-                writer.write(code + "\n");
-                } else {
-                    writer.write("No" + "\n");
+            writer.write("\n" + codeSize + "\n");
+            for (String text : code) {            
+                if(!text.equals("")){
+                    writer.write(text + "\n");
+                    } else {
+                        writer.write("No" + "\n");
+                }
             }
+            if(directoryImage.equals("")){
+                directoryImage = "No";
+            } else {
+                copyImage(directoryImage);
+                directoryImage = "Si";
+            }
+            writer.write(directoryImage + "\n");
             for (String text : answers) {
                 writer.write(text + "\n");
             }
