@@ -1,8 +1,0 @@
-¿Cual es la palabra clave utilizada para declarar una constante en Java?
-Palabras claves
-const
-La palabra clave 'const' se utiliza para declarar variables locales con un valor que no cambiará despues de su asignacion inicial en el ambito en el que se declara.
-vfinal
-La palabra clave utilizada para declarar una constante es 'final'. Declarar una variable 'final' indica que su valor no puede ser modificado despues de haber sido asignado una vez.
-abstract
-La palabra clave 'abstract' es utilizada para declarar una clase abstracta.

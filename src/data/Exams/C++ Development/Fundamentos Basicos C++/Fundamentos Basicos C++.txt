@@ -1,7 +1,0 @@
-Fundamentos Basicos C++
-C++
-8
-Profesor
-8
-Instrucciones basicas de C++
-C++ Development

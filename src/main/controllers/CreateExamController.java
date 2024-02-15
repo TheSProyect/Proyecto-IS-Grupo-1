@@ -66,7 +66,7 @@ public class CreateExamController extends TemplateExam{
             int count = 0;
             while ((line = br.readLine()) != null) {
                 count++;
-                if (count == 2) {
+                if (count == 3) {
                     content += String.valueOf(questionsCount)+ "\n";
                     } else {
                         content += line + "\n";
@@ -90,10 +90,10 @@ public class CreateExamController extends TemplateExam{
         }
     }
     
-    public void saveQuestion(List<List<String>> informationExam, String questionText, String directoryImage){
+    public void saveQuestion(List<List<String>> informationExam,List<List<List<String>>> informationQuestion, String directoryImage){
         questionsCount++;
-        int INDEX_DOMAIN=0, INDEX_CODE=1, INDEX_ANSWERS=2;
-        List<String> domain = informationExam.get(INDEX_DOMAIN), code = informationExam.get(INDEX_CODE), answers = informationExam.get(INDEX_ANSWERS);
+        int INDEX_QUESTION_TEXT=0, INDEX_DOMAIN=1,INDEX_CODE=2;
+        List<String> questionText = informationExam.get(INDEX_QUESTION_TEXT), domain = informationExam.get(INDEX_DOMAIN), code = informationExam.get(INDEX_CODE);
         int codeSize = code.size();
         File file = new File(folder, "Pregunta"+ questionsCount + ".txt");
         try {
