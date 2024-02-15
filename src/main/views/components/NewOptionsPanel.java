@@ -181,16 +181,6 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
         return optionsText;
     }
 
-    public List<String> getExplicationsText() {
-        List<String> explicationsText = new ArrayList<String>();
-
-        for(NewOptionItem option : options) {
-            explicationsText.add(option.getExplicationText());
-        }
-
-        return explicationsText;
-    }
-
     public boolean checkOptionsAreComplete() {
         boolean atLeastOneCorrectAnswer = false;
         boolean allCorrectAnswer = true;
@@ -203,9 +193,9 @@ public class NewOptionsPanel extends JPanel implements ActionListener{
                 allCorrectAnswer = false;
             }
 
-            if (option.getOptionText().length() == 0) {
+            if (option.isOptionFieldBlank()) {
                 return false;
-            } else if (option.getExplicationText().length() == 0) {
+            } else if (option.isExplicationFieldBlank()) {
                 return false;
             }
         }

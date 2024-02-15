@@ -211,10 +211,8 @@ public class NewQuestionPanel extends QuestionPanel {
         return newOptionsPanel.getOptionsText();
     }
 
-    public List<String> getQuestionText() {
-        List<String> questionText = new ArrayList<String>();
-        questionText.add(questionField.getText());
-        return questionText;
+    public String getQuestionText() {
+        return questionField.getText();
     }
 
     public List<String> getDomainText() {
@@ -225,10 +223,6 @@ public class NewQuestionPanel extends QuestionPanel {
 
     public List<String> getCode() {
         return codeField.getCode();
-    }
-
-    public List<String> getExplications() {
-        return newOptionsPanel.getExplicationsText();
     }
 
     public boolean checkQuestionIsComplete() {

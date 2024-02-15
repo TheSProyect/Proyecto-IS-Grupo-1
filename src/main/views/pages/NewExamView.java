@@ -131,17 +131,15 @@ public class NewExamView extends ExamTemplateView {
         } else if (popup.actionEventInFinishButton(e)) {
             for(QuestionPanel question : questions) {
                 NewQuestionPanel newQuestion = (NewQuestionPanel)question;
-                //pass these to the controller 
+
                 List<List<String>> questionInfo = new ArrayList<List<String>>();
-                questionInfo.add(newQuestion.getQuestionText());
                 questionInfo.add(newQuestion.getDomainText());
                 questionInfo.add(newQuestion.getCode());
+                System.out.println(newQuestion.getOptionsText());
                 questionInfo.add(newQuestion.getOptionsText());
-                questionInfo.add(newQuestion.getExplications());
-
-                createExamController.saveQuestion(TOOL_TIP_TEXT_KEY, null, TOOL_TIP_TEXT_KEY, null);
+                createExamController.saveQuestion(questionInfo, newQuestion.getQuestionText(), "");
             }
-
+            createExamController.replaceQuestionCount();
             Frame.instance().setView(new ExamPublishedView(createExamController));
         }
     }

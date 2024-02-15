@@ -1,0 +1,13 @@
+Pregunta
+Dominio, 
+1
+No
+No
+vResuesta1
+Explicacion1
+fRespuesta2
+Explicacion2
+fRespuesta3
+Explicacion3
+fRespuesta4
+Explicacion4
