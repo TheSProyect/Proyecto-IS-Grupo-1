@@ -47,10 +47,15 @@ public class ExamTest {
     public void testExam() throws IOException {
         setUp();
         exam = new Exam();
+        Assertions.assertEquals(instructions, exam.getInstructions());
+    }
+
+    @Test
+    public void testExamIsEmpty() {
+        exam = new Exam();
         assertThrows(NullPointerException.class, () -> {exam.getNameExam();});
         assertThrows(NullPointerException.class, () -> {exam.getNameCourse();});
         assertNull(exam.getType());
         assertThrows(NullPointerException.class, () -> {exam.getNameTeacher();});
-        Assertions.assertEquals(instructions, exam.getInstructions());
     }
 }

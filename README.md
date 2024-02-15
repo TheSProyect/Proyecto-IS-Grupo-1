@@ -68,8 +68,15 @@
 ## Modelo de Implementacion
 #### Utilizamos la libreria externa iTextPDF version 5.5.12, se encuentra en la carpeta lib dentro de src. La llama  GeneratePDFFile que se encuentra en la carpeta de controladores
 
-#### Para el Login actualmente solo esta habilitado para user=Usuario y password=Contrasenia
-
+## Modelo de pruebas
+* PresentExamControllerTest
+  - testReadIndformation()
+* RequestCertificateControllerTest
+  - readStudentDataTest()
+  - showCertificatesTest()
+* ExamTest
+  - testExam()
+  - testExamIsEmpty()
 
 ## Historias de Usuario
 ### Cambios de requisitos
@@ -78,3 +85,13 @@
 
 #### Requisito: Crear preguntas de seleccion multiple
 ![Seleccion multiple](out/docs/Historias_de_Usuario/Historia_de_Usuario_Selección_Multiple.png)
+
+## Iniciar el programa
+#### El programa se corre desde la clase Main
+#### Para hacer Login 
+* Como usuario corriente:
+  - user = Usuario
+  - password = Contrasenia
+* Como administrador:
+  - user = Profesor
+  - password = contrasenia
