@@ -74,6 +74,10 @@
 * RequestCertificateControllerTest
   - readStudentDataTest()
   - showCertificatesTest()
+* RegisterUserControllerTest
+  - writeFileTest()
+  - searchUserTest()
+  - RegisterNewUserTest()
 * ExamTest
   - testExam()
   - testExamIsEmpty()
