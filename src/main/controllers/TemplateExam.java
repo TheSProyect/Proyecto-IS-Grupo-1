@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 
 import main.models.Exam;
 import main.utils.Directory;
@@ -21,7 +22,16 @@ public class TemplateExam {
                 return (currentDirectory.getDirectoryStudents())+ File.separator + currentUser.getUsername();
         }   
     }
-
+    public List<String> readInformationQuestion(BufferedReader br, List<String> data, int sizeData){
+        try{
+            for(int i=0; i < sizeData; i++){
+                data.add(br.readLine());
+            }
+            } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
     public int getNumberQuestion(String directory, String nameFolder){
         int LINE_NUMBER_QUESTION = 2;
         int numberQuestion = 0;

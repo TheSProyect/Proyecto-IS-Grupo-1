@@ -36,12 +36,18 @@ public class Exam extends Course{
     public String getInstructions(){
         return instructions;
     }
+    public void setImageQuestion(boolean image, int counter){
+        questions.get(counter).setImage(image);;
+    }
+    public boolean isImage(int counter){
+        return questions.get(counter).isImage();
+    }
    
-    public void setQuestionsExam(String statement, String domain, int counter){
+    public void setQuestionsExam(List<String> statement, String domain, int counter){
         questions.add(new Question());
         questions.get(counter).setQuestions(statement,domain,questions.get(counter));
     }
-    public void setAnswersExam(String answer, String justification, int i, int counter){
+    public void setAnswersExam(List<String> answer, List<String> justification, int i, int counter){
         questions.get(counter).setAnswersQuestions(answer, justification, i);
     }
     
@@ -64,18 +70,18 @@ public class Exam extends Course{
         return results.getScore();
     }
     
-    public String getQuestionsExam(int counter){
+    public List<String> getQuestionsExam(int counter){
         return questions.get(counter).getQuestions();
     }
     
-    public String getJustificationExam(int counter, int i){
+    public List<String> getJustificationExam(int counter, int i){
         return questions.get(counter).getJustificationQuestion(i);
     }
     public String getDomainExam(int counterQuestion){
         return questions.get(counterQuestion).getDomain();
     }
     
-    public String getOptionsExam(int counterQuestion, int counterAnswer){
+    public List<String> getOptionsExam(int counterQuestion, int counterAnswer){
         return questions.get(counterQuestion).getOptionsQuestion(counterAnswer);
     }
     
@@ -86,7 +92,7 @@ public class Exam extends Course{
         return questions.get(counter).getNumberAnswers();
     }
 
-    public String getAnswersQuestionExam(int counter, int i){
+    public List<String> getAnswersQuestionExam(int counter, int i){
         return questions.get(counter).getAnswersQuestions(i);
     }
 

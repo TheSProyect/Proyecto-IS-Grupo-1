@@ -5,29 +5,36 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Question {
-    private String statement;
+    private List<String> statement = new ArrayList<>();
     private String domain;
     private Line[] lines;
     private int numberAnswers;
     private int numCorrectAnswers=0;
-    private List<Answer> answers = new ArrayList<>(); 
+    private List<Answer> answers = new ArrayList<>();
+    private boolean image = false;
 
+    public void setImage(boolean image){
+        this.image=image;
+    }
+    public boolean isImage(){
+        return image;
+    }
     
-    public void setQuestions(String statement, String domain, Question question){
+    public void setQuestions(List<String> statement, String domain, Question question){
         question.statement=statement;
         question.domain=domain;
     }
 
-    public void setAnswersQuestions(String answer, String justification, int i){
+    public void setAnswersQuestions(List<String> answer, List<String> justification, int i){
         answers.get(i).setAnswers(answer, justification, answers.get(i));
     }
 
-    public void setIsCorrectQuestions(Boolean isCorrect, int i){
+    public void setIsCorrectQuestions(Boolean isCorrect, int i){        
         answers.add(new Answer());
         answers.get(i).setIsCorrect(isCorrect,answers.get(i));
 }
 
-    public String getQuestions(){
+    public List<String> getQuestions(){
         return statement;
     }
 
@@ -38,20 +45,20 @@ public class Question {
         return numCorrectAnswers;
     }
     
-    public String getAnswersQuestions(int counter){
+    public List<String> getAnswersQuestions(int counter){
         return answers.get(counter).getAnswers();
     }
-    public String getJustificationQuestion(int counter){
+    public List<String> getJustificationQuestion(int counter){
         return answers.get(counter).getJustification();
     }
     public Boolean getIsCorrectQuestion(int counter){
         return answers.get(counter).getIsCorrect();
     }
-    public String getOptionsQuestion(int counter){
+    public List<String> getOptionsQuestion(int counter){
         //return questions2.getQuestions();
         return answers.get(counter).getAnswers();
     }
-    public String getCode(int counter){
+    public List<String> getCode(int counter){
         //return questions2.getQuestions();
         return answers.get(counter).getAnswers();
     }

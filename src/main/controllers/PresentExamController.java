@@ -103,43 +103,59 @@ public class PresentExamController extends TemplateExam{
         examInformation.add(currentExam.getNameCourse());
         return examInformation;
     }
-    private void readQuestion(String directory, int readings, int counter, int stop){
-        String line, lineImage;
-        List<String> answer = new ArrayList<String>(), justification = new ArrayList<String>(), code = new ArrayList<String>();
-        try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
-            currentExam.setQuestionsExam((br.readLine()),(br.readLine()),counter);
-            int sizeCode = Integer.parseInt(br.readLine());
-            for(int i=1; i < sizeCode; i++){
-                code.add(br.readLine());
-            }
-            currentExam.setCode(code);
-            lineImage = br.readLine();
-            if(lineImage.equals("Si")){
-                //metodo para buscar y mostrar la ruta de la imagen
-            }
-            for (int i =0; ((line = br.readLine()) != null); i++) {
-                if (line != null && line.length() > 0 && line.substring(0, 1).equalsIgnoreCase("v")) {
-                    answer.add(line.substring(1));
-                    justification.add(br.readLine());
-                    currentExam.setIsCorrectExam(true, i, counter);
-                    currentExam.setNumCorrectAsnwers(counter);
-                    } else {
+    private void readAnswersAndJustifications(BufferedReader br, int counter){
+        String line;
+        List<List<String>> answers = new ArrayList<>(), justifications = new ArrayList<>();
+        try{
+            for (int i=0; ((line = br.readLine()) != null); i++) {
+                int amountLines = Integer.parseInt(line);
+                List<String> answer = new ArrayList<String>(), justification = new ArrayList<String>();
+                for(int j=0; j < amountLines; j++){
+                    if ((line = br.readLine()) != null && j==0 && line.substring(0, 1).equalsIgnoreCase("v")) {
                         answer.add(line.substring(1));
-                        justification.add(br.readLine());
-                        currentExam.setIsCorrectExam(false, i, counter);
-                        }
-                    currentExam.setAnswersExam(answer.get(i),justification.get(i), i, counter);
-                    currentExam.setNumberAnswers(counter, i+1);
+                        currentExam.setIsCorrectExam(true, i, counter);
+                        currentExam.setNumCorrectAsnwers(counter);
+                        } else if(j==0 && line.substring(0, 1).equalsIgnoreCase("f")){
+                            answer.add(line.substring(1));
+                            currentExam.setIsCorrectExam(false, i, counter);
+                        } else if( j>0 && line != null ){
+                            answer.add(line);    
                     }
-                br.close();     
-                } catch (IOException e) {
+                }
+                answers.add(answer);
+                for(int j=0 ; j < amountLines; j++){
+                    justification.add(br.readLine());
+                }
+                justifications.add(justification);
+                currentExam.setAnswersExam(answers.get(i),justifications.get(i), i, counter);
+                currentExam.setNumberAnswers(counter, i+1);
+        }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void readQuestion(String directory, int readings, int counter, int stop){
+        String line;
+        List<String> code = new ArrayList<String>(), questionStatement = new ArrayList<String>();
+        try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
+            currentExam.setQuestionsExam((readInformationQuestion(br, questionStatement, Integer.parseInt(br.readLine()))),(br.readLine()),counter);
+            if((line=br.readLine())!= "No"){
+                readInformationQuestion(br, code, Integer.parseInt(line));
+                currentExam.setCode(code);
+            }
+            if(br.readLine().equals("Si")){
+                currentExam.setImageQuestion(true, counter);
+            }
+            readAnswersAndJustifications(br, counter);
+            br.close();     
+            } catch (IOException e) {
                     e.printStackTrace();
             }
             if(readings==stop) {
                 return;
-                } else {
-            counter++;
-            readQuestion(changeDirectory(directory),readings+1, counter, stop);
+            } else {
+                counter++;
+                readQuestion(changeDirectory(directory),readings+1, counter, stop);
         }   
     }
     

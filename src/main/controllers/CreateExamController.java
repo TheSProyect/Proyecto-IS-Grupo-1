@@ -89,66 +89,117 @@ public class CreateExamController extends TemplateExam{
             System.err.println("Ocurrió un error al copiar la imagen: " + e.getMessage());
         }
     }
-    
+    private void saveInformationQuestion(List<List<String>> answers, List<List<String>> justifications, FileWriter writer){
+        List<String> answer = new ArrayList<>(), justification = new ArrayList<>();
+        for(int i =0; i< answers.size(); i++){
+            answer = answers.get(i);
+            justification = justifications.get(i);
+            try {
+                writer.write(answer.size()+ "\n");
+                for(String text : answer){
+                writer.write(text + "\n");
+                }
+                for(String text : justification){
+                    writer.write(text + "\n");
+                }
+                } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private void saveCode(List<String> code, FileWriter writer){
+        int INDEX_CODE=0;
+        try{
+            if(code.get(INDEX_CODE)!= ""){
+                writer.write("\n" + code.size() + "\n"); 
+                for (String text : code) {            
+                    writer.write(text + "\n");
+                }
+                } else { 
+                writer.write("No" + "\n");
+            }
+            } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void saveQuestion(List<List<String>> informationExam,List<List<List<String>>> informationQuestion, String directoryImage){
         questionsCount++;
-        int INDEX_QUESTION_TEXT=0, INDEX_DOMAIN=1,INDEX_CODE=2;
+        int INDEX_QUESTION_TEXT=0, INDEX_DOMAIN=1,INDEX_CODE=2, INDEX_ANSWERS=0, INDEX_JUSTIFICATION=1;
         List<String> questionText = informationExam.get(INDEX_QUESTION_TEXT), domain = informationExam.get(INDEX_DOMAIN), code = informationExam.get(INDEX_CODE);
-        int codeSize = code.size();
+        List<List<String>> answers = informationQuestion.get(INDEX_ANSWERS), justifications = informationQuestion.get(INDEX_JUSTIFICATION);
         File file = new File(folder, "Pregunta"+ questionsCount + ".txt");
         try {
             file.createNewFile();
             FileWriter writer = new FileWriter(file);
-            writer.write(questionText + "\n");
+            writer.write(questionText.size() + "\n");
+            for (String text : questionText) {
+                writer.write(text + "\n");
+            }
             for (String text : domain) {
-                if(domain.size() > 0){
+                if(domain.size() > 1){
                     writer.write(text + ", ");
                     }else {
                         writer.write(text);
                 }
             }
-            writer.write("\n" + codeSize + "\n");
-            for (String text : code) {            
-                if(!text.equals("")){
-                    writer.write(text + "\n");
-                    } else {
-                }
-            }
+            saveCode(code, writer);
             if(directoryImage.equals("")){
                 directoryImage = "No";
-            } else {
-                copyImage(directoryImage);
-                directoryImage = "Si";
-            }
-            writer.write(directoryImage + "\n");
-            for (String text : answers) {
-                writer.write(text + "\n");
-            }
+                } else {
+                    copyImage(directoryImage);
+                    directoryImage = "Si";
+            } 
+            writer.write("\n"+directoryImage + "\n");
+            saveInformationQuestion(answers, justifications, writer);
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
+    private void showAnswersAndJustifications(BufferedReader br, int counter){
+        String line;
+        List<List<String>> answers = new ArrayList<>(), justifications = new ArrayList<>();
+        try{
+            for (int i=0; ((line = br.readLine()) != null); i++) {
+                int amountLines = Integer.parseInt(line);
+                List<String> answer = new ArrayList<String>(), justification = new ArrayList<String>();
+                for(int j=0; j < amountLines; j++){
+                    if ((line = br.readLine()) != null && j==0 && line.substring(0, 1).equalsIgnoreCase("v")) {
+                        answer.add(line.substring(1));
+                        } else if(j==0 && line.substring(0, 1).equalsIgnoreCase("f")){
+                            answer.add(line.substring(1));
+                        } else if( j>0 && line != null ){
+                            answer.add(line);    
+                    }
+                }
+                answers.add(answer);
+                for(int j=0 ; j < amountLines; j++){
+                    justification.add(br.readLine());
+                }
+                justifications.add(justification);
+                currentExam.setAnswersExam(answers.get(i),justifications.get(i), i, counter);
+                currentExam.setNumberAnswers(counter, i+1);
+        }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     private void showQuestion(String directory, int readings, int counter, int stop){
         String line;
-        List<String> answer = new ArrayList<String>();
-        List<String> justification = new ArrayList<String>();
+        List<String> code = new ArrayList<String>(), questionStatement = new ArrayList<String>();
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
-            currentExam.setQuestionsExam((br.readLine()),(br.readLine()),counter);
-            for (int i =0; ((line = br.readLine()) != null); i++) {
-                if (line != null && line.length() > 0 && line.substring(0, 1).equalsIgnoreCase("v")) {
-                    answer.add(line.substring(1));
-                    justification.add(br.readLine());
-                    } else {
-                        answer.add(line);
-                        justification.add(br.readLine());
-                        }
-                    currentExam.setAnswersExam(answer.get(i),justification.get(i), i, counter);
-                    currentExam.setNumberAnswers(counter, i+1);
-                    }
-                    br.close();     
-                } catch (IOException e) {
+            currentExam.setQuestionsExam((readInformationQuestion(br, questionStatement, Integer.parseInt(br.readLine()))),(br.readLine()),counter);
+            if((line=br.readLine())!= "No"){
+                readInformationQuestion(br, code, Integer.parseInt(line));
+                currentExam.setCode(code);
+            }
+            if(br.readLine().equals("Si")){
+                currentExam.setImageQuestion(true, counter);
+            }
+            showAnswersAndJustifications(br, counter);
+            br.close();     
+            } catch (IOException e) {
                     e.printStackTrace();
             }
             if(readings==stop) {
