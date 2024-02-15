@@ -104,7 +104,7 @@ public class PresentExamController extends TemplateExam{
         return examInformation;
     }
     private void readQuestion(String directory, int readings, int counter, int stop){
-        String line;
+        String line, lineImage;
         List<String> answer = new ArrayList<String>(), justification = new ArrayList<String>(), code = new ArrayList<String>();
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentExam.setQuestionsExam((br.readLine()),(br.readLine()),counter);
@@ -113,7 +113,8 @@ public class PresentExamController extends TemplateExam{
                 code.add(br.readLine());
             }
             currentExam.setCode(code);
-            if(br.readLine().equals("Si")){
+            lineImage = br.readLine();
+            if(lineImage.equals("Si")){
                 //metodo para buscar y mostrar la ruta de la imagen
             }
             for (int i =0; ((line = br.readLine()) != null); i++) {
