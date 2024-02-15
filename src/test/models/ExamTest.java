@@ -12,9 +12,11 @@ import java.io.IOException;
 
 import javax.swing.text.BadLocationException;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import main.models.Exam;
@@ -23,8 +25,8 @@ public class ExamTest {
     private Exam exam;
     private String instructions;
 
-    @BeforeAll
-    private void setUp() throws IOException {
+    @Before
+    public void setUp() throws IOException {
         String instructionPath = Directory.instance().getDirectoryExams()+File.separator+"Instructions.txt";
         File file = new File(instructionPath);
         BufferedReader br = new BufferedReader(new FileReader(file));
@@ -40,19 +42,16 @@ public class ExamTest {
                 instructions = instructions + '\n' + st;
             }
         }
-        
+        exam = new Exam();
     }
 
     @Test 
     public void testExam() throws IOException {
-        setUp();
-        exam = new Exam();
         Assertions.assertEquals(instructions, exam.getInstructions());
     }
 
     @Test
     public void testExamIsEmpty() {
-        exam = new Exam();
         assertThrows(NullPointerException.class, () -> {exam.getNameExam();});
         assertThrows(NullPointerException.class, () -> {exam.getNameCourse();});
         assertNull(exam.getType());
