@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class RegisterUserController {
     boolean isAdmin;
-    String newUsername;
+    private String newUsername;
     
     public RegisterUserController(){
         
@@ -25,7 +25,7 @@ public class RegisterUserController {
 
         if(searchUser(Username)){
             return false;
-        }
+        } else {
 
         String FileName;
         
@@ -35,9 +35,10 @@ public class RegisterUserController {
         } else{
         FileName = Directory.instance().getDirectoryStudents()+File.separator+Username;
         this.isAdmin = false;
-        
-    }
 
+        this.newUsername = Username;
+        
+        }
         File newUserFile = new File(FileName);
         
         if(newUserFile.mkdir()){
@@ -62,12 +63,14 @@ public class RegisterUserController {
             return false;
         }
     }
+    }
 
     public void setSignature(){
         
     }
 
-    public void setNewUserPassword(String newUserPassword){
+
+    public void setNewUserPassword(String newUserPassword, String newMail){
         String FileName;
         if(isAdmin){
             FileName = Directory.instance().getDirectoryTeachers()+File.separator+newUsername;
@@ -77,7 +80,7 @@ public class RegisterUserController {
             this.isAdmin = false;
         }
         FileName = FileName+File.separator+"Password.txt";
-        writeFile(FileName, newUserPassword);
+        writeFile(FileName, newUserPassword+"\n"+newMail);
 
     }
 
@@ -107,29 +110,20 @@ public class RegisterUserController {
     }
 
     public boolean searchUser(String Username){
-		
-		try(BufferedReader adminR = new BufferedReader(new FileReader(searchedDirectory("Teachers", Username)))){
-
-			return true;
-			
-		} catch (IOException e){
-			
-			try(BufferedReader userR = new BufferedReader(new FileReader(searchedDirectory("Students",Username)))){
-
-			return true;
-
-			} catch (IOException ee){
-				
-			return false;
-			}
-		}
-		
+        if(new File(searchedDirectory("Students", Username)).isDirectory()){
+            return true;
+        } else if (new File(searchedDirectory("Teachers", Username)).isDirectory()){
+            return true;
+        } else {
+            return false;
+        }
 		
 	}
 
     public String searchedDirectory(String Folder, String Username){
 		Directory currentDirectory = Directory.instance();
 		String directory = currentDirectory.getDirectoryUsers()+File.separator+Folder+File.separator+Username;
+        
 		return directory;
 	}
 	

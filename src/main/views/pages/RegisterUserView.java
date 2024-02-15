@@ -125,11 +125,11 @@ public class RegisterUserView extends UserTemplateView{
 
             if(RegisterControl.RegisterNewUser(userTextField.getTextField(), Admin.getButton().isSelected())){
                 RegisterControl.setNewUserName(userFirstName.getTextField(), usertLastName.getTextField());
-                RegisterControl.setNewUserPassword(passwordTextField.getTextField());
+                RegisterControl.setNewUserPassword(passwordTextField.getTextField(), emailTextField.getTextField());
                 AdminExamsView.instance().paintNavBar();
                 Frame.instance().setView(AdminExamsView.instance());
 
-            popup = new RegisterUserPopUp("Usuario");
+            popup = new RegisterUserPopUp(userTextField.getTextField());
             PopUp.instance(Size.instance().getRegisterUserPopUpDimension()).setView(popup);
             popup.getButton().addActionListener(this);
             } else {
