@@ -26,8 +26,13 @@ public class RequestCertificateControllerTest {
     String course;
     String directory = System.getProperty("user.dir");
     String nameFolderStudent = "Usuario";
-    RequestCertificateController controller = new RequestCertificateController(nameFolderStudent);
+    RequestCertificateController controller;
     
+    @Before
+    public void setUp() {
+        UserData.instance().setUsername(nameFolderStudent);
+        controller = new RequestCertificateController();
+    }
 
     @Test
     public  void readStudentDataTest(){

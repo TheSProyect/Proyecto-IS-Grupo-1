@@ -14,13 +14,6 @@ import main.utils.UserData;
 public class RequestCertificateController extends TemplateExam{
     Certificate currentCertificate = new Certificate();
 
-    public RequestCertificateController(){
-        
-    }
-    public RequestCertificateController(String user){
-        UserData.instance().setUsername(user);
-    }
-    
     public static void main(String[] args) throws IOException{
         RequestCertificateController r= new RequestCertificateController();
     }
