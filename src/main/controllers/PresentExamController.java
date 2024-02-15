@@ -103,14 +103,19 @@ public class PresentExamController extends TemplateExam{
         examInformation.add(currentExam.getNameCourse());
         return examInformation;
     }
-    
     private void readQuestion(String directory, int readings, int counter, int stop){
         String line;
-        List<String> answer = new ArrayList<String>();
-        List<String> justification = new ArrayList<String>();
+        List<String> answer = new ArrayList<String>(), justification = new ArrayList<String>(), code = new ArrayList<String>();
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentExam.setQuestionsExam((br.readLine()),(br.readLine()),counter);
-            //currentExam.setCode(br.readLine());
+            int sizeCode = Integer.parseInt(br.readLine());
+            for(int i=1; i < sizeCode; i++){
+                code.add(br.readLine());
+            }
+            currentExam.setCode(code);
+            if(br.readLine().equals("Si")){
+                //metodo para buscar y mostrar la ruta de la imagen
+            }
             for (int i =0; ((line = br.readLine()) != null); i++) {
                 if (line != null && line.length() > 0 && line.substring(0, 1).equalsIgnoreCase("v")) {
                     answer.add(line.substring(1));
