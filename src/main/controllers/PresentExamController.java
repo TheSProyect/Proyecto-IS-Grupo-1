@@ -290,6 +290,9 @@ public class PresentExamController extends TemplateExam{
         return currentExam.getDuration();
     }
 
+    public int getNumCorrectAnswersController(int counter){
+        return currentExam.getNumCorrectAnswersExam(counter);
+    }
     public Boolean isCorrect(int indexQuestion, int indexSelectedAnswer){
         return currentExam.getIsCorrectExam(indexQuestion, indexSelectedAnswer);
     }
@@ -298,9 +301,10 @@ public class PresentExamController extends TemplateExam{
         currentExam.setResultExam(numCorrectQuestions);
     }
 
-    public void computeResultQuestion(int numCorrectQuestions){
+    public void computeResultQuestion(int numQuestion){
         //hay que cambiarlo a float
-        float result=currentExam.getNumberAnswersExam(numCorrectQuestions)/currentExam.getNumCorrectAnswersExam(numCorrectQuestions);
+        //ese numcorrectquestion tiene que ser el index de la pregunta 
+        float result=currentExam.getNumberAnswersExam(numQuestion)/currentExam.getNumCorrectAnswersExam(numQuestion);
         currentExam.setResultExam(result);
     }
 }
