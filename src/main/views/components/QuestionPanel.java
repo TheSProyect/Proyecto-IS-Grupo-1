@@ -2,6 +2,7 @@ package main.views.components;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,6 +17,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -201,8 +203,41 @@ public class QuestionPanel extends JPanel implements ActionListener {
         constraints.gridx = 0;
         constraints.gridy = 3;
         constraints.weightx = 1.0;
-        // constraints.weighty = 1.0;
         constraints.gridwidth = 4;
+        constraints.insets = new Insets(0, 0, 0, 10);
+        constraints.fill = GridBagConstraints.BOTH;
+
+        return constraints;
+    }
+
+    private ImageIcon scaleImageIconDown(ImageIcon image) {
+        int newHeight;
+        final int MAX_WIDTH = 620;
+        if (image.getIconWidth() > MAX_WIDTH) {
+            newHeight = (MAX_WIDTH * image.getIconHeight()) / image.getIconWidth();
+            Image newImage = image.getImage();
+            newImage = newImage.getScaledInstance(MAX_WIDTH, newHeight, Image.SCALE_SMOOTH);
+            image = new ImageIcon(newImage);
+        }
+        return image;
+    }
+    
+    public void paintImage(String imagePath) {
+        ImageIcon image = new ImageIcon(imagePath);
+        image = scaleImageIconDown(image);
+        JLabel imageLabel = new JLabel();
+        imageLabel.setIcon(image);
+        imageLabel.setHorizontalAlignment(JLabel.CENTER);
+        
+        questionContentPanel.add(imageLabel, createImageConstraints());
+    }
+
+    private GridBagConstraints createImageConstraints() {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 1;
+        constraints.gridy = 4;
+        constraints.weightx = 1.0;
+        constraints.gridwidth = 2;
         constraints.insets = new Insets(0, 0, 0, 10);
         constraints.fill = GridBagConstraints.BOTH;
 
@@ -213,7 +248,6 @@ public class QuestionPanel extends JPanel implements ActionListener {
         optionsPanel = new OptionsPanel(options, isSimpleOption);
 
         questionContentPanel.add(optionsPanel, createOptionPanelConstraints());
-        questionContentPanel.setPreferredSize(new Dimension(544, questionContentPanel.getHeight()));
     }
 
     protected GridBagConstraints createOptionPanelConstraints() {

@@ -60,6 +60,7 @@ public class ExamView extends ExamTemplateView {
             if (hasCode.get(i)) {
                 question.paintCodeField(code.get(i));
             }
+            question.paintImage("src/assets/Logo_SingIn.png");
             boolean isSimpleOption = presentController.getNumCorrectAnswersController(i) == 1;
             question.paintOptionsPanel(options.get(i), isSimpleOption);
             questions.add(question);
