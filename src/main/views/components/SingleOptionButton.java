@@ -1,14 +1,21 @@
 package main.views.components;
 
+import java.awt.Dimension;
+import java.awt.Font;
+
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
+import javax.swing.JRadioButton;
 
-public class SingleOptionButton extends OptionButton {
+import main.utils.Palette;
+
+public class SingleOptionButton extends JRadioButton {
     ImageIcon notSelected;
     ImageIcon selected;
 
     public SingleOptionButton(String option, ButtonGroup group) {
-        setIcons();
+        notSelected = new ImageIcon("src/assets/Unselected_Option_Icon.png");
+        selected = new ImageIcon("src/assets/Selected_Option_Icon.png");
 
         paintRadialButton();
         this.setText("<html>" + option + "</html>");
@@ -17,8 +24,24 @@ public class SingleOptionButton extends OptionButton {
         }
     }
 
-    protected void setIcons() {
-        notSelected = new ImageIcon("src/assets/Unselected_Option_Icon.png");
-        selected = new ImageIcon("src/assets/Selected_Option_Icon.png");
+    private void paintRadialButton() {
+        this.setPreferredSize(new Dimension(150, 60));
+        this.setForeground(Palette.instance().getGray());
+        this.setBackground(Palette.instance().getWhite());
+        this.setIcon(notSelected);
+        this.setFont(new Font("Nunito Sans", Font.PLAIN, 20));
+        this.setFocusable(false);
+    }
+
+    public void paintIcon() {
+        if (this.isSelected() && this.getIcon() == notSelected) {
+            this.setIcon(selected);
+        } else if (!this.isSelected() && this.getIcon() == selected) {
+            this.setIcon(notSelected);
+        }
+    }
+
+    public JRadioButton getButton() {
+        return this;
     }
 }

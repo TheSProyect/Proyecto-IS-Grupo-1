@@ -3,6 +3,7 @@ package main.views.components;
 import java.awt.Dimension;
 import java.awt.Font;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JRadioButton;
 
@@ -13,16 +14,16 @@ public class OptionButton extends JRadioButton {
     ImageIcon notSelected;
     ImageIcon selected;
 
-    OptionButton() {
+    // OptionButton() {
+    //     setIcons();
+    // }
 
-    }
+    // public OptionButton(String option) {
+    //     setIcons();
 
-    public OptionButton(String option) {
-        setIcons();
-
-        paintRadialButton();
-        this.setText("<html>" + option + "</html>");
-    }
+    //     paintRadialButton();
+    //     this.setText("<html>" + option + "</html>");
+    // }
 
     protected void setIcons() {
         notSelected = new ImageIcon("src/assets/Unselected_MultiOption_Icon.png");
