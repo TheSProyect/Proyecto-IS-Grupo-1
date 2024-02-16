@@ -49,7 +49,7 @@ public class ExamView extends ExamTemplateView {
         List<String> domain = presentController.getDomain();
         List<Boolean> hasCode = presentController.getHasCode();
         List<List<String>> code = presentController.getCode();
-        List<String> image = presentController.directoryImage();
+        List<String> image = presentController.getDirectoryImage();
         List<List<String>> options = presentController.getOptions();
 
         QuestionPanel question;

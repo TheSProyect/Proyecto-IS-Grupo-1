@@ -97,8 +97,12 @@ public class PresentExamController extends TemplateExam{
     
     public List<String> readInformation(String nameCourse, Exam currentExam){
         List<String> examInformation = new ArrayList<String>();
+        String description = "";
         examInformation.add(currentExam.getNameExam());
-        examInformation.add((currentExam.getDescription()));
+        for(int i=0; i < currentExam.getDescription().size(); i++){
+            description += currentExam.getDescription().get(i) + " ";
+        }
+        examInformation.add(description);
         examInformation.add((currentExam.getType()));
         String duration = Integer.toString(currentExam.getDuration());
         examInformation.add(duration);
@@ -165,7 +169,8 @@ public class PresentExamController extends TemplateExam{
     }
     
     public void readExam(String directory, String nameFolder){
-        int numberQuestions, duration;
+        int numberQuestions, duration, sizeDescription;
+        List<String> description = new ArrayList<String>();
         directory = directory +File.separator+ nameFolder+File.separator+nameFolder+".txt";
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentExam.setNameExam(br.readLine());
@@ -175,7 +180,11 @@ public class PresentExamController extends TemplateExam{
             currentExam.setNameTeacher(br.readLine());
             duration = Integer.parseInt((br.readLine()));
             currentExam.setDuration(duration);
-            currentExam.setDescripcion(br.readLine());
+            sizeDescription = Integer.parseInt(br.readLine());
+            for(int i=0; i < sizeDescription; i++){
+                description.add(br.readLine());
+            }
+            currentExam.setDescripcion(description);
             currentExam.setNameCourse(br.readLine());
             }catch (IOException e) {
                 e.printStackTrace();
