@@ -24,6 +24,7 @@ public class NewQuestionPanel extends QuestionPanel {
     IconButton deleteQuestionButton;
     TextArea questionField;
     NewDomainsPanel domainField;
+    String imagePath;
 
     public NewQuestionPanel(ActionListener listener) {
         paintLabels();
@@ -180,8 +181,6 @@ public class NewQuestionPanel extends QuestionPanel {
         }
         
         domainField.addActionListenerDeleteButtons(this);
-        // questionContentPanel.validate();
-        // questionContentPanel.repaint();
         this.validate();
         this.repaint();
     }
@@ -208,11 +207,8 @@ public class NewQuestionPanel extends QuestionPanel {
             int response = imageChooser.showOpenDialog(null);
 
             if (response == JFileChooser.APPROVE_OPTION) {
-                File file = new File(imageChooser.getSelectedFile().getAbsolutePath());
-                System.out.println(file);
+                imagePath = imageChooser.getSelectedFile().getAbsolutePath();
             }
-
-            System.out.println("This should ask to add Image");
         }
     }
 
@@ -250,6 +246,10 @@ public class NewQuestionPanel extends QuestionPanel {
         questionInfo.add(getDomainText());
         questionInfo.add(getCode());
         return questionInfo;
+    }
+
+    public String getImagePath() {
+        return imagePath;
     }
 
     public boolean checkQuestionIsComplete() {

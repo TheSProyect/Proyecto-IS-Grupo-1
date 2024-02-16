@@ -134,7 +134,7 @@ public class NewExamView extends ExamTemplateView {
                 List<List<String>> questionInfo = newQuestion.getQuestionInfo();
                 List<List<List<String>>> answersInfo = newQuestion.getAnswersContent();
 
-                createExamController.saveQuestion(questionInfo, answersInfo, "");
+                createExamController.saveQuestion(questionInfo, answersInfo, newQuestion.getImagePath());
             }
             createExamController.replaceQuestionCount();
             // Frame.instance().setView(new ExamPublishedView(createExamController));
