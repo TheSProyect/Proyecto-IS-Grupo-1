@@ -15,13 +15,18 @@ public class OptionsPanel extends JPanel implements ActionListener{
     List<OptionButton> options;
     boolean answered;
 
-    OptionsPanel(List<String> optionsString) {
+    OptionsPanel(List<String> optionsString, boolean isSimpleOption) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBackground(Palette.instance().getWhite());
         answered = false;
         
         options = new ArrayList<OptionButton>();
-        createSimpleOptionsButtons(optionsString);
+        if (isSimpleOption) {
+            createSimpleOptionsButtons(optionsString);
+        } else {
+            createMultiOptionsButtons(optionsString);
+        }
+        
         paintOption();
     }
 

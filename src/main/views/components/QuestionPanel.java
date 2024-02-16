@@ -141,7 +141,6 @@ public class QuestionPanel extends JPanel implements ActionListener {
         JLabel domainLabel = new JLabel();
         domainLabel.setText("<html> <b> Dominio: </b>" + questionDomain);
         domainLabel.setFont(new Font("Nunito Sans", Font.PLAIN, 15));
-        // domainLabel.setPreferredSize(new Dimension(544, 40));
         domainLabel.setForeground(Palette.instance().getGray());
         domainLabel.setVerticalAlignment(JLabel.BOTTOM);
         domainPanel.add(domainLabel);
@@ -210,8 +209,8 @@ public class QuestionPanel extends JPanel implements ActionListener {
         return constraints;
     }
 
-    public void paintOptionsPanel(List<String> options) {
-        optionsPanel = new OptionsPanel(options);
+    public void paintOptionsPanel(List<String> options, boolean isSimpleOption) {
+        optionsPanel = new OptionsPanel(options, isSimpleOption);
 
         questionContentPanel.add(optionsPanel, createOptionPanelConstraints());
         questionContentPanel.setPreferredSize(new Dimension(544, questionContentPanel.getHeight()));
