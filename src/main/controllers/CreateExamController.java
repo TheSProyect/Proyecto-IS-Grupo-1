@@ -216,6 +216,17 @@ public class CreateExamController extends TemplateExam{
         String directory = folder.getAbsolutePath() + File.separator+ "Pregunta1.txt";
         showQuestion(directory,questionsRead,counter, stop);               
     }
+    public List<String> getDirectoryImage(){
+        List<String> directoryImage = new ArrayList<String>();
+        for(int i=0; i< currentExam.getNumberQuestions(); i++){
+            if(currentExam.isImage(i)){
+                directoryImage.add(currentDirectory.getDirectoryExams()+ File.separator + currentExam.getNameCourse()+ File.separator+ currentExam.getNameExam()+File.separator+ "Pregunta"+(currentExam.getNumberQuestions()+1) + ".jpg"); 
+            } else{
+                directoryImage.add(null);
+            }
+        }
+        return directoryImage;
+    }
      public List<String> getQuestionsStrings(){
         int j=currentExam.getNumberQuestions();
         List<String> questionsString = new ArrayList<String>();

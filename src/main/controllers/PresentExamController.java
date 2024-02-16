@@ -252,7 +252,7 @@ public class PresentExamController extends TemplateExam{
         return code;
     }
 
-    public List<String> directoryImage(){
+    public List<String> getDirectoryImage(){
         int j=currentExam.getNumberQuestions();
         List<String> directoryImage = new ArrayList<String>();
         for(int i=0; i<j; i++){
