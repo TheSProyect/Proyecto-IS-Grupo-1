@@ -222,6 +222,7 @@ public class QuestionPanel extends JPanel implements ActionListener {
         constraints.gridx = 0;
         constraints.gridy = 5;
         constraints.weighty = 1.0;
+        constraints.weightx = 1.0;
         constraints.gridwidth = 4;
         constraints.insets = new Insets(0, 0, 0, 10);
         constraints.fill = GridBagConstraints.BOTH;
