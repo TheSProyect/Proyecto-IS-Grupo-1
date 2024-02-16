@@ -42,7 +42,9 @@ public class Exam extends Course{
     public boolean isImage(int counter){
         return questions.get(counter).isImage();
     }
-   
+    public void setHasCode(Boolean code, int counter){
+        questions.get(counter).setHasCode(code);
+    }
     public void setQuestionsExam(List<String> statement, String domain, int counter){
         questions.add(new Question());
         questions.get(counter).setQuestions(statement,domain,questions.get(counter));
@@ -61,15 +63,17 @@ public class Exam extends Course{
     public void setNumCorrectAsnwers(int counter){
         questions.get(counter).setNumCorrectAsnwers();
     }
-    public void setResultExam(int numCorrectQuestions){
+    public void setResultExam(float numCorrectQuestions){
         results = new Result();
         results.setScore(numCorrectQuestions);
     }
    
-    public int getResultExam(){
+    public float getResultExam(){
         return results.getScore();
     }
-    
+    public Boolean getHasCodeExam(int counter){
+        return questions.get(counter).getHasCode();
+    }
     public List<String> getQuestionsExam(int counter){
         return questions.get(counter).getQuestions();
     }

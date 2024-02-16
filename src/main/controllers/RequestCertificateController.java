@@ -97,7 +97,7 @@ public class RequestCertificateController extends TemplateExam{
     public String getNameCourseController(){
         return currentCertificate.getNameCourse();
     }
-    public int getResultAnswersController(){
+    public float getResultAnswersController(){
         return currentCertificate.getResultExam();
     }
     public int getQuestionsExamController(){
