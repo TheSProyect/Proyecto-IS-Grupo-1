@@ -1,7 +1,7 @@
 Imagenes
-Examen con imagenes
+Con Imagenes
 1
 Nombre Apellido
-10
+60
 Descripcion
 Ayudarnos

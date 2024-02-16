@@ -1,20 +1,16 @@
 1
-Pregunta 1
-Dominio 1
-3
-if (this.works()) {
-	me.happy = true;
-}
+Pregunta pregunta
+DominioNo
 Si
 1
-fRespuesta 1
-Explicacion 1
+vMony
+Mony
 1
-vRespuesta 2
-Explicacion 2
+fMony
+Mony
 1
-vRespuesta 3
-Explicacion 3
+fMony
+Mony
 1
-fRespuesta 4
-Explicacion 4
+fMony
+Mony

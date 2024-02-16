@@ -2,7 +2,7 @@
 Pregunta con imagen
 Domi, nio, 
 1
-Has code bb
+
 Si
 1
 vRes
