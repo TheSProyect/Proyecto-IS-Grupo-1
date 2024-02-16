@@ -150,9 +150,6 @@ public class ExamView extends ExamTemplateView {
             Frame.instance().setTitle("ExamEndedView");
         }
     }
-  
-    public void showInstructions(){}
-    public void endExam(){}
 
     @Override
     public void actionPerformed(ActionEvent e) {

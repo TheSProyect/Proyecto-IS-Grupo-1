@@ -12,18 +12,16 @@ import javax.swing.JPanel;
 import main.utils.Palette;
 
 public class OptionsPanel extends JPanel implements ActionListener{
-    List<SingleOptionButton> options;
-    ButtonGroup group;
+    List<OptionButton> options;
     boolean answered;
 
     OptionsPanel(List<String> optionsString) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBackground(Palette.instance().getWhite());
-        options = new ArrayList<SingleOptionButton>();
-        group = new ButtonGroup();
         answered = false;
 
-        createOptionsButtons(optionsString);
+        options = new ArrayList<OptionButton>();
+        createSingleOptionsButtons(optionsString);
         paintOption();
     }
 
@@ -41,9 +39,17 @@ public class OptionsPanel extends JPanel implements ActionListener{
         }
     }
 
-    private void createOptionsButtons(List<String> optionsString) {
+    private void createSingleOptionsButtons(List<String> optionsString) {
+        ButtonGroup group = new ButtonGroup();
         for (int i = 0; i < determineNumLines(optionsString); i++) {
             options.add(new SingleOptionButton(optionsString.get(i), group));
+            options.get(i).addActionListener(this);
+        }
+    }
+
+    private void createMultiOptionsButtons(List<String> optionsString) {
+        for (int i = 0; i < determineNumLines(optionsString); i++) {
+            options.add(new OptionButton(optionsString.get(i)));
             options.get(i).addActionListener(this);
         }
     }
