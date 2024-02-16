@@ -1,6 +1,5 @@
 package test.controllers;
 import org.junit.*;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import main.controllers.RequestCertificateController;
 import main.utils.UserData;
@@ -8,21 +7,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.*;
 
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.Answers.*;
-import org.mockito.exceptions.base.MockitoException;
-//import java.nio.file.Files;
-//import java.nio.file.Paths;
-//@ExtendWith(MockitoExtension.class);
 
 public class RequestCertificateControllerTest {
-    //@Mock
-    //private UserData currentUser;
-
-    //@InjectMocks
-    
     String course;
     String directory = System.getProperty("user.dir");
     String nameFolderStudent = "Usuario";
