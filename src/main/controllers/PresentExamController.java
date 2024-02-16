@@ -240,6 +240,19 @@ public class PresentExamController extends TemplateExam{
         return code;
     }
 
+    public List<String> directoryImage(){
+        int j=currentExam.getNumberQuestions();
+        List<String> directoryImage = new ArrayList<String>();
+        for(int i=0; i<j; i++){
+            if(currentExam.isImage(i)){
+                directoryImage.add(currentDirectory.getDirectoryExams()+ File.separator + currentExam.getNameCourse()+ File.separator+ currentExam.getNameExam()+File.separator+ "Pregunta"+(currentExam.getNumberQuestions()+1) + ".jpg"); 
+            } else{
+                directoryImage.add(null);
+            }
+        }
+        return directoryImage;
+    }
+
     public List<List<String>> getJustification(){
         int j=currentExam.getNumberQuestions();
         List<List<String>> justification = new ArrayList<List<String>>();
