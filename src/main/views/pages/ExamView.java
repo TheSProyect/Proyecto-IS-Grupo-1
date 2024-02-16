@@ -49,6 +49,7 @@ public class ExamView extends ExamTemplateView {
         List<String> domain = presentController.getDomain();
         List<Boolean> hasCode = presentController.getHasCode();
         List<List<String>> code = presentController.getCode();
+        List<String> image = presentController.directoryImage();
         List<List<String>> options = presentController.getOptions();
 
         QuestionPanel question;
@@ -60,7 +61,11 @@ public class ExamView extends ExamTemplateView {
             if (hasCode.get(i)) {
                 question.paintCodeField(code.get(i));
             }
-            question.paintImage("src/assets/Logo_SingIn.png");
+
+            if (image.get(i) != null) {
+                question.paintImage(image.get(i));
+            }
+            
             boolean isSimpleOption = presentController.getNumCorrectAnswersController(i) == 1;
             question.paintOptionsPanel(options.get(i), isSimpleOption);
             questions.add(question);
