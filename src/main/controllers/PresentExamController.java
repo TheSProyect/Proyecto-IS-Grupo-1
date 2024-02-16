@@ -252,6 +252,19 @@ public class PresentExamController extends TemplateExam{
         return code;
     }
 
+    public List<String> directoryImage(){
+        int j=currentExam.getNumberQuestions();
+        List<String> directoryImage = new ArrayList<String>();
+        for(int i=0; i<j; i++){
+            if(currentExam.isImage(i)){
+                directoryImage.add(currentDirectory.getDirectoryExams()+ File.separator + currentExam.getNameCourse()+ File.separator+ currentExam.getNameExam()+File.separator+ "Pregunta"+(currentExam.getNumberQuestions()+1) + ".jpg"); 
+            } else{
+                directoryImage.add(null);
+            }
+        }
+        return directoryImage;
+    }
+
     public List<List<String>> getJustification(){
         int j=currentExam.getNumberQuestions();
         List<List<String>> justification = new ArrayList<List<String>>();
@@ -297,14 +310,15 @@ public class PresentExamController extends TemplateExam{
         return currentExam.getIsCorrectExam(indexQuestion, indexSelectedAnswer);
     }
 
-    public void setResultExamC(int numCorrectQuestions){
+    public void setResultExamC(float numCorrectQuestions){
         currentExam.setResultExam(numCorrectQuestions);
     }
 
-    public void computeResultQuestion(int numQuestion){
+    public float computeResultQuestion(int numQuestion, float numCorrectAnswers){
         //hay que cambiarlo a float
         //ese numcorrectquestion tiene que ser el index de la pregunta 
-        float result=currentExam.getNumberAnswersExam(numQuestion)/currentExam.getNumCorrectAnswersExam(numQuestion);
+        float result=numCorrectAnswers/currentExam.getNumCorrectAnswersExam(numQuestion);
         currentExam.setResultExam(result);
+        return result;
     }
 }

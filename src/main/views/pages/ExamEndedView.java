@@ -46,10 +46,11 @@ public class ExamEndedView extends ExamTemplateView {
         }
     }
 
-    private int showScore(){
-        int numCorrectQuestions = 0;
+    private float showScore(){
+        float numCorrectQuestions = 0;
 
         for (int i = 0; i < questions.size(); i++) {
+            System.out.println(numCorrectQuestions);
             int selectedOption = questions.get(i).getSelectedOption();
             if (selectedOption == -1) {
                 menuPanel.getQuestionListItems().get(i).setIcons("Wrong_Unselected_Icon", "Wrong_Selected_Icon");
@@ -59,6 +60,7 @@ public class ExamEndedView extends ExamTemplateView {
             } else {
                 menuPanel.getQuestionListItems().get(i).setIcons("Wrong_Unselected_Icon", "Wrong_Selected_Icon");
             }
+            numCorrectQuestions = numCorrectQuestions+ presentController.computeResultQuestion(i,numCorrectQuestions);
         }
         presentController.setResultExamC(numCorrectQuestions);
         presentController.examFinished();
