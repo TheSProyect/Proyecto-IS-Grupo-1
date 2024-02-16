@@ -115,7 +115,6 @@ public class NewExamView extends ExamTemplateView {
     private void actionEventInPublishButton(ActionEvent e) {
         if (e.getSource() == publishButton) {
             if (!checkQuestionsAreComplete()) {
-                System.out.println("Nop");
                 return;
             }
             createExamController = new CreateExamController();
@@ -139,7 +138,7 @@ public class NewExamView extends ExamTemplateView {
             }
             createExamController.replaceQuestionCount();
             // Frame.instance().setView(new ExamPublishedView(createExamController));
-            AdminExamsView.instance().paintNavBar();
+            AdminExamsView.deleteInstance();
             Frame.instance().setView(AdminExamsView.instance());
         }
     }

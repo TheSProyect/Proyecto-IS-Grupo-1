@@ -2,12 +2,12 @@ package main.models;
 
 public class Result {
     private int[] elections;
-    private int score;
+    private float score;
 
-    public void setScore(int numCorrectQuestions){
+    public void setScore(float numCorrectQuestions){
         score=numCorrectQuestions;
     }
-    public int getScore(){
+    public float getScore(){
         return score;
     }
 }

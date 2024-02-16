@@ -15,7 +15,6 @@ public class Exam extends Course{
     private String type, instructions, description;
     private int numberQuestions, duration;
     private Result results;
-    private List<String> code;
     private List<Question> questions = new ArrayList<>();
     
     public Exam(){
@@ -30,8 +29,8 @@ public class Exam extends Course{
                 e.printStackTrace();
         }
     }
-    public void setCode(List<String> code){
-        this.code=code;
+    public void setCode(List<String> code, int counter){
+        questions.get(counter).setCode(code);
     }
     public String getInstructions(){
         return instructions;
@@ -42,10 +41,12 @@ public class Exam extends Course{
     public boolean isImage(int counter){
         return questions.get(counter).isImage();
     }
-   
+    public void setHasCode(Boolean code, int counter){
+        questions.get(counter).setHasCode(code);
+    }
     public void setQuestionsExam(List<String> statement, String domain, int counter){
         questions.add(new Question());
-        questions.get(counter).setQuestions(statement,domain,questions.get(counter));
+        questions.get(counter).setQuestions(statement,domain);
     }
     public void setAnswersExam(List<String> answer, List<String> justification, int i, int counter){
         questions.get(counter).setAnswersQuestions(answer, justification, i);
@@ -61,15 +62,17 @@ public class Exam extends Course{
     public void setNumCorrectAsnwers(int counter){
         questions.get(counter).setNumCorrectAsnwers();
     }
-    public void setResultExam(int numCorrectQuestions){
+    public void setResultExam(float numCorrectQuestions){
         results = new Result();
         results.setScore(numCorrectQuestions);
     }
    
-    public int getResultExam(){
+    public float getResultExam(){
         return results.getScore();
     }
-    
+    public Boolean getHasCodeExam(int counter){
+        return questions.get(counter).getHasCode();
+    }
     public List<String> getQuestionsExam(int counter){
         return questions.get(counter).getQuestions();
     }
@@ -83,6 +86,9 @@ public class Exam extends Course{
     
     public List<String> getOptionsExam(int counterQuestion, int counterAnswer){
         return questions.get(counterQuestion).getOptionsQuestion(counterAnswer);
+    }
+    public List<String> getCodeExam(int counterQuestion){
+        return questions.get(counterQuestion).getCodeQuestion();
     }
     
     public int getNumCorrectAnswersExam(int counter){
