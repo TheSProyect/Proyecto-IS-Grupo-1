@@ -1,15 +1,9 @@
 package test.controllers;
 
-import org.junit.*;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.extension.ExtendWith;
-import static org.junit.Assert.assertEquals;
-
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 
 import main.controllers.RegisterUserController;

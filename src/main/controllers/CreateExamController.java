@@ -144,7 +144,7 @@ public class CreateExamController extends TemplateExam{
                 }
             }
             saveCode(code, writer);
-            if(directoryImage.equals("")){
+            if(directoryImage == null){
                 directoryImage = "No";
                 } else {
                     copyImage(directoryImage);

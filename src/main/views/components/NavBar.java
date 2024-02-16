@@ -92,6 +92,7 @@ public class NavBar extends JPanel implements ActionListener {
     }
 
     protected void actionEventInDefautButtons(ActionEvent e) {
+        PopUp.deleteInstance();
         if (e.getSource() == homeButton) {
             ExamsView.instance().paintNavBar();
             Frame.instance().setView(ExamsView.instance());
@@ -104,6 +105,7 @@ public class NavBar extends JPanel implements ActionListener {
         } else if (e.getSource() == logOutButton) {
             ExamsView.deleteInstance();
             navbar = null;
+        
             Frame.instance().setView(new LogInView());
         }
     }
