@@ -138,13 +138,15 @@ public class PresentExamController extends TemplateExam{
         }
     }
     private void readQuestion(String directory, int readings, int counter, int stop){
-        String line;
+        String line = null;
+        Boolean[] hasCode={false};
         List<String> code = new ArrayList<String>(), questionStatement = new ArrayList<String>();
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentExam.setQuestionsExam((readInformationQuestion(br, questionStatement, Integer.parseInt(br.readLine()))),(br.readLine()),counter);
             if((line=br.readLine())!= "No"){
-                readInformationQuestion(br, code, Integer.parseInt(line));
-                currentExam.setCode(code);
+                readCode(br, code, Integer.parseInt(line),hasCode);
+                currentExam.setCode(code, counter);
+                currentExam.setHasCode(hasCode[0], counter);
             }
             if(br.readLine().equals("Si")){
                 currentExam.setImageQuestion(true, counter);
@@ -290,6 +292,9 @@ public class PresentExamController extends TemplateExam{
         return currentExam.getDuration();
     }
 
+    public int getNumCorrectAnswersController(int counter){
+        return currentExam.getNumCorrectAnswersExam(counter);
+    }
     public Boolean isCorrect(int indexQuestion, int indexSelectedAnswer){
         return currentExam.getIsCorrectExam(indexQuestion, indexSelectedAnswer);
     }
@@ -298,9 +303,10 @@ public class PresentExamController extends TemplateExam{
         currentExam.setResultExam(numCorrectQuestions);
     }
 
-    public void computeResultQuestion(int numCorrectQuestions){
+    public void computeResultQuestion(int numQuestion){
         //hay que cambiarlo a float
-        float result=currentExam.getNumberAnswersExam(numCorrectQuestions)/currentExam.getNumCorrectAnswersExam(numCorrectQuestions);
+        //ese numcorrectquestion tiene que ser el index de la pregunta 
+        float result=currentExam.getNumberAnswersExam(numQuestion)/currentExam.getNumCorrectAnswersExam(numQuestion);
         currentExam.setResultExam(result);
     }
 }

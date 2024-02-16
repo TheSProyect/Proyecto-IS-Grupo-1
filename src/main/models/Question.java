@@ -12,7 +12,8 @@ public class Question {
     private int numCorrectAnswers=0;
     private List<Answer> answers = new ArrayList<>();
     private boolean image = false;
-    private boolean code =false;
+    private boolean hasCode =false;
+    private List<String> code;
 
     public void setImage(boolean image){
         this.image=image;
@@ -20,10 +21,14 @@ public class Question {
     public boolean isImage(){
         return image;
     }
-    
-    public void setQuestions(List<String> statement, String domain, Question question){
-        question.statement=statement;
-        question.domain=domain;
+    public void setCode(List<String> code){
+        this.code=code;
+    }
+    public void setQuestions(List<String> statement, String domain){
+        //question.statement=statement;
+        //question.domain=domain;
+        this.domain=domain;
+        this.statement=statement;
     }
 
     public void setAnswersQuestions(List<String> answer, List<String> justification, int i){
@@ -33,9 +38,6 @@ public class Question {
     public void setIsCorrectQuestions(Boolean isCorrect, int i){        
         answers.add(new Answer());
         answers.get(i).setIsCorrect(isCorrect,answers.get(i));
-    }
-    public void setHasCode(Boolean hasCode, Question question){
-        question.code= hasCode;
     }
     public List<String> getQuestions(){
         return statement;
@@ -70,16 +72,16 @@ public class Question {
     }
 
     public void setNumberAnswers(int number){
-        numberAnswers=number;
+        this.numberAnswers=number;
     }
 
     public void setNumCorrectAsnwers(){
-        numCorrectAnswers++;
+        this.numCorrectAnswers++;
     }
     public Boolean getHasCode(){
-        return code;
+        return hasCode;
     }
     public void setHasCode(Boolean hasCode){
-        this.code=hasCode;
+        this.hasCode=hasCode;
     }
 }
