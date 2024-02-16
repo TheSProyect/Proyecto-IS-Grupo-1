@@ -150,7 +150,8 @@ public class CreateExamController extends TemplateExam{
                     copyImage(directoryImage);
                     directoryImage = "Si";
             } 
-            writer.write("\n"+directoryImage + "\n");
+            writer.write(directoryImage + "\n");
+            //writer.write("\n"+directoryImage + "\n");
             saveInformationQuestion(answers, justifications, writer);
             writer.close();
         } catch (IOException e) {
@@ -219,7 +220,11 @@ public class CreateExamController extends TemplateExam{
         int j=currentExam.getNumberQuestions();
         List<String> questionsString = new ArrayList<String>();
         for(int i=0; i<j; i++){ 
-            questionsString.add(currentExam.getQuestionsExam(i));
+            String statement = "";
+            for(int k=0; k<currentExam.getQuestionsExam(i).size(); k++){
+                statement= statement + currentExam.getQuestionsExam(i).get(k) + "\n";
+            }
+            questionsString.add(statement);
         }
         return questionsString;
     }
@@ -248,7 +253,11 @@ public class CreateExamController extends TemplateExam{
         for(int i=0; i<j; i++){ 
             code.add(new ArrayList<String>());
             for(int k=0; k<currentExam.getNumberAnswersExam(i); k++){
-                code.get(i).add(currentExam.getOptionsExam(i,k));
+                String statement= "";
+                for(int l=0 ; l<currentExam.getOptionsExam(i,k).size(); l++){
+                    statement = statement + currentExam.getOptionsExam(i,k).get(l) + "\n";
+                }
+                code.get(i).add(statement);
             }
         }
         return code;
@@ -278,7 +287,11 @@ public class CreateExamController extends TemplateExam{
         for(int i=0; i<j; i++){ 
             options.add(new ArrayList<String>());
             for(int k=0; k<currentExam.getNumberAnswersExam(i); k++){
-                options.get(i).add(currentExam.getOptionsExam(i,k));
+                String statement= "";
+                for(int l=0 ; l<currentExam.getOptionsExam(i,k).size(); l++){
+                    statement = statement + currentExam.getOptionsExam(i,k).get(l) + "\n";
+                }
+                options.get(i).add(statement);
             }
         }
         return options;

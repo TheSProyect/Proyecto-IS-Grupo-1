@@ -38,7 +38,7 @@ public class ResultsBlock extends JPanel {
         this.add(blockText);
     }
 
-    public void paintResults(int numCorrectQuestions, int numTotalQuestions) {
+    public void paintResults(float numCorrectQuestions, int numTotalQuestions) {
         JLabel results = new JLabel(numCorrectQuestions + " / " + numTotalQuestions);
         results.setFont(new Font("Nunito Sans", Font.BOLD, 25));
         results.setForeground(Palette.instance().getWhite());

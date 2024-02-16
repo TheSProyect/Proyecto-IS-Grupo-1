@@ -12,6 +12,7 @@ public class Question {
     private int numCorrectAnswers=0;
     private List<Answer> answers = new ArrayList<>();
     private boolean image = false;
+    private boolean code =false;
 
     public void setImage(boolean image){
         this.image=image;
@@ -32,8 +33,10 @@ public class Question {
     public void setIsCorrectQuestions(Boolean isCorrect, int i){        
         answers.add(new Answer());
         answers.get(i).setIsCorrect(isCorrect,answers.get(i));
-}
-
+    }
+    public void setHasCode(Boolean hasCode, Question question){
+        question.code= hasCode;
+    }
     public List<String> getQuestions(){
         return statement;
     }
@@ -72,5 +75,11 @@ public class Question {
 
     public void setNumCorrectAsnwers(){
         numCorrectAnswers++;
+    }
+    public Boolean getHasCode(){
+        return code;
+    }
+    public void setHasCode(Boolean hasCode){
+        this.code=hasCode;
     }
 }

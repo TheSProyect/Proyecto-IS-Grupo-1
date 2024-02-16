@@ -12,9 +12,12 @@ import main.models.Exam;
 public class PresentExamController extends TemplateExam{
 
     public PresentExamController(){
+
     }
     public static void main(String[] args) throws IOException{
         PresentExamController p = new PresentExamController();
+        String[] examid= {"Prueba 1","Ayudarnos"};
+        p.searchFolder(examid);
     }
     public List<String> getInstructions(String [] informationsExam) {
         int INDEX_FOR_NAME_EXAM = 0, INDEX_FOR_NAME_COURSE = 1, INDEX_FOR_DURATION = 4;
@@ -205,7 +208,11 @@ public class PresentExamController extends TemplateExam{
         int j=currentExam.getNumberQuestions();
         List<String> questionsString = new ArrayList<String>();
         for(int i=0; i<j; i++){ 
-            questionsString.add(currentExam.getQuestionsExam(i));
+            String statement = "";
+            for(int k=0; k<currentExam.getQuestionsExam(i).size(); k++){
+                statement= statement + currentExam.getQuestionsExam(i).get(k) + "\n";
+            }
+            questionsString.add(statement);    
         }
         return questionsString;
     }
@@ -224,18 +231,23 @@ public class PresentExamController extends TemplateExam{
         List<Boolean> hasCode = new ArrayList<Boolean>();
         //falta arreglar
         for(int i=0; i<j; i++){ 
-            hasCode.add(true);
+            hasCode.add(currentExam.getHasCodeExam(i));
         }
         return hasCode;
     }
+
     public List<List<String>> getCode(){
         int j=currentExam.getNumberQuestions();
         List<List<String>> code = new ArrayList<List<String>>();
         for(int i=0; i<j; i++){ 
             code.add(new ArrayList<String>());
             for(int k=0; k<currentExam.getNumberAnswersExam(i); k++){
-                code.get(i).add(currentExam.getOptionsExam(i,k));
-            }
+                String statement= "";
+                for(int l=0 ; l<currentExam.getOptionsExam(i,k).size(); l++){
+                    statement = statement + currentExam.getOptionsExam(i,k).get(l) + "\n";
+                }
+                code.get(i).add(statement);
+            } 
         }
         return code;
     }
@@ -264,7 +276,11 @@ public class PresentExamController extends TemplateExam{
         for(int i=0; i<j; i++){ 
             options.add(new ArrayList<String>());
             for(int k=0; k<currentExam.getNumberAnswersExam(i); k++){
-                options.get(i).add(currentExam.getOptionsExam(i,k));
+                String statement= "";
+                for(int l=0 ; l<currentExam.getOptionsExam(i,k).size(); l++){
+                    statement = statement + currentExam.getOptionsExam(i,k).get(l) + "\n";
+                }
+                options.get(i).add(statement);
             }
         }
         return options;
@@ -284,7 +300,7 @@ public class PresentExamController extends TemplateExam{
 
     public void computeResultQuestion(int numCorrectQuestions){
         //hay que cambiarlo a float
-        int result=currentExam.getNumberAnswersExam(numCorrectQuestions)/currentExam.getNumCorrectAnswersExam(numCorrectQuestions);
+        float result=currentExam.getNumberAnswersExam(numCorrectQuestions)/currentExam.getNumCorrectAnswersExam(numCorrectQuestions);
         currentExam.setResultExam(result);
     }
 }
