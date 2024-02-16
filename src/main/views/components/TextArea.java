@@ -37,6 +37,9 @@ public class TextArea extends JTextArea implements FocusListener {
 
     @Override
     public void focusLost(FocusEvent e) {
+        if (placeHolder == null) {
+            return;
+        }
         if (this.getText().isEmpty()) {
             this.setText(placeHolder);
             this.setForeground(Palette.instance().getLightGray());
