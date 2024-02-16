@@ -22,7 +22,7 @@ import main.views.components.ResultsBlock;
 public class ExamEndedPopup extends PopUpTemplate{
     JButton Button;
     
-    public ExamEndedPopup(int correctAnswer,  int amountOfQuestion) {
+    public ExamEndedPopup(float correctAnswer,  int amountOfQuestion) {
         
         buildFrame(Size.instance().getExamEndedPopUpDimension());
         paintBorders();
@@ -30,7 +30,7 @@ public class ExamEndedPopup extends PopUpTemplate{
 
     }
 
-    protected void paintContentPanel(int correctAnswer,  int amountOfQuestion){
+    protected void paintContentPanel(float correctAnswer,  int amountOfQuestion){
         JPanel contentPanel = new JPanel();
         contentPanel.setPreferredSize(Size.instance().getExamEndedPopUpDimension());
         contentPanel.setBackground(Palette.instance().getWhite());
@@ -62,7 +62,7 @@ public class ExamEndedPopup extends PopUpTemplate{
         contentPanel.add(text);
     }
 
-    private void paintScore(JPanel contentPanel, int correctAnswer,  int amountOfQuestion) {
+    private void paintScore(JPanel contentPanel, float correctAnswer,  int amountOfQuestion) {
         ResultsBlock results = new ResultsBlock();
         results.paintResults(correctAnswer, amountOfQuestion);
         contentPanel.add(results);
