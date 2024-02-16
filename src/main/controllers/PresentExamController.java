@@ -243,13 +243,11 @@ public class PresentExamController extends TemplateExam{
         List<List<String>> code = new ArrayList<List<String>>();
         for(int i=0; i<j; i++){ 
             code.add(new ArrayList<String>());
-            for(int k=0; k<currentExam.getNumberAnswersExam(i); k++){
-                String statement= "";
-                for(int l=0 ; l<currentExam.getOptionsExam(i,k).size(); l++){
-                    statement = statement + currentExam.getOptionsExam(i,k).get(l) + "\n";
-                }
-                code.get(i).add(statement);
-            } 
+            String statement= "";
+            for(int k=0 ; k<currentExam.getCodeExam(i).size(); k++){
+                statement = statement + currentExam.getCodeExam(i).get(k) + "\n";
+            }
+            code.get(i).add(statement); 
         }
         return code;
     }

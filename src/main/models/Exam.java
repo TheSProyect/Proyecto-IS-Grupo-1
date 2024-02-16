@@ -15,7 +15,6 @@ public class Exam extends Course{
     private String type, instructions, description;
     private int numberQuestions, duration;
     private Result results;
-    private List<String> code;
     private List<Question> questions = new ArrayList<>();
     
     public Exam(){
@@ -33,9 +32,6 @@ public class Exam extends Course{
     public void setCode(List<String> code, int counter){
         questions.get(counter).setCode(code);
     }
-    //public void setCode(List<String> code){
-        //this.code=code;
-    //}
     public String getInstructions(){
         return instructions;
     }
@@ -90,6 +86,9 @@ public class Exam extends Course{
     
     public List<String> getOptionsExam(int counterQuestion, int counterAnswer){
         return questions.get(counterQuestion).getOptionsQuestion(counterAnswer);
+    }
+    public List<String> getCodeExam(int counterQuestion){
+        return questions.get(counterQuestion).getCodeQuestion();
     }
     
     public int getNumCorrectAnswersExam(int counter){

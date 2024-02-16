@@ -63,6 +63,10 @@ public class Question {
         //return questions2.getQuestions();
         return answers.get(counter).getAnswers();
     }
+    public List<String> getCodeQuestion(){
+        //return questions2.getQuestions();
+        return this.code;
+    }
     public List<String> getCode(int counter){
         //return questions2.getQuestions();
         return answers.get(counter).getAnswers();
