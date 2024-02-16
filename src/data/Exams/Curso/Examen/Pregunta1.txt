@@ -1,0 +1,17 @@
+1
+Pregunta
+DominioNo
+
+No
+1
+fRespuesta 1
+Explicacion 1
+1
+vRespuesta 2
+Explicacion 2
+1
+fRespuesta 3
+Explicacion 3
+1
+fRespuesta 4
+Explicacion 4
