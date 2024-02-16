@@ -30,9 +30,12 @@ public class Exam extends Course{
                 e.printStackTrace();
         }
     }
-    public void setCode(List<String> code){
-        this.code=code;
+    public void setCode(List<String> code, int counter){
+        questions.get(counter).setCode(code);
     }
+    //public void setCode(List<String> code){
+        //this.code=code;
+    //}
     public String getInstructions(){
         return instructions;
     }
@@ -47,7 +50,7 @@ public class Exam extends Course{
     }
     public void setQuestionsExam(List<String> statement, String domain, int counter){
         questions.add(new Question());
-        questions.get(counter).setQuestions(statement,domain,questions.get(counter));
+        questions.get(counter).setQuestions(statement,domain);
     }
     public void setAnswersExam(List<String> answer, List<String> justification, int i, int counter){
         questions.get(counter).setAnswersQuestions(answer, justification, i);

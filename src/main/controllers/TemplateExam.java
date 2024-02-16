@@ -32,6 +32,20 @@ public class TemplateExam {
         }
         return data;
     }
+    public List<String> readCode(BufferedReader br, List<String> code, int sizeCode, Boolean[] hasCode){
+        try{
+            for(int i=0; i < sizeCode; i++){
+                String line=br.readLine();
+                if(!line.isEmpty()){
+                    hasCode[0]=true;
+                    code.add(line);
+                }
+            }
+            } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return code;
+    }
     public int getNumberQuestion(String directory, String nameFolder){
         int LINE_NUMBER_QUESTION = 2;
         int numberQuestion = 0;

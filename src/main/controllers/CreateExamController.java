@@ -193,7 +193,7 @@ public class CreateExamController extends TemplateExam{
             currentExam.setQuestionsExam((readInformationQuestion(br, questionStatement, Integer.parseInt(br.readLine()))),(br.readLine()),counter);
             if((line=br.readLine())!= "No"){
                 readInformationQuestion(br, code, Integer.parseInt(line));
-                currentExam.setCode(code);
+                currentExam.setCode(code,counter);
             }
             if(br.readLine().equals("Si")){
                 currentExam.setImageQuestion(true, counter);

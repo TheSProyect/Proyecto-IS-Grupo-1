@@ -13,6 +13,7 @@ public class Question {
     private List<Answer> answers = new ArrayList<>();
     private boolean image = false;
     private boolean hasCode =false;
+    private List<String> code;
 
     public void setImage(boolean image){
         this.image=image;
@@ -20,8 +21,10 @@ public class Question {
     public boolean isImage(){
         return image;
     }
-    
-    public void setQuestions(List<String> statement, String domain, Question question){
+    public void setCode(List<String> code){
+        this.code=code;
+    }
+    public void setQuestions(List<String> statement, String domain){
         //question.statement=statement;
         //question.domain=domain;
         this.domain=domain;
@@ -69,11 +72,11 @@ public class Question {
     }
 
     public void setNumberAnswers(int number){
-        numberAnswers=number;
+        this.numberAnswers=number;
     }
 
     public void setNumCorrectAsnwers(){
-        numCorrectAnswers++;
+        this.numCorrectAnswers++;
     }
     public Boolean getHasCode(){
         return hasCode;
