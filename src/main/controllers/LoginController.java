@@ -21,18 +21,23 @@ public class LoginController {
 	
 	public boolean searchUser(String Username){
 		
-		try(BufferedReader adminR = new BufferedReader(new FileReader(searchedDirectory("Teachers", Username)))){
+		try(BufferedReader adminR = new BufferedReader(new FileReader(searchedDirectory("Teachers", Username, "Password")))){
 			currentUser.setUsername(Username);
 			String currentPassword = adminR.readLine();
 
 			currentUser.setPassword(currentPassword);
 			
 			currentUser.setIsAdmin(true);
+
+			try(BufferedReader FullnameR = new BufferedReader(new FileReader(searchedDirectory("Teachers", Username, "Name")))){
+				currentUser.setFullname(FullnameR.readLine(), FullnameR.readLine());
+			} catch (IOException e){}
+			
 			return true;
 			
 		} catch (IOException e){
 			
-			try(BufferedReader userR = new BufferedReader(new FileReader(searchedDirectory("Students",Username)))){
+			try(BufferedReader userR = new BufferedReader(new FileReader(searchedDirectory("Students",Username, "Password")))){
 			currentUser.setUsername(Username);
 			
 			String currentPassword = userR.readLine();
@@ -42,6 +47,12 @@ public class LoginController {
 			currentUser.setMail(currentMail);
 			
 			currentUser.setIsAdmin(false);
+			
+			try(BufferedReader FullnameR = new BufferedReader(new FileReader(searchedDirectory("Teachers", Username, "Name")))){
+				currentUser.setFullname(FullnameR.readLine(), FullnameR.readLine());
+				System.out.println(currentUser.getFullname());
+			} catch (IOException ee){}
+
 			return true;
 
 			} catch (IOException ee){
@@ -53,9 +64,11 @@ public class LoginController {
 		
 	}
 
-	public String searchedDirectory(String Folder, String Username){
+	
+
+	public String searchedDirectory(String Folder, String Username,String Field){
 		Directory currentDirectory = Directory.instance();
-		String directory = currentDirectory.getDirectoryUsers()+File.separator+Folder+File.separator+Username+File.separator+"Password.txt";
+		String directory = currentDirectory.getDirectoryUsers()+File.separator+Folder+File.separator+Username+File.separator+Field+".txt";
 		return directory;
 	}
 	
@@ -68,6 +81,10 @@ public class LoginController {
 	
 	public boolean isAdmin(){
 		return currentUser.isAdmin();
+	}
+
+	public void setFullname(){
+
 	}
 	
 }

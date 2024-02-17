@@ -54,7 +54,7 @@ public class RequestCertificateController extends TemplateExam{
             currentCertificate.setNameCourse(br.readLine());
             currentCertificate.setNameExam(br.readLine());
             String answersCorrects = br.readLine();
-            currentCertificate.setResultExam(Integer.parseInt(answersCorrects));
+            currentCertificate.setResultExam(Float.parseFloat(answersCorrects));
             String questionsExam =  br.readLine();
             currentCertificate.setQuestionsExam(Integer.parseInt(questionsExam));
             currentCertificate.setNameTeacherCertificate(br.readLine());

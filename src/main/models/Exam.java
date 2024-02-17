@@ -60,7 +60,7 @@ public class Exam extends Course{
     public void setNumberAnswers(int counter, int number){
         questions.get(counter).setNumberAnswers(number);
     }
-    public void setNumCorrectAsnwers(int counter){
+    public void setNumCorrectAsnwersExam(int counter){
         questions.get(counter).setNumCorrectAsnwers();
     }
     public void setResultExam(float numCorrectQuestions){
