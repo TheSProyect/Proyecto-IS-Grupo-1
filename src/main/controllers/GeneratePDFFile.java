@@ -16,7 +16,7 @@ public class GeneratePDFFile {
     Font fuenteTitulo= new Font();
     Font fuenteSmall = new Font();
     Font fuenteName = new Font();
-    Image imageSignature, imageScore ;
+    Image imageSignature, imageScore;
     List<String> informationToPDF = new ArrayList<String>();
     RequestCertificateController RCController= new RequestCertificateController();
 
@@ -35,11 +35,11 @@ public class GeneratePDFFile {
         scoreAnswers=informationToPDF.get(1);
         numQuestions=informationToPDF.get(2);
         course=new Paragraph(informationToPDF.get(3),fuenteSmall);
-        //String teacherName=informationToPDF.get(4);
-        String teacherName="Profesor";
+        String teacherName=informationToPDF.get(4);
+        String usernameTeacher = informationToPDF.get(5);
         teacher= new Paragraph(teacherName, fuenteSmall);
         try {
-            imageSignature = Image.getInstance(directorio+File.separator+teacherName+File.separator +"Signature.png");
+            imageSignature = Image.getInstance(directorio + File.separator + usernameTeacher + File.separator + "Signature.png");
             imageScore=Image.getInstance("src\\assets\\BlueFolder_Icon.png");
 
         } catch (Exception e) {

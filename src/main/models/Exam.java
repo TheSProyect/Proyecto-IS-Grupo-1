@@ -122,6 +122,14 @@ public class Exam extends Course{
     public String getNameCourse(){
         return course.getNameCourse();
     }
+    
+    public void setUsernameTeacher(String username){
+        course.setUsernameTeacher(username);
+    }
+
+    public String getUsernameTeacher(){
+        return course.getUsernameTeacher();
+    }
 
     public void setNameExam(String nameExam){
         name = new Name();

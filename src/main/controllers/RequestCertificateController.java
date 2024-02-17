@@ -58,6 +58,7 @@ public class RequestCertificateController extends TemplateExam{
             String questionsExam =  br.readLine();
             currentCertificate.setQuestionsExam(Integer.parseInt(questionsExam));
             currentCertificate.setNameTeacherCertificate(br.readLine());
+            currentCertificate.setUsernameTeacher(br.readLine());
             br.close();     
             } catch (IOException e) {
                 e.printStackTrace();
@@ -86,6 +87,7 @@ public class RequestCertificateController extends TemplateExam{
         informationToPDF.add(String.valueOf(currentCertificate.getQuestionsExam()));
         informationToPDF.add(currentCertificate.getNameCourse());
         informationToPDF.add(currentCertificate.getNameTeacher());
+        informationToPDF.add(currentCertificate.getUsernameTeacher());
         GeneratePDFFile creatingPDF = new GeneratePDFFile(informationToPDF);
     }
     public String getNameStudentController(){

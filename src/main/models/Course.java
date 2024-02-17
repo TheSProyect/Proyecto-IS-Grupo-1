@@ -3,6 +3,7 @@ package main.models;
 public class Course {
     private  Name name;
     private Name teacher;
+    private Name usernameTeacher;
 
     public void setNameTeacher(String name){
         teacher = new Name();
@@ -17,5 +18,12 @@ public class Course {
     }
     public String getNameTeacher(){
         return teacher.getName();
+    }
+    public void setUsernameTeacher(String name){
+        usernameTeacher = new Name();
+        usernameTeacher.setName(name);
+    }
+    public String getUsernameTeacher(){
+        return usernameTeacher.getName();
     }
 }

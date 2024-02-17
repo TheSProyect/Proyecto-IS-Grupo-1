@@ -50,9 +50,9 @@ public class PresentExamController extends TemplateExam{
             File file = new File(directory, (currentExam.getNameCourse())+ ".txt");
             if (file.createNewFile()) {
                 FileWriter writer = new FileWriter(file);               
-                writer.write((currentExam.getNameCourse()) +"\n"+ (currentExam.getNameExam()) + "\n");
-                writer.write((String.valueOf(currentExam.getResultExam()))+"\n"+ currentExam.getNumberQuestions()+ "\n");
-                writer.write(currentExam.getNameTeacher());
+                writer.write((currentExam.getNameCourse()) + "\n" + (currentExam.getNameExam()) + "\n");
+                writer.write((String.valueOf(currentExam.getResultExam())) + "\n" + currentExam.getNumberQuestions()+ "\n");
+                writer.write(currentExam.getNameTeacher() + "\n" + currentExam.getUsernameTeacher());
                 writer.close();
                 }
            } catch (IOException e) {
@@ -125,6 +125,7 @@ public class PresentExamController extends TemplateExam{
             }
             currentExam.setDescripcion(description);
             currentExam.setNameCourse(br.readLine());
+            currentExam.setUsernameTeacher(br.readLine());
             }catch (IOException e) {
                 e.printStackTrace();
         }

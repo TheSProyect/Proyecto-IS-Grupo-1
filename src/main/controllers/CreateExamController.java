@@ -39,7 +39,7 @@ public class CreateExamController extends TemplateExam{
             for(String text : description){
                 writer.write(text + "\n");
             }
-            writer.write(examData.get(INDEX_FOR_NAME_COURSE));  
+            writer.write(examData.get(INDEX_FOR_NAME_COURSE) + "\n" + currentUser.getUsername());  
             writer.close();
 
         } catch (IOException e) {

@@ -5,6 +5,14 @@ public class Certificate {
     private Exam course = new Exam();
     private int questionsExam;
 
+    public void setUsernameTeacher(String username){
+        course.setUsernameTeacher(username);
+    }
+
+    public String getUsernameTeacher(){
+        return course.getUsernameTeacher();
+    }
+
     public void setQuestionsExam(int questionsExam){
         this.questionsExam = questionsExam;
     }
