@@ -1,14 +1,9 @@
 package main.views.pages;
 
-import main.views.pages.NewExamView;
-import main.views.pages.ExamView;
 import main.views.components.ExamMenu;
 import main.views.components.Message;
 import main.views.components.PopUp;
 import main.views.components.QuestionPanel;
-import main.views.components.ResultsBlock;
-import main.views.components.TimerBlock;
-
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import main.controllers.CreateExamController;
-import main.controllers.PresentExamController;
+import main.utils.Palette;
 import main.utils.Size;
 
 public class ExamPublishedView extends ExamTemplateView{
@@ -41,14 +36,16 @@ public class ExamPublishedView extends ExamTemplateView{
     
     protected void paintMenuPanel() {
         JPanel panel = new JPanel();
+        panel.setBackground(Palette.instance().getWhite());
         menuPanel = new ExamMenu(panel, questions.size());
         menuPanel.setCurrentQuestion(index);
 
         contentPanel.add(menuPanel, menuPanelConstraints());
     }
+
     protected void inicializeQuestions() {
         createExamController.showExam();
-        List<String> questionsString= createExamController.getQuestionsStrings();
+        List<String> questionsString = createExamController.getQuestionsStrings();
         List<String> domain = createExamController.getDomain();
         List<Boolean> hasCode = createExamController.getHasCode();
         List<List<String>> code = createExamController.getCode();
@@ -68,7 +65,8 @@ public class ExamPublishedView extends ExamTemplateView{
             if (image.get(i) != null) {
                 question.paintImage(image.get(i));
             }
-            
+            boolean isSimpleOption = createExamController.getNumCorrectAnswersController(i) == 1;
+            question.paintOptionsPanel(options.get(i), isSimpleOption);
             questions.add(question);
         }
     }
@@ -113,6 +111,7 @@ public class ExamPublishedView extends ExamTemplateView{
             questions.get(index).setVisible(true);
         }
     }  
+
     protected void actionEventInBottomLeftButton(ActionEvent e) {
         if(e.getSource() == bottomLeftButton) {
             popup = new ExamPublishedPopUp();
@@ -122,15 +121,15 @@ public class ExamPublishedView extends ExamTemplateView{
             popup.getButton().addActionListener(this);
         } 
     }
+
     private void actionEventInPopUp(ActionEvent e) {
         if (popup == null){
             return;
         } else if (e.getSource() == popup.getButton()) {
             PopUp.deleteInstance();
-           // Frame.instance().setView(new ExamEndedView(questions, presentController));
-           // Frame.instance().setTitle("ExamEndedView");
         }
     }
+
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == prevButton) {
             showPreviousQuestions();

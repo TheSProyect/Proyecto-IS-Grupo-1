@@ -54,7 +54,6 @@ public abstract class ExamTemplateView extends NavBarTemplateView {
             contentPanel.add(questions.get(i), constraints);
             questions.get(i).setVisible(false);
         }
-        
         questions.get(index).setVisible(true);
     }
 

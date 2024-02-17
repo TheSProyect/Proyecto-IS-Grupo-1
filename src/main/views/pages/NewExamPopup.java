@@ -6,7 +6,6 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -15,7 +14,6 @@ import main.controllers.CreateExamController;
 import main.utils.Palette;
 import main.utils.Size;
 import main.views.components.ExamInfoPanel;
-import main.views.pages.ExamPublishedView;
 import main.views.components.IconButton;
 import main.views.components.PopUp;
 
@@ -91,10 +89,8 @@ public class NewExamPopup extends PopUpTemplate implements ActionListener{
             examDescription = examInfoPanel.getDescription();
 
             createExamController.saveExam(examData, examDescription, ExamInfoPanel.getDuration());
-            System.out.print(examDescription);
 
             PopUp.deleteInstance();
-            Frame.instance().setView(new ExamPublishedView(createExamController));
             return true;
         }
         return false;
