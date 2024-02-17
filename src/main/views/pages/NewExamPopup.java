@@ -81,14 +81,16 @@ public class NewExamPopup extends PopUpTemplate implements ActionListener{
             if (!examInfoPanel.checkFieldsAreComplete()) {
                 return false;
             }
-            ArrayList<String> examInfo = new ArrayList<String>(); 
-            examInfo.add(examInfoPanel.getExamName());
-            examInfo.add(examInfoPanel.getType());
-            examInfo.add(examInfoPanel.getCourse());
-            examInfo.add(examInfoPanel.getDescription());
+            ArrayList<String> examData = new ArrayList<String>(); 
+            ArrayList<String> examDescription = new ArrayList<String>();
+            examData.add(examInfoPanel.getExamName());
+            examData.add(examInfoPanel.getType());
+            examData.add(examInfoPanel.getCourse());
+            examDescription = examInfoPanel.getDescription();
 
-            createExamController.saveExam(examInfo, ExamInfoPanel.getDuration());
-            
+            createExamController.saveExam(examData, examDescription, ExamInfoPanel.getDuration());
+            System.out.print(examDescription);
+
             PopUp.deleteInstance();
             return true;
         }
