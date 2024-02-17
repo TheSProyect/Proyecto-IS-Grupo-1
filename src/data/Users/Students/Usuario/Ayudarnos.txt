@@ -1,6 +1,6 @@
 Ayudarnos
 Examen con espacios
-0.0
+1.0
 2
 Nombre Apellido
 Profesor
