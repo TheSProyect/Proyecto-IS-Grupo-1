@@ -22,7 +22,9 @@ public class PresentExamControllerTest {
         currentExam = new Exam(); 
         currentExam.setNameExam("ExamName");
         currentExam.setType("Type");
-        currentExam.setDescripcion("Description");
+        List<String> description = new ArrayList<String>();
+        description.add("Description");
+        currentExam.setDescripcion(description);
         currentExam.setNameCourse("CourseName");
         currentExam.setResultExam(15);
         currentExam.setNumberQuestions(20);
