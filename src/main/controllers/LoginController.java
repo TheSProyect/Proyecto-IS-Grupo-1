@@ -31,7 +31,6 @@ public class LoginController {
 
 			try(BufferedReader FullnameR = new BufferedReader(new FileReader(searchedDirectory("Teachers", Username, "Name")))){
 				currentUser.setFullname(FullnameR.readLine(), FullnameR.readLine());
-				System.out.println(currentUser.getFullname());
 			} catch (IOException e){}
 			
 			return true;
