@@ -253,8 +253,10 @@ public class PresentExamController extends TemplateExam{
         for(int i=0; i<j; i++){ 
             code.add(new ArrayList<String>());
             String statement= "";
-            for(int k=0 ; k<currentExam.getCodeExam(i).size(); k++){
-                statement = statement + currentExam.getCodeExam(i).get(k) + "\n";
+            if(currentExam.getHasCodeExam(i)){
+                for(int k=0 ; k<currentExam.getCodeExam(i).size(); k++){
+                    statement = statement + currentExam.getCodeExam(i).get(k) + "\n";
+                }
             }
             code.get(i).add(statement); 
         }

@@ -36,7 +36,7 @@ public class ExamEndedPopup extends PopUpTemplate{
         contentPanel.setBackground(Palette.instance().getWhite());
         contentPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 15));
         
-        paintTitlePanel(contentPanel, "¡Felicidades!");
+        paintTitlePanel(contentPanel, "Examen Finalizado");
         
         paintTextLabel(contentPanel);
         paintScore(contentPanel, correctAnswer, amountOfQuestion);
@@ -48,7 +48,7 @@ public class ExamEndedPopup extends PopUpTemplate{
 
     protected void paintTextLabel(JPanel contentPanel) {
         JTextPane text = new JTextPane();
-        text.setText("Haz finalizado exitosamente con una nota de:");
+        text.setText("Haz finalizado el examen con una nota de:");
         text.setFont(new Font("Nunito Sans", Font.PLAIN, 20));
         text.setPreferredSize(new Dimension(500, 25));
         text.setEditable(false);

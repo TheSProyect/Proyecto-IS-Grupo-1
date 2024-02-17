@@ -191,12 +191,14 @@ public class CreateExamController extends TemplateExam{
     }
     private void showQuestion(String directory, int readings, int counter, int stop){
         String line;
+        Boolean[] hasCode={false};
         List<String> code = new ArrayList<String>(), questionStatement = new ArrayList<String>();
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentExam.setQuestionsExam((readInformationQuestion(br, questionStatement, Integer.parseInt(br.readLine()))),(br.readLine()),counter);
-            if((line=br.readLine())!= "No"){
-                readInformationQuestion(br, code, Integer.parseInt(line));
+            if(!((line=br.readLine()).equals("No"))){
+                readCode(br, code, Integer.parseInt(line),hasCode);
                 currentExam.setCode(code,counter);
+                currentExam.setHasCode(hasCode[0], counter);
             }
             if(br.readLine().equals("Si")){
                 currentExam.setImageQuestion(true, counter);
@@ -251,15 +253,16 @@ public class CreateExamController extends TemplateExam{
         }
         return hasCode;
     }
-
     public List<List<String>> getCode(){
         int j=currentExam.getNumberQuestions();
         List<List<String>> code = new ArrayList<List<String>>();
         for(int i=0; i<j; i++){ 
             code.add(new ArrayList<String>());
             String statement= "";
-            for(int k=0 ; k<currentExam.getCodeExam(i).size(); k++){
-                statement = statement + currentExam.getCodeExam(i).get(k) + "\n";
+            if(currentExam.getHasCodeExam(i)){
+                for(int k=0 ; k<currentExam.getCodeExam(i).size(); k++){
+                    statement = statement + currentExam.getCodeExam(i).get(k) + "\n";
+                }
             }
             code.get(i).add(statement); 
         }
