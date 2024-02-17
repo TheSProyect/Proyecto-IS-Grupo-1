@@ -204,7 +204,7 @@ public class ExamInfoPanel extends JPanel{
     }
 
     public String getExamName() {
-        return examNameField.getText();
+        return examNameField.getText().replace("\n","-");
     }
 
     public String getType() {
@@ -212,7 +212,7 @@ public class ExamInfoPanel extends JPanel{
     }
 
     public String getCourse() {
-        return courseField.getText();
+        return courseField.getText().replace("\n","-");
     }
 
     public static int getDuration() {
