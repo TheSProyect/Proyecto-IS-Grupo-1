@@ -1,7 +1,7 @@
 1
 Pregunta con imagen
 Domi, nio, 
-1
+No
 Si
 1
 vRes

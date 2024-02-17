@@ -1,5 +1,5 @@
 Ayudarnos
-Prueba 1
-1.5
-3
+Imagenes
+0.0
+1
 Nombre Apellido

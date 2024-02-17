@@ -14,11 +14,11 @@ public class PresentExamController extends TemplateExam{
     public PresentExamController(){
 
     }
-    public static void main(String[] args) throws IOException{
-        PresentExamController p = new PresentExamController();
-        String[] examid= {"Prueba 1","Ayudarnos"};
-        p.searchFolder(examid);
-    }
+    // public static void main(String[] args) throws IOException{
+    //     PresentExamController p = new PresentExamController();
+    //     String[] examid= {"Prueba 1","Ayudarnos"};
+    //     p.searchFolder(examid);
+    // }
     public List<String> getInstructions(String [] informationsExam) {
         int INDEX_FOR_NAME_EXAM = 0, INDEX_FOR_NAME_COURSE = 1, INDEX_FOR_DURATION = 4;
         List<String> instrucionsInformation = new ArrayList<String>();
@@ -358,8 +358,7 @@ public class PresentExamController extends TemplateExam{
 
     public float computeResultQuestion(int numQuestion, float numCorrectAnswers, float selectedOptions){
         float maxAmountCorrectAnswers = currentExam.getNumCorrectAnswersExam(numQuestion);
-        System.out.println("numCorrectAnswers=" + numCorrectAnswers);
-        System.out.println("maxAmountCorrectAnswers=" + maxAmountCorrectAnswers);
+        
         if (numCorrectAnswers != 0 && numCorrectAnswers < selectedOptions) {
             float penalization = selectedOptions - numCorrectAnswers;
             numCorrectAnswers = numCorrectAnswers - penalization;
@@ -370,7 +369,6 @@ public class PresentExamController extends TemplateExam{
 
         float result = numCorrectAnswers / maxAmountCorrectAnswers;
         currentExam.setResultExam(result);
-        System.out.println(result);
         return result;
     }
 }
