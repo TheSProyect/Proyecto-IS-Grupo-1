@@ -63,13 +63,12 @@ public class OptionsPanel extends JPanel implements ActionListener{
         return answered;
     }
 
-    public int getSelectedOption() {
-        for (int i = 0; i < options.size(); i++) {
-            if (options.get(i).isSelected()) {
-                return i;
-            }
+    public List<Boolean> getSelectedOption() {
+        List<Boolean> selectedQuestions = new ArrayList<Boolean>();
+        for (OptionButton option : options) {
+            selectedQuestions.add(option.isSelected());
         }
-        return -1;
+        return selectedQuestions;
     }
 
     public void disableOptions() {

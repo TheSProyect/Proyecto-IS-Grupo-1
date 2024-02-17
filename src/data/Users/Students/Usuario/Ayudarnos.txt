@@ -1,5 +1,5 @@
 Ayudarnos
 Prueba 1
-6.6666665
+0.0
 3
 Nombre Apellido
