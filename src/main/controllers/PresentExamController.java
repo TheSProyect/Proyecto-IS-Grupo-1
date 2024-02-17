@@ -5,20 +5,16 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import main.models.Exam;
 
 public class PresentExamController extends TemplateExam{
 
-    public PresentExamController(){
+    public PresentExamController(){}
 
-    }
-    // public static void main(String[] args) throws IOException{
-    //     PresentExamController p = new PresentExamController();
-    //     String[] examid= {"Prueba 1","Ayudarnos"};
-    //     p.searchFolder(examid);
-    // }
     public List<String> getInstructions(String [] informationsExam) {
         int INDEX_FOR_NAME_EXAM = 0, INDEX_FOR_NAME_COURSE = 1, INDEX_FOR_DURATION = 4;
         List<String> instrucionsInformation = new ArrayList<String>();
@@ -121,7 +117,7 @@ public class PresentExamController extends TemplateExam{
                     if ((line = br.readLine()) != null && j==0 && line.substring(0, 1).equalsIgnoreCase("v")) {
                         answer.add(line.substring(1));
                         currentExam.setIsCorrectExam(true, i, counter);
-                        currentExam.setNumCorrectAsnwers(counter);
+                        currentExam.setNumCorrectAsnwersExam(counter);
                         } else if(j==0 && line.substring(0, 1).equalsIgnoreCase("f")){
                             answer.add(line.substring(1));
                             currentExam.setIsCorrectExam(false, i, counter);
@@ -141,7 +137,7 @@ public class PresentExamController extends TemplateExam{
             e.printStackTrace();
         }
     }
-    private void readQuestion(String directory, int readings, int counter, int stop){
+    public void readQuestion(String directory, int readings, int counter, int stop){
         String line = null;
         Boolean[] hasCode={false};
         List<String> code = new ArrayList<String>(), questionStatement = new ArrayList<String>();
@@ -161,6 +157,8 @@ public class PresentExamController extends TemplateExam{
                     e.printStackTrace();
             }
             if(readings==stop) {
+                System.out.println("en el read antes del retorno");
+        System.out.println(currentExam.getNumCorrectAnswersExam(0));
                 return;
             } else {
                 counter++;
@@ -327,37 +325,36 @@ public class PresentExamController extends TemplateExam{
     public void setResultExamC(float numCorrectQuestions){
         currentExam.setResultExam(numCorrectQuestions);
     }
-
+    
     public float caculateResult(List<List<Boolean>> selectedOptions) {
         float result=0;
-        int numQuestions = currentExam.getNumberQuestions();
+        int numQuestions = currentExam.getNumberQuestions(), decimals=2;
+        
         for (int i = 0; i < numQuestions; i++) {
-
             float numCorrectAnswers = 0;
             float numSelectedOptions = 0;
-
             for (int j = 0; j < selectedOptions.get(i).size(); j++) {
                 if (selectedOptions.get(i).get(j)) {
                     numSelectedOptions++;
                     if (isCorrect(i, j)) {
-                        System.out.println("Correct " + j);
                         numCorrectAnswers++;
                     }
                 }
-                
             }
-
             if (numSelectedOptions == selectedOptions.get(i).size()) {
                 numCorrectAnswers = 0;
             }
             result =  result + computeResultQuestion(i, numCorrectAnswers, numSelectedOptions);
         }
-        
-        return result;
+        BigDecimal bd = new BigDecimal(Float.toString(result));
+        bd = bd.setScale(decimals, RoundingMode.HALF_UP);
+        float resultF = bd.floatValue();
+        return resultF;
     }
 
     public float computeResultQuestion(int numQuestion, float numCorrectAnswers, float selectedOptions){
-        float maxAmountCorrectAnswers = currentExam.getNumCorrectAnswersExam(numQuestion);
+        //float maxAmountCorrectAnswers = currentExam.getNumCorrectAnswersExam(numQuestion);
+        float maxAmountCorrectAnswers = getNumCorrectAnswersController(numQuestion);
         
         if (numCorrectAnswers != 0 && numCorrectAnswers < selectedOptions) {
             float penalization = selectedOptions - numCorrectAnswers;
