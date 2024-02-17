@@ -12,10 +12,11 @@ import java.util.List;
 public class Exam extends Course{
     private Course course = new Course();
     private Name name;
-    private String type, instructions, description;
+    private String type, instructions;
     private int numberQuestions, duration;
     private Result results;
     private List<Question> questions = new ArrayList<>();
+    private List<String> description = new ArrayList<String>();
     
     public Exam(){
         Directory currentDirectory = Directory.instance();
@@ -155,11 +156,11 @@ public class Exam extends Course{
         return duration;
     }
 
-    public void setDescripcion(String description){
+    public void setDescripcion(List<String> description){
         this.description=description;
     }
     
-    public String getDescription(){
+    public List<String> getDescription(){
         return description;
     }
 }

@@ -16,8 +16,8 @@ public class CreateExamController extends TemplateExam{
     int questionsCount = 0;
     File folder;
 
-    public void saveExam(List<String> examData, int duration){
-        int INDEX_FOR_NAME_EXAM=0, INDEX_FOR_TYPE=1,INDEX_FOR_NAME_COURSE=2, INDEX_FOR_DESCRIPTION=3;
+    public void saveExam(List<String> examData,List<String> description, int duration){
+        int INDEX_FOR_NAME_EXAM=0, INDEX_FOR_TYPE=1,INDEX_FOR_NAME_COURSE=2;
         File courseFolder = new File(currentDirectory.getDirectoryExams()+ File.separator+ examData.get(INDEX_FOR_NAME_COURSE));
         if (!courseFolder.exists()) {
             courseFolder.mkdir();
@@ -34,8 +34,12 @@ public class CreateExamController extends TemplateExam{
                 file.createNewFile();
             }
             FileWriter writer = new FileWriter(file);
-
-            writer.write(examData.get(INDEX_FOR_NAME_EXAM) + "\n" + examData.get(INDEX_FOR_TYPE) + "\n" + questionsCount + "\n" + readNameTeacher() + "\n" + duration + "\n" + examData.get(INDEX_FOR_DESCRIPTION) + "\n"+ examData.get(INDEX_FOR_NAME_COURSE));
+            writer.write(examData.get(INDEX_FOR_NAME_EXAM) + "\n" + examData.get(INDEX_FOR_TYPE) + "\n" + questionsCount + "\n" + readNameTeacher() + "\n" + duration + "\n");
+            writer.write(description.size() + "\n");
+            for(String text : description){
+                writer.write(text + "\n");
+            }
+            writer.write(examData.get(INDEX_FOR_NAME_COURSE));  
             writer.close();
 
         } catch (IOException e) {
@@ -216,7 +220,8 @@ public class CreateExamController extends TemplateExam{
         String directory = folder.getAbsolutePath() + File.separator+ "Pregunta1.txt";
         showQuestion(directory,questionsRead,counter, stop);               
     }
-     public List<String> getQuestionsStrings(){
+    
+    public List<String> getQuestionsStrings(){
         int j=currentExam.getNumberQuestions();
         List<String> questionsString = new ArrayList<String>();
         for(int i=0; i<j; i++){ 
@@ -224,7 +229,7 @@ public class CreateExamController extends TemplateExam{
             for(int k=0; k<currentExam.getQuestionsExam(i).size(); k++){
                 statement= statement + currentExam.getQuestionsExam(i).get(k) + "\n";
             }
-            questionsString.add(statement);
+            questionsString.add(statement);    
         }
         return questionsString;
     }
@@ -243,10 +248,11 @@ public class CreateExamController extends TemplateExam{
         List<Boolean> hasCode = new ArrayList<Boolean>();
         //falta arreglar
         for(int i=0; i<j; i++){ 
-            hasCode.add(true);
+            hasCode.add(currentExam.getHasCodeExam(i));
         }
         return hasCode;
     }
+
     public List<List<String>> getCode(){
         int j=currentExam.getNumberQuestions();
         List<List<String>> code = new ArrayList<List<String>>();
@@ -259,6 +265,21 @@ public class CreateExamController extends TemplateExam{
             code.get(i).add(statement); 
         }
         return code;
+    }
+
+    public List<String> getDirectoryImage(){
+        int j=currentExam.getNumberQuestions();
+        List<String> directoryImage = new ArrayList<String>();
+        for(int i=0; i<j; i++){
+            if(currentExam.isImage(i)){
+                int currentQuestion = i + 1;
+                directoryImage.add(currentDirectory.getDirectoryExams()+ File.separator + currentExam.getNameCourse()+ File.separator+ currentExam.getNameExam()+File.separator+ "Pregunta"+ currentQuestion + ".jpg");
+                directoryImage.get(i).replace(" ", "-");
+            } else{
+                directoryImage.add(null);
+            }
+        }
+        return directoryImage;
     }
 
     public List<List<String>> getJustification(){
@@ -293,6 +314,17 @@ public class CreateExamController extends TemplateExam{
             }
         }
         return options;
+    }
+
+    public int getNumCorrectAnswersController(int counter){
+        return currentExam.getNumCorrectAnswersExam(counter);
+    }
+    public Boolean isCorrect(int indexQuestion, int indexSelectedAnswer){
+        return currentExam.getIsCorrectExam(indexQuestion, indexSelectedAnswer);
+    }
+
+    public void setResultExamC(float numCorrectQuestions){
+        currentExam.setResultExam(numCorrectQuestions);
     }
 
     public int getDuracion(){
