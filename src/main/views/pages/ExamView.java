@@ -65,7 +65,6 @@ public class ExamView extends ExamTemplateView {
             if (image.get(i) != null) {
                 question.paintImage(image.get(i));
             }
-            
             boolean isSimpleOption = presentController.getNumCorrectAnswersController(i) == 1;
             question.paintOptionsPanel(options.get(i), isSimpleOption);
             questions.add(question);
@@ -113,20 +112,14 @@ public class ExamView extends ExamTemplateView {
         }
     }  
 
-    private float caculateResult() {
-        float result=0;
-        for (int i = 0; i < questions.size(); i++) {
-            float numCorrectQuestions = 0;
-            int selectedOption = questions.get(i).getSelectedOption();
-            if (selectedOption == -1) {
-                continue;
-            } else if (presentController.isCorrect(i, selectedOption)) {
-                numCorrectQuestions++;
-            }
-            result =  result+presentController.computeResultQuestion(i,numCorrectQuestions);
+    private List<List<Boolean>> getSelectedOptions() {
+        List<List<Boolean>> selectedOptions = new ArrayList<List<Boolean>>();
+
+        for (QuestionPanel question : questions) {
+            selectedOptions.add(question.getSelectedOption());
         }
-        
-        return result;
+
+        return selectedOptions;
     }
 
     private void disableEvents() {
@@ -139,11 +132,10 @@ public class ExamView extends ExamTemplateView {
     protected void actionEventInBottomLeftButton(ActionEvent e) {
         if(e.getSource() == bottomLeftButton) {
             disableEvents();
-            popup = new ExamEndedPopup(caculateResult(), questions.size());
             
             this.menuPanel.getBlock().StopTimer();
 
-            float numCorrectQuestions = caculateResult();
+            float numCorrectQuestions = presentController.caculateResult(getSelectedOptions());
             popup = new ExamEndedPopup(numCorrectQuestions, questions.size());
             PopUp.instance(Size.instance().getExamEndedPopUpDimension()).setView(popup);
 

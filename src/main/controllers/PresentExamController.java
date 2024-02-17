@@ -308,6 +308,7 @@ public class PresentExamController extends TemplateExam{
     public int getNumCorrectAnswersController(int counter){
         return currentExam.getNumCorrectAnswersExam(counter);
     }
+    
     public Boolean isCorrect(int indexQuestion, int indexSelectedAnswer){
         return currentExam.getIsCorrectExam(indexQuestion, indexSelectedAnswer);
     }
@@ -316,11 +317,46 @@ public class PresentExamController extends TemplateExam{
         currentExam.setResultExam(numCorrectQuestions);
     }
 
-    public float computeResultQuestion(int numQuestion, float numCorrectAnswers){
-        //hay que cambiarlo a float
-        //ese numcorrectquestion tiene que ser el index de la pregunta 
-        float result=numCorrectAnswers/currentExam.getNumCorrectAnswersExam(numQuestion);
+    public float caculateResult(List<List<Boolean>> selectedOptions) {
+        float result=0;
+        int numQuestions = currentExam.getNumberQuestions();
+        for (int i = 0; i < numQuestions; i++) {
+
+            float numCorrectAnswers = 0;
+            float numSelectedOptions = 0;
+
+            for (int j = 0; j < selectedOptions.get(i).size(); j++) {
+                if (selectedOptions.get(i).get(j)) {
+                    numSelectedOptions++;
+                    if (isCorrect(i, j)) {
+                        System.out.println("Correct " + j);
+                        numCorrectAnswers++;
+                    }
+                }
+                
+            }
+
+            if (numSelectedOptions == selectedOptions.get(i).size()) {
+                numCorrectAnswers = 0;
+            }
+            result =  result + computeResultQuestion(i, numCorrectAnswers, numSelectedOptions);
+        }
+        
+        return result;
+    }
+
+    public float computeResultQuestion(int numQuestion, float numCorrectAnswers, float selectedOptions){
+        float maxAmountCorrectAnswers = currentExam.getNumCorrectAnswersExam(numQuestion);
+        System.out.println("numCorrectAnswers=" + numCorrectAnswers);
+        System.out.println("maxAmountCorrectAnswers=" + maxAmountCorrectAnswers);
+        if (numCorrectAnswers != 0 && numCorrectAnswers < selectedOptions) {
+            float penalization = selectedOptions - numCorrectAnswers;
+            numCorrectAnswers = numCorrectAnswers - penalization;
+        }
+
+        float result = numCorrectAnswers / maxAmountCorrectAnswers;
         currentExam.setResultExam(result);
+        System.out.println(result);
         return result;
     }
 }

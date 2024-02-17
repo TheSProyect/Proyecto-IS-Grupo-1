@@ -267,7 +267,7 @@ public class QuestionPanel extends JPanel implements ActionListener {
         return optionsPanel.isAnswered();
     }
 
-    public int getSelectedOption() {
+    public List<Boolean> getSelectedOption() {
         return optionsPanel.getSelectedOption();
     }
 
