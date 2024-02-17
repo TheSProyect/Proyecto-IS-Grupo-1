@@ -159,67 +159,13 @@ public class CreateExamController extends TemplateExam{
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-    private void showAnswersAndJustifications(BufferedReader br, int counter){
-        String line;
-        List<List<String>> answers = new ArrayList<>(), justifications = new ArrayList<>();
-        try{
-            for (int i=0; ((line = br.readLine()) != null); i++) {
-                int amountLines = Integer.parseInt(line);
-                List<String> answer = new ArrayList<String>(), justification = new ArrayList<String>();
-                for(int j=0; j < amountLines; j++){
-                    if ((line = br.readLine()) != null && j==0 && line.substring(0, 1).equalsIgnoreCase("v")) {
-                        answer.add(line.substring(1));
-                        } else if(j==0 && line.substring(0, 1).equalsIgnoreCase("f")){
-                            answer.add(line.substring(1));
-                        } else if( j>0 && line != null ){
-                            answer.add(line);    
-                    }
-                }
-                answers.add(answer);
-                for(int j=0 ; j < amountLines; j++){
-                    justification.add(br.readLine());
-                }
-                justifications.add(justification);
-                currentExam.setAnswersExam(answers.get(i),justifications.get(i), i, counter);
-                currentExam.setNumberAnswers(counter, i+1);
-        }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    private void showQuestion(String directory, int readings, int counter, int stop){
-        String line;
-        Boolean[] hasCode={false};
-        List<String> code = new ArrayList<String>(), questionStatement = new ArrayList<String>();
-        try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
-            currentExam.setQuestionsExam((readInformationQuestion(br, questionStatement, Integer.parseInt(br.readLine()))),(br.readLine()),counter);
-            if(!((line=br.readLine()).equals("No"))){
-                readCode(br, code, Integer.parseInt(line),hasCode);
-                currentExam.setCode(code,counter);
-                currentExam.setHasCode(hasCode[0], counter);
-            }
-            if(br.readLine().equals("Si")){
-                currentExam.setImageQuestion(true, counter);
-            }
-            showAnswersAndJustifications(br, counter);
-            br.close();     
-            } catch (IOException e) {
-                    e.printStackTrace();
-            }
-            if(readings==stop) {
-                return;
-                } else {
-                    counter++;
-                    showQuestion(changeDirectory(directory),readings+1, counter, stop);
-        }   
+        }  
     }
     public void showExam() {
-        int counter = 0, questionsRead = 1;
-        int stop = getNumberQuestion(currentDirectory.getDirectoryExams()+File.separator+currentExam.getNameCourse(), currentExam.getNameExam());
-        String directory = folder.getAbsolutePath() + File.separator+ "Pregunta1.txt";
-        showQuestion(directory,questionsRead,counter, stop);               
+        int counter = 0, questionsRead = 1, stop = getNumberQuestion(currentDirectory.getDirectoryExams() + File.separator + currentExam.getNameCourse(), currentExam.getNameExam());
+        String directory = currentDirectory.getDirectoryExams() + File.separator + currentExam.getNameCourse() + File.separator + currentExam.getNameExam() +File.separator + "Pregunta1.txt";
+        System.out.println(directory);
+        readQuestion(directory,questionsRead,counter, stop);               
     }
     
     public List<String> getQuestionsStrings(){
