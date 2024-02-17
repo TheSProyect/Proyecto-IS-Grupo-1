@@ -1,6 +1,7 @@
 1
 Pregunta pregunta
-DominioNo
+Dominio
+No
 No
 1
 fRespuesta
