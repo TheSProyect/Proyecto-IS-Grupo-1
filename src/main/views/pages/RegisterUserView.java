@@ -7,7 +7,9 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import main.controllers.RegisterUserController;
 import main.utils.Palette;
@@ -23,6 +25,7 @@ public class RegisterUserView extends UserTemplateView{
     PlaceholderTextField usertLastName;
     Button cancelButton;
     Button SignatureButton;
+    String SignaturePath;
     RegisterUserPopUp popup;
     SingleOptionButton Admin;
     ButtonGroup group;
@@ -123,9 +126,18 @@ public class RegisterUserView extends UserTemplateView{
             } else {
             RegisterUserController RegisterControl = new RegisterUserController();
 
-            if(RegisterControl.RegisterNewUser(userTextField.getTextField(), Admin.getButton().isSelected())){
+            if(Admin.getButton().isSelected() && SignaturePath == null){
+                
+                setErrorMessage(errorLabel, "Se debe añadir una firma");
+
+            }else if(RegisterControl.RegisterNewUser(userTextField.getTextField(), Admin.getButton().isSelected())){
                 RegisterControl.setNewUserName(userFirstName.getTextField(), usertLastName.getTextField());
                 RegisterControl.setNewUserPassword(passwordTextField.getTextField(), emailTextField.getTextField());
+                
+                if(Admin.getButton().isSelected()){
+                RegisterControl.saveSignatureImg(SignaturePath, userTextField.getTextField());
+                }
+
                 AdminExamsView.instance().paintNavBar();
                 Frame.instance().setView(AdminExamsView.instance());
 
@@ -171,7 +183,17 @@ public class RegisterUserView extends UserTemplateView{
     
     private void ActionEventInSignatureButton(ActionEvent e) {
         if(e.getSource() == SignatureButton) {
-            System.out.println("Add image");
+
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "jpg", "png", "gif", "jpeg");
+            JFileChooser imageChooser = new JFileChooser();
+            imageChooser.setFileFilter(filter);
+
+            int response = imageChooser.showOpenDialog(null);
+
+            if (response == JFileChooser.APPROVE_OPTION) {
+                SignaturePath = imageChooser.getSelectedFile().getAbsolutePath();
+            }
+
         }
     }
 
