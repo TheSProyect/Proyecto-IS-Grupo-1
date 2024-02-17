@@ -57,16 +57,14 @@ public class ExamEndedView extends ExamTemplateView {
             int numCorrectAnswers = 0;
             int numIncorrectAnswers = 0;
             boolean allCorrectSelected = true;
-            boolean oneCorrectSelected = false;
-            boolean oneWrongSelected = false;
             boolean allSelecteds = true;
             
             for (int j = 0; j < selectedOptions.size(); j++) {
                 if (selectedOptions.get(j)) {
                     if (presentController.isCorrect(i, j)) {
-                        oneCorrectSelected = true;
+                        numCorrectAnswers++;
                     } else {
-                        oneWrongSelected = true;
+                        numIncorrectAnswers++;
                     }
                 } else {
                     allSelecteds = false;
@@ -76,10 +74,12 @@ public class ExamEndedView extends ExamTemplateView {
                 }
             }
 
-            if (allSelecteds || !oneCorrectSelected || numCorrectAnswers < numIncorrectAnswers) {
+            if (allSelecteds || numCorrectAnswers == 0 || numCorrectAnswers < numIncorrectAnswers) {
                 menuPanel.getQuestionListItems().get(i).setIcons("Wrong_Unselected_Icon", "Wrong_Selected_Icon");
-            } else if (allCorrectSelected && !oneWrongSelected) {
+            } else if (allCorrectSelected && numIncorrectAnswers == 0) {
                 menuPanel.getQuestionListItems().get(i).setIcons("Correct_Unselected_Icon", "Correct_Selected_Icon");
+            } else {
+                menuPanel.getQuestionListItems().get(i).setIcons("Half_Unselected_Icon", "Half_Selected_Icon");
             }
         }
     }

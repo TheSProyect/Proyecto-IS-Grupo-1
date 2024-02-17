@@ -76,8 +76,7 @@ public class ExamEndedPopup extends PopUpTemplate{
         Button.setBackground(Palette.instance().getBlue());
         Button.setPreferredSize(new Dimension(200, 30));
         Button.setFocusable(false);
-        Button.addActionListener(null);
-
+        
         Border border = BorderFactory.createLineBorder(Palette.instance().getBlue());
         Button.setBorder(border);
 
