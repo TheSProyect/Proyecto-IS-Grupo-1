@@ -1,5 +1,6 @@
 package main;
 
+import main.views.pages.ExamsView;
 import main.views.pages.Frame;
 import main.views.pages.LogInView;
 import main.utils.UserData;
