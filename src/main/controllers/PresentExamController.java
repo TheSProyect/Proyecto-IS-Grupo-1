@@ -147,7 +147,7 @@ public class PresentExamController extends TemplateExam{
         List<String> code = new ArrayList<String>(), questionStatement = new ArrayList<String>();
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentExam.setQuestionsExam((readInformationQuestion(br, questionStatement, Integer.parseInt(br.readLine()))),(br.readLine()),counter);
-            if((line=br.readLine())!= "No"){
+            if(!((line=br.readLine()).equals("No"))){
                 readCode(br, code, Integer.parseInt(line),hasCode);
                 currentExam.setCode(code, counter);
                 currentExam.setHasCode(hasCode[0], counter);

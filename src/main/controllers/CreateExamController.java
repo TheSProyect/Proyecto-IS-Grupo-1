@@ -120,7 +120,7 @@ public class CreateExamController extends TemplateExam{
                     writer.write(text + "\n");
                 }
                 } else { 
-                writer.write("No" + "\n");
+                writer.write("\n"+"No" + "\n");
             }
             } catch (IOException e) {
             e.printStackTrace();
@@ -140,11 +140,11 @@ public class CreateExamController extends TemplateExam{
             for (String text : questionText) {
                 writer.write(text + "\n");
             }
-            for (String text : domain) {
-                if(domain.size() > 1){
-                    writer.write(text + ", ");
-                    }else {
-                        writer.write(text);
+            for(int i=0; i<domain.size();i++){
+                if(i > 0){
+                    writer.write("," +domain.get(i));
+                    } else {
+                        writer.write(domain.get(i));
                 }
             }
             saveCode(code, writer);
@@ -155,7 +155,6 @@ public class CreateExamController extends TemplateExam{
                     directoryImage = "Si";
             } 
             writer.write(directoryImage + "\n");
-            //writer.write("\n"+directoryImage + "\n");
             saveInformationQuestion(answers, justifications, writer);
             writer.close();
         } catch (IOException e) {
