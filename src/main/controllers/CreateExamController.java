@@ -251,15 +251,16 @@ public class CreateExamController extends TemplateExam{
         }
         return hasCode;
     }
-
     public List<List<String>> getCode(){
         int j=currentExam.getNumberQuestions();
         List<List<String>> code = new ArrayList<List<String>>();
         for(int i=0; i<j; i++){ 
             code.add(new ArrayList<String>());
             String statement= "";
-            for(int k=0 ; k<currentExam.getCodeExam(i).size(); k++){
-                statement = statement + currentExam.getCodeExam(i).get(k) + "\n";
+            if(currentExam.getHasCodeExam(i)){
+                for(int k=0 ; k<currentExam.getCodeExam(i).size(); k++){
+                    statement = statement + currentExam.getCodeExam(i).get(k) + "\n";
+                }
             }
             code.get(i).add(statement); 
         }
