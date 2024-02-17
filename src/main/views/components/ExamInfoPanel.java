@@ -6,6 +6,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.Date;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 
 import javax.swing.BorderFactory;
@@ -202,7 +204,7 @@ public class ExamInfoPanel extends JPanel{
     }
 
     public String getExamName() {
-        return examNameField.getText();
+        return examNameField.getText().replace("\n","-");
     }
 
     public String getType() {
@@ -210,7 +212,7 @@ public class ExamInfoPanel extends JPanel{
     }
 
     public String getCourse() {
-        return courseField.getText();
+        return courseField.getText().replace("\n","-");
     }
 
     public static int getDuration() {
@@ -223,8 +225,10 @@ public class ExamInfoPanel extends JPanel{
 
     }
 
-    public String getDescription() {
-        return descriptionField.getText();
+    public ArrayList<String> getDescription() {
+        String description = descriptionField.getText();
+        ArrayList<String> descriptionList = new ArrayList<>(Arrays.asList(description.split("\n")));
+        return descriptionList;
     }
 
     
