@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -125,6 +126,16 @@ public abstract class ExamTemplateView extends NavBarTemplateView {
     }
 
     protected abstract void inicializeQuestions();
+
+        protected List<List<Boolean>> getSelectedOptions() {
+        List<List<Boolean>> selectedOptions = new ArrayList<List<Boolean>>();
+
+        for (QuestionPanel question : questions) {
+            selectedOptions.add(question.getSelectedOption());
+        }
+
+        return selectedOptions;
+    }
 
     protected void showPreviousQuestions(){
         if ((index - 1) >= 0) {

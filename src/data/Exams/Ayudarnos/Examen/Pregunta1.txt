@@ -1,0 +1,17 @@
+1
+Pregunta pregunta
+Dominio
+No
+No
+1
+fRespuesta
+1
+1
+fRespuesta
+2
+1
+vRespuesta
+3
+1
+fRespuesta
+4

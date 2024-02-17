@@ -1,10 +1,8 @@
 package test.controllers;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.File;
 import java.nio.file.Files;
 
@@ -19,15 +17,10 @@ public class RegisterUserControllerTest{
     @BeforeEach
         public void setUp(){
         RegisterControl = new RegisterUserController();
-        
         usedUserName = "Usuario";
         unusedUserName = "Usuario2";
         usedAdminName = "Profesor";
-
         directory = Directory.instance().getDirectoryTeachers();
-
-        
-
     }
 
     @Test

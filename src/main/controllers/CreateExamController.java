@@ -16,8 +16,8 @@ public class CreateExamController extends TemplateExam{
     int questionsCount = 0;
     File folder;
 
-    public void saveExam(List<String> examData, int duration){
-        int INDEX_FOR_NAME_EXAM=0, INDEX_FOR_TYPE=1,INDEX_FOR_NAME_COURSE=2, INDEX_FOR_DESCRIPTION=3;
+    public void saveExam(List<String> examData,List<String> description, int duration){
+        int INDEX_FOR_NAME_EXAM=0, INDEX_FOR_TYPE=1,INDEX_FOR_NAME_COURSE=2;
         File courseFolder = new File(currentDirectory.getDirectoryExams()+ File.separator+ examData.get(INDEX_FOR_NAME_COURSE));
         if (!courseFolder.exists()) {
             courseFolder.mkdir();
@@ -34,8 +34,12 @@ public class CreateExamController extends TemplateExam{
                 file.createNewFile();
             }
             FileWriter writer = new FileWriter(file);
-
-            writer.write(examData.get(INDEX_FOR_NAME_EXAM) + "\n" + examData.get(INDEX_FOR_TYPE) + "\n" + questionsCount + "\n" + readNameTeacher() + "\n" + duration + "\n" + examData.get(INDEX_FOR_DESCRIPTION) + "\n"+ examData.get(INDEX_FOR_NAME_COURSE));
+            writer.write(examData.get(INDEX_FOR_NAME_EXAM) + "\n" + examData.get(INDEX_FOR_TYPE) + "\n" + questionsCount + "\n" + readNameTeacher() + "\n" + duration + "\n");
+            writer.write(description.size() + "\n");
+            for(String text : description){
+                writer.write(text + "\n");
+            }
+            writer.write(examData.get(INDEX_FOR_NAME_COURSE));  
             writer.close();
 
         } catch (IOException e) {
@@ -89,86 +93,90 @@ public class CreateExamController extends TemplateExam{
             System.err.println("Ocurrió un error al copiar la imagen: " + e.getMessage());
         }
     }
-    
+    private void saveInformationQuestion(List<List<String>> answers, List<List<String>> justifications, FileWriter writer){
+        List<String> answer = new ArrayList<>(), justification = new ArrayList<>();
+        for(int i =0; i< answers.size(); i++){
+            answer = answers.get(i);
+            justification = justifications.get(i);
+            try {
+                writer.write(answer.size()+ "\n");
+                for(String text : answer){
+                writer.write(text + "\n");
+                }
+                for(String text : justification){
+                    writer.write(text + "\n");
+                }
+                } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private void saveCode(List<String> code, FileWriter writer){
+        int INDEX_CODE=0;
+        try{
+            if(code.get(INDEX_CODE)!= ""){
+                writer.write("\n" + code.size() + "\n"); 
+                for (String text : code) {            
+                    writer.write(text + "\n");
+                }
+                } else { 
+                writer.write("\n"+"No" + "\n");
+            }
+            } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void saveQuestion(List<List<String>> informationExam,List<List<List<String>>> informationQuestion, String directoryImage){
         questionsCount++;
-        int INDEX_QUESTION_TEXT=0, INDEX_DOMAIN=1,INDEX_CODE=2;
+        int INDEX_QUESTION_TEXT=0, INDEX_DOMAIN=1,INDEX_CODE=2, INDEX_ANSWERS=0, INDEX_JUSTIFICATION=1;
         List<String> questionText = informationExam.get(INDEX_QUESTION_TEXT), domain = informationExam.get(INDEX_DOMAIN), code = informationExam.get(INDEX_CODE);
-        int codeSize = code.size();
+        List<List<String>> answers = informationQuestion.get(INDEX_ANSWERS), justifications = informationQuestion.get(INDEX_JUSTIFICATION);
         File file = new File(folder, "Pregunta"+ questionsCount + ".txt");
         try {
             file.createNewFile();
             FileWriter writer = new FileWriter(file);
-            writer.write(questionText + "\n");
-            for (String text : domain) {
-                if(domain.size() > 0){
-                    writer.write(text + ", ");
-                    }else {
-                        writer.write(text);
-                }
-            }
-            writer.write("\n" + codeSize + "\n");
-            for (String text : code) {            
-                if(!text.equals("")){
-                    writer.write(text + "\n");
-                    } else {
-                }
-            }
-            if(directoryImage.equals("")){
-                directoryImage = "No";
-            } else {
-                copyImage(directoryImage);
-                directoryImage = "Si";
-            }
-            writer.write(directoryImage + "\n");
-            for (String text : answers) {
+            writer.write(questionText.size() + "\n");
+            for (String text : questionText) {
                 writer.write(text + "\n");
             }
+            for(int i=0; i<domain.size();i++){
+                if(i > 0){
+                    writer.write("," +domain.get(i));
+                    } else {
+                        writer.write(domain.get(i));
+                }
+            }
+            saveCode(code, writer);
+            if(directoryImage == null){
+                directoryImage = "No";
+                } else {
+                    copyImage(directoryImage);
+                    directoryImage = "Si";
+            } 
+            writer.write(directoryImage + "\n");
+            saveInformationQuestion(answers, justifications, writer);
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-    
-    private void showQuestion(String directory, int readings, int counter, int stop){
-        String line;
-        List<String> answer = new ArrayList<String>();
-        List<String> justification = new ArrayList<String>();
-        try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
-            currentExam.setQuestionsExam((br.readLine()),(br.readLine()),counter);
-            for (int i =0; ((line = br.readLine()) != null); i++) {
-                if (line != null && line.length() > 0 && line.substring(0, 1).equalsIgnoreCase("v")) {
-                    answer.add(line.substring(1));
-                    justification.add(br.readLine());
-                    } else {
-                        answer.add(line);
-                        justification.add(br.readLine());
-                        }
-                    currentExam.setAnswersExam(answer.get(i),justification.get(i), i, counter);
-                    currentExam.setNumberAnswers(counter, i+1);
-                    }
-                    br.close();     
-                } catch (IOException e) {
-                    e.printStackTrace();
-            }
-            if(readings==stop) {
-                return;
-                } else {
-                    counter++;
-                    showQuestion(changeDirectory(directory),readings+1, counter, stop);
-        }   
+        }  
     }
     public void showExam() {
-        int counter = 0, questionsRead = 1;
-        int stop = getNumberQuestion(currentDirectory.getDirectoryExams()+File.separator+currentExam.getNameCourse(), currentExam.getNameExam());
-        String directory = folder.getAbsolutePath() + File.separator+ "Pregunta1.txt";
-        showQuestion(directory,questionsRead,counter, stop);               
+        int counter = 0, questionsRead = 1, stop = getNumberQuestion(currentDirectory.getDirectoryExams() + File.separator + currentExam.getNameCourse(), currentExam.getNameExam());
+        String directory = currentDirectory.getDirectoryExams() + File.separator + currentExam.getNameCourse() + File.separator + currentExam.getNameExam() +File.separator + "Pregunta1.txt";
+        System.out.println(directory);
+        readQuestion(directory,questionsRead,counter, stop);               
     }
-     public List<String> getQuestionsStrings(){
+    
+    public List<String> getQuestionsStrings(){
         int j=currentExam.getNumberQuestions();
         List<String> questionsString = new ArrayList<String>();
         for(int i=0; i<j; i++){ 
-            questionsString.add(currentExam.getQuestionsExam(i));
+            String statement = "";
+            for(int k=0; k<currentExam.getQuestionsExam(i).size(); k++){
+                statement= statement + currentExam.getQuestionsExam(i).get(k) + "\n";
+            }
+            questionsString.add(statement);    
         }
         return questionsString;
     }
@@ -187,7 +195,7 @@ public class CreateExamController extends TemplateExam{
         List<Boolean> hasCode = new ArrayList<Boolean>();
         //falta arreglar
         for(int i=0; i<j; i++){ 
-            hasCode.add(true);
+            hasCode.add(currentExam.getHasCodeExam(i));
         }
         return hasCode;
     }
@@ -196,11 +204,30 @@ public class CreateExamController extends TemplateExam{
         List<List<String>> code = new ArrayList<List<String>>();
         for(int i=0; i<j; i++){ 
             code.add(new ArrayList<String>());
-            for(int k=0; k<currentExam.getNumberAnswersExam(i); k++){
-                code.get(i).add(currentExam.getOptionsExam(i,k));
+            String statement= "";
+            if(currentExam.getHasCodeExam(i)){
+                for(int k=0 ; k<currentExam.getCodeExam(i).size(); k++){
+                    statement = statement + currentExam.getCodeExam(i).get(k) + "\n";
+                }
             }
+            code.get(i).add(statement); 
         }
         return code;
+    }
+
+    public List<String> getDirectoryImage(){
+        int j=currentExam.getNumberQuestions();
+        List<String> directoryImage = new ArrayList<String>();
+        for(int i=0; i<j; i++){
+            if(currentExam.isImage(i)){
+                int currentQuestion = i + 1;
+                directoryImage.add(currentDirectory.getDirectoryExams()+ File.separator + currentExam.getNameCourse()+ File.separator+ currentExam.getNameExam()+File.separator+ "Pregunta"+ currentQuestion + ".jpg");
+                directoryImage.get(i).replace(" ", "-");
+            } else{
+                directoryImage.add(null);
+            }
+        }
+        return directoryImage;
     }
 
     public List<List<String>> getJustification(){
@@ -227,10 +254,25 @@ public class CreateExamController extends TemplateExam{
         for(int i=0; i<j; i++){ 
             options.add(new ArrayList<String>());
             for(int k=0; k<currentExam.getNumberAnswersExam(i); k++){
-                options.get(i).add(currentExam.getOptionsExam(i,k));
+                String statement= "";
+                for(int l=0 ; l<currentExam.getOptionsExam(i,k).size(); l++){
+                    statement = statement + currentExam.getOptionsExam(i,k).get(l) + "\n";
+                }
+                options.get(i).add(statement);
             }
         }
         return options;
+    }
+
+    public int getNumCorrectAnswersController(int counter){
+        return currentExam.getNumCorrectAnswersExam(counter);
+    }
+    public Boolean isCorrect(int indexQuestion, int indexSelectedAnswer){
+        return currentExam.getIsCorrectExam(indexQuestion, indexSelectedAnswer);
+    }
+
+    public void setResultExamC(float numCorrectQuestions){
+        currentExam.setResultExam(numCorrectQuestions);
     }
 
     public int getDuracion(){

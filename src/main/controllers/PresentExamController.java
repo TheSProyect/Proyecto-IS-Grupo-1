@@ -5,17 +5,16 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import main.models.Exam;
 
 public class PresentExamController extends TemplateExam{
 
-    public PresentExamController(){
-    }
-    public static void main(String[] args) throws IOException{
-        PresentExamController p = new PresentExamController();
-    }
+    public PresentExamController(){}
+
     public List<String> getInstructions(String [] informationsExam) {
         int INDEX_FOR_NAME_EXAM = 0, INDEX_FOR_NAME_COURSE = 1, INDEX_FOR_DURATION = 4;
         List<String> instrucionsInformation = new ArrayList<String>();
@@ -94,8 +93,12 @@ public class PresentExamController extends TemplateExam{
     
     public List<String> readInformation(String nameCourse, Exam currentExam){
         List<String> examInformation = new ArrayList<String>();
+        String description = "";
         examInformation.add(currentExam.getNameExam());
-        examInformation.add((currentExam.getDescription()));
+        for(int i=0; i < currentExam.getDescription().size(); i++){
+            description += currentExam.getDescription().get(i) + " ";
+        }
+        examInformation.add(description);
         examInformation.add((currentExam.getType()));
         String duration = Integer.toString(currentExam.getDuration());
         examInformation.add(duration);
@@ -103,48 +106,10 @@ public class PresentExamController extends TemplateExam{
         examInformation.add(currentExam.getNameCourse());
         return examInformation;
     }
-    private void readQuestion(String directory, int readings, int counter, int stop){
-        String line, lineImage;
-        List<String> answer = new ArrayList<String>(), justification = new ArrayList<String>(), code = new ArrayList<String>();
-        try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
-            currentExam.setQuestionsExam((br.readLine()),(br.readLine()),counter);
-            int sizeCode = Integer.parseInt(br.readLine());
-            for(int i=1; i < sizeCode; i++){
-                code.add(br.readLine());
-            }
-            currentExam.setCode(code);
-            lineImage = br.readLine();
-            if(lineImage.equals("Si")){
-                //metodo para buscar y mostrar la ruta de la imagen
-            }
-            for (int i =0; ((line = br.readLine()) != null); i++) {
-                if (line != null && line.length() > 0 && line.substring(0, 1).equalsIgnoreCase("v")) {
-                    answer.add(line.substring(1));
-                    justification.add(br.readLine());
-                    currentExam.setIsCorrectExam(true, i, counter);
-                    currentExam.setNumCorrectAsnwers(counter);
-                    } else {
-                        answer.add(line.substring(1));
-                        justification.add(br.readLine());
-                        currentExam.setIsCorrectExam(false, i, counter);
-                        }
-                    currentExam.setAnswersExam(answer.get(i),justification.get(i), i, counter);
-                    currentExam.setNumberAnswers(counter, i+1);
-                    }
-                br.close();     
-                } catch (IOException e) {
-                    e.printStackTrace();
-            }
-            if(readings==stop) {
-                return;
-                } else {
-            counter++;
-            readQuestion(changeDirectory(directory),readings+1, counter, stop);
-        }   
-    }
     
     public void readExam(String directory, String nameFolder){
-        int numberQuestions, duration;
+        int numberQuestions, duration, sizeDescription;
+        List<String> description = new ArrayList<String>();
         directory = directory +File.separator+ nameFolder+File.separator+nameFolder+".txt";
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             currentExam.setNameExam(br.readLine());
@@ -154,7 +119,11 @@ public class PresentExamController extends TemplateExam{
             currentExam.setNameTeacher(br.readLine());
             duration = Integer.parseInt((br.readLine()));
             currentExam.setDuration(duration);
-            currentExam.setDescripcion(br.readLine());
+            sizeDescription = Integer.parseInt(br.readLine());
+            for(int i=0; i < sizeDescription; i++){
+                description.add(br.readLine());
+            }
+            currentExam.setDescripcion(description);
             currentExam.setNameCourse(br.readLine());
             }catch (IOException e) {
                 e.printStackTrace();
@@ -189,7 +158,11 @@ public class PresentExamController extends TemplateExam{
         int j=currentExam.getNumberQuestions();
         List<String> questionsString = new ArrayList<String>();
         for(int i=0; i<j; i++){ 
-            questionsString.add(currentExam.getQuestionsExam(i));
+            String statement = "";
+            for(int k=0; k<currentExam.getQuestionsExam(i).size(); k++){
+                statement= statement + currentExam.getQuestionsExam(i).get(k) + "\n";
+            }
+            questionsString.add(statement);    
         }
         return questionsString;
     }
@@ -208,20 +181,40 @@ public class PresentExamController extends TemplateExam{
         List<Boolean> hasCode = new ArrayList<Boolean>();
         //falta arreglar
         for(int i=0; i<j; i++){ 
-            hasCode.add(true);
+            hasCode.add(currentExam.getHasCodeExam(i));
         }
         return hasCode;
     }
+
     public List<List<String>> getCode(){
         int j=currentExam.getNumberQuestions();
         List<List<String>> code = new ArrayList<List<String>>();
         for(int i=0; i<j; i++){ 
             code.add(new ArrayList<String>());
-            for(int k=0; k<currentExam.getNumberAnswersExam(i); k++){
-                code.get(i).add(currentExam.getOptionsExam(i,k));
+            String statement= "";
+            if(currentExam.getHasCodeExam(i)){
+                for(int k=0 ; k<currentExam.getCodeExam(i).size(); k++){
+                    statement = statement + currentExam.getCodeExam(i).get(k) + "\n";
+                }
             }
+            code.get(i).add(statement); 
         }
         return code;
+    }
+
+    public List<String> getDirectoryImage(){
+        int j=currentExam.getNumberQuestions();
+        List<String> directoryImage = new ArrayList<String>();
+        for(int i=0; i<j; i++){
+            if(currentExam.isImage(i)){
+                int currentQuestion = i + 1;
+                directoryImage.add(currentDirectory.getDirectoryExams()+ File.separator + currentExam.getNameCourse()+ File.separator+ currentExam.getNameExam()+File.separator+ "Pregunta"+ currentQuestion + ".jpg");
+                directoryImage.get(i).replace(" ", "-");
+            } else{
+                directoryImage.add(null);
+            }
+        }
+        return directoryImage;
     }
 
     public List<List<String>> getJustification(){
@@ -248,7 +241,11 @@ public class PresentExamController extends TemplateExam{
         for(int i=0; i<j; i++){ 
             options.add(new ArrayList<String>());
             for(int k=0; k<currentExam.getNumberAnswersExam(i); k++){
-                options.get(i).add(currentExam.getOptionsExam(i,k));
+                String statement= "";
+                for(int l=0 ; l<currentExam.getOptionsExam(i,k).size(); l++){
+                    statement = statement + currentExam.getOptionsExam(i,k).get(l) + "\n";
+                }
+                options.get(i).add(statement);
             }
         }
         return options;
@@ -258,17 +255,58 @@ public class PresentExamController extends TemplateExam{
         return currentExam.getDuration();
     }
 
+    public int getNumCorrectAnswersController(int counter){
+        return currentExam.getNumCorrectAnswersExam(counter);
+    }
+    
     public Boolean isCorrect(int indexQuestion, int indexSelectedAnswer){
         return currentExam.getIsCorrectExam(indexQuestion, indexSelectedAnswer);
     }
 
-    public void setResultExamC(int numCorrectQuestions){
+    public void setResultExamC(float numCorrectQuestions){
         currentExam.setResultExam(numCorrectQuestions);
     }
+    
+    public float caculateResult(List<List<Boolean>> selectedOptions) {
+        float result=0;
+        int numQuestions = currentExam.getNumberQuestions(), decimals=2;
+        
+        for (int i = 0; i < numQuestions; i++) {
+            float numCorrectAnswers = 0;
+            float numSelectedOptions = 0;
+            for (int j = 0; j < selectedOptions.get(i).size(); j++) {
+                if (selectedOptions.get(i).get(j)) {
+                    numSelectedOptions++;
+                    if (isCorrect(i, j)) {
+                        numCorrectAnswers++;
+                    }
+                }
+            }
+            if (numSelectedOptions == selectedOptions.get(i).size()) {
+                numCorrectAnswers = 0;
+            }
+            result =  result + computeResultQuestion(i, numCorrectAnswers, numSelectedOptions);
+        }
+        BigDecimal bd = new BigDecimal(Float.toString(result));
+        bd = bd.setScale(decimals, RoundingMode.HALF_UP);
+        float resultF = bd.floatValue();
+        return resultF;
+    }
 
-    public void computeResultQuestion(int numCorrectQuestions){
-        //hay que cambiarlo a float
-        int result=currentExam.getNumberAnswersExam(numCorrectQuestions)/currentExam.getNumCorrectAnswersExam(numCorrectQuestions);
+    public float computeResultQuestion(int numQuestion, float numCorrectAnswers, float selectedOptions){
+        //float maxAmountCorrectAnswers = currentExam.getNumCorrectAnswersExam(numQuestion);
+        float maxAmountCorrectAnswers = getNumCorrectAnswersController(numQuestion);
+        
+        if (numCorrectAnswers != 0 && numCorrectAnswers < selectedOptions) {
+            float penalization = selectedOptions - numCorrectAnswers;
+            numCorrectAnswers = numCorrectAnswers - penalization;
+            if (numCorrectAnswers < 0) {
+                numCorrectAnswers = 0;
+            }
+        }
+
+        float result = numCorrectAnswers / maxAmountCorrectAnswers;
         currentExam.setResultExam(result);
+        return result;
     }
 }

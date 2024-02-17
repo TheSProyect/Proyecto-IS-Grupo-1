@@ -60,7 +60,6 @@ public class NewOptionItem extends JPanel implements ActionListener{
         answerPanel.setBorder(border);
     }
 
-
     private void paintDeleteButton(JPanel answerPanel) {
         Border border = BorderFactory.createLineBorder(Palette.instance().getOffWhite());
 
@@ -75,7 +74,7 @@ public class NewOptionItem extends JPanel implements ActionListener{
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
-        constraints.insets = new Insets(0, 5, 0, 5);
+        constraints.insets = new Insets(0, 15, 0, 5);
 
         answerPanel.add(deleteButton, constraints);
     }

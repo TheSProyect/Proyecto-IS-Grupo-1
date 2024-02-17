@@ -1,0 +1,18 @@
+1
+Pregunta prueba
+Dominio
+1
+Codigo
+Si
+1
+vRepuesta
+true
+1
+fRespuesta
+false
+1
+fRespuesta
+false
+1
+fRespuesta
+true

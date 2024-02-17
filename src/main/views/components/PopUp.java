@@ -21,8 +21,10 @@ public class PopUp extends JFrame {
 	}
 
     public static void deleteInstance() {
-        popup.setVisible(false);
-        popup = null;
+        if (popup != null) {
+            popup.setVisible(false);
+            popup = null;
+        }
     }
 
     public PopUp(Dimension Size) {

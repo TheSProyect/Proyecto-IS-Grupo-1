@@ -49,6 +49,7 @@ public class ExamView extends ExamTemplateView {
         List<String> domain = presentController.getDomain();
         List<Boolean> hasCode = presentController.getHasCode();
         List<List<String>> code = presentController.getCode();
+        List<String> image = presentController.getDirectoryImage();
         List<List<String>> options = presentController.getOptions();
 
         QuestionPanel question;
@@ -60,7 +61,12 @@ public class ExamView extends ExamTemplateView {
             if (hasCode.get(i)) {
                 question.paintCodeField(code.get(i));
             }
-            question.paintOptionsPanel(options.get(i));
+
+            if (image.get(i) != null) {
+                question.paintImage(image.get(i));
+            }
+            boolean isSimpleOption = presentController.getNumCorrectAnswersController(i) == 1;
+            question.paintOptionsPanel(options.get(i), isSimpleOption);
             questions.add(question);
         }
     }
@@ -106,19 +112,6 @@ public class ExamView extends ExamTemplateView {
         }
     }  
 
-    private int caculateResult() {
-        int numCorrectQuestions = 0;
-        for (int i = 0; i < questions.size(); i++) {
-            int selectedOption = questions.get(i).getSelectedOption();
-            if (selectedOption == -1) {
-                continue;
-            } else if (presentController.isCorrect(i, selectedOption)) {
-                numCorrectQuestions++;
-            }
-        }
-        return numCorrectQuestions;
-    }
-
     private void disableEvents() {
         actionEnable = false;
         for(QuestionPanel question : questions) {
@@ -129,11 +122,10 @@ public class ExamView extends ExamTemplateView {
     protected void actionEventInBottomLeftButton(ActionEvent e) {
         if(e.getSource() == bottomLeftButton) {
             disableEvents();
-            popup = new ExamEndedPopup(caculateResult(), questions.size());
             
             this.menuPanel.getBlock().StopTimer();
 
-            int numCorrectQuestions = caculateResult();
+            float numCorrectQuestions = presentController.caculateResult(getSelectedOptions());
             popup = new ExamEndedPopup(numCorrectQuestions, questions.size());
             PopUp.instance(Size.instance().getExamEndedPopUpDimension()).setView(popup);
 
@@ -150,9 +142,6 @@ public class ExamView extends ExamTemplateView {
             Frame.instance().setTitle("ExamEndedView");
         }
     }
-  
-    public void showInstructions(){}
-    public void endExam(){}
 
     @Override
     public void actionPerformed(ActionEvent e) {

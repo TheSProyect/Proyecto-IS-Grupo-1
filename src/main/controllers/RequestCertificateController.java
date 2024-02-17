@@ -14,13 +14,6 @@ import main.utils.UserData;
 public class RequestCertificateController extends TemplateExam{
     Certificate currentCertificate = new Certificate();
 
-    public RequestCertificateController(){
-        
-    }
-    public RequestCertificateController(String user){
-        UserData.instance().setUsername(user);
-    }
-    
     public static void main(String[] args) throws IOException{
         RequestCertificateController r= new RequestCertificateController();
     }
@@ -61,7 +54,7 @@ public class RequestCertificateController extends TemplateExam{
             currentCertificate.setNameCourse(br.readLine());
             currentCertificate.setNameExam(br.readLine());
             String answersCorrects = br.readLine();
-            currentCertificate.setResultExam(Integer.parseInt(answersCorrects));
+            currentCertificate.setResultExam(Float.parseFloat(answersCorrects));
             String questionsExam =  br.readLine();
             currentCertificate.setQuestionsExam(Integer.parseInt(questionsExam));
             currentCertificate.setNameTeacherCertificate(br.readLine());
@@ -104,7 +97,7 @@ public class RequestCertificateController extends TemplateExam{
     public String getNameCourseController(){
         return currentCertificate.getNameCourse();
     }
-    public int getResultAnswersController(){
+    public float getResultAnswersController(){
         return currentCertificate.getResultExam();
     }
     public int getQuestionsExamController(){

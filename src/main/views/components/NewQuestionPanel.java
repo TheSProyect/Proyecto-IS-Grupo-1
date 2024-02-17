@@ -13,7 +13,6 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -24,7 +23,8 @@ public class NewQuestionPanel extends QuestionPanel {
     IconButton addImageButton;
     IconButton deleteQuestionButton;
     TextArea questionField;
-    JTextField domainField;
+    NewDomainsPanel domainField;
+    String imagePath;
 
     public NewQuestionPanel(ActionListener listener) {
         paintLabels();
@@ -100,11 +100,10 @@ public class NewQuestionPanel extends QuestionPanel {
     }
 
     private void paintDomainField() {
-        domainField = new JTextField();
-        domainField.setForeground(Palette.instance().getGray());
-        domainField.setBackground(Palette.instance().getOffWhite());
-        domainField.setFont(new Font("Nunito Sans", Font.PLAIN, 20));
-        domainField.setBorder(createQuestionFieldBorder());
+        domainField = new NewDomainsPanel();
+
+        domainField.addActionListenerDeleteButtons(this);
+        domainField.getAddButton().addActionListener(this);
 
         questionContentPanel.add(domainField, createLabelsConstraints(1));
     }
@@ -173,6 +172,19 @@ public class NewQuestionPanel extends QuestionPanel {
         return constraints;
     }
 
+    private void actionEventInDomainsField(ActionEvent e) {
+        if (e.getSource() == domainField.getAddButton()) {
+            domainField.actionEventInAddButton(e);
+
+        } else if (e.getSource() != addImageButton) {
+            domainField.actionEventInDeleteButton(e);
+        }
+        
+        domainField.addActionListenerDeleteButtons(this);
+        this.validate();
+        this.repaint();
+    }
+
     private void actionEventInNewOptionsPanel(ActionEvent e) {
         if (e.getSource() == newOptionsPanel.getAddButton()) {
             newOptionsPanel.actionEventInAddButton(e);
@@ -195,12 +207,26 @@ public class NewQuestionPanel extends QuestionPanel {
             int response = imageChooser.showOpenDialog(null);
 
             if (response == JFileChooser.APPROVE_OPTION) {
-                File file = new File(imageChooser.getSelectedFile().getAbsolutePath());
-                System.out.println(file);
+                imagePath = imageChooser.getSelectedFile().getAbsolutePath();
             }
-
-            System.out.println("This should ask to add Image");
         }
+    }
+
+    private List<String> getQuestionText() {
+        List<String> question = new ArrayList<String>();
+        String[] separatedQuestion = questionField.getText().split("\n");
+        for(String questionLine : separatedQuestion) {
+            question.add(questionLine);
+        }
+        return question;
+    }
+
+    private List<String> getDomainText() {
+        return domainField.getDomainsText();
+    }
+
+    private List<String> getCode() {
+        return codeField.getCode();
     }
 
     public IconButton getDeleteButton() {
@@ -214,25 +240,6 @@ public class NewQuestionPanel extends QuestionPanel {
         return answerContent;
     }
 
-    private List<String> getQuestionText() {
-        List<String> question = new ArrayList<String>();
-        String[] separatedQuestion = questionField.getText().split("\n");
-        for(String questionLine : separatedQuestion) {
-            question.add(questionLine);
-        }
-        return question;
-    }
-
-    private List<String> getDomainText() {
-        List<String> domainList = new ArrayList<String>();
-        domainList.add(domainField.getText());
-        return domainList;
-    }
-
-    private List<String> getCode() {
-        return codeField.getCode();
-    }
-
     public List<List<String>> getQuestionInfo() {
         List<List<String>> questionInfo = new ArrayList<List<String>>();
         questionInfo.add(getQuestionText());
@@ -241,10 +248,14 @@ public class NewQuestionPanel extends QuestionPanel {
         return questionInfo;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
     public boolean checkQuestionIsComplete() {
         if (questionField.isEmpty()) {
             return false;
-        } else if (domainField.getText().isBlank()) {
+        } else if (domainField.checkDomainsAreBlank()) {
             return false;
         } else if(!newOptionsPanel.checkOptionsAreComplete()) {
             return false;
@@ -255,6 +266,7 @@ public class NewQuestionPanel extends QuestionPanel {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        actionEventInDomainsField(e);
         actionEventInNewOptionsPanel(e);
         actionEventInAddImageButton(e);
     }

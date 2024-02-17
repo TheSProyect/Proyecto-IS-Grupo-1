@@ -1,17 +1,20 @@
 package main.models;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class Answer {
     private boolean correct_option;
-    private String name;
-    private String justification;
+    private List<String> text = new ArrayList<>();
+    private List<String> justification = new ArrayList<>();
     private Line[] lines;
 
-    public void setAnswers(String answer, String justification, Answer answers){
-        answers.name=answer;
+    public void setAnswers(List<String> answer, List<String> justification, Answer answers){
+        answers.text=answer;
         answers.justification= justification;
     }
-    public String getAnswers(){
-        return name;
+    public List<String> getAnswers(){
+        return text;
     }
 
     public void setIsCorrect(Boolean isCorrect, Answer answers){
@@ -22,7 +25,7 @@ public class Answer {
         return correct_option;
     }
 
-    public String getJustification(){
+    public List<String> getJustification(){
         return justification;
     }
 }

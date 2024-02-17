@@ -2,7 +2,6 @@ package main.controllers;
 
 import main.utils.Directory;
 import main.utils.UserData;
-import com.itextpdf.*;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.util.List;
@@ -36,7 +35,8 @@ public class GeneratePDFFile {
         scoreAnswers=informationToPDF.get(1);
         numQuestions=informationToPDF.get(2);
         course=new Paragraph(informationToPDF.get(3),fuenteSmall);
-        String teacherName=informationToPDF.get(4);
+        //String teacherName=informationToPDF.get(4);
+        String teacherName="Profesor";
         teacher= new Paragraph(teacherName, fuenteSmall);
         try {
             imageSignature = Image.getInstance(directorio+File.separator+teacherName+File.separator +"Signature.png");

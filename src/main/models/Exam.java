@@ -12,11 +12,11 @@ import java.util.List;
 public class Exam extends Course{
     private Course course = new Course();
     private Name name;
-    private String type, instructions, description;
+    private String type, instructions;
     private int numberQuestions, duration;
     private Result results;
-    private List<String> code;
     private List<Question> questions = new ArrayList<>();
+    private List<String> description = new ArrayList<String>();
     
     public Exam(){
         Directory currentDirectory = Directory.instance();
@@ -30,18 +30,26 @@ public class Exam extends Course{
                 e.printStackTrace();
         }
     }
-    public void setCode(List<String> code){
-        this.code=code;
+    public void setCode(List<String> code, int counter){
+        questions.get(counter).setCode(code);
     }
     public String getInstructions(){
         return instructions;
     }
-   
-    public void setQuestionsExam(String statement, String domain, int counter){
-        questions.add(new Question());
-        questions.get(counter).setQuestions(statement,domain,questions.get(counter));
+    public void setImageQuestion(boolean image, int counter){
+        questions.get(counter).setImage(image);;
     }
-    public void setAnswersExam(String answer, String justification, int i, int counter){
+    public boolean isImage(int counter){
+        return questions.get(counter).isImage();
+    }
+    public void setHasCode(Boolean code, int counter){
+        questions.get(counter).setHasCode(code);
+    }
+    public void setQuestionsExam(List<String> statement, String domain, int counter){
+        questions.add(new Question());
+        questions.get(counter).setQuestions(statement,domain);
+    }
+    public void setAnswersExam(List<String> answer, List<String> justification, int i, int counter){
         questions.get(counter).setAnswersQuestions(answer, justification, i);
     }
     
@@ -52,31 +60,36 @@ public class Exam extends Course{
     public void setNumberAnswers(int counter, int number){
         questions.get(counter).setNumberAnswers(number);
     }
-    public void setNumCorrectAsnwers(int counter){
+    public void setNumCorrectAsnwersExam(int counter){
         questions.get(counter).setNumCorrectAsnwers();
     }
-    public void setResultExam(int numCorrectQuestions){
+    public void setResultExam(float numCorrectQuestions){
         results = new Result();
         results.setScore(numCorrectQuestions);
     }
    
-    public int getResultExam(){
+    public float getResultExam(){
         return results.getScore();
     }
-    
-    public String getQuestionsExam(int counter){
+    public Boolean getHasCodeExam(int counter){
+        return questions.get(counter).getHasCode();
+    }
+    public List<String> getQuestionsExam(int counter){
         return questions.get(counter).getQuestions();
     }
     
-    public String getJustificationExam(int counter, int i){
+    public List<String> getJustificationExam(int counter, int i){
         return questions.get(counter).getJustificationQuestion(i);
     }
     public String getDomainExam(int counterQuestion){
         return questions.get(counterQuestion).getDomain();
     }
     
-    public String getOptionsExam(int counterQuestion, int counterAnswer){
+    public List<String> getOptionsExam(int counterQuestion, int counterAnswer){
         return questions.get(counterQuestion).getOptionsQuestion(counterAnswer);
+    }
+    public List<String> getCodeExam(int counterQuestion){
+        return questions.get(counterQuestion).getCodeQuestion();
     }
     
     public int getNumCorrectAnswersExam(int counter){
@@ -86,7 +99,7 @@ public class Exam extends Course{
         return questions.get(counter).getNumberAnswers();
     }
 
-    public String getAnswersQuestionExam(int counter, int i){
+    public List<String> getAnswersQuestionExam(int counter, int i){
         return questions.get(counter).getAnswersQuestions(i);
     }
 
@@ -143,11 +156,11 @@ public class Exam extends Course{
         return duration;
     }
 
-    public void setDescripcion(String description){
+    public void setDescripcion(List<String> description){
         this.description=description;
     }
     
-    public String getDescription(){
+    public List<String> getDescription(){
         return description;
     }
 }

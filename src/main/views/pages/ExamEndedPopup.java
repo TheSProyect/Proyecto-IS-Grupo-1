@@ -22,7 +22,7 @@ import main.views.components.ResultsBlock;
 public class ExamEndedPopup extends PopUpTemplate{
     JButton Button;
     
-    public ExamEndedPopup(int correctAnswer,  int amountOfQuestion) {
+    public ExamEndedPopup(float correctAnswer,  int amountOfQuestion) {
         
         buildFrame(Size.instance().getExamEndedPopUpDimension());
         paintBorders();
@@ -30,13 +30,13 @@ public class ExamEndedPopup extends PopUpTemplate{
 
     }
 
-    protected void paintContentPanel(int correctAnswer,  int amountOfQuestion){
+    protected void paintContentPanel(float correctAnswer,  int amountOfQuestion){
         JPanel contentPanel = new JPanel();
         contentPanel.setPreferredSize(Size.instance().getExamEndedPopUpDimension());
         contentPanel.setBackground(Palette.instance().getWhite());
         contentPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 15));
         
-        paintTitlePanel(contentPanel, "¡Felicidades!");
+        paintTitlePanel(contentPanel, "Examen Finalizado");
         
         paintTextLabel(contentPanel);
         paintScore(contentPanel, correctAnswer, amountOfQuestion);
@@ -48,7 +48,7 @@ public class ExamEndedPopup extends PopUpTemplate{
 
     protected void paintTextLabel(JPanel contentPanel) {
         JTextPane text = new JTextPane();
-        text.setText("Haz finalizado exitosamente con una nota de:");
+        text.setText("Haz finalizado el examen con una nota de:");
         text.setFont(new Font("Nunito Sans", Font.PLAIN, 20));
         text.setPreferredSize(new Dimension(500, 25));
         text.setEditable(false);
@@ -62,7 +62,7 @@ public class ExamEndedPopup extends PopUpTemplate{
         contentPanel.add(text);
     }
 
-    private void paintScore(JPanel contentPanel, int correctAnswer,  int amountOfQuestion) {
+    private void paintScore(JPanel contentPanel, float correctAnswer,  int amountOfQuestion) {
         ResultsBlock results = new ResultsBlock();
         results.paintResults(correctAnswer, amountOfQuestion);
         contentPanel.add(results);
@@ -76,8 +76,7 @@ public class ExamEndedPopup extends PopUpTemplate{
         Button.setBackground(Palette.instance().getBlue());
         Button.setPreferredSize(new Dimension(200, 30));
         Button.setFocusable(false);
-        Button.addActionListener(null);
-
+        
         Border border = BorderFactory.createLineBorder(Palette.instance().getBlue());
         Button.setBorder(border);
 

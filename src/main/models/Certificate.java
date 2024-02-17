@@ -36,10 +36,10 @@ public class Certificate {
     public String getNameCourse(){
         return course.getNameCourse();
     }
-    public void setResultExam(int Summary){
+    public void setResultExam(float Summary){
         course.setResultExam(Summary);
     }
-    public int getResultExam(){
+    public float getResultExam(){
         return course.getResultExam();
     }
     public void setNameExam(String nameExam){

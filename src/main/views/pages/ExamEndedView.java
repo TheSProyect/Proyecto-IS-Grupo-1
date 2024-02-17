@@ -32,8 +32,13 @@ public class ExamEndedView extends ExamTemplateView {
         menuPanel = new ExamMenu(results, questions.size());
         menuPanel.setCurrentQuestion(index);
 
-        results.paintResults(showScore(), questions.size());
+        showScore();
+        float numCorrectQuestions = presentController.caculateResult(getSelectedOptions());
+        results.paintResults(numCorrectQuestions, questions.size());
         
+        presentController.setResultExamC(numCorrectQuestions);
+        presentController.examFinished();
+
         contentPanel.add(menuPanel, menuPanelConstraints());
     }
 
@@ -46,23 +51,37 @@ public class ExamEndedView extends ExamTemplateView {
         }
     }
 
-    private int showScore(){
-        int numCorrectQuestions = 0;
-
+    private void showScore(){
         for (int i = 0; i < questions.size(); i++) {
-            int selectedOption = questions.get(i).getSelectedOption();
-            if (selectedOption == -1) {
+            List<Boolean> selectedOptions = questions.get(i).getSelectedOption();
+            int numCorrectAnswers = 0;
+            int numIncorrectAnswers = 0;
+            boolean allCorrectSelected = true;
+            boolean allSelecteds = true;
+            
+            for (int j = 0; j < selectedOptions.size(); j++) {
+                if (selectedOptions.get(j)) {
+                    if (presentController.isCorrect(i, j)) {
+                        numCorrectAnswers++;
+                    } else {
+                        numIncorrectAnswers++;
+                    }
+                } else {
+                    allSelecteds = false;
+                    if (presentController.isCorrect(i, j)) {
+                        allCorrectSelected = false;
+                    }
+                }
+            }
+
+            if (allSelecteds || numCorrectAnswers == 0 || numCorrectAnswers < numIncorrectAnswers) {
                 menuPanel.getQuestionListItems().get(i).setIcons("Wrong_Unselected_Icon", "Wrong_Selected_Icon");
-            } else if (presentController.isCorrect(i, selectedOption)) {
-                numCorrectQuestions++;
+            } else if (allCorrectSelected && numIncorrectAnswers == 0) {
                 menuPanel.getQuestionListItems().get(i).setIcons("Correct_Unselected_Icon", "Correct_Selected_Icon");
             } else {
-                menuPanel.getQuestionListItems().get(i).setIcons("Wrong_Unselected_Icon", "Wrong_Selected_Icon");
+                menuPanel.getQuestionListItems().get(i).setIcons("Half_Unselected_Icon", "Half_Selected_Icon");
             }
         }
-        presentController.setResultExamC(numCorrectQuestions);
-        presentController.examFinished();
-        return numCorrectQuestions;
     }
 
     protected void actionEventInBottomLeftButton(ActionEvent e) {
