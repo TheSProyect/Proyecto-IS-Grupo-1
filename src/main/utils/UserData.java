@@ -1,8 +1,10 @@
 package main.utils;
 
+import org.junit.platform.engine.discovery.FileSelector;
+
 public class UserData {
 	private static UserData currentUser;
-	private String Username, Password, Mail;
+	private String Username, Password, Mail, Fullname;
 	private boolean isAdmin;	
 	
 	public UserData(){}
@@ -30,6 +32,10 @@ public class UserData {
 		Mail = Email;
 	}
 
+	public void setFullname(String Firstname, String Lastname){
+		Fullname = Firstname+" "+Lastname;
+	}
+
 	public String getUsername(){
 		return Username;
 	}
@@ -44,6 +50,10 @@ public class UserData {
 
 	public String getMail(){
 		return Mail;
+	}
+
+	public String getFullname(){
+		return Fullname;
 	}
 
 }
