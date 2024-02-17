@@ -50,17 +50,16 @@ public class ExamEndedView extends ExamTemplateView {
         float numCorrectQuestions = 0;
 
         for (int i = 0; i < questions.size(); i++) {
-            System.out.println(numCorrectQuestions);
-            int selectedOption = questions.get(i).getSelectedOption();
-            if (selectedOption == -1) {
-                menuPanel.getQuestionListItems().get(i).setIcons("Wrong_Unselected_Icon", "Wrong_Selected_Icon");
-            } else if (presentController.isCorrect(i, selectedOption)) {
-                numCorrectQuestions++;
-                menuPanel.getQuestionListItems().get(i).setIcons("Correct_Unselected_Icon", "Correct_Selected_Icon");
-            } else {
-                menuPanel.getQuestionListItems().get(i).setIcons("Wrong_Unselected_Icon", "Wrong_Selected_Icon");
+            List<Boolean> selectedOptions = questions.get(i).getSelectedOption();
+            for (int j = 0; j < selectedOptions.size(); j++) {
+                if (selectedOptions.get(j) && presentController.isCorrect(i, j)) {
+                    // numCorrectQuestions++;
+                    menuPanel.getQuestionListItems().get(i).setIcons("Correct_Unselected_Icon", "Correct_Selected_Icon");
+                } else {
+                    menuPanel.getQuestionListItems().get(i).setIcons("Wrong_Unselected_Icon", "Wrong_Selected_Icon");
+                }
             }
-            numCorrectQuestions = numCorrectQuestions+ presentController.computeResultQuestion(i,numCorrectQuestions);
+            // numCorrectQuestions = numCorrectQuestions+ presentController.computeResultQuestion(i,numCorrectQuestions);
         }
         presentController.setResultExamC(numCorrectQuestions);
         presentController.examFinished();
