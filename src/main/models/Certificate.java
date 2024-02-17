@@ -36,7 +36,7 @@ public class Certificate {
     public String getNameCourse(){
         return course.getNameCourse();
     }
-    public void setResultExam(int Summary){
+    public void setResultExam(float Summary){
         course.setResultExam(Summary);
     }
     public float getResultExam(){

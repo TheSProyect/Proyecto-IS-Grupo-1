@@ -157,8 +157,6 @@ public class PresentExamController extends TemplateExam{
                     e.printStackTrace();
             }
             if(readings==stop) {
-                System.out.println("en el read antes del retorno");
-        System.out.println(currentExam.getNumCorrectAnswersExam(0));
                 return;
             } else {
                 counter++;
