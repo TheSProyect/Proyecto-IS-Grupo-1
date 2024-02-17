@@ -4,6 +4,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import main.utils.Directory;
 
@@ -30,12 +33,14 @@ public class RegisterUserController {
         } else{
         FileName = Directory.instance().getDirectoryStudents()+File.separator+Username;
         this.isAdmin = false;
-
-        this.newUsername = Username;
-        
         }
-        File newUserFile = new File(FileName);
         
+        this.newUsername = Username;
+
+        File newUserFile = new File(FileName);
+
+        System.out.println(this.newUsername);
+
         if(newUserFile.mkdir()){
             newUserFile = new File(FileName+File.separator+"Password.txt");
             try {
@@ -60,8 +65,15 @@ public class RegisterUserController {
     }
     }
 
-    public void setSignature(){
-        
+    public void saveSignatureImg(String Path, String adminName){
+         String destinationFolderDirectory = Directory.instance().getDirectoryTeachers()+File.separator+adminName;
+        try {
+            Path origin = Paths.get(Path);
+            Path destination = Paths.get(destinationFolderDirectory + File.separator + "Signature.png"); 
+            Files.copy(origin, destination);
+        } catch (IOException e) {
+            System.err.println("Ocurrió un error al copiar la imagen: " + e.getMessage());
+        }
     }
 
 
