@@ -112,16 +112,6 @@ public class ExamView extends ExamTemplateView {
         }
     }  
 
-    private List<List<Boolean>> getSelectedOptions() {
-        List<List<Boolean>> selectedOptions = new ArrayList<List<Boolean>>();
-
-        for (QuestionPanel question : questions) {
-            selectedOptions.add(question.getSelectedOption());
-        }
-
-        return selectedOptions;
-    }
-
     private void disableEvents() {
         actionEnable = false;
         for(QuestionPanel question : questions) {

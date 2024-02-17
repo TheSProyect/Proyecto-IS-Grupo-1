@@ -32,8 +32,13 @@ public class ExamEndedView extends ExamTemplateView {
         menuPanel = new ExamMenu(results, questions.size());
         menuPanel.setCurrentQuestion(index);
 
-        results.paintResults(showScore(), questions.size());
+        showScore();
+        float numCorrectQuestions = presentController.caculateResult(getSelectedOptions());
+        results.paintResults(numCorrectQuestions, questions.size());
         
+        presentController.setResultExamC(numCorrectQuestions);
+        presentController.examFinished();
+
         contentPanel.add(menuPanel, menuPanelConstraints());
     }
 
@@ -46,24 +51,37 @@ public class ExamEndedView extends ExamTemplateView {
         }
     }
 
-    private float showScore(){
-        float numCorrectQuestions = 0;
-
+    private void showScore(){
         for (int i = 0; i < questions.size(); i++) {
             List<Boolean> selectedOptions = questions.get(i).getSelectedOption();
+            int numCorrectAnswers = 0;
+            int numIncorrectAnswers = 0;
+            boolean allCorrectSelected = true;
+            boolean oneCorrectSelected = false;
+            boolean oneWrongSelected = false;
+            boolean allSelecteds = true;
+            
             for (int j = 0; j < selectedOptions.size(); j++) {
-                if (selectedOptions.get(j) && presentController.isCorrect(i, j)) {
-                    // numCorrectQuestions++;
-                    menuPanel.getQuestionListItems().get(i).setIcons("Correct_Unselected_Icon", "Correct_Selected_Icon");
+                if (selectedOptions.get(j)) {
+                    if (presentController.isCorrect(i, j)) {
+                        oneCorrectSelected = true;
+                    } else {
+                        oneWrongSelected = true;
+                    }
                 } else {
-                    menuPanel.getQuestionListItems().get(i).setIcons("Wrong_Unselected_Icon", "Wrong_Selected_Icon");
+                    allSelecteds = false;
+                    if (presentController.isCorrect(i, j)) {
+                        allCorrectSelected = false;
+                    }
                 }
             }
-            // numCorrectQuestions = numCorrectQuestions+ presentController.computeResultQuestion(i,numCorrectQuestions);
+
+            if (allSelecteds || !oneCorrectSelected || numCorrectAnswers < numIncorrectAnswers) {
+                menuPanel.getQuestionListItems().get(i).setIcons("Wrong_Unselected_Icon", "Wrong_Selected_Icon");
+            } else if (allCorrectSelected && !oneWrongSelected) {
+                menuPanel.getQuestionListItems().get(i).setIcons("Correct_Unselected_Icon", "Correct_Selected_Icon");
+            }
         }
-        presentController.setResultExamC(numCorrectQuestions);
-        presentController.examFinished();
-        return numCorrectQuestions;
     }
 
     protected void actionEventInBottomLeftButton(ActionEvent e) {

@@ -1,6 +1,7 @@
 1
 Pregunta pregunta
-DominioNo
+Dominio
+No
 Si
 1
 vMony

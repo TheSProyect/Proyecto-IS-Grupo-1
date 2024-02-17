@@ -352,6 +352,9 @@ public class PresentExamController extends TemplateExam{
         if (numCorrectAnswers != 0 && numCorrectAnswers < selectedOptions) {
             float penalization = selectedOptions - numCorrectAnswers;
             numCorrectAnswers = numCorrectAnswers - penalization;
+            if (numCorrectAnswers < 0) {
+                numCorrectAnswers = 0;
+            }
         }
 
         float result = numCorrectAnswers / maxAmountCorrectAnswers;
