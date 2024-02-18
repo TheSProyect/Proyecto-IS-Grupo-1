@@ -244,7 +244,9 @@ public class TemplateExam {
     public int getDuracion(){
         return currentExam.getDuration();
     }
-
+    public int getNumAnswers(int counterQuestion){
+        return currentExam.getNumberAnswersExam(counterQuestion);
+    }
     public int getNumCorrectAnswersController(int counter){
         return currentExam.getNumCorrectAnswersExam(counter);
     }

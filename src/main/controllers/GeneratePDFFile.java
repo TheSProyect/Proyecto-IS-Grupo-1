@@ -46,6 +46,8 @@ public class GeneratePDFFile {
         try {
             imageSignature = Image.getInstance(directorio + File.separator + usernameTeacher + File.separator + "Signature.png");
             imageScore=Image.getInstance("src\\assets\\BlueFolder_Icon.png");
+            imageSignature.setAlignment(Element.ALIGN_CENTER);
+            imageScore.scaleToFit(40, 40);
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -71,9 +73,7 @@ public class GeneratePDFFile {
             addDocument(documento, name,1);
             text= new Paragraph("Por su participación en el examen para aspirar a", fuenteSmall);
             addDocument(documento, text,0);
-            addDocument(documento, course,2);
-            imageSignature.setAlignment(Element.ALIGN_CENTER);
-            imageScore.scaleToFit(40, 40);
+            addDocument(documento, course,2); 
             documento.add(imageSignature);
             documento.add(Chunk.NEWLINE);
             Paragraph scoreParagraph = new Paragraph();

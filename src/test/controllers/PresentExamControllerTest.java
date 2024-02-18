@@ -86,6 +86,39 @@ public class PresentExamControllerTest {
         currentExam.setNumberQuestions(3);
         presentExam.readQuestion(directory, 1, 0, currentExam.getNumberQuestions());
     }
+    public void fillIsCorrect(List<List<Boolean>> isCorrecList){
+        List<Boolean> options = new ArrayList<>();
+        String directoryTest = System.getProperty("user.dir");
+        final int INDEX_INFORMATION_ANSWERS = 8; 
+        directoryTest = directoryTest+File.separator+"src"+File.separator+"data"+File.separator+"Exams"+File.separator+"Ayudarnos"+File.separator + "Prueba 1";
+        File searchedFolder = new File(directoryTest);
+        if (searchedFolder.exists() && searchedFolder.isDirectory()) {
+            File[] files = searchedFolder.listFiles();
+            if (files != null) {
+                for (File fileExam : files) {
+                    if(!(fileExam.getName().equals(currentExam.getNameExam()+ ".txt"))){
+                        int counter=0;
+                        try (BufferedReader br = new BufferedReader(new FileReader(directoryTest+File.separator+fileExam.getName()))){
+                            String line="";
+                            for(int i=1 ; i<INDEX_INFORMATION_ANSWERS; i++){
+                                line=br.readLine();
+                            }
+                            for (int i=0; ((line = br.readLine()) != null); i++){
+                                if((i%3==0)&&line.substring(0, 1).equalsIgnoreCase("v")){
+                                    options.add(true);
+                                }else if((i%3==0)&&line.substring(0, 1).equalsIgnoreCase("f")){
+                                    options.add(false);
+                                }
+                            }   
+                        } catch (Exception e) {
+                            // TODO: handle exception
+                        }
+                    isCorrecList.add(options);
+                    }     
+                }
+            }
+        }
+    }
     public int[] countNumCorrectAnswers(){
         String directoryTest = System.getProperty("user.dir");
         int counterQuestion=0;
@@ -108,28 +141,63 @@ public class PresentExamControllerTest {
                                 if((i%3==0)&&line.substring(0, 1).equalsIgnoreCase("v")){
                                     counter++;
                                 }
-                            }
-                            
+                            }   
                         } catch (Exception e) {
                             // TODO: handle exception
                         }
                     numCorrectAnswers[counterQuestion]=counter;
                     counterQuestion++;
-                    }  
-                     
+                    }     
                 }
             }
         }
         return numCorrectAnswers;
     }
+    public void fillOptionsList(List<List<Boolean>> selectedOptions){ 
+        int[] numAnswers = {4,4,5};
+        for(int i=0; i<currentExam.getNumberQuestions();i++){
+            List<Boolean> options = new ArrayList<>();
+            for(int j=0 ; j<numAnswers[i];j++){
+                if(i==2&&j==2){
+                    options.add(true);
+                }else if(i==2&&j!=2){
+                    options.add(false);
+                }else{
+                    if(j%2==0){
+                        options.add(true);
+                    }else{
+                        options.add(false);  
+                }}}
+            selectedOptions.add(options);
+        }
+    }
+    public String caculateResultTest(List<List<Boolean>> selectedOptions,List<List<Boolean>> isCorrectList){
+        float numCorrectAnswers = 0,resultTest=0;
+        int[] numAnswers = {2,3,1};
+        //aqui uso la lista correct que lee del archivo y el controller usa los getiscorrect
+        for(int i=0 ; i<selectedOptions.size();i++){
+            for(int j=0 ; j<selectedOptions.get(i).size();j++){
+                if (selectedOptions.get(i).get(j)&&isCorrectList.get(i).get(j)) {
+                    numCorrectAnswers++;
+                }
+            }
+            resultTest =  resultTest + computeResult(numCorrectAnswers,numAnswers[i]);
+        }
+        BigDecimal bd = new BigDecimal(Float.toString(resultTest));
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        float resultF = bd.floatValue();
+        return Float.toString(resultF);
+    }
+    public Float computeResult(float result, int numCorrectAnswers){
+        return (float)result/numCorrectAnswers;
+    }
     @Test 
-    public void calculateResultTest()throws IOException{
+    public void calculateResultQuestionTest()throws IOException{
         createExam();
         int[] numCorrectAnswers= new int[20];
         int decimals=2;
         numCorrectAnswers=countNumCorrectAnswers();
-        float resultTest ; 
-        float resultController;
+        float resultTest, resultController;
         for(int i=0; i<currentExam.getNumberQuestions(); i++){
             Assert.assertEquals(numCorrectAnswers[i], presentExam.getNumCorrectAnswersController(i));
             for(int j=0; j<presentExam.getNumCorrectAnswersController(i);j++){
@@ -145,5 +213,17 @@ public class PresentExamControllerTest {
             }
         }
     }
+    @Test
+    public void calculateResultExamTest()throws IOException{
+        createExam();
+        List<List<Boolean>> selectedOptions= new ArrayList<List<Boolean>>();
+        List<List<Boolean>> isCorrectList = new ArrayList<List<Boolean>>();
+        fillOptionsList(selectedOptions);
+        fillIsCorrect(isCorrectList);
+        String resultTest=caculateResultTest(selectedOptions, isCorrectList);
+        float resultController=presentExam.caculateResult(selectedOptions);
+        Assert.assertEquals(resultTest, Float.toString(resultController));
+        
 
+    }
 }

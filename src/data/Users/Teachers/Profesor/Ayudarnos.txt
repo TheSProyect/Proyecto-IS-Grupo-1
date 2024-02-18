@@ -1,6 +1,6 @@
 Ayudarnos
 Prueba 1
-2.67
+0.5
 3
 Nombre Apellido
 Profesor
