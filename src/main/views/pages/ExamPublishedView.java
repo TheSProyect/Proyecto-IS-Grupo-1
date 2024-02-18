@@ -30,7 +30,7 @@ public class ExamPublishedView extends ExamTemplateView{
         buildFrame("ExamView");
         paintBorders();
         paintContentPanel();
-
+        showPopUp();
         addActionListener();
     }
     
@@ -112,24 +112,15 @@ public class ExamPublishedView extends ExamTemplateView{
         }
     }  
 
-    protected void actionEventInBottomLeftButton(ActionEvent e) {
-        if(e.getSource() == bottomLeftButton) {
-            popup = new ExamPublishedPopUp();
-            
-            PopUp.instance(Size.instance().getExamEndedPopUpDimension()).setView(popup);
-
-            popup.getButton().addActionListener(this);
-        } 
+    protected void showPopUp() {
+        
+        popup = new ExamPublishedPopUp();
+        
+        PopUp.instance(Size.instance().getExamPublishedPopUpDimension()).setView(popup);
     }
+    protected void actionEventInBottomLeftButton(ActionEvent e){
 
-    private void actionEventInPopUp(ActionEvent e) {
-        if (popup == null){
-            return;
-        } else if (e.getSource() == popup.getButton()) {
-            PopUp.deleteInstance();
-        }
     }
-
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == prevButton) {
             showPreviousQuestions();
@@ -138,9 +129,7 @@ public class ExamPublishedView extends ExamTemplateView{
             showNextQuestion();
 
         } else {
-            actionEventInBottomLeftButton(e);
             actionEventInExamMenu(e);
-            actionEventInPopUp(e);
         }
     }
 }

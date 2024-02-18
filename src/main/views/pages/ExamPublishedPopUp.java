@@ -29,7 +29,7 @@ public class ExamPublishedPopUp extends PopUpTemplate{
 
     public ExamPublishedPopUp() {
         
-        buildFrame(Size.instance().getExamEndedPopUpDimension());
+        buildFrame(Size.instance().getExamPublishedPopUpDimension());
         paintBorders();
         paintContentPanel();
         addActionListener();
@@ -38,7 +38,7 @@ public class ExamPublishedPopUp extends PopUpTemplate{
 
     protected void paintContentPanel(){
         JPanel contentPanel = new JPanel();
-        contentPanel.setPreferredSize(Size.instance().getExamEndedPopUpDimension());
+        contentPanel.setPreferredSize(Size.instance().getExamPublishedPopUpDimension());
         contentPanel.setBackground(Palette.instance().getWhite());
         contentPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 15));
         
@@ -68,7 +68,7 @@ public class ExamPublishedPopUp extends PopUpTemplate{
     }
 
     private void paintButton(String textButton, JPanel contentPanel) {
-        JButton button = new JButton(textButton);
+        button = new JButton(textButton);
         button.setFont(new Font("Nunito Sans", Font.BOLD, 15));
         button.setUI(new MetalButtonUI());
         button.setForeground(Palette.instance().getWhite());
@@ -82,8 +82,6 @@ public class ExamPublishedPopUp extends PopUpTemplate{
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(0,  10,  0,  10);
-        
-        button.add(button);
         
         contentPanel.add(button, gbc);
     }
@@ -101,12 +99,12 @@ public class ExamPublishedPopUp extends PopUpTemplate{
     @Override
     protected void paintBorders() {
         JPanel borderPanel = new JPanel();
-        borderPanel.setPreferredSize(new Dimension(40, 450));
+        borderPanel.setPreferredSize(new Dimension(40, 100));
         borderPanel.setBackground(Palette.instance().getWhite());
         this.add(borderPanel, BorderLayout.WEST);
 
         borderPanel = new JPanel();
-        borderPanel.setPreferredSize(new Dimension(40, 450));
+        borderPanel.setPreferredSize(new Dimension(40, 100));
         borderPanel.setBackground(Palette.instance().getWhite());
         this.add(borderPanel, BorderLayout.EAST);
     }
