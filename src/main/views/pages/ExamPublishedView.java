@@ -119,7 +119,8 @@ public class ExamPublishedView extends ExamTemplateView{
         PopUp.instance(Size.instance().getExamPublishedPopUpDimension()).setView(popup);
     }
     protected void actionEventInBottomLeftButton(ActionEvent e){
-
+        System.out.print("Se edsta ejecutando");
+        Frame.instance().setView(AdminExamsView.instance());
     }
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == prevButton) {
@@ -130,6 +131,7 @@ public class ExamPublishedView extends ExamTemplateView{
 
         } else {
             actionEventInExamMenu(e);
+            actionEventInBottomLeftButton(e);
         }
     }
 }
