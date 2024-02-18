@@ -112,6 +112,7 @@ public class NewExamView extends ExamTemplateView {
         return true;
     }
 
+
     private void actionEventInPublishButton(ActionEvent e) {
         if (e.getSource() == publishButton) {
             if (!checkQuestionsAreComplete()) {
@@ -137,9 +138,7 @@ public class NewExamView extends ExamTemplateView {
                 createExamController.saveQuestion(questionInfo, answersInfo, newQuestion.getImagePath());
             }
             createExamController.replaceQuestionCount();
-            // Frame.instance().setView(new ExamPublishedView(createExamController));
-            AdminExamsView.deleteInstance();
-            Frame.instance().setView(AdminExamsView.instance());
+            Frame.instance().setView(new ExamPublishedView(createExamController));
         }
     }
 

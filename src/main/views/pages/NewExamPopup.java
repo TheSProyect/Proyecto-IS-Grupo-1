@@ -89,7 +89,6 @@ public class NewExamPopup extends PopUpTemplate implements ActionListener{
             examDescription = examInfoPanel.getDescription();
 
             createExamController.saveExam(examData, examDescription, ExamInfoPanel.getDuration());
-            System.out.print(examDescription);
 
             PopUp.deleteInstance();
             return true;

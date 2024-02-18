@@ -162,10 +162,11 @@ public class CreateExamController extends TemplateExam{
         }  
     }
     public void showExam() {
-        int counter = 0, questionsRead = 1, stop = getNumberQuestion(currentDirectory.getDirectoryExams() + File.separator + currentExam.getNameCourse(), currentExam.getNameExam());
+        currentExam.setNumberQuestions(questionsCount);
+        int counter = 0, questionsRead = 1;
         String directory = currentDirectory.getDirectoryExams() + File.separator + currentExam.getNameCourse() + File.separator + currentExam.getNameExam() +File.separator + "Pregunta1.txt";
-        System.out.println(directory);
-        readQuestion(directory,questionsRead,counter, stop);               
+        readQuestion(directory,questionsRead,counter, questionsCount);  
+                     
     }
 }
 
