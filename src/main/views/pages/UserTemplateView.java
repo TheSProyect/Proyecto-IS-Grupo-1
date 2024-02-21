@@ -30,14 +30,10 @@ public abstract class UserTemplateView extends JPanel implements ActionListener 
     PlaceholderTextField passwordTextField;
 
     public UserTemplateView() {
-        /*buildFrame();
-        paintTitlePanel();
-        paintUserDataPanel();*/
     }
 
     protected void buildFrame(String Title) {
         Frame.instance().setTitle(Title);
-        
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
     }
     

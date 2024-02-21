@@ -24,8 +24,6 @@ public class Question {
         this.code=code;
     }
     public void setQuestions(List<String> statement, String domain){
-        //question.statement=statement;
-        //question.domain=domain;
         this.domain=domain;
         this.statement=statement;
     }
@@ -59,15 +57,12 @@ public class Question {
         return answers.get(counter).getIsCorrect();
     }
     public List<String> getOptionsQuestion(int counter){
-        //return questions2.getQuestions();
         return answers.get(counter).getAnswers();
     }
     public List<String> getCodeQuestion(){
-        //return questions2.getQuestions();
         return this.code;
     }
     public List<String> getCode(int counter){
-        //return questions2.getQuestions();
         return answers.get(counter).getAnswers();
     }
     public String getDomain(){
