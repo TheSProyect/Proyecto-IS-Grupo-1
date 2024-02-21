@@ -6,9 +6,15 @@ import java.awt.event.*;
 public class ExamTimer {
   private static Timer t;
   public static ExamTimer instance(){
-		if(t == null){
-			t = new Timer();
-		}
 		return t;
 	}
+
+	public void StartTimer(){
+		t.start();
+	}
+
+	public void StopTimer(){
+		t.stop();
+	}
+
 }
