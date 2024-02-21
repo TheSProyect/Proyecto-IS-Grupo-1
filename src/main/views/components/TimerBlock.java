@@ -88,5 +88,9 @@ public class TimerBlock extends JPanel{
 		}
 		return Time;
 	}
+
+	public void StopTimer(){
+		T.stop();
+	}
 	
 }
