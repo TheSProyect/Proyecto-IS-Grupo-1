@@ -132,9 +132,7 @@ public class PresentExamController extends TemplateExam{
     }
 
     public void searchFolder(String [] informationsExam) {
-        int INDEX_FOR_NAME_EXAM = 0;
-        int INDEX_FOR_NAME_COURSE = 1;
-        int questionsRead = 1;
+        int INDEX_FOR_NAME_EXAM = 0, INDEX_FOR_NAME_COURSE = 1, questionsRead = 1;
         String nameFolder = informationsExam[INDEX_FOR_NAME_EXAM];
         String directory = (currentDirectory.getDirectoryExams())+File.separator+informationsExam[INDEX_FOR_NAME_COURSE];
         File searchedFolder = new File(directory);
@@ -181,7 +179,6 @@ public class PresentExamController extends TemplateExam{
     }
 
     public float computeResultQuestion(int numQuestion, float numCorrectAnswers, float selectedOptions){
-        //float maxAmountCorrectAnswers = currentExam.getNumCorrectAnswersExam(numQuestion);
         float maxAmountCorrectAnswers = getNumCorrectAnswersController(numQuestion);
         
         if (numCorrectAnswers != 0 && numCorrectAnswers < selectedOptions) {

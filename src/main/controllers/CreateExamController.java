@@ -63,6 +63,7 @@ public class CreateExamController extends TemplateExam{
     }
     public void replaceQuestionCount(){
         String directory = currentDirectory.getDirectoryExams()+ File.separator + currentExam.getNameCourse() + File.separator + currentExam.getNameExam()+ File.separator + currentExam.getNameExam() + ".txt";
+        int LINE_QUESTION = 3;
         try {
             File file = new File(directory);
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -70,7 +71,7 @@ public class CreateExamController extends TemplateExam{
             int count = 0;
             while ((line = br.readLine()) != null) {
                 count++;
-                if (count == 3) {
+                if (count == LINE_QUESTION) {
                     content += String.valueOf(questionsCount)+ "\n";
                     } else {
                         content += line + "\n";
