@@ -1,0 +1,23 @@
+1
+Que no es una excepcion?
+Java,Metodos
+6
+try {
+  //  Block of code to try
+}
+catch(Exception e) {
+  //  Block of code to handle errors
+}
+No
+1
+fUn error que lanza un metodo cuando algo va mal
+Una excepción es un evento que se produce cuando se ejecuta el programa de forma que interrumpe el flujo normal de instrucciones. El sistema de ejecucion Java y muchas clases de paquetes Java lanzan excepciones en algunas circunstancias utilizando la sentencia throw.
+1
+vUn objeto que no puede ser instanciado
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+1
+vUn bucle que no finaliza
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+1
+vUn tipo de evento muy utilizado al crear interfaces
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.

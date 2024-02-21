@@ -1,0 +1,17 @@
+1
+Cual es la descripcion que crees que define mejor el concepto 'clase' en la programacion orientada a objetos?
+POO
+No
+No
+1
+fEs un concepto similar al de 'array'
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+1
+fEs un tipo particular de variable
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+1
+vEs un modelo o plantilla a partir de la cual creamos objetos
+Una clase es un elemento de la programacion orientada a objetos que actua como una plantilla y va a definir las caracteristicas y comportamientos de una entidad. La clase va a ser como un molde a partir del cual vamos a poder definir entidades.
+1
+fEs una categoria de datos ordenada secuencialmente
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
