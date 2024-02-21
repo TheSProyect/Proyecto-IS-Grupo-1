@@ -1,7 +1,6 @@
 package main.views.pages;
 
 import main.views.components.ExamMenu;
-import main.views.components.Message;
 import main.views.components.PopUp;
 import main.views.components.QuestionPanel;
 import java.awt.event.ActionEvent;
@@ -16,7 +15,6 @@ import main.utils.Palette;
 import main.utils.Size;
 
 public class ExamPublishedView extends ExamTemplateView{
-    private Message message;
     CreateExamController createExamController;
     ExamPublishedPopUp popup;
 
@@ -27,7 +25,7 @@ public class ExamPublishedView extends ExamTemplateView{
         createExamController = _createExamController;
         inicializeQuestions();
 
-        buildFrame("ExamView");
+        buildFrame("ExamPublishedView");
         paintBorders();
         paintContentPanel();
         showPopUp();
@@ -118,10 +116,14 @@ public class ExamPublishedView extends ExamTemplateView{
         
         PopUp.instance(Size.instance().getExamPublishedPopUpDimension()).setView(popup);
     }
+
     protected void actionEventInBottomLeftButton(ActionEvent e){
-        System.out.print("Se edsta ejecutando");
-        Frame.instance().setView(AdminExamsView.instance());
+        if(e.getSource() == bottomLeftButton) {
+            AdminExamsView.instance().paintNavBar();
+            Frame.instance().setView(AdminExamsView.instance());
+        }
     }
+
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == prevButton) {
             showPreviousQuestions();

@@ -25,7 +25,7 @@ public class Frame extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setMinimumSize(Size.instance().getDefaultFrame());
         this.setSize(Size.instance().getDefaultFrame());
-        // this.setIconImage(new ImageIcon(getClass().getResource("/assets/Favicon.png")).getImage());
+        this.setIconImage(new ImageIcon(getClass().getResource("/assets/Favicon.png")).getImage());
     }
 
     public void setView(JPanel view) {

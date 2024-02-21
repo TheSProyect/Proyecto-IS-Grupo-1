@@ -1,7 +1,5 @@
 package main.utils;
 
-import org.junit.platform.engine.discovery.FileSelector;
-
 public class UserData {
 	private static UserData currentUser;
 	private String Username, Password, Mail, Fullname;
