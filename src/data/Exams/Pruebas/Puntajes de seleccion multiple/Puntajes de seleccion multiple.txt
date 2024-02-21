@@ -1,0 +1,9 @@
+Puntajes de seleccion multiple
+Prueba puntaje
+1
+Nombre Apellido
+10
+1
+Este es un examen para probar la manera de puntuar preguntas de seleccion multiple
+Pruebas
+Profesor
