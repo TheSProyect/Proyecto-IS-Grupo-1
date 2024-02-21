@@ -1,0 +1,23 @@
+1
+Pregunta de opcion multiple
+Penalizaciones
+No
+No
+1
+vEsta respuesta es correcta
+Si se responde esto se lleva 1/4
+1
+vEsta respuesta tambien
+Si se responde esto y la anterio se llevan 2/4
+1
+vEsta igualmente
+Si se responde esto y las dos anteriores se llevan 3/4
+1
+fEsta no
+Esta es mala, si si escoge ademas de las correctas se anula una de las buenas
+1
+fEsta tampoco
+Si se escogen todas las opciones esta pregunta se anula
+1
+vEsta si lo es
+Si se escoge esta y las 3 primeras se lleva 4/4

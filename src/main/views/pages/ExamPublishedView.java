@@ -119,7 +119,7 @@ public class ExamPublishedView extends ExamTemplateView{
 
     protected void actionEventInBottomLeftButton(ActionEvent e){
         if(e.getSource() == bottomLeftButton) {
-            AdminExamsView.instance().paintNavBar();
+            AdminExamsView.deleteInstance();
             Frame.instance().setView(AdminExamsView.instance());
         }
     }

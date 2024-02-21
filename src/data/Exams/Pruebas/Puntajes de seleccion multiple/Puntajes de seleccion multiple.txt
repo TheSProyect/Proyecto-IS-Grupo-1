@@ -1,6 +1,6 @@
 Puntajes de seleccion multiple
 Prueba puntaje
-1
+3
 Nombre Apellido
 10
 1
