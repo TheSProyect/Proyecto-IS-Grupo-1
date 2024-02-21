@@ -124,7 +124,7 @@ public class TemplateExam {
     
     public String changeDirectory(String directory, int questionAmount){
         int removeQuestion = 13;
-        if(questionAmount < 9) {
+        if(questionAmount > 9) {
             removeQuestion++;
         }   
         int REMOVE_FILE_TYPE = 4;
@@ -136,7 +136,7 @@ public class TemplateExam {
     
     public String changeNumberQuestion(String question, int questionAmount){
         int removeNumberQuestion = 1;
-        if(questionAmount < 9) {
+        if(questionAmount > 9) {
             removeNumberQuestion++;
         }  
         if (question != null && question.length() > 0) {
