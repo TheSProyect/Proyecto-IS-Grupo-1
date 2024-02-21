@@ -141,7 +141,6 @@ public class ExamsView extends HelpBarTemplateView {
             if (e.getSource() == presentExamButtons.get(i)) {
                 actionEventInBottomLeftButton(e, examsIDs.get(i), presentExamController);
                 
-                //Frame.instance().setView(new ExamView(presentExamController, examsIDs.get(i)));
             }
         }
     }

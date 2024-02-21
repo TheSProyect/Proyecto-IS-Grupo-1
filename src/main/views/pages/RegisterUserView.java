@@ -120,7 +120,7 @@ public class RegisterUserView extends UserTemplateView{
 
     private void ActionEventInRegisterButton(ActionEvent e) {
         if(e.getSource() == ContinueButton) {
-            /* */
+            
             if(userTextField.getTextField().equals("") || emailTextField.getTextField().equals("") || passwordTextField.getTextField().equals("") || userFirstName.getTextField().equals("") || usertLastName.getTextField().equals("")){
                 setErrorMessage(errorLabel, "Se deben llenar todos los campos");
             } else {

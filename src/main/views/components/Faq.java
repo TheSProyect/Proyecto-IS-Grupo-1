@@ -16,8 +16,6 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
-
-
 import main.utils.Palette;
 
 public class Faq extends JScrollPane{

@@ -21,7 +21,6 @@ public class CourseList extends JPanel {
     CourseList() {
         buildCourseListPanel();
         inicializeGridConstraints();
-        // showCoursePanel();
     }
 
     private void buildCourseListPanel() {

@@ -10,15 +10,8 @@ import main.utils.UserData;
 
 public class LoginController {
 	public UserData currentUser = UserData.instance();
-	public LoginController(){
-		
-	}
-	
-	public static void main(String[] args) throws IOException{
-        
-	}
+	public LoginController(){}
 
-	
 	public boolean searchUser(String Username){
 		
 		try(BufferedReader adminR = new BufferedReader(new FileReader(searchedDirectory("Teachers", Username, "Password")))){

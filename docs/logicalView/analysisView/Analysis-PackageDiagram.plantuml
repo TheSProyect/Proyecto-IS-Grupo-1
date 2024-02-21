@@ -2,86 +2,23 @@
 skinparam style strictuml
 
 
-package Views {}
+package Views {
+    package Pages{}
+    package Components{}
+}
 package Controllers{}
 package Models{}
-
-package views {
-class MyExamsView
-
-class ExamView
-class ExamEndedView
-class CertificatesView
-class CertificateView
-class AnswersView
-
-class NewExamView
-class ExamPublishedView
-class AdminExamView
-}
-
-package controllers {
-class CreateExamController
-
-class PresentExamController
-class RequestCertificateController
-
-}
-
-package models {
-class Questions
-class Answers
-class Exam
-class Result
-class Certificate
-class Course
-
-}
-
-MyExamsView -- AdminExamView
-MyExamsView -- CertificatesView
-MyExamsView -- CertificateView
-MyExamsView -- NewExamView
-MyExamsView -- ExamPublishedView
-MyExamsView -- AnswersView
-MyExamsView -- ExamEndedView
-MyExamsView -- ExamView
-NewExamView -- ExamPublishedView
-AdminExamView -- NewExamView
-
-ExamEndedView -- AnswersView
-ExamView -- ExamEndedView
-
-CertificatesView -l- CertificateView
-
-Exam *-- Questions
-Exam *-- Answers
-
-Exam -- Result
-Result -- Course
-Course -- Certificate
-
-CreateExamController -u- NewExamView
-CreateExamController -u- ExamPublishedView
-
-RequestCertificateController -u- CertificatesView
-RequestCertificateController -u- CertificateView
-
-PresentExamController -u- ExamView
-PresentExamController -u- AnswersView
-PresentExamController -u- ExamEndedView
-
-CreateExamController -- Exam
-PresentExamController -- Exam
-PresentExamController -- Result
-
-RequestCertificateController -- Certificate
-
-RequestCertificateController -- Course
+package Utils{}
 
 
 Controllers <.u. Views
 
 Models <.u. Controllers
+
+Utils <.u. Controllers
+Utils <.u. Models
+Utils <.u. Views
+
+Pages <.u. Components
 
 @enduml
