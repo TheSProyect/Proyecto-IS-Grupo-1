@@ -5,6 +5,7 @@ import java.awt.event.*;
 import java.io.File;
 
 import main.utils.Palette;
+import main.utils.ExamTimer;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -30,8 +31,8 @@ public class TimerBlock extends JPanel{
 
 		this.paintImageIcon(ClockImg, imgLabel);
 		
-		T = new Timer(1000, setActionListener(stopButton, TimeLabel));
-		T.start();
+		ExamTimer.instance() = new Timer(1000, setActionListener(stopButton, TimeLabel));
+		ExamTimer.instance().StartTimer();
 
 	}
 
@@ -70,7 +71,7 @@ public class TimerBlock extends JPanel{
 				TimeRemaining--;
 
 				if(TimeRemaining<0){
-					T.stop();
+					ExamTimer.isntance().StopTimer();
 					stopButton.doClick();
 				} else {
 
@@ -89,7 +90,4 @@ public class TimerBlock extends JPanel{
 		return Time;
 	}
 	
-	public void StopTimer(){
-		this.T.stop();
-	}
 }
