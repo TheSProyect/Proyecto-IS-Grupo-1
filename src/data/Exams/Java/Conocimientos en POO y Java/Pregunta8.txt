@@ -1,0 +1,21 @@
+1
+Que codigo asociarias a una Interfaz en Java?
+Java
+4
+    public class Componente interface Product
+    Componente cp = new Componente (interfaz)
+    public class Componente implements Printable
+    Componente cp = new Componente.interfaz
+Si
+1
+fpublic class Componente interface Product
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+1
+fComponente cp = new Componente (interfaz)
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+1
+vpublic class Componente implements Printable
+Una interfaz en Java es una coleccion de metodos abstractos y propiedades constantes. En las interfaces se especifica que se debe hacer pero no su implementacion. Seran las clases que implementen estas interfaces las que describan la logica del comportamiento de los metodos. Utiliza la palabra clave implements
+1
+fComponente cp = new Componente.interfaz
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.

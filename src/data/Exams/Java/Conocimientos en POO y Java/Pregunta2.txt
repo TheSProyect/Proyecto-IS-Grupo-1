@@ -1,0 +1,39 @@
+1
+Que elementos crees que definen a un objeto?
+POO
+22
+//Le damos un nombre "MiClase" a la clase
+public class MiClase
+{
+    //Atributos de la clase
+    private String atributo1;
+    private int atributo2;
+    private float atributo3;
+
+    //Constructor con el mismo nombre de la clase
+    public MiClase(){}
+
+    //Metodos de la clase
+    public void metodo1()
+    {
+        //Metodo vacio
+    }
+
+    public String metodo2()
+    {
+        return "metodo2";
+    }
+}
+No
+1
+fSus cardinalidad y su tipo
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+1
+vSus atributos y sus metodos
+Los atributos: Son las propiedades que poseen los objetos de esa clase. Los Metodos: Son las acciones que los objetos de la clase pueden realizar.
+1
+fLa forma en que establece comunicacion e intercambia mensajes
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+1
+fSu interfaz y los eventos asociados
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.

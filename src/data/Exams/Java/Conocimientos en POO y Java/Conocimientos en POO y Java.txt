@@ -1,0 +1,9 @@
+Conocimientos en POO y Java
+Cuestionario
+10
+Nombre Apellido
+60
+1
+Java es uno de los lenguajes de programacion mas populares del mundo e implementa la Programacion Orientada a Objetos (POO), el modelo mas utilizado en el desarrollo de aplicaciones modernas.
+Java
+Profesor

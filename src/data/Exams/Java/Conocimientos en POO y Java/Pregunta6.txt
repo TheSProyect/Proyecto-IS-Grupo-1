@@ -1,0 +1,20 @@
+1
+Que es Eclipse?
+Java,Eclipse
+No
+Si
+1
+fUna libreria de Java
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+1
+fUna version de Java especial para servidores
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+1
+vUn IDE para desarrollar aplicaciones
+Eclipse es una plataforma de software compuesto por un conjunto de herramientas de programacion de codigo abierto multiplataforma para desarrollar lo que el proyecto llama "Aplicaciones de Cliente Enriquecido", opuesto a las aplicaciones "Cliente-liviano" basadas en navegadores.
+1
+fNinguna de las anteriores
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+1
+vFenomeno en el que la luz procedente de un cuerpo celeste es bloqueada por otro cuerpo eclipsante
+Si pero no, no nos referiamos a ese tipo de eclipse

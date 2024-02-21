@@ -1,0 +1,17 @@
+1
+Que significa instanciar una clase?
+POO
+No
+No
+1
+fDuplicar una clase
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+1
+fEliminar una clase
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+1
+vCrear un objeto a partir de la clase
+Las clases en Java (Java Class) son plantillas para la creacion de objetos. Como tal, la clase forma la base para la programacion orientada a objetos en Java, la cual es una de los principales paradigmas de desarrollo de software en la actualidad.
+1
+fConectar dos clases entre si
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
