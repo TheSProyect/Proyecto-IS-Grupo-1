@@ -101,7 +101,7 @@ public class TemplateExam {
                 return;
             } else {
                 counter++;
-                readQuestion(changeDirectory(directory, readings+1),readings+1, counter, stop);
+                readQuestion(changeDirectory(directory, readings),readings+1, counter, stop);
         }   
     }
     public int getNumberQuestion(String directory, String nameFolder){
@@ -123,8 +123,8 @@ public class TemplateExam {
     }
     
     public String changeDirectory(String directory, int questionAmount){
-        int removeQuestion = 13;
-        if(questionAmount > 9) {
+        int removeQuestion = 13, changeAmountQuestion = 9;
+        if(questionAmount > changeAmountQuestion) {
             removeQuestion++;
         }   
         int REMOVE_FILE_TYPE = 4;
@@ -136,15 +136,15 @@ public class TemplateExam {
     
     public String changeNumberQuestion(String question, int questionAmount){
         int removeNumberQuestion = 1;
-        if(questionAmount > 9) {
+        if(questionAmount-1 > 9) {
             removeNumberQuestion++;
         }  
         if (question != null && question.length() > 0) {
-            char lastCharacter = question.charAt(question.length() - removeNumberQuestion);
-            if (Character.isDigit(lastCharacter)) {
-                int number = Character.getNumericValue(lastCharacter);
+            String lastCharacter = question.substring(question.length() - removeNumberQuestion);
+            if (lastCharacter.matches("\\d+")) {
+                int number = Integer.valueOf(lastCharacter);
                 number++;
-                char newCharacter = Character.forDigit(number, 10);
+                String newCharacter = String.valueOf(number);
                 return question.substring(0, question.length() - removeNumberQuestion) + newCharacter; 
             }
         }

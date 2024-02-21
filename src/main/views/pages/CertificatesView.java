@@ -28,7 +28,6 @@ public class CertificatesView extends HelpBarTemplateView {
 
 
     public CertificatesView() {
-        // inicializeCertificates();
 
         buildFrame("CertificatesView");
         paintBorders();

@@ -14,8 +14,6 @@ import main.utils.Size;
 public class ExamMenu extends JPanel{
     JScrollPane questionsListScrollPane;
     QuestionsList questionsList;
-
-    /* */
     TimerBlock returnBlock;
 
     public ExamMenu(JPanel block, int questionAmount) {
@@ -26,7 +24,6 @@ public class ExamMenu extends JPanel{
         paintQuestionsList(questionAmount);
     }
 
-    /* */
     public ExamMenu(TimerBlock block, int questionAmount) {
         buildExamMenuPanel();
 
