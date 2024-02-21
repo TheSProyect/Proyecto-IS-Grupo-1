@@ -49,7 +49,7 @@ public class GeneratePDFFile {
             imageSignature.setAlignment(Element.ALIGN_CENTER);
             imageScore.scaleToFit(40, 40);
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         }
     }
     public String searchDirectoryStudent(){

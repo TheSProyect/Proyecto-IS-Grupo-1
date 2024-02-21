@@ -8,15 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.models.Certificate;
-import main.utils.UserData;
 
 
 public class RequestCertificateController extends TemplateExam{
     Certificate currentCertificate = new Certificate();
-
-    public static void main(String[] args) throws IOException{
-        RequestCertificateController r= new RequestCertificateController();
-    }
 
     private String nameCourses(File file){
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -88,8 +83,10 @@ public class RequestCertificateController extends TemplateExam{
         informationToPDF.add(currentCertificate.getNameCourse());
         informationToPDF.add(currentCertificate.getNameTeacher());
         informationToPDF.add(currentCertificate.getUsernameTeacher());
+        @SuppressWarnings("unused")
         GeneratePDFFile creatingPDF = new GeneratePDFFile(informationToPDF);
     }
+    
     public String getNameStudentController(){
         return currentCertificate.getFirstNameStudent()+" "+currentCertificate.getLastNameStudent();
     }

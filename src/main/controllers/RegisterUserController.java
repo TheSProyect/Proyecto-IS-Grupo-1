@@ -46,7 +46,6 @@ public class RegisterUserController {
             try {
                 newUserFile.createNewFile();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
@@ -54,7 +53,6 @@ public class RegisterUserController {
             try {
                 newUserFile.createNewFile();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 

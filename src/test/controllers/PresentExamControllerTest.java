@@ -15,10 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.controllers.PresentExamController;
-import main.controllers.RegisterUserController;
-import main.controllers.RequestCertificateController;
 import main.models.Exam;
-import main.utils.Directory;
 import main.utils.UserData;
 
 public class PresentExamControllerTest {
@@ -97,7 +94,6 @@ public class PresentExamControllerTest {
             if (files != null) {
                 for (File fileExam : files) {
                     if(!(fileExam.getName().equals(currentExam.getNameExam()+ ".txt"))){
-                        int counter=0;
                         try (BufferedReader br = new BufferedReader(new FileReader(directoryTest+File.separator+fileExam.getName()))){
                             String line="";
                             for(int i=1 ; i<INDEX_INFORMATION_ANSWERS; i++){
@@ -111,7 +107,7 @@ public class PresentExamControllerTest {
                                 }
                             }   
                         } catch (Exception e) {
-                            // TODO: handle exception
+                            e.printStackTrace();
                         }
                     isCorrecList.add(options);
                     }     
@@ -143,7 +139,7 @@ public class PresentExamControllerTest {
                                 }
                             }   
                         } catch (Exception e) {
-                            // TODO: handle exception
+                            e.printStackTrace();
                         }
                     numCorrectAnswers[counterQuestion]=counter;
                     counterQuestion++;

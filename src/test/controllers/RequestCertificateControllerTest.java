@@ -37,16 +37,10 @@ public class RequestCertificateControllerTest {
         directory = directory + File.separator + course ;      
         controller.readStudentData(directory);
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
-            // nombre del curso
             Assert.assertEquals(br.readLine(), controller.getNameCourseController());
-            //nombre del examen
-            //Assert.assertEquals(br.readLine(), course);
             Assert.assertEquals(br.readLine(), controller.getNameExamController());
-            //resultado de examen
             Assert.assertEquals(Integer.parseInt(br.readLine()), controller.getResultAnswersController());
-            //numero de preguntas
             Assert.assertEquals(Integer.parseInt(br.readLine()), controller.getQuestionsExamController());
-            //nombre profe
             Assert.assertEquals(br.readLine(), controller.getNameTeacherController());
 
             br.close();     
@@ -57,10 +51,8 @@ public class RequestCertificateControllerTest {
 
     @Test
     public  void showCertificatesTest(){
-
         List<String> certificate = new ArrayList<String>();
         certificate = controller.showCertificates();
-
         directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Users"+File.separator+"Students"+File.separator + nameFolderStudent;
         File searchedFolder = new File(directory);
         String courseName;

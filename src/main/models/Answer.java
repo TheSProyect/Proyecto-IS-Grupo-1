@@ -7,7 +7,6 @@ public class Answer {
     private boolean correct_option;
     private List<String> text = new ArrayList<>();
     private List<String> justification = new ArrayList<>();
-    private Line[] lines;
 
     public void setAnswers(List<String> answer, List<String> justification, Answer answers){
         answers.text=answer;

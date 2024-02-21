@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class Question {
     private List<String> statement = new ArrayList<>();
     private String domain;
-    private Line[] lines;
     private int numberAnswers;
     private int numCorrectAnswers=0;
     private List<Answer> answers = new ArrayList<>();
