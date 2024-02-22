@@ -1,7 +1,8 @@
 package main.controllers;
 
+import main.models.UserData;
 import main.utils.Directory;
-import main.utils.UserData;
+
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.util.List;

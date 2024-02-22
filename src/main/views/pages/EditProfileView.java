@@ -6,9 +6,9 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 
 import main.controllers.EditProfileController;
+import main.models.UserData;
 import main.utils.Palette;
 import main.utils.Size;
-import main.utils.UserData;
 import main.views.components.PlaceholderTextField;
 
 public class EditProfileView extends UserTemplateView{

@@ -5,8 +5,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import main.models.UserData;
 import main.utils.Directory;
-import main.utils.UserData;
 
 public class LoginController {
 	public UserData currentUser = UserData.instance();

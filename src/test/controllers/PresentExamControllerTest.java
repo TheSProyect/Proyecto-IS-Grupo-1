@@ -16,7 +16,7 @@ import java.util.List;
 
 import main.controllers.PresentExamController;
 import main.models.Exam;
-import main.utils.UserData;
+import main.models.UserData;
 
 public class PresentExamControllerTest {
 
