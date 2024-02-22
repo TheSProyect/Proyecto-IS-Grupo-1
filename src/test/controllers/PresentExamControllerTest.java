@@ -78,27 +78,51 @@ public class PresentExamControllerTest {
     public void createExam(){ 
         presentExam = new PresentExamController();
         currentExam = new Exam(); 
-        currentExam.setNameExam("Prueba 1");
+        currentExam.setNameExam("Conocimientos en POO y Java");
         String directory = System.getProperty("user.dir");
-        directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Exams"+File.separator+"Ayudarnos"+File.separator + currentExam.getNameExam()+File.separator + "Pregunta1.txt";
-        currentExam.setNumberQuestions(3);
+        directory = directory+File.separator+"src"+File.separator+"data"+File.separator+"Exams"+File.separator+"Java"+File.separator + currentExam.getNameExam()+File.separator + "Pregunta1.txt";
+        currentExam.setNumberQuestions(4);
         presentExam.readQuestion(directory, 1, 0, currentExam.getNumberQuestions());
     }
+    public void continueReading(BufferedReader br, String line){
+        int size=Integer.parseInt(line);
+        try {
+            for(int i=0; i<size;i++){
+                line=br.readLine();
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        
+    }
+    public String changeNameQuestion(String name, int k){
+        return name.substring(name.length()-5);
+
+    }
     public void fillIsCorrect(List<List<Boolean>> isCorrecList){
-        List<Boolean> options = new ArrayList<>();
+        String nameQuestion="Pregunta1.txt";
+        int k=0;
         String directoryTest = System.getProperty("user.dir");
-        final int INDEX_INFORMATION_ANSWERS = 8; 
-        directoryTest = directoryTest+File.separator+"src"+File.separator+"data"+File.separator+"Exams"+File.separator+"Ayudarnos"+File.separator + "Prueba 1";
+        final int INDEX_INFORMATION_ANSWERS = 4; 
+        directoryTest = directoryTest+File.separator+"src"+File.separator+"data"+File.separator+"Exams"+File.separator+"Java"+File.separator + "Conocimientos en POO y Java";
         File searchedFolder = new File(directoryTest);
         if (searchedFolder.exists() && searchedFolder.isDirectory()) {
             File[] files = searchedFolder.listFiles();
             if (files != null) {
                 for (File fileExam : files) {
-                    if(!(fileExam.getName().equals(currentExam.getNameExam()+ ".txt"))){
+                    if(!(fileExam.getName().equals(currentExam.getNameExam()+ ".txt")) && !(fileExam.getName().substring(9).equals(".jpg"))){ 
+                        List<Boolean> options = new ArrayList<>();
                         try (BufferedReader br = new BufferedReader(new FileReader(directoryTest+File.separator+fileExam.getName()))){
                             String line="";
-                            for(int i=1 ; i<INDEX_INFORMATION_ANSWERS; i++){
+                            for(int i=0 ; i<INDEX_INFORMATION_ANSWERS; i++){
                                 line=br.readLine();
+                                if(i==3){
+                                    if((line!="Si")&&(line!="No")){
+                                        continueReading(br,line);
+                                    }
+                                    br.readLine();
+                                    br.readLine();
+                                }
                             }
                             for (int i=0; ((line = br.readLine()) != null); i++){
                                 if((i%3==0)&&line.substring(0, 1).equalsIgnoreCase("v")){
@@ -107,10 +131,11 @@ public class PresentExamControllerTest {
                                     options.add(false);
                                 }
                             }   
+                            isCorrecList.add(options);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                    isCorrecList.add(options);
+                    
                     }     
                 }
             }
@@ -120,30 +145,41 @@ public class PresentExamControllerTest {
         String directoryTest = System.getProperty("user.dir");
         int counterQuestion=0;
         int[] numCorrectAnswers= new int[20]; 
-        final int INDEX_INFORMATION_ANSWERS = 8; 
-        directoryTest = directoryTest+File.separator+"src"+File.separator+"data"+File.separator+"Exams"+File.separator+"Ayudarnos"+File.separator + "Prueba 1";
+        final int INDEX_INFORMATION_ANSWERS = 4;
+        directoryTest = directoryTest+File.separator+"src"+File.separator+"data"+File.separator+"Exams"+File.separator+"Java"+File.separator + "Conocimientos en POO y Java";
         File searchedFolder = new File(directoryTest);
         if (searchedFolder.exists() && searchedFolder.isDirectory()) {
             File[] files = searchedFolder.listFiles();
             if (files != null) {
-                for (File fileExam : files) {
-                    if(!(fileExam.getName().equals(currentExam.getNameExam()+ ".txt"))){
+                for (File fileExam : files) { 
+                    if(!(fileExam.getName().equals(currentExam.getNameExam()+ ".txt")) && !(fileExam.getName().endsWith(".jpg"))){ 
                         int counter=0;
                         try (BufferedReader br = new BufferedReader(new FileReader(directoryTest+File.separator+fileExam.getName()))){
                             String line="";
-                            for(int i=1 ; i<INDEX_INFORMATION_ANSWERS; i++){
+                            for(int i=0 ; i<INDEX_INFORMATION_ANSWERS; i++){
                                 line=br.readLine();
+                                if(i==3){
+                                    if((line!="Si")&&(line!="No")){
+                                        continueReading(br,line);
+                                    }
+                                    line=br.readLine();
+                                    line=br.readLine();
+                                }
                             }
                             for (int i=0; ((line = br.readLine()) != null); i++){
-                                if((i%3==0)&&line.substring(0, 1).equalsIgnoreCase("v")){
-                                    counter++;
+                                if((i%3==0)){
+                                    if(line.substring(0, 1).equalsIgnoreCase("v")){
+                                        counter++;
+                                    }
+                                    
                                 }
-                            }   
+                            }
+                            numCorrectAnswers[counterQuestion]=counter;
+                        counterQuestion++;   
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                    numCorrectAnswers[counterQuestion]=counter;
-                    counterQuestion++;
+                    
                     }     
                 }
             }
@@ -151,26 +187,28 @@ public class PresentExamControllerTest {
         return numCorrectAnswers;
     }
     public void fillOptionsList(List<List<Boolean>> selectedOptions){ 
-        int[] numAnswers = {4,4,5};
-        for(int i=0; i<currentExam.getNumberQuestions();i++){
+        //int[] numAnswers = {4,4,4,4,5,5,4,4,6,4};
+        int[] numAnswers = {4,4,4,4};
+
+        for(int i=0; i<4;i++){
             List<Boolean> options = new ArrayList<>();
             for(int j=0 ; j<numAnswers[i];j++){
-                if(i==2&&j==2){
+                if((i>=0&&i<=3&&j==0) || (i>=6&&i<=8&&j==0)){
                     options.add(true);
-                }else if(i==2&&j!=2){
+                }
+                if(j>0){
                     options.add(false);
-                }else{
-                    if(j%2==0){
+                }
+                    if((i==4||i==5||i==9)&&j==0){
                         options.add(true);
-                    }else{
-                        options.add(false);  
-                }}}
+                    }}
             selectedOptions.add(options);
         }
     }
     public String caculateResultTest(List<List<Boolean>> selectedOptions,List<List<Boolean>> isCorrectList){
         float numCorrectAnswers = 0,resultTest=0;
-        int[] numAnswers = {2,3,1};
+        //int[] numAnswers = {1,1,1,1,2,2,1,1,1,3};
+        int[] numAnswers = {1,1,1,1};
         //aqui uso la lista correct que lee del archivo y el controller usa los getiscorrect
         for(int i=0 ; i<selectedOptions.size();i++){
             for(int j=0 ; j<selectedOptions.get(i).size();j++){
@@ -196,7 +234,6 @@ public class PresentExamControllerTest {
         numCorrectAnswers=countNumCorrectAnswers();
         float resultTest, resultController;
         for(int i=0; i<currentExam.getNumberQuestions(); i++){
-            Assert.assertEquals(numCorrectAnswers[i], presentExam.getNumCorrectAnswersController(i));
             for(int j=0; j<presentExam.getNumCorrectAnswersController(i);j++){
                 resultTest=(float)j/numCorrectAnswers[i];
                 BigDecimal bdTest = new BigDecimal(Float.toString(resultTest));

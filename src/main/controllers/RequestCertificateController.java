@@ -33,10 +33,9 @@ public class RequestCertificateController extends TemplateExam{
             if (files != null) {
                 for (File file : files) {
                     if (file.isDirectory() || (!(file.getName().equals("Password.txt")) && file.getName().endsWith(".txt"))) {
-                        if((file.getName().equals("Name.txt"))){
-                            } else {
-                                namesCourses.add(nameCourses(file));
-                        }
+                        if(!(file.getName().equals("Name.txt"))){
+                            namesCourses.add(nameCourses(file));
+                            } 
                     }
                 }
             }    

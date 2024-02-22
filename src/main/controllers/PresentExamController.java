@@ -14,7 +14,7 @@ import main.models.Exam;
 public class PresentExamController extends TemplateExam{
 
     public PresentExamController(){}
-
+    
     public List<String> getInstructions(String [] informationsExam) {
         int INDEX_FOR_NAME_EXAM = 0, INDEX_FOR_NAME_COURSE = 1, INDEX_FOR_DURATION = 4;
         List<String> instrucionsInformation = new ArrayList<String>();

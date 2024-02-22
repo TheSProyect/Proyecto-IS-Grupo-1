@@ -61,12 +61,14 @@ public class RequestCertificateControllerTest {
             if (files != null) {
                 int i=0;
                 for (File fileCertificate : files) {
-                    if(!(fileCertificate.getName().equals("Password.txt")) && !(fileCertificate.getName().startsWith(nameFolderStudent))&& !(fileCertificate.getName().startsWith("Name"))){
+                    if(!(fileCertificate.getName().equals("Password.txt")) && !(fileCertificate.getName().startsWith(nameFolderStudent))&& !(fileCertificate.getName().equals("Name.txt"))){
                         courseName=fileCertificate.getName();
                         courseName = courseName.substring(0, courseName.length()-4);
+                        
                         Assert.assertEquals(courseName, certificate.get(i));
+                        i++;
                     }
-                    i++;
+                    
                 }
             }
         }
