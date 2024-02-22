@@ -39,10 +39,10 @@ public class ResultsBlock extends JPanel {
     }
 
     public void paintResults(float numCorrectQuestions, int numTotalQuestions) {
-        JLabel results = new JLabel(numCorrectQuestions + " / " + numTotalQuestions);
+        JLabel results = new JLabel(numCorrectQuestions + " / " + (float) numTotalQuestions);
         results.setFont(new Font("Nunito Sans", Font.BOLD, 25));
         results.setForeground(Palette.instance().getWhite());
-        results.setBounds(85, 30, 200, 25);
+        results.setBounds(85, 30, 280, 25);
         this.add(results);
     }
 }

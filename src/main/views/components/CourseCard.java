@@ -117,7 +117,7 @@ public class CourseCard extends JPanel {
     public void paintExamCaracteristics(List<String> caracteristics) {
         paintExamCaracteristicPanel("<b>Tipo: </b>" + caracteristics.get(2), 5);
         
-        paintExamCaracteristicPanel("<b>Duración: </b>" + caracteristics.get(3), 6);
+        paintExamCaracteristicPanel("<b>Duración: </b>" + caracteristics.get(3) + " minutos", 6);
         
         paintExamCaracteristicPanel("<b>Profesor: </b>" + caracteristics.get(4), 7);
 

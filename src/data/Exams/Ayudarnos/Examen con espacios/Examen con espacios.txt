@@ -1,9 +1,0 @@
-Examen con espacios
-Con imagen
-2
-Nombre Apellido
-10
-1
-Descripcion que describe descriptivamente 
-Ayudarnos
-Profesor
