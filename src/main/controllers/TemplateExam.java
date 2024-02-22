@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.models.Exam;
+import main.models.UserData;
 import main.utils.Directory;
-import main.utils.UserData;
 
 public class TemplateExam {
     public Directory currentDirectory = Directory.instance();

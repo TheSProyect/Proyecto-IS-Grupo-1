@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import main.utils.UserData;
+import main.models.UserData;
 import main.utils.Directory;
 
 public class EditProfileController {

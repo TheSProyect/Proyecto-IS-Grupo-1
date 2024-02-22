@@ -2,7 +2,8 @@ package test.controllers;
 import org.junit.*;
 
 import main.controllers.RequestCertificateController;
-import main.utils.UserData;
+import main.models.UserData;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.io.*;

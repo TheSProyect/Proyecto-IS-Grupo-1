@@ -1,6 +1,0 @@
-Ayudarnos
-Prueba 1
-0.5
-3
-Nombre Apellido
-Profesor

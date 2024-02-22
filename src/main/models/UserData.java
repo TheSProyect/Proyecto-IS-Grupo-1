@@ -1,4 +1,4 @@
-package main.utils;
+package main.models;
 
 public class UserData {
 	private static UserData currentUser;

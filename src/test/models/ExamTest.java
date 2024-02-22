@@ -26,7 +26,6 @@ public class ExamTest {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String st;
             instructions = "";
-            boolean first = true;
             while ((st = br.readLine()) != null) {
                 instructions += st;
             }
