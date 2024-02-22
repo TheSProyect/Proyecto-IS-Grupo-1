@@ -39,10 +39,10 @@ public class RequestCertificateControllerTest {
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             Assert.assertEquals(br.readLine(), controller.getNameCourseController());
             Assert.assertEquals(br.readLine(), controller.getNameExamController());
-            Assert.assertEquals(Integer.parseInt(br.readLine()), controller.getResultAnswersController(), 0.001);
+            Assert.assertEquals(Float.parseFloat(br.readLine()), controller.getResultAnswersController(), 0.001);
             Assert.assertEquals(Integer.parseInt(br.readLine()), controller.getQuestionsExamController());
             Assert.assertEquals(br.readLine(), controller.getNameTeacherController());
-
+//
             br.close();     
             } catch (IOException e) {
                 e.printStackTrace();

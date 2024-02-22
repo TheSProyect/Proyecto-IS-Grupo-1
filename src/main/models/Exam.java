@@ -12,7 +12,7 @@ import java.util.List;
 public class Exam extends Course{
     private Course course = new Course();
     private Name name;
-    private String type, instructions;
+    private String type, instructions="";
     private int numberQuestions, duration;
     private Result results;
     private List<Question> questions = new ArrayList<>();
@@ -52,11 +52,9 @@ public class Exam extends Course{
     public void setAnswersExam(List<String> answer, List<String> justification, int i, int counter){
         questions.get(counter).setAnswersQuestions(answer, justification, i);
     }
-    
     public void setIsCorrectExam(Boolean isCorrect, int i, int counter){
         questions.get(counter).setIsCorrectQuestions(isCorrect, i);
     }
-
     public void setNumberAnswers(int counter, int number){
         questions.get(counter).setNumberAnswers(number);
     }
@@ -67,7 +65,6 @@ public class Exam extends Course{
         results = new Result();
         results.setScore(numCorrectQuestions);
     }
-   
     public float getResultExam(){
         return results.getScore();
     }
@@ -77,48 +74,40 @@ public class Exam extends Course{
     public List<String> getQuestionsExam(int counter){
         return questions.get(counter).getQuestions();
     }
-    
     public List<String> getJustificationExam(int counter, int i){
         return questions.get(counter).getJustificationQuestion(i);
     }
     public String getDomainExam(int counterQuestion){
         return questions.get(counterQuestion).getDomain();
     }
-    
     public List<String> getOptionsExam(int counterQuestion, int counterAnswer){
         return questions.get(counterQuestion).getOptionsQuestion(counterAnswer);
     }
     public List<String> getCodeExam(int counterQuestion){
         return questions.get(counterQuestion).getCodeQuestion();
     }
-    
     public int getNumCorrectAnswersExam(int counter){
         return questions.get(counter).getNumCorrectAnswers();
     }
     public int getNumberAnswersExam(int counter){
         return questions.get(counter).getNumberAnswers();
     }
-
     public List<String> getAnswersQuestionExam(int counter, int i){
         return questions.get(counter).getAnswersQuestions(i);
     }
-
     public Boolean getIsCorrectExam(int counter, int i){
         return questions.get(counter).getIsCorrectQuestion(i);
     }
-    
     public void setNumberQuestions(int number){
         numberQuestions=number;
     }
-
     public int getNumberQuestions(){
         return numberQuestions;
     }
-
     public void setNameCourse(String nameCourse){
+        //course=new Course();
         course.setNameCourse(nameCourse);
     }
-
     public String getNameCourse(){
         return course.getNameCourse();
     }

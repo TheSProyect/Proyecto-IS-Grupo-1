@@ -28,16 +28,12 @@ public class ExamTest {
             instructions = "";
             boolean first = true;
             while ((st = br.readLine()) != null) {
-                if (first) {
-                    instructions = st;
-                    first = false;
-                } else {
-                    instructions = instructions + '\n' + st;
-                }
+                instructions += st;
             }
         }
 
         exam = new Exam();
+        
     }
 
     @Test 
