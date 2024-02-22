@@ -25,25 +25,26 @@ public class PresentExamControllerTest {
 
     @BeforeEach
     public void setUp() {
-        presentExam = new PresentExamController(); 
+        presentExam = new PresentExamController();
         currentExam = new Exam(); 
+        
         currentExam.setNameExam("ExamName");
         currentExam.setType("Type");
         List<String> description = new ArrayList<String>();
         description.add("Description");
         currentExam.setDescripcion(description);
+        currentExam.setNameTeacher("TeacherName");
         currentExam.setNameCourse("CourseName");
         currentExam.setResultExam(15);
         currentExam.setNumberQuestions(20);
-        currentExam.setNameTeacher("TeacherName");
         currentExam.setDuration(30);
         UserData currentUser = UserData.instance();
         currentUser.setUsername("Usuario");
         currentUser.setIsAdmin(false);
+       
         }
 
     @Test
-
     public void testReadIndformation(){
         setUp();
         String expectedCourseName = "CourseName";
@@ -54,7 +55,7 @@ public class PresentExamControllerTest {
         expectedInformation.add("30");
         expectedInformation.add("TeacherName");
         expectedInformation.add(expectedCourseName);
-
+        Assert.assertEquals("TeacherName", currentExam.getNameTeacher());
         List<String> result = presentExam.readInformation(expectedCourseName, currentExam);
         assertEquals(expectedInformation.size(), result.size(), "Las listas no tienen la misma longitud");
 

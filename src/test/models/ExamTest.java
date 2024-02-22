@@ -26,11 +26,12 @@ public class ExamTest {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String st;
             while ((st = br.readLine()) != null) {
-                instructions = instructions + st;
+                instructions += st;
             }
         }
 
         exam = new Exam();
+        
     }
 
     @Test 
