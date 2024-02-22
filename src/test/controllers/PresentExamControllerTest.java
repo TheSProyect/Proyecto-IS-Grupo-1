@@ -45,10 +45,11 @@ public class PresentExamControllerTest {
     @Test
 
     public void testReadIndformation(){
+        setUp();
         String expectedCourseName = "CourseName";
         List<String> expectedInformation = new ArrayList<>();
         expectedInformation.add("ExamName");
-        expectedInformation.add("Description");
+        expectedInformation.add("Description ");
         expectedInformation.add("Type");
         expectedInformation.add("30");
         expectedInformation.add("TeacherName");
@@ -83,6 +84,7 @@ public class PresentExamControllerTest {
         currentExam.setNumberQuestions(3);
         presentExam.readQuestion(directory, 1, 0, currentExam.getNumberQuestions());
     }
+    
     public void fillIsCorrect(List<List<Boolean>> isCorrecList){
         List<Boolean> options = new ArrayList<>();
         String directoryTest = System.getProperty("user.dir");
@@ -189,6 +191,7 @@ public class PresentExamControllerTest {
     }
     @Test 
     public void calculateResultQuestionTest()throws IOException{
+        setUp();
         createExam();
         int[] numCorrectAnswers= new int[20];
         int decimals=2;
@@ -211,6 +214,7 @@ public class PresentExamControllerTest {
     }
     @Test
     public void calculateResultExamTest()throws IOException{
+        setUp();
         createExam();
         List<List<Boolean>> selectedOptions= new ArrayList<List<Boolean>>();
         List<List<Boolean>> isCorrectList = new ArrayList<List<Boolean>>();

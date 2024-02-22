@@ -25,15 +25,8 @@ public class ExamTest {
         File file = new File(instructionPath);
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String st;
-            instructions = "";
-            boolean first = true;
             while ((st = br.readLine()) != null) {
-                if (first) {
-                    instructions = st;
-                    first = false;
-                } else {
-                    instructions = instructions + '\n' + st;
-                }
+                instructions = instructions + st;
             }
         }
 
