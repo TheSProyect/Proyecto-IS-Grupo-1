@@ -92,7 +92,6 @@ public class PresentExamControllerTest {
                 line=br.readLine();
             }
         } catch (Exception e) {
-            // TODO: handle exception
         }
         
     }
@@ -101,8 +100,6 @@ public class PresentExamControllerTest {
 
     }
     public void fillIsCorrect(List<List<Boolean>> isCorrecList){
-        String nameQuestion="Pregunta1.txt";
-        int k=0;
         String directoryTest = System.getProperty("user.dir");
         final int INDEX_INFORMATION_ANSWERS = 4; 
         directoryTest = directoryTest+File.separator+"src"+File.separator+"data"+File.separator+"Exams"+File.separator+"Java"+File.separator + "Conocimientos en POO y Java";
